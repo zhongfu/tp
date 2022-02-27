@@ -9,7 +9,7 @@ src/main/resources/docs/
 /*.iml
 
 # Storage/log files
-/data/
+# /data/ Change the sample details
 /config.json
 /preferences.json
 /*.log.*

@@ -1,0 +1,34 @@
+{
+  "persons" : [ {
+    "name" : "Nicole Tan",
+    "phone" : "99338558",
+    "email" : "nicole@stffhub.org",
+    "address" : "1 Tech Drive, S138572",
+    "tagged" : [ "Intern", "Aircon" ]
+  }, {
+    "name" : "Kavya Singh",
+    "phone" : "96736637",
+    "email" : "kavya@stffhub.org",
+    "address" : "2 Orchard Turn, S238801",
+    "tagged" : [ "Senior", "Electrician" ]
+  }, {
+    "name" : "Ethan Lee",
+    "phone" : "91031282",
+    "email" : "ethan@stffhub.org",
+    "address" : "10 Anson Road, S079903",
+    "tagged" : [ "Appliances" ]
+  }, {
+    "name" : "Irfan Ibrahim",
+    "phone" : "92492021",
+    "email" : "irfan@example.com",
+    "address" : "Blk 47 Tampines Street 20, #17-35",
+    "tagged" : [ "Painting" ]
+  }, {
+    "name" : "Arjun Khatau",
+    "phone" : "80445044",
+    "email" : "arjun@stffhub.org",
+    "address" : "50 Collyer Quay, S049321",
+    "tagged" : [ "Contract", "Aircon" ]
+  } ]
+}
+
