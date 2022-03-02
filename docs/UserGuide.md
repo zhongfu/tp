@@ -148,6 +148,18 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Archiving data files : `archive`
+
+Saves the AddressBook data to a new file.
+
+If a file name is not specified, the data is saved to a file named `yyyy-mm-ddThh:mm:ss.json` in `[JAR file location]/data/`.
+
+If a relative path is specified for the file name (e.g. `backup-3.json`), the data is saved in `[JAR file location]/data/[FILENAME]`.
+
+If an absolute path is specified for the file name (e.g. `C:\backup.json`), the data is saved to the specified path.
+
+Format: `archive [FILENAME]`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -189,4 +201,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Archive** | `archive [FILENAME]`
 **Help** | `help`
