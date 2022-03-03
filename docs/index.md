@@ -6,7 +6,7 @@ title: AddressBook Level-3
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T11-4/tp/branch/master/graph/badge.svg?token=Z0PQIQXY29)](https://codecov.io/gh/AY2122S2-CS2103T-T11-4/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/_AB3_Ui.png)
 
 **AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
