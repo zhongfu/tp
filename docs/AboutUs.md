@@ -38,8 +38,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Elumalai Oviya Dharshini
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ovidharsini.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ovidharsini)]
+[[portfolio](team/ovidharshini.md)]
 
