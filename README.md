@@ -1,7 +1,7 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T11-4/tp/branch/master/graph/badge.svg?token=Z0PQIQXY29)](https://codecov.io/gh/AY2122S2-CS2103T-T11-4/tp)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/_AB3_Ui.png)
 
 - PeopleSoft is a CLI-based contractor payroll management app.
 * This is **a sample project for Software Engineering (SE) students**.<br>

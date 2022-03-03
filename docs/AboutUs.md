@@ -5,55 +5,41 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Zhong Fu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhongfu.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/zhongfu)]
+[[portfolio](team/zhongfu.md)]
 
-* Role: Project Advisor
+### Ian Hong
 
-### Jane Doe
+<img src="images/ian-from-dover.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/ian-from-dover)]
+[[portfolio](team/ian-from-dover.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Wrik Karmakar
 
-* Role: Team Lead
-* Responsibilities: UI
+<img src="images/thewrik.png" width="200px">
 
-### Johnny Doe
+[[github](http://github.com/thewrik)] [[portfolio](team/thewrik.md)]
 
-<img src="images/johndoe.png" width="200px">
+### Elliot Lim Zhi Yong
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/spyobird.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Data
+[[github](http://github.com/spyobird)]
+[[portfolio](team/spyobird.md)]
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### Elumalai Oviya Dharshini
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/ovidharsini.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+[[github](http://github.com/ovidharsini)]
+[[portfolio](team/ovidharshini.md)]
 
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI

@@ -1,14 +1,13 @@
 ---
 layout: page
-
-title: Oviya's Project Portfolio Page
+title: Wrik's Project Portfolio Page
 ---
 
 ### Project: PeopleSoft
 
 Lorem ipsum dolor sit amet.
 
-Given below are my contributions to the project.
+Given below are (not) my contributions to the project.
 
 * **New Feature**: tbd
     * What it does:
