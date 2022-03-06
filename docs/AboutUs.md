@@ -38,8 +38,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Elumalai Oviya Dharshini
 
-<img src="images/ovidharsini.png" width="200px">
+<img src="images/ovidharshini.png" width="200px">
 
-[[github](http://github.com/ovidharsini)]
+[[github](http://github.com/ovidharshini)]
 [[portfolio](team/ovidharshini.md)]
 
