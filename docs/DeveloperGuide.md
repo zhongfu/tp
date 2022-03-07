@@ -9,6 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* Project adapted from [addressbook-level3](https://se-education.org/addressbook-level3/DeveloperGuide.html#product-scope)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -256,43 +257,56 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+HR Managers of companies offering contractor services
+* have a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer typing to mouse interactions
+* are reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* HR-related functions like retrieving contact information, hiring, grouping by user type etc.
+* Organize many dimensions of information; increase maintainability and simplify the management of data.
+* Increase the speed and ease of use.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                   | I want to …​                                                                   | So that I can…​                                                               |
+|-----|-------------------------------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* *` | new user                                  | see usage instructions                                                         | refer to instructions when I forget how to use the App                        |
+| `* *` | potential user                            | see the app populated with sample data                                         | easily see how the app will look like when it is in use                       |
+| `* * *` | user                                      | add a new employee                                                             |                                                                               |
+| `* * *` | user                                      | add tags to employees                                                          | identify their roles                                                          |
+| `* * *` | user                                      | view the number of hours an employee has worked                                | compensate them accordingly                                                   |
+| `* * *` | user                                      | edit an employee's information                                                 | rectify mistakes or update their personal information if need be              |
+| `* * *` | user                                      | delete an employee                                                             |                                                                               |
+| `* * *` | user                                      | delete all employees                                                           | mass-remove entries that I no longer need                                     |
+| `* * *` | user                             | list all employees                                                             |                                                                               |
+| `* * *` | user                                       | find a person by name or tag                                                   | locate details of persons without having to go through the entire list        |
+| `* * *` | user                                      | view the salary owed to a given employee                                       | pay them                                                                      |
+| `* * *` | user                                      | pay for a given type of job                                                    |                                                                               |
+| `* * *` | user                             | load and save data in human-readable data files                                | I can backup the data externally or access it in a different application      |
+| `* * *` | user                                      | exit the application                                                           |                                                                               |
+| `* *` | user                                      | log into separate modes for HR-related functions and for job-related functions | easily access relevant data for the type of work I am doing at any given time |
+| `* *` | user                                      | edit pay multiplier factors (e.g. overtime, experience, emergency on-calls)    | apply changes in payment policies across the organization                     |
+| `*` | user                                      | view expiring contractor licenses                                              | renew them on time                                                            |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `PeopleSoft` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete an employee**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list employees
+2.  PeopleSoft shows a list of employees
+3.  User requests to delete a specific employee in the list
+4.  PeopleSoft deletes the employee
 
     Use case ends.
 
@@ -304,24 +318,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. PeopleSoft shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Update an employee's data**
+
+**MSS**
+
+1.  User requests to list employees
+2.  PeopleSoft shows a list of employees
+3.  User requests to edit a specific employee in the list with the updated information
+4.  PeopleSoft updates the employee to match user input
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PeopleSoft shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. Should not rely on database-management systems to store data.
+4. Should be compatible with Java 11
+5. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file. 
+6. Should not be hosted on remote servers
+7. Should not make use of proprietary third-party frameworks, libraries and services
+8. Should have a responsive GUI. GUI should function well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions and higher and for screen scales 100% and 125%. GUI should be usable - even if suboptimal - for resolutions 1280x720 and higher and for screen scales 150%.
+9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Standard screen resolution**: 1920x1080
 
 --------------------------------------------------------------------------------------------------------------------
 
