@@ -119,12 +119,12 @@ public class Money {
         return value.hashCode();
     }
 
-    @Override
     /**
      * Prints the 2 decimal place currency format of the value.
      *
      * @returns Value in currency format as a string.
      */
+    @Override
     public String toString() {
         // Might change if scale not matching is an issue
         return CURRENCY_FORMAT.format(value);
