@@ -3,6 +3,7 @@ package seedu.address.model.job;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -10,13 +11,13 @@ import java.util.Set;
 import seedu.address.model.person.Person;
 
 /**
- * Represents a Job. Immutable.
+ * Represents a job. Immutable.
  */
 public class Job {
 
     private final String name;
-    private final BigDecimal rate;
-    private final BigDecimal duration;
+    private final Money rate;
+    private final float duration;
 
     private final boolean isPaid;
 
@@ -26,7 +27,7 @@ public class Job {
      * Constructor for an immutable job.
      * All fields must not be null.
      */
-    public Job(String name, BigDecimal rate, BigDecimal duration, boolean isPaid, Set<Person> persons) {
+    public Job(String name, Money rate, float duration, boolean isPaid, Set<Person> persons) {
         requireAllNonNull(name, rate, duration, isPaid, persons);
         this.name = name;
         this.rate = rate;
@@ -39,11 +40,11 @@ public class Job {
         return name;
     }
 
-    public BigDecimal getRate() {
+    public Money getRate() {
         return rate;
     }
 
-    public BigDecimal getDuration() {
+    public float getDuration() {
         return duration;
     }
 
@@ -52,12 +53,21 @@ public class Job {
     }
 
     /**
+     * Returns an immutable person set.
+     *
+     * @return Immutable set of persons.
+     */
+    public Set<Person> getPersons() {
+        return Collections.unmodifiableSet(persons);
+    }
+
+    /**
      * Returns the pay of the job.
      * Calculated from rate and duration.
      *
      * @return Pay.
      */
-    public BigDecimal calculatePay() {
+    public Money calculatePay() {
         return rate.multiply(duration);
     }
 
@@ -80,8 +90,19 @@ public class Job {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Job)) {
+            return false;
+        }
+        Job otherJob = (Job) other;
+        return otherJob.getName().equals(getName())
+                && otherJob.getRate().equals(getRate())
+                && otherJob.getDuration() == getDuration()
+                && otherJob.isPaid() == isPaid()
+                && otherJob.getPersons().equals(getPersons());
     }
 
     @Override
