@@ -13,7 +13,7 @@ import java.util.Locale;
 public class Money {
 
     private static final int VALUE_SCALE = 6;
-    private static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
+    private static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(Locale.US);
 
     public final BigDecimal value;
 
@@ -35,6 +35,10 @@ public class Money {
         requireNonNull(value);
         CURRENCY_FORMAT.setRoundingMode(RoundingMode.HALF_UP);
         this.value = value.setScale(VALUE_SCALE, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal getValue() {
+        return value;
     }
 
     /**
