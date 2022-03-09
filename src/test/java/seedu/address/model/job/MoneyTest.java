@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 public class MoneyTest {
+
     private static final Money ZERO = new Money(0);
     private static final Money ONE = new Money(1);
     private static final Money TWO = new Money(2);
@@ -79,7 +80,7 @@ public class MoneyTest {
     }
 
     @Test
-    public void equals() {
+    public void testEquals() {
         // same value -> returns true
         Money otherOne = new Money(1);
         Money yetAnotherOne = new Money(BigDecimal.ONE);
