@@ -85,7 +85,7 @@ public class Job {
      * @return Unpaid job.
      */
     public Job setAsNotPaid() {
-        return new Job(name, rate, duration, true, persons);
+        return new Job(name, rate, duration, false, persons);
     }
 
     @Override
