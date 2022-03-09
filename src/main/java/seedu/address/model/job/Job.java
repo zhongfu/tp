@@ -18,7 +18,7 @@ public class Job {
     private final Money rate;
     private final float duration;
 
-    private final boolean isPaid;
+    private final boolean hasPaid;
 
     private final Set<Person> persons = new HashSet<>();
 
@@ -26,12 +26,12 @@ public class Job {
      * Constructor for an immutable job.
      * All fields must not be null.
      */
-    public Job(String name, Money rate, float duration, boolean isPaid, Set<Person> persons) {
-        requireAllNonNull(name, rate, duration, isPaid, persons);
+    public Job(String name, Money rate, float duration, boolean hasPaid, Set<Person> persons) {
+        requireAllNonNull(name, rate, duration, hasPaid, persons);
         this.name = name;
         this.rate = rate;
         this.duration = duration;
-        this.isPaid = isPaid;
+        this.hasPaid = hasPaid;
         this.persons.addAll(persons);
     }
 
@@ -47,8 +47,8 @@ public class Job {
         return duration;
     }
 
-    public boolean isPaid() {
-        return isPaid;
+    public boolean hasPaid() {
+        return hasPaid;
     }
 
     /**
@@ -100,13 +100,13 @@ public class Job {
         return otherJob.getName().equals(getName())
                 && otherJob.getRate().equals(getRate())
                 && otherJob.getDuration() == getDuration()
-                && otherJob.isPaid() == isPaid()
+                && otherJob.hasPaid() == hasPaid()
                 && otherJob.getPersons().equals(getPersons());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, rate, duration, isPaid, persons);
+        return Objects.hash(name, rate, duration, hasPaid, persons);
     }
 
     @Override

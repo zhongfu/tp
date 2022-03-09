@@ -32,15 +32,15 @@ class JobTest {
     @Test
     public void setAsPaid() {
         // paid -> returns true
-        assertTrue(EATING.setAsPaid().isPaid());
-        assertTrue(RUNNING.setAsPaid().isPaid());
+        assertTrue(EATING.setAsPaid().hasPaid());
+        assertTrue(RUNNING.setAsPaid().hasPaid());
     }
 
     @Test
     public void setAsNotPaid() {
         // not paid -> returns false
-        assertFalse(EATING.setAsNotPaid().isPaid());
-        assertFalse(RUNNING.setAsNotPaid().isPaid());
+        assertFalse(EATING.setAsNotPaid().hasPaid());
+        assertFalse(RUNNING.setAsNotPaid().hasPaid());
     }
 
     @Test

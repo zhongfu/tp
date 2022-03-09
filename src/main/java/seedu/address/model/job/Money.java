@@ -23,7 +23,7 @@ public class Money {
      * @param value A value as a double.
      */
     public Money(double value) {
-        this(BigDecimal.valueOf(value).setScale(VALUE_SCALE, RoundingMode.HALF_UP));
+        this(BigDecimal.valueOf(value));
     }
 
     /**
@@ -112,9 +112,9 @@ public class Money {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof Money
-                && value.equals(((Money) other).value));
+        return other == this // short circuit if same object
+                || (other instanceof Money // instanceof handles nulls
+                && value.equals(((Money) other).value)); // state check
     }
 
     @Override
