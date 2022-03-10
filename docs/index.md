@@ -6,7 +6,7 @@ title: PeopleSoft
 [![CI Status](https://github.com/AY2122S2-CS2103T-T11-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S2-CS2103T-T11-4/tp/actions/workflows/gradle.yml)
 [![Codecov](https://codecov.io/gh/AY2122S2-CS2103T-T11-4/tp/branch/master/graph/badge.svg?token=Z0PQIQXY29)](https://codecov.io/gh/AY2122S2-CS2103T-T11-4/tp)
 
-![Ui](images/_AB3_Ui.png)
+![Ui](images/Ui.png)
 
 PeopleSoft is a CLI-based contractor payroll management app. It helps **companies which offer contractor services** with managing how much each contractor is paid. You can:
 - manage contractors

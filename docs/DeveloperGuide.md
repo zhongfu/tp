@@ -351,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. Should not rely on database-management systems to store data.
 4. Should be compatible with Java 11
-5. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file. 
+5. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file.
 6. Should not be hosted on remote servers
 7. Should not make use of proprietary third-party frameworks, libraries and services
 8. Should have a responsive GUI. GUI should function well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions and higher and for screen scales 100% and 125%. GUI should be usable - even if suboptimal - for resolutions 1280x720 and higher and for screen scales 150%.
@@ -414,3 +414,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+

@@ -1,12 +1,12 @@
 [![CI Status](https://github.com/AY2122S2-CS2103T-T11-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S2-CS2103T-T11-4/tp/actions/workflows/gradle.yml)
 [![Codecov](https://codecov.io/gh/AY2122S2-CS2103T-T11-4/tp/branch/master/graph/badge.svg?token=Z0PQIQXY29)](https://codecov.io/gh/AY2122S2-CS2103T-T11-4/tp)
 
-![Ui](docs/images/_AB3_Ui.png)
+![Ui](docs/images/Ui.png)
 
 PeopleSoft is a CLI-based contractor payroll management app. It helps **companies which offer contractor services** with managing how much each contractor is paid. You can:
-- manage contractors 
+- manage contractors
 - manage jobs
-- calculate monthly salary 
+- calculate monthly salary
 
 It is written with the OOP paradigm in mind and has ~6 KLoC.
 * View the User Guide and Developer Guide on our **[Website](https://ay2122s2-cs2103t-t11-4.github.io/tp/)**.
