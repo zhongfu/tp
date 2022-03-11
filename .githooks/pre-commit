@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# assume we're in repo root
+
+if [[ -d .git/hooks/pre-commit.d ]]; then
+    for script in .git/hooks/pre-commit.d/*; do
+        if [[ -f "$script" && -x "$script" ]]; then
+            filename="$(basename "$script")"
+            echo "### Running script $filename"
+            . $script
+            echo -e "### Done running $filename\n"
+        fi
+    done
+fi
