@@ -3,10 +3,11 @@
 /build/
 src/main/resources/docs/
 
-# IDEA files
+# IDEA and other IDE files
 /.idea/
 /out/
 /*.iml
+/.vscode/
 
 # Misc build files
 /bin/
