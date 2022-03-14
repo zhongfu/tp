@@ -52,6 +52,16 @@ public class Money {
     }
 
     /**
+     * Returns a {@code Money} with the value equal the sum of both values.
+     *
+     * @param augend Value to add.
+     * @return Sum.
+     */
+    public Money add(BigDecimal augend) {
+        return new Money(value.add(augend).setScale(VALUE_SCALE, RoundingMode.HALF_UP));
+    }
+
+    /**
      * Returns a {@code Money} with the value equal the difference of the second value from the first.
      *
      * @param augend Value to subtract.
@@ -67,8 +77,8 @@ public class Money {
      * @param multiplicand Value to multiply.
      * @return Product.
      */
-    public Money multiply(double multiplicand) {
-        return new Money(value.multiply(BigDecimal.valueOf(multiplicand)).setScale(VALUE_SCALE, RoundingMode.HALF_UP));
+    public Money multiply(BigDecimal multiplicand) {
+        return new Money(value.multiply(multiplicand).setScale(VALUE_SCALE, RoundingMode.HALF_UP));
     }
 
     /**
@@ -87,8 +97,8 @@ public class Money {
      * @param divisor Value to divide.
      * @return Quotient.
      */
-    public Money divide(double divisor) {
-        return new Money(value.divide(BigDecimal.valueOf(divisor), VALUE_SCALE, RoundingMode.HALF_UP));
+    public Money divide(BigDecimal divisor) {
+        return new Money(value.divide(divisor, VALUE_SCALE, RoundingMode.HALF_UP));
     }
 
     /**

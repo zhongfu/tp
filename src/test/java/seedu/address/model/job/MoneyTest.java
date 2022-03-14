@@ -47,26 +47,26 @@ public class MoneyTest {
     @Test
     public void multiply() {
         // wrong multiplication -> returns false
-        assertFalse(ZERO.multiply(0).getValue().compareTo(BigDecimal.ONE) == 0);
+        assertFalse(ZERO.multiply(ZERO).getValue().compareTo(BigDecimal.ONE) == 0);
         assertFalse(ONE.multiply(ONE).getValue().compareTo(BigDecimal.ZERO) == 0);
 
         // correct multiplication -> returns true
-        assertTrue(ONE.multiply(0).getValue().compareTo(BigDecimal.ZERO) == 0);
+        assertTrue(ONE.multiply(ZERO).getValue().compareTo(BigDecimal.ZERO) == 0);
         assertTrue(ONE.multiply(ONE).getValue().compareTo(BigDecimal.ONE) == 0);
     }
 
     @Test
     public void divide() {
         // division by zero -> throws error
-        assertThrows(ArithmeticException.class, () -> ONE.divide(0));
+        assertThrows(ArithmeticException.class, () -> ONE.divide(ZERO));
         assertThrows(ArithmeticException.class, () -> ONE.divide(ZERO));
 
         // wrong division -> returns false
-        assertFalse(ZERO.divide(1).getValue().compareTo(BigDecimal.ONE) == 0);
+        assertFalse(ZERO.divide(BigDecimal.valueOf(1)).getValue().compareTo(BigDecimal.ONE) == 0);
         assertFalse(ONE.divide(ONE).getValue().compareTo(BigDecimal.ZERO) == 0);
 
         // correct division -> returns true
-        assertTrue(ZERO.divide(1).getValue().compareTo(BigDecimal.ZERO) == 0);
+        assertTrue(ZERO.divide(BigDecimal.valueOf(1)).getValue().compareTo(BigDecimal.ZERO) == 0);
         assertTrue(TWO.divide(TWO).getValue().compareTo(BigDecimal.ONE) == 0);
     }
 
