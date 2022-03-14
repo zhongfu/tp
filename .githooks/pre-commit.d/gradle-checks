@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# https://stackoverflow.com/a/3466183/1675299
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+
+if [[ "$machine" == "Cygwin" || "$machine" == "MinGw" ]]; then
+    ./gradlew.bat check
+else
+    # assume *nix, I guess
+    ./gradlew check
+fi
