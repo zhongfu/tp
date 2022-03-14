@@ -8,11 +8,15 @@ src/main/resources/docs/
 /out/
 /*.iml
 
+# Misc build files
+/bin/
+
 # Storage/log files
 # /data/ Change the sample details
 /config.json
 /preferences.json
 /*.log.*
+/data/
 
 # Test sandbox files
 src/test/data/sandbox/
