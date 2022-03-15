@@ -15,7 +15,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@../styles/DarkTheme.css" />
+        <URL value="@../styles/LightTheme.css" />
         <URL value="@../styles/Extensions.css" />
       </stylesheets>
 
