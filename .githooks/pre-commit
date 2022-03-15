@@ -1,14 +1,28 @@
 #!/bin/bash
+set -Eeuo pipefail
+trap fail ERR
+
+TYPE="$(basename $0)"
+TYPE_UPPER="${TYPE^}"
+
+function fail() {
+    if [ -n "${filename:-}" ]; then
+        echo -e '\033[1;91m### '"$TYPE_UPPER"' script '"$filename"' failed!\033[0m'
+    else
+        echo -e '\033[1;91m### '"$TYPE_UPPER"' hooks failed for an unknown reason!\033[0m'
+    fi
+    exit 1
+}
 
 # assume we're in repo root
 
-if [[ -d .git/hooks/pre-commit.d ]]; then
-    for script in .git/hooks/pre-commit.d/*; do
+if [[ -d .git/hooks/${TYPE}.d ]]; then
+    for script in .git/hooks/${TYPE}.d/*; do
         if [[ -f "$script" && -x "$script" ]]; then
             filename="$(basename "$script")"
-            echo -e "\033[1;96m### Running script $filename\033[0m"
+            echo -e '\033[1;96m### Running '"$TYPE"' script '"$filename"'\033[0m'
             . $script
-            echo -e "\033[1;96m### Done running $filename\033[0m\n"
+            echo -e '\033[1;96m### Finished running '"$TYPE"' script '"$filename"'\033[0m\n'
         fi
     done
 fi
