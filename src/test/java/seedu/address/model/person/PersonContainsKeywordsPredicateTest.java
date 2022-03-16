@@ -18,14 +18,17 @@ public class PersonContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        PersonContainsKeywordsPredicate firstPredicate = new PersonContainsKeywordsPredicate(firstPredicateKeywordList);
-        PersonContainsKeywordsPredicate secondPredicate = new PersonContainsKeywordsPredicate(secondPredicateKeywordList);
+        PersonContainsKeywordsPredicate firstPredicate = new PersonContainsKeywordsPredicate(
+                firstPredicateKeywordList);
+        PersonContainsKeywordsPredicate secondPredicate = new PersonContainsKeywordsPredicate(
+                secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PersonContainsKeywordsPredicate firstPredicateCopy = new PersonContainsKeywordsPredicate(firstPredicateKeywordList);
+        PersonContainsKeywordsPredicate firstPredicateCopy = new PersonContainsKeywordsPredicate(
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,7 +44,8 @@ public class PersonContainsKeywordsPredicateTest {
     @Test
     public void test_personContainsKeywords_returnsTrue() {
         // One keyword
-        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(
+                Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
@@ -50,7 +54,8 @@ public class PersonContainsKeywordsPredicateTest {
 
         // Multiple keywords with tags
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Alice", "Bob", "intern", "tech"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("Intern", "Tech").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName(
+                "Alice Bob").withTags("Intern", "Tech").build()));
 
         // Mixed-case keywords
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
@@ -76,7 +81,8 @@ public class PersonContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("Intern").build()));
 
         // Keywords match phone, email and address, but does not match name or tags
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        predicate = new PersonContainsKeywordsPredicate(
+                Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
