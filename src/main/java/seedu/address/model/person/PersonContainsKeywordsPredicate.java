@@ -17,7 +17,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
+        return !keywords.isEmpty() && keywords.stream()
                 .allMatch(keyword -> (
                         person.getTags().stream().anyMatch(
                             tag -> keyword.equalsIgnoreCase(tag.getTagName())))
