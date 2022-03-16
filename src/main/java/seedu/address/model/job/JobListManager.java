@@ -8,12 +8,11 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.job.exceptions.DuplicateJobException;
 import seedu.address.model.job.exceptions.JobNotFoundException;
 
 
-public class JobListManager implements JobList{
+public class JobListManager implements JobList {
 
     private final ObservableList<Job> internalList = FXCollections.observableArrayList();
     private final ObservableList<Job> internalUnmodifiableList =
@@ -28,7 +27,7 @@ public class JobListManager implements JobList{
     @Override
     public void add(Job toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)){
+        if (contains(toAdd)) {
             throw new DuplicateJobException();
         }
         internalList.add(toAdd);
