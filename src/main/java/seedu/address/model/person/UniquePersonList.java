@@ -127,10 +127,11 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns true if {@code persons} contains only unique persons.
      */
     private boolean personsAreUnique(List<Person> persons) {
-        Set<Person> personSet = new HashSet<>();
-        for (Person person : persons) {
-            if (!personSet.add(person)) {
-                return false;
+        for (int i = 0; i < persons.size() - 1; i++) {
+            for (int j = i + 1; j < persons.size(); j++) {
+                if (persons.get(i).isSamePerson(persons.get(j))) {
+                    return false;
+                }
             }
         }
         return true;
