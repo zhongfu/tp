@@ -2,6 +2,7 @@ package seedu.address.model.job;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,9 +15,10 @@ import seedu.address.model.person.Person;
  */
 public class Job {
 
-    private final String name;
-    private final Money rate;
-    private final float duration;
+    private final String jobId;
+    private final String desc;
+    private final Rate rate;
+    private final Duration duration;
 
     private final boolean hasPaid;
 
@@ -26,24 +28,29 @@ public class Job {
      * Constructor for an immutable job.
      * All fields must not be null.
      */
-    public Job(String name, Money rate, float duration, boolean hasPaid, Set<Person> persons) {
-        requireAllNonNull(name, rate, duration, hasPaid, persons);
-        this.name = name;
+    public Job(String jobId, String desc, Rate rate, Duration duration, boolean hasPaid, Set<Person> persons) {
+        requireAllNonNull(jobId, desc, rate, duration, hasPaid, persons);
+        this.jobId = jobId;
+        this.desc = desc;
         this.rate = rate;
         this.duration = duration;
         this.hasPaid = hasPaid;
         this.persons.addAll(persons);
     }
 
-    public String getName() {
-        return name;
+    public String getJobId() {
+        return jobId;
     }
 
-    public Money getRate() {
+    public String getDesc() {
+        return desc;
+    }
+
+    public Rate getRate() {
         return rate;
     }
 
-    public float getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
@@ -67,7 +74,7 @@ public class Job {
      * @return Pay.
      */
     public Money calculatePay() {
-        return rate.multiply(duration);
+        return rate.calculateAmount(duration);
     }
 
     /**
@@ -76,7 +83,7 @@ public class Job {
      * @return Paid job.
      */
     public Job setAsPaid() {
-        return new Job(name, rate, duration, true, persons);
+        return new Job(jobId, desc, rate, duration, true, persons);
     }
 
     /**
@@ -85,7 +92,23 @@ public class Job {
      * @return Unpaid job.
      */
     public Job setAsNotPaid() {
-        return new Job(name, rate, duration, false, persons);
+        return new Job(jobId, desc, rate, duration, false, persons);
+    }
+
+    /**
+     * Returns true if both jobs have the same {@code jobId}.
+     * This defines a weaker notion of equality between two jobs.
+     *
+     * @param other the other Job to compare against
+     * @return true if both jobs have the same {@code jobId}
+     */
+    public boolean isSameJob(Job other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other != null
+            && other.getJobId().equals(getJobId());
     }
 
     @Override
@@ -97,16 +120,17 @@ public class Job {
             return false;
         }
         Job otherJob = (Job) other;
-        return otherJob.getName().equals(getName())
+        return otherJob.getJobId().equals(getJobId())
+                && otherJob.getDesc().equals(getDesc())
                 && otherJob.getRate().equals(getRate())
-                && otherJob.getDuration() == getDuration()
+                && otherJob.getDuration().equals(getDuration())
                 && otherJob.hasPaid() == hasPaid()
                 && otherJob.getPersons().equals(getPersons());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, rate, duration, hasPaid, persons);
+        return Objects.hash(jobId, desc, rate, duration, hasPaid, persons);
     }
 
     @Override

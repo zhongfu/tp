@@ -20,11 +20,6 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-test {
-    useJUnitPlatform()
-    finalizedBy jacocoTestReport
-}
-
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
@@ -40,8 +35,13 @@ task coverage(type: JacocoReport) {
     }
 }
 
+test {
+    useJUnitPlatform()
+    finalizedBy coverage
+}
+
 dependencies {
-    String jUnitVersion = '5.4.0'
+    String jUnitVersion = '5.8.2'
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
