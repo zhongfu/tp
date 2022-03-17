@@ -57,7 +57,6 @@ public class JobListManager implements JobList {
         internalList.set(index, editedJob);
     }
 
-    @Override
     public void setJobs(JobListManager replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

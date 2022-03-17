@@ -14,8 +14,6 @@ public interface JobList extends Iterable<Job> {
 
     void setJob(Job targetJob, Job editedJob);
 
-    void setJobs(JobListManager replacement);
-
     void setJobs(List<Job> jobs);
 
     ObservableList<Job> asUnmodifiableObservableList();
