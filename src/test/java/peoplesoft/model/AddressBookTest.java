@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.exceptions.DuplicatePersonException;
 import peoplesoft.testutil.PersonBuilder;
@@ -49,7 +50,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        PersonAddressBookStub newData = new PersonAddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -86,10 +87,10 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class PersonAddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        PersonAddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 
@@ -97,6 +98,12 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public ObservableList<Job> getJobList() {
+            return FXCollections.observableArrayList();
+        }
     }
 
+    // TODO: JobAddressBookStub
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -21,6 +22,9 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import javafx.collections.ObservableList;
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.job.Job;
+import peoplesoft.model.job.JobList;
+import peoplesoft.model.job.JobListManager;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.UniquePersonList;
 
@@ -33,9 +37,14 @@ import peoplesoft.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private JobList jobs;
 
+    /**
+     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     */
     public AddressBook() {
         persons = new UniquePersonList();
+        jobs = new JobListManager();
     }
 
     /**
@@ -67,12 +76,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the job list with {@code jobs}.
+     * {@code jobs} must not contain duplicate jobs.
+     */
+    public void setJobs(List<Job> jobs) {
+        this.jobs.setJobs(jobs);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        // TODO: handle jobs - serdes issue
     }
 
     //// person-level operations
@@ -93,6 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -112,6 +131,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// job-level operations
+
+    /**
+     * Returns true if a job with the same identity as {@code job} exists in the address book.
+     */
+    public boolean hasJob(Job job) {
+        requireNonNull(job);
+        return jobs.contains(job);
+    }
+
+    /**
+     * Adds a job to the address book.
+     * The job must not already exist in the address book.
+     */
+    public void addJob(Job job) {
+        jobs.add(job);
+    }
+
+    /**
+     * Replaces the given job {@code target} in the list with {@code editedJob}.
+     * {@code target} must exist in the address book.
+     * The job identity of {@code editedJob} must not be the same as another existing job in the address book.
+     */
+    public void setJob(Job target, Job editedJob) {
+        requireNonNull(editedJob);
+
+        jobs.setJob(target, editedJob);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeJob(Job key) {
+        jobs.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -126,15 +182,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Job> getJobList() {
+        return jobs.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons));
+                // && jobs.equals(((AddressBook) other).jobs));
+                // TODO: fix serdes error
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, jobs);
     }
 
     protected static class AddressBookSerializer extends StdSerializer<AddressBook> {
