@@ -3,10 +3,8 @@ package seedu.address.model.job;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,10 +84,11 @@ public class JobListManager implements JobList {
      */
     @Override
     public boolean jobsAreUnique(List<Job> jobs) {
-        Set<Job> jobSet = new HashSet<>();
-        for (Job job : jobs) {
-            if (!jobSet.add(job)) {
-                return false;
+        for (int i = 0; i < jobs.size() - 1; i++) {
+            for (int j = i + 1; j < jobs.size(); j++) {
+                if (jobs.get(i).isSameJob(jobs.get(j))) {
+                    return false;
+                }
             }
         }
         return true;
