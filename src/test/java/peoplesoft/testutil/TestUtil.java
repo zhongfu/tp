@@ -5,7 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import peoplesoft.commons.core.index.Index;
+import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.Model;
 import peoplesoft.model.person.Person;
 
@@ -51,5 +54,18 @@ public class TestUtil {
      */
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns a JSON-serialized representation of the given object. Output is pretty-printed, but with
+     * carriage returns removed, unlike {@code JsonUtil.toJsonString()}. Handy for running tests with.
+     *
+     * @param <T> the type of the object to be serialized
+     * @param obj the object to be serialized
+     * @return the JSON-serialized object
+     * @throws JsonProcessingException if there was an error while serializing the object
+     */
+    public static <T> String normalizedToJsonString(T obj) throws JsonProcessingException {
+        return JsonUtil.toJsonString(obj).replace("\r", "");
     }
 }
