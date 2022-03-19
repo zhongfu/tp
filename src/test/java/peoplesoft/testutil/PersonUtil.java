@@ -77,7 +77,7 @@ public class PersonUtil {
     }
 
     /**
-     * Generate a rudimentary JSON serialization of a {@code Person} with the given details.
+     * Generates a rudimentary JSON serialization of a {@code Person} with the given details.
      *
      * @param name the string representation of the {@code Person}'s name
      * @param phone the string representation of the {@code Person}'s phone number

@@ -65,7 +65,7 @@ public class TestUtil {
      * @return the JSON-serialized object
      * @throws JsonProcessingException if there was an error while serializing the object
      */
-    public static <T> String normalizedToJsonString(T obj) throws JsonProcessingException {
+    public static <T> String toNormalizedJsonString(T obj) throws JsonProcessingException {
         return JsonUtil.toJsonString(obj).replace("\r", "");
     }
 }

@@ -3,7 +3,7 @@ package peoplesoft.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static peoplesoft.testutil.PersonUtil.serializePerson;
-import static peoplesoft.testutil.TestUtil.normalizedToJsonString;
+import static peoplesoft.testutil.TestUtil.toNormalizedJsonString;
 import static peoplesoft.testutil.TypicalPersons.BENSON;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class PersonSerdesTest {
 
     @Test
     public void serialize() throws JsonProcessingException {
-        assertEquals(VALID_SERIALIZATION, normalizedToJsonString(BENSON));
+        assertEquals(VALID_SERIALIZATION, toNormalizedJsonString(BENSON));
     }
 
     /**

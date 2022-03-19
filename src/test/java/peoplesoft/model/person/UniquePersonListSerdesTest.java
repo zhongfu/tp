@@ -3,7 +3,7 @@ package peoplesoft.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static peoplesoft.testutil.PersonUtil.serializePerson;
-import static peoplesoft.testutil.TestUtil.normalizedToJsonString;
+import static peoplesoft.testutil.TestUtil.toNormalizedJsonString;
 import static peoplesoft.testutil.TypicalPersons.ALICE;
 import static peoplesoft.testutil.TypicalPersons.BENSON;
 import static peoplesoft.testutil.TypicalPersons.CARL;
@@ -44,7 +44,7 @@ public class UniquePersonListSerdesTest {
 
         String serialized = serializeList(serializedPersonList);
 
-        assertEquals(serialized, normalizedToJsonString(upl));
+        assertEquals(serialized, toNormalizedJsonString(upl));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class UniquePersonListSerdesTest {
         UniquePersonList upl = new UniquePersonList();
         String serialized = serializeList(Arrays.asList());
 
-        assertEquals(serialized, normalizedToJsonString(upl));
+        assertEquals(serialized, toNormalizedJsonString(upl));
     }
 
     /**
