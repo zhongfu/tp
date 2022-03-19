@@ -3,6 +3,7 @@ package peoplesoft.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static peoplesoft.testutil.PersonUtil.serializePerson;
+import static peoplesoft.testutil.TestUtil.serializeList;
 import static peoplesoft.testutil.TestUtil.toNormalizedJsonString;
 import static peoplesoft.testutil.TypicalPersons.ALICE;
 import static peoplesoft.testutil.TypicalPersons.BENSON;
@@ -25,12 +26,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import peoplesoft.commons.util.JsonUtil;
 
 public class UniquePersonListSerdesTest {
-    private static String serializeList(List<String> list) {
-        return "[ "
-            + list.stream().collect(Collectors.joining(", "))
-            + (list.size() > 0 ? " ]" : "]");
-    }
-
     @Test
     public void serialize_validNonEmptyList_returnsValidSerialization() throws JsonProcessingException {
         List<Person> personList = Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA);
