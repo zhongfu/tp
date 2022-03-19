@@ -122,6 +122,21 @@ public class JsonUtil {
      *
      * @param ctx the {@code SerializerProvider} context (from a {@code Serializer})
      * @param msg the message for the {@code JsonMappingException} and {@code IllegalValueException}
+     * @param cause the cause for the {@code IllegalValueException}
+     * @return a {@code JsonMappingException} that wraps an {@code IllegalValueException}
+     */
+    public static JsonMappingException getWrappedIllegalValueException(SerializerProvider ctx, String msg,
+            Throwable cause) {
+        IllegalValueException ive = new IllegalValueException(msg, cause);
+        return JsonMappingException.from(ctx, msg, ive);
+    }
+
+    /**
+     * Creates a {@code JsonMappingException} instance that wraps an {@code IllegalValueException} using the
+     * given context and message.
+     *
+     * @param ctx the {@code SerializerProvider} context (from a {@code Serializer})
+     * @param msg the message for the {@code JsonMappingException} and {@code IllegalValueException}
      * @return a {@code JsonMappingException} that wraps an {@code IllegalValueException}
      */
     public static JsonMappingException getWrappedIllegalValueException(SerializerProvider ctx, String msg) {
@@ -139,6 +154,21 @@ public class JsonUtil {
      */
     public static JsonMappingException getWrappedIllegalValueException(DeserializationContext ctx, String msg) {
         IllegalValueException ive = new IllegalValueException(msg);
+        return JsonMappingException.from(ctx, msg, ive);
+    }
+
+    /**
+     * Creates a {@code JsonMappingException} instance that wraps an {@code IllegalValueException} using the
+     * given context and message.
+     *
+     * @param ctx the {@code DeserializationContext} (from a {@code Deerializer})
+     * @param msg the message for the {@code JsonMappingException} and {@code IllegalValueException}
+     * @param cause the cause for the {@code IllegalValueException}
+     * @return a {@code JsonMappingException} that wraps an {@code IllegalValueException}
+     */
+    public static JsonMappingException getWrappedIllegalValueException(DeserializationContext ctx, String msg,
+            Throwable cause) {
+        IllegalValueException ive = new IllegalValueException(msg, cause);
         return JsonMappingException.from(ctx, msg, ive);
     }
 
