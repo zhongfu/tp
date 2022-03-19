@@ -1,13 +1,12 @@
 package peoplesoft.model.job;
 
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
-import static peoplesoft.model.job.Money.requireNonNegative;
+import static peoplesoft.model.job.util.DurationUtil.requirePositive;
+import static peoplesoft.model.job.util.MoneyUtil.requireNonNegative;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Objects;
-
-import peoplesoft.model.job.exceptions.NonPositiveDurationException;
 
 /**
  * Represents a rate of payment, e.g. $5 per hour. Immutable.
@@ -29,15 +28,6 @@ public class Rate {
         requirePositive(duration);
         this.amount = amount;
         this.duration = duration;
-    }
-
-    /**
-     * Throws NonPositiveDurationException if {@code duration} is not positive.
-     */
-    private void requirePositive(Duration duration) {
-        if (duration.compareTo(Duration.ofHours(0)) <= 0) {
-            throw new NonPositiveDurationException();
-        }
     }
 
     public Money getAmount() {

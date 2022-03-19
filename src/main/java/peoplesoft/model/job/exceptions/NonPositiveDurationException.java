@@ -5,6 +5,6 @@ package peoplesoft.model.job.exceptions;
  */
 public class NonPositiveDurationException extends RuntimeException {
     public NonPositiveDurationException() {
-        super("Operation would result in non-positive duration");
+        super("Operation would result in duration with non-positive value");
     }
 }
