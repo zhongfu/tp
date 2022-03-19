@@ -1,4 +1,4 @@
-package peoplesoft.model.person;
+package peoplesoft.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,7 +27,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import peoplesoft.commons.util.JsonUtil;
-import peoplesoft.model.AddressBook;
+import peoplesoft.model.person.Person;
 
 public class AddressBookSerdesTest {
     @Test
