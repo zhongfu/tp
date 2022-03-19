@@ -2,14 +2,32 @@ package peoplesoft.model.job;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.node.TextNode;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
+import peoplesoft.commons.util.JsonUtil;
+
 /**
  * Represents some value of money. Immutable.
  */
+@JsonSerialize(using = Money.MoneySerializer.class)
+@JsonDeserialize(using = Money.MoneyDeserializer.class)
 public class Money {
 
     private static final int VALUE_SCALE = 6;
@@ -35,6 +53,20 @@ public class Money {
         requireNonNull(value);
         CURRENCY_FORMAT.setRoundingMode(RoundingMode.HALF_UP);
         this.value = value.setScale(VALUE_SCALE, RoundingMode.HALF_UP);
+    }
+
+    /**
+     * Returns true if a given string is a valid money string.
+     *
+     * TODO: should we accept strings with {@code $}, {@code ,}, etc?
+     */
+    public static boolean isValidMoneyString(String moneyString) {
+        try {
+            new BigDecimal(moneyString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public BigDecimal getValue() {
@@ -142,5 +174,55 @@ public class Money {
     public String toString() {
         // Might change if scale not matching is an issue
         return CURRENCY_FORMAT.format(value);
+    }
+
+    protected static class MoneySerializer extends StdSerializer<Money> {
+        private MoneySerializer(Class<Money> val) {
+            super(val);
+        }
+
+        private MoneySerializer() {
+            this(null);
+        }
+
+        @Override
+        public void serialize(Money val, JsonGenerator gen, SerializerProvider provider) throws IOException {
+            gen.writeString(val.value.toString()); // to preserve precision
+        }
+    }
+
+    protected static class MoneyDeserializer extends StdDeserializer<Money> {
+        private static final String MISSING_OR_INVALID_VALUE = "The money value is invalid or missing!";
+
+        private MoneyDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        private MoneyDeserializer() {
+            this(null);
+        }
+
+        @Override
+        public Money deserialize(JsonParser p, DeserializationContext ctx)
+                throws IOException, JsonProcessingException {
+            JsonNode node = p.readValueAsTree();
+
+            if (!(node instanceof TextNode)) {
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            }
+
+            String valString = ((TextNode) node).textValue();
+
+            if (!Money.isValidMoneyString(valString)) {
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            }
+
+            return new Money(new BigDecimal(valString));
+        }
+
+        @Override
+        public Money getNullValue(DeserializationContext ctx) throws JsonMappingException {
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+        }
     }
 }
