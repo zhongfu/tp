@@ -14,12 +14,10 @@ public interface JobList extends Iterable<Job> {
 
     void setJob(Job targetJob, Job editedJob);
 
-    void setJobs(JobList replacement);
-
-    void setJobs(List<Job> jobList);
+    void setJobs(List<Job> jobs);
 
     ObservableList<Job> asUnmodifiableObservableList();
 
-    boolean jobsAreUnique();
+    boolean jobsAreUnique(List<Job> jobs);
 
 }
