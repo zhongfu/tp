@@ -7,6 +7,8 @@ import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import peoplesoft.model.job.exceptions.NegativeMoneyException;
+
 /**
  * Represents some value of money. Immutable.
  */
@@ -35,6 +37,15 @@ public class Money {
         requireNonNull(value);
         CURRENCY_FORMAT.setRoundingMode(RoundingMode.HALF_UP);
         this.value = value.setScale(VALUE_SCALE, RoundingMode.HALF_UP);
+    }
+
+    /**
+     * Throws NegativeMoneyException if {@code money} is negative.
+     */
+    public static void requireNonNegative(Money money) {
+        if (money.value.compareTo(new BigDecimal("0")) < 0) {
+            throw new NegativeMoneyException();
+        }
     }
 
     public BigDecimal getValue() {
