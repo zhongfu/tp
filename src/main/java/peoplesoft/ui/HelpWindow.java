@@ -113,14 +113,17 @@ public class HelpWindow extends UiPart<Stage> {
 
                 if (oS.contains("mac")) {
                     logger.fine("Using 'open' on Mac to open webpage.");
-                    runtime.exec("open " + USERGUIDE_URL);
+                    Process open = runtime.exec("open " + USERGUIDE_URL);
+                    logger.fine("Opened. Exit value is " + open.exitValue());
 
                 } else if (oS.contains("nix") || oS.contains("nux")) {
                     logger.fine("Using 'xdg-open' on Linux to open webpage.");
-                    runtime.exec("xdg-open " + USERGUIDE_URL);
+                    Process open = runtime.exec("xdg-open " + USERGUIDE_URL);
+                    logger.fine("Opened. Exit value is " + open.exitValue());
                 } else {
                     logger.warning("Unable to launch browser due to the OS.");
                 }
+
             }
 
             logger.fine("User Guide successfully opened in browser.");
