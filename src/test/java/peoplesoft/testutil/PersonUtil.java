@@ -6,7 +6,10 @@ import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_PHONE;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import peoplesoft.logic.commands.AddCommand;
 import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
@@ -58,5 +61,46 @@ public class PersonUtil {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Generate a rudimentary JSON serialization of a {@code Person}.
+     *
+     * @param person the {@code Person} to be serialized
+     * @return a JSON serialization of the given {@code Person}
+     */
+    public static String serializePerson(Person person) {
+        return serializePerson(
+            person.getName().toString(),
+            person.getPhone().toString(),
+            person.getAddress().toString(),
+            person.getEmail().toString(),
+            person.getTags().stream().map((tag) -> tag.tagName).collect(Collectors.toSet()));
+    }
+
+    /**
+     * Generates a rudimentary JSON serialization of a {@code Person} with the given details.
+     *
+     * @param name the string representation of the {@code Person}'s name
+     * @param phone the string representation of the {@code Person}'s phone number
+     * @param address the string representation of the {@code Person}'s address
+     * @param email the string representation of the {@code Person}'s email address
+     * @param tags a {@code Set} of the tags assigned to the {@code Person}
+     * @return a JSON serialization of the given {@code Person}
+     */
+    public static String serializePerson(String name, String phone, String address, String email,
+            Set<String> tags) {
+        Map<String, String> map = new LinkedHashMap<>();
+
+        map.put("name", name == null ? "null" : "\"" + name + "\"");
+        map.put("phone", phone == null ? "null" : "\"" + phone + "\"");
+        map.put("email", email == null ? "null" : "\"" + email + "\"");
+        map.put("address", address == null ? "null" : "\"" + address + "\"");
+        map.put("tagged", TestUtil.serializeList(
+            tags.stream()
+                .map((tag) -> tag == null ? "null" : "\"" + tag + "\"")
+                .collect(Collectors.toList())));
+
+        return TestUtil.serializeObject(map);
     }
 }
