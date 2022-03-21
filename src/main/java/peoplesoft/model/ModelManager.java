@@ -135,9 +135,9 @@ public class ModelManager implements Model {
     //=========== Job Operations =============================================================================
 
     @Override
-    public boolean hasJob(Job job) {
-        requireNonNull(job);
-        return addressBook.hasJob(job);
+    public boolean hasJob(String jobId) {
+        requireNonNull(jobId);
+        return addressBook.hasJob(jobId);
     }
 
     @Override

@@ -136,9 +136,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a job with the same identity as {@code job} exists in the address book.
      */
-    public boolean hasJob(Job job) {
-        requireNonNull(job);
-        return jobs.contains(job);
+    public boolean hasJob(String jobId) {
+        requireNonNull(jobId);
+        return jobs.contains(jobId);
     }
 
     /**

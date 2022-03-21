@@ -135,6 +135,16 @@ public class Job {
 
     @Override
     public String toString() {
-        return super.toString();
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getJobId())
+            .append("; Name: ")
+            .append(getDesc())
+            .append("; Rate: ")
+            .append(getRate())
+            .append("; Duration: ")
+            .append(getDuration().toHours())
+            .append("H");
+
+        return builder.toString();
     }
 }

@@ -92,7 +92,7 @@ public interface Model {
     /**
      * Returns true if a job with the same job id as {@code job} exists in the address book.
      */
-    boolean hasJob(Job job);
+    boolean hasJob(String jobId);
 
     /**
      * Deletes the given job.

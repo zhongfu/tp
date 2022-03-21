@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import peoplesoft.model.job.exceptions.DuplicateJobException;
 import peoplesoft.model.job.exceptions.JobNotFoundException;
 
-
+/**
+ * Implementation of {@code JobList}.
+ */
 public class JobListManager implements JobList {
 
     private final ObservableList<Job> internalList = FXCollections.observableArrayList();
@@ -19,15 +21,15 @@ public class JobListManager implements JobList {
             FXCollections.unmodifiableObservableList(internalList);
 
     @Override
-    public boolean contains(Job toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+    public boolean contains(String jobId) {
+        requireNonNull(jobId);
+        return internalList.stream().anyMatch(job -> job.getJobId().equals(jobId));
     }
 
     @Override
     public void add(Job toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (contains(toAdd.getJobId())) {
             throw new DuplicateJobException();
         }
         internalList.add(toAdd);
@@ -50,7 +52,7 @@ public class JobListManager implements JobList {
             throw new JobNotFoundException();
         }
 
-        if (!targetJob.equals(editedJob) && contains(editedJob)) {
+        if (!targetJob.isSameJob(editedJob) && contains(editedJob.getJobId())) {
             throw new DuplicateJobException();
         }
 

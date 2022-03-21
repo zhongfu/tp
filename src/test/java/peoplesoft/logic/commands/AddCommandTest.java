@@ -150,7 +150,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasJob(Job job) {
+        public boolean hasJob(String jobId) {
             throw new AssertionError("This method should not be called.");
         }
 
