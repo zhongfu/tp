@@ -2,6 +2,9 @@ package peoplesoft.logic.commands.job;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.Duration;
+import java.util.Set;
+
 import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
@@ -9,6 +12,8 @@ import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.logic.parser.job.JobDeleteCommandParser;
 import peoplesoft.model.Model;
 import peoplesoft.model.job.Job;
+import peoplesoft.model.job.Money;
+import peoplesoft.model.job.Rate;
 
 /**
  * Deletes a {@code Job} with a given {@code JobId}.
@@ -48,9 +53,9 @@ public class JobDeleteCommand extends Command {
         }
 
         try {
-            // TODO: This line breaks LoD
-            Job jobToDelete = model.getAddressBook().getJobList()
-                    .filtered(job -> job.getJobId().equals(toDelete)).get(0);
+            Job jobToDelete = new Job(toDelete, "empty",
+                    new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(1), false, Set.of());
+            // Currently handles deletions in JobList implementation (by jobId)
             model.deleteJob(jobToDelete);
         } catch (IndexOutOfBoundsException e) {
             // Asserts that filtered list should always contain exactly the filtered element

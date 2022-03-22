@@ -38,9 +38,10 @@ public class JobListManager implements JobList {
     @Override
     public void remove(Job toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!contains(toRemove.getJobId())) {
             throw new JobNotFoundException();
         }
+        internalList.removeIf(job -> job.isSameJob(toRemove));
     }
 
     @Override
