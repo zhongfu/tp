@@ -1,7 +1,7 @@
 .error {
     /* changes the element to this color */
     /* Called by Ui.CommandBox.java, declared as ERROR_STYLE_CLASS */
-    -fx-background-color: #FF5736 !important;
+    -fx-text-fill: #FF5736 !important;
 }
 
 .list-cell:empty {

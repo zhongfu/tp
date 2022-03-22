@@ -1,14 +1,19 @@
 package peoplesoft.ui;
 
+import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import peoplesoft.commons.core.GuiSettings;
@@ -29,27 +34,31 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
+    private HelpWindow helpWindow;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private SideBar sideBar;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+
+    @FXML
+    private BorderPane bp;
+
+    @FXML
+    private StackPane sideBarPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private Button helpButton; // was MenuItem
+    private Button helpButton;
 
     @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -65,8 +74,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         // setAccelerators();
-
-        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -113,17 +120,19 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        helpWindow = new HelpWindow();
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        sideBar = new SideBar(this);
+        sideBarPlaceholder.getChildren().add(sideBar.getRoot());
     }
 
     /**
@@ -138,6 +147,52 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
+
+    public PersonListPanel getPersonListPanel() {
+        return personListPanel;
+    }
+
+    /**
+     * Loads the page on the right side of the app
+     * @param page
+     */
+    public void loadPage(SideBar.ActivePage page) {
+        Parent root = null;
+        String filename = "";
+
+        try {
+            switch(page) {
+            case OVERVIEW:
+                filename = "Overview";
+                break;
+            case JOBS:
+                filename = "Jobs";
+                break;
+            case EMPLOYEES:
+                filename = "Employees";
+                break;
+            case SETTINGS:
+                filename = "Settings";
+                break;
+            case HELP:
+                filename = "Help";
+                handleHelp();
+                break;
+            default:
+                throw new IllegalArgumentException("Tried to switch to an invalid page named " + page.name());
+            }
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/" + filename + ".fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        bp.setCenter(root);
+    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -150,24 +205,16 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
-        primaryStage.show();
-    }
-
     /**
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    public void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**

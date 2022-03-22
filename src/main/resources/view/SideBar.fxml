@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="SidePane" prefHeight="720.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #222338;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <StackPane onMouseClicked="#switchToOverview" prefHeight="100.0" prefWidth="230.0">
+         <children>
+            <ImageView fitHeight="28.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/sidebar/toplogo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </StackPane>
+      <Button fx:id="bOverview" graphicTextGap="16.0" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: #6076FF; -fx-background-radius: 10;" textFill="WHITE">
+         <font>
+            <Font name="Inter Italic" size="16.0" />
+         </font>
+         <graphic>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="150.0" spacing="16.0">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/sidebar/overview.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Overview" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </graphic>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </Button>
+      <Button fx:id="bJobs" graphicTextGap="16.0" layoutX="30.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#switchToJobs" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" textFill="WHITE">
+         <font>
+            <Font name="Inter Italic" size="16.0" />
+         </font>
+         <graphic>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="150.0" spacing="16.0">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/sidebar/jobs.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Jobs" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </graphic>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </Button>
+      <Button fx:id="bEmployees" graphicTextGap="16.0" layoutX="30.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#switchToEmployees" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" textFill="WHITE">
+         <font>
+            <Font name="Inter Italic" size="16.0" />
+         </font>
+         <graphic>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="150.0" spacing="16.0">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/sidebar/employees.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Employees" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </graphic>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </Button>
+      <Button fx:id="bSettings" graphicTextGap="16.0" layoutX="30.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#switchToSettings" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" textFill="WHITE">
+         <font>
+            <Font name="Inter Italic" size="16.0" />
+         </font>
+         <graphic>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="150.0" spacing="16.0">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/sidebar/settings.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Settings" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </graphic>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </Button>
+      <Button fx:id="bHelp" graphicTextGap="16.0" layoutX="30.0" layoutY="310.0" mnemonicParsing="false"   onMouseClicked="#switchToHelp" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" textFill="WHITE">
+         <font>
+            <Font name="Inter Italic" size="16.0" />
+         </font>
+         <graphic>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="150.0" spacing="16.0">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/sidebar/help.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Help" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </graphic>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </Button>
+
+
+
+
+
+
+
+      <Button fx:id="bExit" graphicTextGap="16.0" layoutX="30.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#exitApp" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" textFill="WHITE">
+
+
+
+
+
+
+         <font>
+            <Font name="Inter Italic" size="16.0" />
+         </font>
+         <graphic>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="150.0" spacing="16.0">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/sidebar/exit.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Exit" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+         </graphic>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+   </padding>
+</VBox>

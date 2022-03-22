@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="overview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1050.0" spacing="30.0" style="-fx-background-color: #1B1C31;" stylesheets="/styles/DarkTheme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="170.0" prefWidth="990.0" styleClass="main-pane">
+         <children>
+            <StackPane fx:id="commandBoxPlaceholder" focusTraversable="true" prefHeight="45.0" prefWidth="20.0" style="-fx-background-color: transparent;" VBox.vgrow="NEVER" />
+            <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0" prefHeight="2.0" style="-fx-background-color: #33344B;" />
+            <StackPane fx:id="resultDisplayPlaceholder" prefHeight="100.0" prefWidth="1280.0" style="-fx-background-color: transparent;" />
+         </children>
+      </VBox>
+
+
+      <VBox prefHeight="630.0" prefWidth="990.0" styleClass="main-pane"> <!-- bottom personlist -->
+         <children>
+            <StackPane fx:id="commandBoxPlaceholder1" alignment="CENTER_LEFT" focusTraversable="true" minHeight="-Infinity" prefHeight="80.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Label text="Overview" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </StackPane>
+            <HBox fx:id="listheader" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #33344B;">
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+               <children>
+                  <Label text="Name" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Medium" size="18.0" />
+                     </font>
+                  </Label>
+                  <StackPane prefWidth="200.0" />
+                  <Label layoutX="70.0" layoutY="29.0" text="Tags" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Medium" size="18.0" />
+                     </font>
+                  </Label>
+                  <StackPane layoutX="121.0" layoutY="10.0" prefWidth="180.0" />
+                  <Label layoutX="321.0" layoutY="29.0" text="Month's Salary" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Medium" size="18.0" />
+                     </font>
+                  </Label>
+                  <StackPane layoutX="364.0" layoutY="10.0" prefWidth="45.0" />
+                  <Label layoutX="544.0" layoutY="29.0" text="Phone" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Medium" size="18.0" />
+                     </font>
+                  </Label>
+                  <StackPane layoutX="672.0" layoutY="10.0" prefWidth="95.0" />
+                  <Label layoutX="717.0" layoutY="29.0" text="Mail" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Medium" size="18.0" />
+                     </font>
+                  </Label>
+               </children></HBox>
+            <StackPane fx:id="personListPanelPlaceholder" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0000ff;" />
+            <StackPane fx:id="roundCornerBottom11" prefHeight="11.0" prefWidth="20.0" style="-fx-background-color: transparent;" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</VBox>
