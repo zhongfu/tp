@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import peoplesoft.commons.core.GuiSettings;
 import peoplesoft.commons.core.LogsCenter;
+import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Job> filteredJobs;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredJobs = new FilteredList<>(this.addressBook.getJobList());
     }
 
     public ModelManager() {
@@ -87,6 +90,8 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== Person Operations ==========================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -107,7 +112,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -128,6 +132,48 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Job Operations =============================================================================
+
+    @Override
+    public boolean hasJob(String jobId) {
+        requireNonNull(jobId);
+        return addressBook.hasJob(jobId);
+    }
+
+    @Override
+    public void deleteJob(Job target) {
+        addressBook.removeJob(target);
+    }
+
+    @Override
+    public void addJob(Job job) {
+        addressBook.addJob(job);
+        updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
+    }
+
+    @Override
+    public void setJob(Job target, Job editedJob) {
+        requireAllNonNull(target, editedJob);
+        addressBook.setJob(target, editedJob);
+    }
+
+    //=========== Filtered Job List Accessors ================================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Job} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Job> getFilteredJobList() {
+        return filteredJobs;
+    }
+
+    @Override
+    public void updateFilteredJobList(Predicate<Job> predicate) {
+        requireNonNull(predicate);
+        filteredJobs.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -144,7 +190,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredJobs.equals(other.filteredJobs);
     }
-
 }

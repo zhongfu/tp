@@ -2,17 +2,31 @@ package peoplesoft.model.job;
 
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
 import java.time.Duration;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-import peoplesoft.model.person.Person;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
+import peoplesoft.commons.util.JsonUtil;
 
 /**
  * Represents a job. Immutable.
  */
+@JsonSerialize(using = Job.JobSerializer.class)
+@JsonDeserialize(using = Job.JobDeserializer.class)
 public class Job {
 
     private final String jobId;
@@ -22,20 +36,17 @@ public class Job {
 
     private final boolean hasPaid;
 
-    private final Set<Person> persons = new HashSet<>();
-
     /**
      * Constructor for an immutable job.
      * All fields must not be null.
      */
-    public Job(String jobId, String desc, Rate rate, Duration duration, boolean hasPaid, Set<Person> persons) {
-        requireAllNonNull(jobId, desc, rate, duration, hasPaid, persons);
+    public Job(String jobId, String desc, Rate rate, Duration duration, boolean hasPaid) {
+        requireAllNonNull(jobId, desc, rate, duration, hasPaid);
         this.jobId = jobId;
         this.desc = desc;
         this.rate = rate;
         this.duration = duration;
         this.hasPaid = hasPaid;
-        this.persons.addAll(persons);
     }
 
     public String getJobId() {
@@ -59,15 +70,6 @@ public class Job {
     }
 
     /**
-     * Returns an immutable person set.
-     *
-     * @return Immutable set of persons.
-     */
-    public Set<Person> getPersons() {
-        return Collections.unmodifiableSet(persons);
-    }
-
-    /**
      * Returns the pay of the job.
      * Calculated from rate and duration.
      *
@@ -83,7 +85,7 @@ public class Job {
      * @return Paid job.
      */
     public Job setAsPaid() {
-        return new Job(jobId, desc, rate, duration, true, persons);
+        return new Job(jobId, desc, rate, duration, true);
     }
 
     /**
@@ -92,7 +94,7 @@ public class Job {
      * @return Unpaid job.
      */
     public Job setAsNotPaid() {
-        return new Job(jobId, desc, rate, duration, false, persons);
+        return new Job(jobId, desc, rate, duration, false);
     }
 
     /**
@@ -124,17 +126,110 @@ public class Job {
                 && otherJob.getDesc().equals(getDesc())
                 && otherJob.getRate().equals(getRate())
                 && otherJob.getDuration().equals(getDuration())
-                && otherJob.hasPaid() == hasPaid()
-                && otherJob.getPersons().equals(getPersons());
+                && otherJob.hasPaid() == hasPaid();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(jobId, desc, rate, duration, hasPaid, persons);
+        return Objects.hash(jobId, desc, rate, duration, hasPaid);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        final StringBuilder builder = new StringBuilder();
+        builder.append("ID: ")
+            .append(getJobId())
+            .append("; Name: ")
+            .append(getDesc())
+            .append("; Rate: ")
+            .append(getRate())
+            .append("; Duration: ")
+            .append(getDuration().toHoursPart())
+            .append("H")
+            .append(getDuration().toMinutesPart())
+            .append("M")
+            .append("; Has paid: ")
+            .append(hasPaid());
+
+        return builder.toString();
+    }
+
+    protected static class JobSerializer extends StdSerializer<Job> {
+        private JobSerializer(Class<Job> val) {
+            super(val);
+        }
+
+        private JobSerializer() {
+            this(null);
+        }
+
+        @Override
+        public void serialize(Job value, JsonGenerator gen, SerializerProvider provider)throws IOException {
+            gen.writeStartObject();
+
+            gen.writeStringField("jobId", value.getJobId());
+            gen.writeStringField("desc", value.getDesc());
+            gen.writeObjectField("rate", value.getRate());
+            gen.writeObjectField("duration", value.getDuration());
+            gen.writeBooleanField("hasPaid", value.hasPaid());
+
+            gen.writeEndObject();
+        }
+    }
+
+    protected static class JobDeserializer extends StdDeserializer<Job> {
+        private static final String MISSING_OR_INVALID_INSTANCE = "The job instance is invalid or missing!";
+        private static final String MISSING_OR_INVALID_VALUE = "The job's %s field is invalid or missing!";
+
+        private JobDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        private JobDeserializer() {
+            this(null);
+        }
+
+        private static JsonNode getNonNullNode(ObjectNode node, String key, DeserializationContext ctx)
+            throws JsonMappingException {
+            JsonNode jsonNode = node.get(key);
+            if (jsonNode == null) {
+                throw JsonUtil.getWrappedIllegalValueException(
+                    ctx, String.format(MISSING_OR_INVALID_VALUE, key));
+            }
+
+            return jsonNode;
+        }
+
+        @Override
+        public Job deserialize(JsonParser p, DeserializationContext ctx)
+                throws IOException, JsonProcessingException {
+            JsonNode node = p.readValueAsTree();
+            ObjectCodec codec = p.getCodec();
+
+            if (!(node instanceof ObjectNode)) {
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
+            }
+
+            ObjectNode job = (ObjectNode) node;
+
+            String jobId = getNonNullNode(job, "jobId", ctx).textValue();
+
+            String desc = getNonNullNode(job, "desc", ctx).textValue();
+
+            Rate rate = codec.treeToValue(
+                    getNonNullNode(job, "rate", ctx), Rate.class);
+
+            Duration duration = codec.treeToValue(
+                    getNonNullNode(job, "duration", ctx), Duration.class);
+
+            Boolean hasPaid = getNonNullNode(job, "hasPaid", ctx).booleanValue();
+
+            return new Job(jobId, desc, rate, duration, hasPaid);
+        }
+
+        @Override
+        public Job getNullValue(DeserializationContext ctx) throws JsonMappingException {
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
+        }
     }
 }

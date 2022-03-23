@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.commons.exceptions.DataConversionException;
-import peoplesoft.commons.exceptions.IllegalValueException;
 import peoplesoft.commons.util.FileUtil;
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.AddressBook;
 import peoplesoft.model.ReadOnlyAddressBook;
 
 /**
@@ -45,18 +45,14 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<ReadOnlyAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
+                filePath, AddressBook.class);
+
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
 
-        try {
-            return Optional.of(jsonAddressBook.get().toModelType());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-            throw new DataConversionException(ive);
-        }
+        return jsonAddressBook;
     }
 
     @Override
@@ -74,7 +70,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(addressBook, filePath);
     }
 
 }

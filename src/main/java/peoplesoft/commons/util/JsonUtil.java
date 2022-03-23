@@ -14,14 +14,17 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.commons.exceptions.DataConversionException;
+import peoplesoft.commons.exceptions.IllegalValueException;
 
 /**
  * Converts a Java object instance to JSON and vice versa
@@ -44,7 +47,7 @@ public class JsonUtil {
     }
 
     static <T> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
-            throws IOException {
+            throws IOException, JsonMappingException {
         return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }
 
@@ -56,7 +59,7 @@ public class JsonUtil {
      * @throws DataConversionException if the file format is not as expected.
      */
     public static <T> Optional<T> readJsonFile(
-            Path filePath, Class<T> classOfObjectToDeserialize) throws DataConversionException {
+            Path filePath, Class<? extends T> classOfObjectToDeserialize) throws DataConversionException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -68,6 +71,9 @@ public class JsonUtil {
 
         try {
             jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);
+        } catch (JsonMappingException e) {
+            logger.info("Illegal values found in " + filePath + ": " + e.getMessage());
+            throw new DataConversionException(e);
         } catch (IOException e) {
             logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
             throw new DataConversionException(e);
@@ -96,7 +102,7 @@ public class JsonUtil {
      * @param <T> The generic type to create an instance of
      * @return The instance of T with the specified values in the JSON string
      */
-    public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException {
+    public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException, JsonMappingException {
         return objectMapper.readValue(json, instanceClass);
     }
 
@@ -108,6 +114,62 @@ public class JsonUtil {
      */
     public static <T> String toJsonString(T instance) throws JsonProcessingException {
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
+    }
+
+    /**
+     * Creates a {@code JsonMappingException} instance that wraps an {@code IllegalValueException} using the
+     * given context and message.
+     *
+     * @param ctx the {@code SerializerProvider} context (from a {@code Serializer})
+     * @param msg the message for the {@code JsonMappingException} and {@code IllegalValueException}
+     * @param cause the cause for the {@code IllegalValueException}
+     * @return a {@code JsonMappingException} that wraps an {@code IllegalValueException}
+     */
+    public static JsonMappingException getWrappedIllegalValueException(SerializerProvider ctx, String msg,
+            Throwable cause) {
+        IllegalValueException ive = new IllegalValueException(msg, cause);
+        return JsonMappingException.from(ctx, msg, ive);
+    }
+
+    /**
+     * Creates a {@code JsonMappingException} instance that wraps an {@code IllegalValueException} using the
+     * given context and message.
+     *
+     * @param ctx the {@code SerializerProvider} context (from a {@code Serializer})
+     * @param msg the message for the {@code JsonMappingException} and {@code IllegalValueException}
+     * @return a {@code JsonMappingException} that wraps an {@code IllegalValueException}
+     */
+    public static JsonMappingException getWrappedIllegalValueException(SerializerProvider ctx, String msg) {
+        IllegalValueException ive = new IllegalValueException(msg);
+        return JsonMappingException.from(ctx, msg, ive);
+    }
+
+    /**
+     * Creates a {@code JsonMappingException} instance that wraps an {@code IllegalValueException} using the
+     * given context and message.
+     *
+     * @param ctx the {@code DeserializationContext} (from a {@code Deerializer})
+     * @param msg the message for the {@code JsonMappingException} and {@code IllegalValueException}
+     * @return a {@code JsonMappingException} that wraps an {@code IllegalValueException}
+     */
+    public static JsonMappingException getWrappedIllegalValueException(DeserializationContext ctx, String msg) {
+        IllegalValueException ive = new IllegalValueException(msg);
+        return JsonMappingException.from(ctx, msg, ive);
+    }
+
+    /**
+     * Creates a {@code JsonMappingException} instance that wraps an {@code IllegalValueException} using the
+     * given context and message.
+     *
+     * @param ctx the {@code DeserializationContext} (from a {@code Deerializer})
+     * @param msg the message for the {@code JsonMappingException} and {@code IllegalValueException}
+     * @param cause the cause for the {@code IllegalValueException}
+     * @return a {@code JsonMappingException} that wraps an {@code IllegalValueException}
+     */
+    public static JsonMappingException getWrappedIllegalValueException(DeserializationContext ctx, String msg,
+            Throwable cause) {
+        IllegalValueException ive = new IllegalValueException(msg, cause);
+        return JsonMappingException.from(ctx, msg, ive);
     }
 
     /**
