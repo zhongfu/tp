@@ -2,7 +2,6 @@ package peoplesoft.logic.commands.job;
 
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_INDEX;
-import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -30,8 +29,8 @@ public class JobAssignCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a job to a person. "
         + "Parameters: "
-        + PREFIX_NAME + "NAME (jobId) "
-        + PREFIX_INDEX + "INDEX (person) ";
+        + "JOBID "
+        + PREFIX_INDEX + "INDEX ";
 
     public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s\n%s has the following jobs: %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
