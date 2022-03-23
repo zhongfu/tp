@@ -151,13 +151,14 @@ public class AddressBookSerdesTest {
 
         String serializedEmployment = JsonUtil.toJsonString(Employment.getInstance().getAllJobs());
 
-        String serializedJobIdState = String.valueOf(JobIdFactory.getId());
+        int id = JobIdFactory.getId();
+        String serializedJobIdState = JsonUtil.toJsonString(id);
 
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("persons", serializeList(serializedPersonList));
         map.put("jobs", serializeList(List.of())); // TODO
-        map.put("employment", JsonUtil.toJsonString(Employment.getInstance().getAllJobs()));
-        map.put("jobIdState", JsonUtil.toJsonString(JobIdFactory.getId()));
+        map.put("employment", serializedEmployment);
+        map.put("jobIdState", serializedJobIdState);
 
         String serialized = serializeObject(map);
 
@@ -165,7 +166,7 @@ public class AddressBookSerdesTest {
         // Checks if employment and jobIdState gets serialized correctly
         assertEquals(Employment.getInstance().getAllJobs(),
                 JsonUtil.fromJsonString(serializedEmployment, HashMap.class));
-        assertEquals(JobIdFactory.getId(), JsonUtil.fromJsonString(serializedJobIdState, int.class));
+        assertEquals(id, JsonUtil.fromJsonString(serializedJobIdState, int.class));
         // TODO if needed
     }
 }
