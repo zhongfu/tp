@@ -9,6 +9,7 @@ import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
 import peoplesoft.model.person.Person;
+import peoplesoft.model.util.Employment;
 
 /**
  * Deletes a person identified using it's displayed index from the database.
@@ -41,6 +42,8 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        // Deletes employment associations
+        Employment.getInstance().deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -20,9 +21,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import javafx.collections.ObservableList;
+import peoplesoft.commons.core.JobIdFactory;
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.job.Job;
+import peoplesoft.model.job.JobList;
+import peoplesoft.model.job.UniqueJobList;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.UniquePersonList;
+import peoplesoft.model.util.Employment;
 
 /**
  * Wraps all data at the address-book level
@@ -33,13 +39,18 @@ import peoplesoft.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private JobList jobs;
 
+    /**
+     * Creates an empty AddressBook.
+     */
     public AddressBook() {
         persons = new UniquePersonList();
+        jobs = new UniqueJobList();
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons in the {@code toBeCopied}.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -47,13 +58,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates an {@code AddressBook} using the given {@code UniquePersonList}. Only used by
-     * {@code AddressBookDeserializer}.
+     * Creates an {@code AddressBook} using the given {@code UniquePersonList} and {@code UniqueJobList}.
+     * Only used by {@code AddressBookDeserializer}.
      *
      * @param upl the {@code UniquePersonList} for the new instance
+     * @param ujl the {@code UniqueJobList} for the new instance
      */
-    private AddressBook(UniquePersonList upl) {
+    private AddressBook(UniquePersonList upl, UniqueJobList ujl) {
         persons = upl;
+        jobs = ujl;
     }
 
     //// list overwrite operations
@@ -67,12 +80,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the job list with {@code jobs}.
+     * {@code jobs} must not contain duplicate jobs.
+     */
+    public void setJobs(List<Job> jobs) {
+        this.jobs.setJobs(jobs);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setJobs(newData.getJobList());
     }
 
     //// person-level operations
@@ -93,6 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -112,6 +135,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// job-level operations
+
+    /**
+     * Returns true if a job with the same identity as {@code job} exists in the address book.
+     */
+    public boolean hasJob(String jobId) {
+        requireNonNull(jobId);
+        return jobs.contains(jobId);
+    }
+
+    /**
+     * Adds a job to the address book.
+     * The job must not already exist in the address book.
+     */
+    public void addJob(Job job) {
+        jobs.add(job);
+    }
+
+    /**
+     * Replaces the given job {@code target} in the list with {@code editedJob}.
+     * {@code target} must exist in the address book.
+     * The job identity of {@code editedJob} must not be the same as another existing job in the address book.
+     */
+    public void setJob(Job target, Job editedJob) {
+        requireNonNull(editedJob);
+
+        jobs.setJob(target, editedJob);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeJob(Job key) {
+        jobs.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -126,15 +186,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Job> getJobList() {
+        return jobs.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && jobs.equals(((AddressBook) other).jobs));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, jobs);
     }
 
     protected static class AddressBookSerializer extends StdSerializer<AddressBook> {
@@ -151,6 +217,9 @@ public class AddressBook implements ReadOnlyAddressBook {
             gen.writeStartObject();
 
             gen.writeObjectField("persons", val.persons);
+            gen.writeObjectField("jobs", val.jobs);
+            gen.writeObjectField("employment", Employment.getInstance());
+            gen.writeNumberField("jobIdState", JobIdFactory.getId());
 
             gen.writeEndObject();
         }
@@ -191,10 +260,32 @@ public class AddressBook implements ReadOnlyAddressBook {
             ObjectNode objNode = (ObjectNode) node;
 
             UniquePersonList upl = codec.treeToValue(
-                getNonNullNode(objNode, "persons", ctx),
-                UniquePersonList.class);
+                    getNonNullNode(objNode, "persons", ctx),
+                    UniquePersonList.class);
 
-            AddressBook ab = new AddressBook(upl);
+            UniqueJobList ujl = codec.treeToValue(
+                    getNonNullNode(objNode, "jobs", ctx),
+                    UniqueJobList.class);
+
+            JsonNode empNode = objNode.get("employment");
+            if (empNode == null) {
+                Employment.newInstance();
+            } else {
+                Employment emp = codec.treeToValue(empNode, Employment.class);
+
+                Employment.setInstance(emp);
+            }
+
+            JsonNode jobIdNode = objNode.get("jobIdstate");
+            if (jobIdNode == null) {
+                JobIdFactory.setId(0);
+            } else {
+                int jobId = getNonNullNode(objNode, "jobIdState", ctx).intValue();
+
+                JobIdFactory.setId(jobId);
+            }
+
+            AddressBook ab = new AddressBook(upl, ujl);
             return ab;
         }
 

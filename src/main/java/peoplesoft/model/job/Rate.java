@@ -37,7 +37,7 @@ public class Rate {
     /**
      * Constructs a {@code Rate} instance.
      *
-     * @param value A value as a double.
+     * @param amount A value as a double.
      */
     public Rate(Money amount, Duration duration) {
         requireAllNonNull(amount, duration);
@@ -96,7 +96,7 @@ public class Rate {
     @Override
     public String toString() {
         // TODO make it more user friendly, e.g. $5 / hour
-        return String.format("%s / %s", amount, duration);
+        return String.format("%s / %dH", amount, duration.toHours());
     }
 
     protected static class RateSerializer extends StdSerializer<Rate> {

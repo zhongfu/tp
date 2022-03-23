@@ -6,7 +6,10 @@ import javafx.collections.ObservableList;
 
 public interface JobList extends Iterable<Job> {
 
-    boolean contains(Job toCheck);
+    // TODO: should jobs compare by jobs or jobId, since add it seems more intuitive
+    // to compare by jobs but delete seems more intuitive to compare by jobId.
+    // For now it is jobId.
+    boolean contains(String jobId);
 
     void add(Job toAdd);
 

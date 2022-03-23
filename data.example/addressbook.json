@@ -20,7 +20,7 @@
   }, {
     "name" : "Irfan Ibrahim",
     "phone" : "92492021",
-    "email" : "irfan@example.com",
+    "email" : "irfan@stffhub.org",
     "address" : "Blk 47 Tampines Street 20, #17-35",
     "tagged" : [ "Painting" ]
   }, {
@@ -29,6 +29,6 @@
     "email" : "arjun@stffhub.org",
     "address" : "50 Collyer Quay, S049321",
     "tagged" : [ "Contract", "Aircon" ]
-  } ]
+  } ],
+  "jobs" : [ ]
 }
-
