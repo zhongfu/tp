@@ -33,7 +33,7 @@ public class JobAssignCommand extends Command {
         + PREFIX_NAME + "NAME (jobId) "
         + PREFIX_INDEX + "INDEX (person) ";
 
-    public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s";
+    public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s\n%s has the following jobs: %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
 
     private String jobId;
@@ -53,7 +53,7 @@ public class JobAssignCommand extends Command {
     private void parseArgs(String args) throws ParseException {
         // TODO: Arguably does not follow SRP/LoD
         ArgumentMultimap argumentMultimap = new JobAssignCommandParser().parse(args);
-        jobId = ParserUtil.parseString(argumentMultimap.getValue(PREFIX_NAME).get());
+        jobId = ParserUtil.parseString(argumentMultimap.getPreamble());
         personIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_INDEX).get());
     }
 
@@ -76,15 +76,17 @@ public class JobAssignCommand extends Command {
         try {
             // TODO: This code breaks LoD.
             Job assignedJob = model.getAddressBook().getJobList()
-                .filtered(job -> job.getJobId().equals(jobId)).get(0);
-            Employment.associate(assignedJob, person);
+                    .filtered(job -> job.getJobId().equals(jobId)).get(0);
+            Employment.getInstance().associate(assignedJob, person);
         } catch (IndexOutOfBoundsException e) {
             // Asserts that filtered list should always contain exactly the filtered element
             assert false;
         }
 
+        List<Job> jobs = Employment.getInstance().getJobs(person, model);
+
         // TODO: For now just prints a list of the jobs associated with a person to console.
-        System.out.println(person.getName() + ": " + Employment.getJobs(person, model).toString());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, jobId, person.getName().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, jobId, person.getName(),
+                person.getName(), jobs));
     }
 }

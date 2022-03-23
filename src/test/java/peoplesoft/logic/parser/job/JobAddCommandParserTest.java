@@ -18,11 +18,6 @@ public class JobAddCommandParserTest {
     }
 
     @Test
-    public void parse_nonEmptyPreamble_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" preamble"));
-    }
-
-    @Test
     public void parse_wrongFormatArgs_throwsParseException() {
         // Empty name
         assertThrows(ParseException.class, () -> parser.parse(" n/ r/1.0 d/3"));

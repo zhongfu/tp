@@ -25,6 +25,7 @@ import peoplesoft.model.person.Name;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.Employment;
 
 /**
  * Edits the details of an existing person in the database.
@@ -83,6 +84,8 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        // Replaces employment associations
+        Employment.getInstance().editPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

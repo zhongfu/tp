@@ -6,7 +6,6 @@ import static peoplesoft.testutil.Assert.assertThrows;
 import static peoplesoft.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.Duration;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +23,7 @@ public class JobDeleteCommandTest {
 
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Job job = new Job(CORRECT_ARGS, "The Right Job",
-            new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(2), false, Set.of());
+            new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(2), false);
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {

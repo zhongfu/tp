@@ -16,6 +16,7 @@ import static peoplesoft.testutil.TypicalPersons.FIONA;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,23 +27,40 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import peoplesoft.commons.core.JobIdFactory;
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
+import peoplesoft.model.util.Employment;
 
 public class AddressBookSerdesTest {
     @Test
     public void serialize_validNonEmptyAttrs_returnsValidSerialization() throws JsonProcessingException {
         List<Person> personList = Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA);
+        List<Job> jobList = List.of();
 
         AddressBook ab = new AddressBook();
         ab.setPersons(personList);
+        ab.setJobs(jobList);
 
         List<String> serializedPersonList = personList.stream()
             .map((p) -> serializePerson(p))
             .collect(Collectors.toList());
 
+        // TODO
+        /*List<String> serializedJobList = jobList.stream()
+            .map((j) -> serializeJob(j))
+            .collect(Collectors.toList());*/
+
+        String serializedEmployment = JsonUtil.toJsonString(Employment.getInstance().getAllJobs());
+
+        String serializedJobIdState = String.valueOf(JobIdFactory.getId());
+
         Map<String, String> entries = new LinkedHashMap<>();
         entries.put("persons", serializeList(serializedPersonList));
+        entries.put("jobs", serializeList(List.of())); // TODO
+        entries.put("employment", serializedEmployment);
+        entries.put("jobIdState", serializedJobIdState);
 
         String serialized = serializeObject(entries);
 
@@ -53,7 +71,14 @@ public class AddressBookSerdesTest {
     public void serialize_emptyList_returnsValidSerialization() throws JsonProcessingException {
         AddressBook ab = new AddressBook();
 
-        String serialized = serializeObject(Map.of("persons", serializeList(Arrays.asList())));
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        map.put("persons", serializeList(List.of()));
+        map.put("jobs", serializeList(List.of()));
+        map.put("employment", JsonUtil.toJsonString(Employment.getInstance().getAllJobs()));
+        map.put("jobIdState", JsonUtil.toJsonString(JobIdFactory.getId()));
+
+        String serialized = serializeObject(map);
+        // TODO not sure if these are deterministic
 
         assertEquals(serialized, toNormalizedJsonString(ab));
     }
@@ -109,16 +134,38 @@ public class AddressBookSerdesTest {
     @Test
     public void deserialize_validSerialization_returnsAddressBook() throws IOException {
         List<Person> personList = Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA);
+        List<Job> jobList = List.of();
 
         AddressBook ab = new AddressBook();
         ab.setPersons(personList);
+        ab.setJobs(jobList);
 
         List<String> serializedPersonList = personList.stream()
             .map((p) -> serializePerson(p))
             .collect(Collectors.toList());
 
-        String serialized = serializeObject(Map.of("persons", serializeList(serializedPersonList)));
+        // TODO
+        /*List<String> serializedJobList = jobList.stream()
+            .map((j) -> serializeJob(j))
+            .collect(Collectors.toList());*/
+
+        String serializedEmployment = JsonUtil.toJsonString(Employment.getInstance().getAllJobs());
+
+        String serializedJobIdState = String.valueOf(JobIdFactory.getId());
+
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        map.put("persons", serializeList(serializedPersonList));
+        map.put("jobs", serializeList(List.of())); // TODO
+        map.put("employment", JsonUtil.toJsonString(Employment.getInstance().getAllJobs()));
+        map.put("jobIdState", JsonUtil.toJsonString(JobIdFactory.getId()));
+
+        String serialized = serializeObject(map);
 
         assertEquals(ab, JsonUtil.fromJsonString(serialized, AddressBook.class));
+        // Checks if employment and jobIdState gets serialized correctly
+        assertEquals(Employment.getInstance().getAllJobs(),
+                JsonUtil.fromJsonString(serializedEmployment, HashMap.class));
+        assertEquals(JobIdFactory.getId(), JsonUtil.fromJsonString(serializedJobIdState, int.class));
+        // TODO if needed
     }
 }

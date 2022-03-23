@@ -21,12 +21,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import javafx.collections.ObservableList;
+import peoplesoft.commons.core.JobIdFactory;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.JobList;
-import peoplesoft.model.job.JobListManager;
+import peoplesoft.model.job.UniqueJobList;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.UniquePersonList;
+import peoplesoft.model.util.Employment;
 
 /**
  * Wraps all data at the address-book level
@@ -40,15 +42,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     private JobList jobs;
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an empty AddressBook.
      */
     public AddressBook() {
         persons = new UniquePersonList();
-        jobs = new JobListManager();
+        jobs = new UniqueJobList();
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons in the {@code toBeCopied}.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -56,13 +58,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates an {@code AddressBook} using the given {@code UniquePersonList}. Only used by
-     * {@code AddressBookDeserializer}.
+     * Creates an {@code AddressBook} using the given {@code UniquePersonList} and {@code UniqueJobList}.
+     * Only used by {@code AddressBookDeserializer}.
      *
      * @param upl the {@code UniquePersonList} for the new instance
+     * @param ujl the {@code UniqueJobList} for the new instance
      */
-    private AddressBook(UniquePersonList upl) {
+    private AddressBook(UniquePersonList upl, UniqueJobList ujl) {
         persons = upl;
+        jobs = ujl;
     }
 
     //// list overwrite operations
@@ -90,7 +94,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        // TODO: handle jobs - serdes issue
+        setJobs(newData.getJobList());
     }
 
     //// person-level operations
@@ -190,9 +194,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
-                // && jobs.equals(((AddressBook) other).jobs));
-                // TODO: fix serdes error
+                && persons.equals(((AddressBook) other).persons)
+                && jobs.equals(((AddressBook) other).jobs));
     }
 
     @Override
@@ -214,6 +217,9 @@ public class AddressBook implements ReadOnlyAddressBook {
             gen.writeStartObject();
 
             gen.writeObjectField("persons", val.persons);
+            gen.writeObjectField("jobs", val.jobs);
+            gen.writeObjectField("employment", Employment.getInstance());
+            gen.writeNumberField("jobIdState", JobIdFactory.getId());
 
             gen.writeEndObject();
         }
@@ -254,10 +260,32 @@ public class AddressBook implements ReadOnlyAddressBook {
             ObjectNode objNode = (ObjectNode) node;
 
             UniquePersonList upl = codec.treeToValue(
-                getNonNullNode(objNode, "persons", ctx),
-                UniquePersonList.class);
+                    getNonNullNode(objNode, "persons", ctx),
+                    UniquePersonList.class);
 
-            AddressBook ab = new AddressBook(upl);
+            UniqueJobList ujl = codec.treeToValue(
+                    getNonNullNode(objNode, "jobs", ctx),
+                    UniqueJobList.class);
+
+            JsonNode empNode = objNode.get("employment");
+            if (empNode == null) {
+                Employment.newInstance();
+            } else {
+                Employment emp = codec.treeToValue(empNode, Employment.class);
+
+                Employment.setInstance(emp);
+            }
+
+            JsonNode jobIdNode = objNode.get("jobIdstate");
+            if (jobIdNode == null) {
+                JobIdFactory.setId(0);
+            } else {
+                int jobId = getNonNullNode(objNode, "jobIdState", ctx).intValue();
+
+                JobIdFactory.setId(jobId);
+            }
+
+            AddressBook ab = new AddressBook(upl, ujl);
             return ab;
         }
 

@@ -3,18 +3,36 @@ package peoplesoft.model.job;
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.exceptions.DuplicateJobException;
 import peoplesoft.model.job.exceptions.JobNotFoundException;
 
 /**
  * Implementation of {@code JobList}.
  */
-public class JobListManager implements JobList {
+@JsonSerialize(using = UniqueJobList.UniqueJobListSerializer.class)
+@JsonDeserialize(using = UniqueJobList.UniqueJobListDeserializer.class)
+public class UniqueJobList implements JobList {
 
     private final ObservableList<Job> internalList = FXCollections.observableArrayList();
     private final ObservableList<Job> internalUnmodifiableList =
@@ -60,7 +78,7 @@ public class JobListManager implements JobList {
         internalList.set(index, editedJob);
     }
 
-    public void setJobs(JobListManager replacement) {
+    public void setJobs(UniqueJobList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -99,8 +117,8 @@ public class JobListManager implements JobList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof JobListManager // instanceof handles nulls
-                && internalList.equals(((JobListManager) other).internalList));
+                || (other instanceof UniqueJobList // instanceof handles nulls
+                && internalList.equals(((UniqueJobList) other).internalList));
     }
 
     @Override
@@ -111,5 +129,53 @@ public class JobListManager implements JobList {
     @Override
     public Iterator<Job> iterator() {
         return internalList.iterator();
+    }
+
+    protected static class UniqueJobListSerializer extends StdSerializer<UniqueJobList> {
+        private UniqueJobListSerializer(Class<UniqueJobList> val) {
+            super(val);
+        }
+
+        private UniqueJobListSerializer() {
+            this(null);
+        }
+
+        @Override
+        public void serialize(UniqueJobList val, JsonGenerator gen, SerializerProvider provider) throws IOException {
+            gen.writeObject(val.asUnmodifiableObservableList());
+        }
+    }
+
+    protected static class UniqueJobListDeserializer extends StdDeserializer<UniqueJobList> {
+        private static final String MISSING_OR_INVALID_VALUE = "The job list is invalid or missing!";
+
+        private UniqueJobListDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        private UniqueJobListDeserializer() {
+            this(null);
+        }
+
+        @Override
+        public UniqueJobList deserialize(JsonParser p, DeserializationContext ctx)
+            throws IOException, JsonProcessingException {
+            JsonNode node = p.readValueAsTree();
+            ObjectCodec codec = p.getCodec();
+
+            JsonParser listParser = node.traverse(codec);
+            List<Job> jobList =
+                codec.readValue(listParser, new TypeReference<List<Job>>(){});
+
+            UniqueJobList ujl = new UniqueJobList();
+            ujl.setJobs(jobList);
+
+            return ujl;
+        }
+
+        @Override
+        public UniqueJobList getNullValue(DeserializationContext ctx) throws JsonMappingException {
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+        }
     }
 }

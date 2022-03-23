@@ -2,7 +2,6 @@ package peoplesoft.logic.parser.job;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_INDEX;
-import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
@@ -22,11 +21,10 @@ public class JobAssignCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ArgumentMultimap parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
-            PREFIX_INDEX);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INDEX)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
+            || argMultimap.getPreamble().isBlank()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 JobAssignCommand.MESSAGE_USAGE));
         }

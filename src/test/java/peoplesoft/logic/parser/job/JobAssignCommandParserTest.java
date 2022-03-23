@@ -12,13 +12,10 @@ public class JobAssignCommandParserTest {
 
     @Test
     public void parse_missingArgs_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" n/name"));
+        // Missing index
+        assertThrows(ParseException.class, () -> parser.parse(" test"));
+        // Missing preamble
         assertThrows(ParseException.class, () -> parser.parse(" i/1"));
-    }
-
-    @Test
-    public void parse_nonEmptyPreamble_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" preamble"));
     }
 
     // TODO: create test for successful construction

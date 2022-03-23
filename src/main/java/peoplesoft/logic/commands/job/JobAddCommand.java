@@ -40,7 +40,6 @@ public class JobAddCommand extends Command {
      */
     public JobAddCommand(String args) throws ParseException {
         requireNonNull(args);
-        System.out.println(args);
         toAdd = new JobAddCommandParser().parse(args);
     }
 

@@ -32,7 +32,7 @@ public class JobAssignCommandTest {
     @Test
     public void constructor_wrongFormatArgs_throwsParseException() {
         // Empty name
-        assertThrows(ParseException.class, () -> new JobAssignCommand("n/ i/1"));
+        assertThrows(ParseException.class, () -> new JobAssignCommand(" i/1"));
         // Incorrect index parse
         assertThrows(ParseException.class, () -> new JobAssignCommand("n/correct i/0"));
     }

@@ -3,7 +3,6 @@ package peoplesoft.logic.commands.job;
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
-import java.util.Set;
 
 import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
@@ -14,6 +13,7 @@ import peoplesoft.model.Model;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.Money;
 import peoplesoft.model.job.Rate;
+import peoplesoft.model.util.Employment;
 
 /**
  * Deletes a {@code Job} with a given {@code JobId}.
@@ -54,9 +54,10 @@ public class JobDeleteCommand extends Command {
 
         try {
             Job jobToDelete = new Job(toDelete, "empty",
-                    new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(1), false, Set.of());
+                    new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(1), false);
             // Currently handles deletions in JobList implementation (by jobId)
             model.deleteJob(jobToDelete);
+            Employment.getInstance().deleteJob(jobToDelete);
         } catch (IndexOutOfBoundsException e) {
             // Asserts that filtered list should always contain exactly the filtered element
             assert false;

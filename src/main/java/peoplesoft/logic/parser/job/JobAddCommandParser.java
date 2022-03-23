@@ -6,7 +6,6 @@ import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_RATE;
 
 import java.time.Duration;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import peoplesoft.commons.core.JobIdFactory;
@@ -33,17 +32,18 @@ public class JobAddCommandParser {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
                 PREFIX_RATE, PREFIX_DURATION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_RATE, PREFIX_DURATION)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_RATE, PREFIX_DURATION)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     JobAddCommand.MESSAGE_USAGE));
         }
         String name = ParserUtil.parseString(argMultimap.getValue(PREFIX_NAME).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
         Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
-        String id = JobIdFactory.nextId();
+        String id = !argMultimap.getPreamble().isBlank()
+                ? ParserUtil.parseString(argMultimap.getPreamble())
+                : JobIdFactory.nextId(); // Short circuit does not increment
 
-        return new Job(id, name, rate, duration, false, Set.of());
+        return new Job(id, name, rate, duration, false);
     }
 
     /**
