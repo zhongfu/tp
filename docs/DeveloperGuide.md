@@ -5,13 +5,15 @@ title: Developer Guide
 
 ## Introduction
 
-PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)** If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
+PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
 
 **PeopleSoft helps to:**
 * Simplify the management of data
 * Reduce menial labour
 * Reduce mistakes due to human error in calculation / accidental edits
-* Helps employees be assured that their hours and pay are registered correctly in the system<br><br>
+* Helps employees be assured that their hours and pay are registered correctly in the system
+
+--------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
 {:toc}
@@ -396,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has `Java 11` or above installed.
+1. Should work on any _mainstream OS_ as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. Should not rely on database-management systems to store data.
 5. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file.

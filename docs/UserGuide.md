@@ -3,9 +3,12 @@ layout: page
 title: User Guide
 ---
 
-PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)** If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
+PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
 
-You can key in your employees' data and the jobs that they are working on. Then, you should assign the employees to the respective jobs that they are working on. After the job has been completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee deserves based on their hourly rates. You can also generate a PDF payslip for you to send to the employees.
+You can key in your employees' data and the jobs that they are working on. 
+Then, you can assign the employees to the respective jobs that they are working on. 
+After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates. 
+You can also generate a PDF payslip for your employees to refer to.
 
 ## How to use this guide
 
@@ -29,17 +32,22 @@ You can key in your employees' data and the jobs that they are working on. Then,
 
 1. Ensure you have Java `11` or above installed in your Computer. Follow [this guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) to do so.
 
-2. Download the latest application from [here](https://github.com/AY2122S2-CS2103T-T11-4/tp/releases). Select the `peoplesoft.jar` file.
+2. Download the latest version of the application from [here](https://github.com/AY2122S2-CS2103T-T11-4/tp/releases). Select the `peoplesoft.jar` file.
 
-3. Move it to a folder that you want it to save its data in.
+3. Move it to the folder that you want the data to be saved in.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+4. Double-click the file to start the app. The GUI should appear as pictured in a few seconds. Note how the app contains some sample data.
+
+<br><br>
  
-   ![Ui](images/Ui.png)<br>_The PeopleSoft interface_<br><br>
+   ![Ui](images/Ui.png)<br>
+   _The PeopleSoft interface_
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>You can try out any command from the [Command Summary](#command-summary) below.
+<br><br>
 
-7. Refer to the [Features](#features) below for details of each command.
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>You can try out any command from the [Command Summary](#command-summary) below.
+
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
@@ -185,7 +193,8 @@ Example: `joblist` lists all the jobs you have created
 
 ### Delete a job : `jobdelete`
 
-Deletes the job that was referred to by the index.<br>
+Deletes the job that was referred to by the index.
+
 ❗️Caution: This is irreversible.
 
 Format: `jobdelete JOBID`
@@ -194,7 +203,8 @@ Example: `jobdelete 2` deletes the second job
 
 ### Mark a job as paid : `mark`
 
-Indicates that a job has been completed.<br>
+Indicates that a job has been completed.
+
 ❗️Caution: This is irreversible.
 
 Format: `mark JOBID`
@@ -215,23 +225,28 @@ Example: `assign 2 i/3` assigns the second job to the first employee
 
 ## FAQ
 
-**Q**: How do I save the data?<br>
-**A**: PeopleSoft saves the data to the folder you placed it in automatically after any command that changes the data. There is no need to save manually.
+**Q**: How do I save the data?
 
-**Q**: What happens if I want to edit the data externally?<br>
-**A**: PeopleSoft data is saved as a JSON file under `/data/peoplesoft.json`. Advanced users are welcome to update data directly by editing that data file.
+**A**: PeopleSoft automatically saves the data to the folder you placed it in automatically after any command that changes the data. There is no need to save manually.
 
-❗️Caution: If your changes to the data file makes its format invalid, PeopleSoft will discard all data and start with an empty data file at the next run.
+**Q**: What happens if I want to edit the data externally?
 
-**Q**: How do I transfer my data to another Computer?<br>
+**A**: PeopleSoft data is saved as a JSON file under `/data/peoplesoft.json`. 
+
+❗️Caution: Do not edit the data directly unless you are sure that its format will remain valid. If your changes to the data file makes its format invalid, PeopleSoft will discard all data and start with an empty data file at the next run.
+
+**Q**: How do I transfer my data to another Computer?
+
 **A**: Install the app in the other computer and overwrite the empty data file it creates with your existing PeopleSoft data file.
 
-**Q**: How do I report a bug? How do I suggest a feature?<br>
+**Q**: How do I report a bug? How do I suggest a feature?
+
 **A**: You may create an issue under the `Issues` tab on our [Github Page](https://github.com/AY2122S2-CS2103T-T11-4/tp/tree/v1.3.tag). You may suggest a feature in the same way.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-**Index**: The item's number in a list. <br>
+**Index**: The item's number in a list.
+
 e.g. The second person in the list has an INDEX of 2.
