@@ -1,6 +1,8 @@
 package peoplesoft.model.job;
 
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
+import static peoplesoft.model.job.util.DurationUtil.requirePositive;
+import static peoplesoft.model.job.util.MoneyUtil.requireNonNegative;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -37,10 +39,13 @@ public class Rate {
     /**
      * Constructs a {@code Rate} instance.
      *
-     * @param amount A value as a double.
+     * @param amount Money per unit time
+     * @param duration Unit time duration
      */
     public Rate(Money amount, Duration duration) {
         requireAllNonNull(amount, duration);
+        requireNonNegative(amount);
+        requirePositive(duration);
         this.amount = amount;
         this.duration = duration;
     }
@@ -91,7 +96,7 @@ public class Rate {
     /**
      * Prints the 2 decimal place currency format of the value.
      *
-     * @returns Value in currency format as a string.
+     * @return Value in currency format as a string.
      */
     @Override
     public String toString() {
