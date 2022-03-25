@@ -239,6 +239,44 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### The `Find` command
+
+The `Find` command is an enhancement of the `Find` feature provided in AB3. 
+It is structured using an object of `PersonContainsKeywordPredicate`, adapted from `NameContainsKeywordPredicate`. It 
+has the following attributes:
+* `static final String COMMAND_WORD` initialised to `'find'`
+* `static final String MESSAGE_USAGE` initialised to the relevant message.
+* `PersonContainsKeywordPredicate predicate` used to find `Person` objects that match with the given keyword.
+
+Applying this filter to the entire list means that only `Persons` that match **ALL** the keywords would be retained in 
+the filtered list.
+#### The `PersonContainsKeywordPredicate` class
+
+The **match** itself is defined as follows (within the `PersonContainsKeywordPredicate` class which implements the 
+`Predicate` interface):
+If a `Person` contains **ALL** the keywords passed in the query, either in their `name` field or as equivalent to an 
+element in their `tags` set of `Tag` objects, then, passed as a parameter to `test()`,
+it is a valid match. 
+
+The implementation is achieved through using stream manipulations to iterate through each person object, 
+and for any such object, iterating through each keyword passed in the query. The keyword is then checked if it is 
+contained within the name or among the tags.
+
+One motivation behind using streams rather than iteration was that streams can be better optimized, given the need or 
+bandwith arising later. 
+
+### The `JobList` interface and `UniqueJobList` class
+
+The `JobList` is an interface for the list of jobs, that implements the `Iterable` interface and supports minimal list 
+operations. 
+
+The `UniqueJobList` class implements the `JobList` interface to that enforces uniqueness between its elements and does 
+not allow nulls.
+Furthermore, it has the following attributes, to interact with `java.fx` effectively.
+* `ObservableList<Job> internalList`
+* `ObservableList<Job> internalUnmodifiableList`
+
+
 ### The `Job` class
 
 The `Job` class is an abstraction for a job stored in PeopleSoft. A `Job` object is immutable and contains the
