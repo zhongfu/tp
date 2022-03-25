@@ -239,6 +239,41 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### The `Job` class
+
+The `Job` class is an abstraction for a job stored in PeopleSoft. A `Job` object is immutable and contains the
+following attributes:
+* `String jobId` - Jobs are referenced by this attribute.
+* `String desc` - A user-readable description of this job.
+* `Rate rate` - The hourly pay of a job. A `Rate` object contains a `Money` object which saves money values as 
+a `java.math.BigDecimal` with 6 decimal places.
+* `Duration duration` - The duration that a job has been worked. Is used together with `rate` to calculate the
+total job earnings. Uses `java.time.Duration`.
+* `boolean hasPaid` - A boolean to denote if this job has been paid for. Used to calculate the salary of a
+`Person`.
+
+The use of immutability ensures that there are no unintended side effects of modifying a `Job`.
+Whenever a `Job` needs to be modified (for example setting the value of `hasPaid`), a new immutable copy
+of the `Job` with the desired changes is created to replace the old instance. Two `Job` objects are considered
+the same job if they share the same `jobId`, which can be compared using `Job#isSameJob()`.
+
+### The `Job` and `Person` association - `Employment`
+
+In order to represent how a job may be assigned to a person (or a person may take on a job) in real life, an
+association class `Employment` is used. The class handles the following responsibilities:
+* Assigning a `Job` to a `Person`.
+* Removing all necessary associations on the deletion/edit of a `Job` or `Person`.
+* Filtering the `Job` objects that are mapped to a `Person`.
+
+In the current implementation, there is a one-to-many mapping of `Job` objects to `Person` objects. An
+association can be created using `Employment#associate(job, person)`. The jobs are internally referenced by
+`jobId`, while the persons are referenced by `Name`.
+
+Future implementations may work on allowing for a many-to-many relationship between `Job` objects and `Person`
+objects (to represent how some jobs may have multiple persons involved). Currently, the class `Employment` is
+written as a singleton. This may be changed to be a field of `AddressBook` due to potential obstacles with the
+testing of the serialization/deserialization of the class.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -414,4 +449,3 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
-
