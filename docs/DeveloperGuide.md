@@ -2,25 +2,38 @@
 layout: page
 title: Developer Guide
 ---
+
+## Introduction
+
+PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
+
+**PeopleSoft helps to:**
+* Simplify the management of data
+* Reduce menial labour
+* Reduce mistakes due to human error in calculation / accidental edits
+* Helps employees be assured that their hours and pay are registered correctly in the system
+
+--------------------------------------------------------------------------------------------------------------------
+
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Acknowledgements
 
 * Project adapted from [addressbook-level3](https://se-education.org/addressbook-level3/DeveloperGuide.html#product-scope)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## Design
 
 <div markdown="span" class="alert alert-primary">
 
@@ -151,7 +164,7 @@ Classes used by multiple components are in the `peoplesoft.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -315,7 +328,7 @@ testing of the serialization/deserialization of the class.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -325,22 +338,24 @@ testing of the serialization/deserialization of the class.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
 **Target user profile**:
 HR Managers of companies offering contractor services
-* have a need to manage a significant number of contacts
+* have a need to manage a significant number of employees and jobs
+* employee pay is calculated based on hours worked
 * prefer desktop apps over other types
 * can type fast
 * prefer typing to mouse interactions
 * are reasonably comfortable using CLI apps
 
 **Value proposition**:
-* HR-related functions like retrieving contact information, hiring, grouping by user type etc.
-* Organize many dimensions of information; increase maintainability and simplify the management of data.
-* Increase the speed and ease of use.
+* Simplify the management of data
+* Reduce menial labour
+* Reduce mistakes due to human error in calculation / accidental edits
+* Helps employees be assured that their hours and pay are registered correctly in the system
 
 
 
@@ -348,25 +363,26 @@ HR Managers of companies offering contractor services
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​                                                                   | So that I can…​                                                               |
-|-----|-------------------------------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* *` | new user                                  | see usage instructions                                                         | refer to instructions when I forget how to use the App                        |
-| `* *` | potential user                            | see the app populated with sample data                                         | easily see how the app will look like when it is in use                       |
-| `* * *` | user                                      | add a new employee                                                             |                                                                               |
-| `* * *` | user                                      | add tags to employees                                                          | identify their roles                                                          |
-| `* * *` | user                                      | view the number of hours an employee has worked                                | compensate them accordingly                                                   |
-| `* * *` | user                                      | edit an employee's information                                                 | rectify mistakes or update their personal information if need be              |
-| `* * *` | user                                      | delete an employee                                                             |                                                                               |
-| `* * *` | user                                      | delete all employees                                                           | mass-remove entries that I no longer need                                     |
-| `* * *` | user                             | list all employees                                                             |                                                                               |
-| `* * *` | user                                       | find a person by name or tag                                                   | locate details of persons without having to go through the entire list        |
-| `* * *` | user                                      | view the salary owed to a given employee                                       | pay them                                                                      |
-| `* * *` | user                                      | pay for a given type of job                                                    |                                                                               |
-| `* * *` | user                             | load and save data in human-readable data files                                | I can backup the data externally or access it in a different application      |
-| `* * *` | user                                      | exit the application                                                           |                                                                               |
-| `* *` | user                                      | log into separate modes for HR-related functions and for job-related functions | easily access relevant data for the type of work I am doing at any given time |
-| `* *` | user                                      | edit pay multiplier factors (e.g. overtime, experience, emergency on-calls)    | apply changes in payment policies across the organization                     |
-| `*` | user                                      | view expiring contractor licenses                                              | renew them on time                                                            |
+| Priority | As a …​        | I want to …​                                                                   | So that I can…​                                                               |
+|----------|----------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* *`    | new user       | see usage instructions                                                         | refer to instructions when I forget how to use the App                        |
+| `* *`    | potential user | see the app populated with sample data                                         | easily see how the app will look like when it is in use                       |
+| `* * *`  | HR Manager     | add a new employee                                                             |                                                                               |
+| `* * *`  | HR Manager     | add tags to employees                                                          | identify their roles                                                          |
+| `* * *`  | HR Manager     | edit an employee's information                                                 | rectify mistakes or update their personal information if need be              |
+| `* * *`  | HR Manager     | delete an employee                                                             |                                                                               |
+| `* * *`  | HR Manager     | delete all employees                                                           | mass-remove entries that I no longer need                                     |
+| `* * *`  | HR Manager     | list all employees                                                             |                                                                               |
+| `* * *`  | HR Manager     | find a person by name or tag                                                   | locate details of persons without having to go through the entire list        |
+| `* * *`  | HR Manager     | view the salary owed to a given employee                                       | pay them                                                                      |
+| `* * *`  | HR Manager     | pay for a given type of job                                                    |                                                                               |
+| `* * *`  | HR Manager     | load and save data in human-readable data files                                | I can backup the data externally or access it in a different application      |
+| `* * *`  | HR Manager     | exit the application                                                           |                                                                               |
+| `* * *`  | HR Manager     | create, update, read, delete jobs                                              | manage the jobs that my employees are working on                              |
+| `* * *`  | HR Manager     | see which jobs each employee is working on                                     | pay them accordingly                                                          |
+| `* *`    | HR Manager     | log into separate modes for HR-related functions and for job-related functions | easily access relevant data for the type of work I am doing at any given time |
+| `* *`    | HR Manager     | edit pay multiplier factors (e.g. overtime, experience, emergency on-calls)    | apply changes in payment policies across the organization                     |
+
 
 ### Use cases
 
@@ -420,13 +436,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1. Should work on any _mainstream OS_ as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. Should not rely on database-management systems to store data.
-4. Should be compatible with Java 11
 5. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file.
-6. Should not be hosted on remote servers
-7. Should not make use of proprietary third-party frameworks, libraries and services
+6. Should not be hosted on remote servers.
+7. Should not make use of proprietary third-party frameworks, libraries and services.
 8. Should have a responsive GUI. GUI should function well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions and higher and for screen scales 100% and 125%. GUI should be usable - even if suboptimal - for resolutions 1280x720 and higher and for screen scales 150%.
 9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
