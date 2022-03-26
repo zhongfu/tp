@@ -5,6 +5,7 @@ import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -17,7 +18,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
@@ -179,7 +182,8 @@ public class Job {
 
     protected static class JobDeserializer extends StdDeserializer<Job> {
         private static final String MISSING_OR_INVALID_INSTANCE = "The job instance is invalid or missing!";
-        private static final String MISSING_OR_INVALID_VALUE = "The job's %s field is invalid or missing!";
+        private static final UnaryOperator<String> INVALID_VAL_FMTR =
+            k -> String.format("This job's %s value is invalid!", k);
 
         private JobDeserializer(Class<?> vc) {
             super(vc);
@@ -190,14 +194,14 @@ public class Job {
         }
 
         private static JsonNode getNonNullNode(ObjectNode node, String key, DeserializationContext ctx)
-            throws JsonMappingException {
-            JsonNode jsonNode = node.get(key);
-            if (jsonNode == null) {
-                throw JsonUtil.getWrappedIllegalValueException(
-                    ctx, String.format(MISSING_OR_INVALID_VALUE, key));
-            }
+                throws JsonMappingException {
+            return JsonUtil.getNonNullNode(node, key, ctx, INVALID_VAL_FMTR);
+        }
 
-            return jsonNode;
+        private static <T> T getNonNullNodeWithType(ObjectNode node, String key, DeserializationContext ctx,
+                Class<T> cls) throws JsonMappingException {
+            return JsonUtil.getNonNullNodeWithType(node, key, ctx,
+                INVALID_VAL_FMTR, cls);
         }
 
         @Override
@@ -212,17 +216,19 @@ public class Job {
 
             ObjectNode job = (ObjectNode) node;
 
-            String jobId = getNonNullNode(job, "jobId", ctx).textValue();
+            String jobId = getNonNullNodeWithType(job, "jobId", ctx, TextNode.class).textValue();
 
-            String desc = getNonNullNode(job, "desc", ctx).textValue();
+            String desc = getNonNullNodeWithType(job, "desc", ctx, TextNode.class).textValue();
 
-            Rate rate = codec.treeToValue(
-                    getNonNullNode(job, "rate", ctx), Rate.class);
+            Rate rate = getNonNullNode(job, "rate", ctx)
+                .traverse(codec)
+                .readValueAs(Rate.class);
 
-            Duration duration = codec.treeToValue(
-                    getNonNullNode(job, "duration", ctx), Duration.class);
+            Duration duration = getNonNullNode(job, "duration", ctx)
+                .traverse(codec)
+                .readValueAs(Duration.class);
 
-            Boolean hasPaid = getNonNullNode(job, "hasPaid", ctx).booleanValue();
+            Boolean hasPaid = getNonNullNodeWithType(job, "hasPaid", ctx, BooleanNode.class).booleanValue();
 
             return new Job(jobId, desc, rate, duration, hasPaid);
         }
