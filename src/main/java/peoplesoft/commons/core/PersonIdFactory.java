@@ -1,5 +1,7 @@
 package peoplesoft.commons.core;
 
+import peoplesoft.model.util.ID;
+
 /**
  * Class to generate unique person ids.
  */
@@ -12,8 +14,8 @@ public class PersonIdFactory {
      * @return JobId.
      */
     // TODO: currently missing functionality with serdes
-    public static String nextId() {
-        return String.valueOf(++id);
+    public static ID nextId() {
+        return new ID(++id);
     }
 
     /**

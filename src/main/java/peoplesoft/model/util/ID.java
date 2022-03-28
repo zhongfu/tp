@@ -52,6 +52,17 @@ public class ID {
     }
 
     /**
+     * Constructs a {@code ID}.
+     *
+     * @param value A valid id.
+     */
+    public ID(int value) {
+        String strValue = String.valueOf(value);
+        checkArgument(isValidId(strValue), MESSAGE_CONSTRAINTS);
+        this.value = strValue;
+    }
+
+    /**
      * Returns true if a given string is a valid id.
      */
     public static boolean isValidId(String test) {

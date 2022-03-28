@@ -1,6 +1,7 @@
 package peoplesoft.logic.commands.job;
 
 import static java.util.Objects.requireNonNull;
+import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_INDEX;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import peoplesoft.model.Model;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.util.Employment;
+import peoplesoft.model.util.ID;
 
 /**
  * Assigns a {@code Job} to a {@code Person}.
@@ -35,7 +37,7 @@ public class JobAssignCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s\n%s has the following jobs: %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
 
-    private String jobId;
+    private ID jobId;
     private Index personIndex;
 
     /**
@@ -52,7 +54,12 @@ public class JobAssignCommand extends Command {
     private void parseArgs(String args) throws ParseException {
         // TODO: Arguably does not follow SRP/LoD
         ArgumentMultimap argumentMultimap = new JobAssignCommandParser().parse(args);
-        jobId = ParserUtil.parseString(argumentMultimap.getPreamble());
+        try {
+            jobId = new ID(ParserUtil.parseString(argumentMultimap.getPreamble()));
+        } catch (IllegalArgumentException e) { // from ID constructor
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                JobAssignCommand.MESSAGE_USAGE));
+        }
         personIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_INDEX).get());
     }
 

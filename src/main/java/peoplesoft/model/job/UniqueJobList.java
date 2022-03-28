@@ -27,6 +27,7 @@ import javafx.collections.ObservableList;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.exceptions.DuplicateJobException;
 import peoplesoft.model.job.exceptions.JobNotFoundException;
+import peoplesoft.model.util.ID;
 
 /**
  * Implementation of {@code JobList}.
@@ -40,7 +41,7 @@ public class UniqueJobList implements JobList {
             FXCollections.unmodifiableObservableList(internalList);
 
     @Override
-    public boolean contains(String jobId) {
+    public boolean contains(ID jobId) {
         requireNonNull(jobId);
         return internalList.stream().anyMatch(job -> job.getJobId().equals(jobId));
     }
@@ -51,7 +52,7 @@ public class UniqueJobList implements JobList {
      * @throws JobNotFoundException if the person does not exist
      */
     @Override
-    public Job get(String jobId) throws JobNotFoundException {
+    public Job get(ID jobId) throws JobNotFoundException {
         requireNonNull(jobId);
         return internalList.stream()
             .filter(j -> j != null && jobId.equals(j.getJobId()))

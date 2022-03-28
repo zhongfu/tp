@@ -27,6 +27,7 @@ import javafx.collections.ObservableList;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.person.exceptions.DuplicatePersonException;
 import peoplesoft.model.person.exceptions.PersonNotFoundException;
+import peoplesoft.model.util.ID;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -50,7 +51,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(String personId) {
+    public boolean contains(ID personId) {
         requireNonNull(personId);
         return internalList.stream().anyMatch(p -> p != null && personId.equals(p.getPersonId()));
     }
@@ -60,7 +61,7 @@ public class UniquePersonList implements Iterable<Person> {
      *
      * @throws PersonNotFoundException if the person does not exist
      */
-    public Person get(String personId) throws PersonNotFoundException {
+    public Person get(ID personId) throws PersonNotFoundException {
         requireNonNull(personId);
         return internalList.stream()
             .filter(p -> p != null && personId.equals(p.getPersonId()))

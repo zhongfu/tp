@@ -71,7 +71,7 @@ public class PersonUtil {
      */
     public static String serializePerson(Person person) {
         return serializePerson(
-            person.getPersonId(),
+            person.getPersonId().toString(),
             person.getName().toString(),
             person.getPhone().toString(),
             person.getAddress().toString(),

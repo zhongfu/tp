@@ -12,6 +12,7 @@ import peoplesoft.model.person.Name;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.ID;
 import peoplesoft.model.util.SampleDataUtil;
 
 /**
@@ -24,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    private String personId;
+    private ID personId;
     private Name name;
     private Phone phone;
     private Email email;
@@ -58,7 +59,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code personId} of the {@code Person} that we are building.
      */
-    public PersonBuilder withId(String personId) {
+    public PersonBuilder withId(ID personId) {
         requireNonNull(personId);
         this.personId = personId;
         return this;
@@ -68,14 +69,14 @@ public class PersonBuilder {
      * Sets the {@code personId} of the {@code Person} that we are building to the current PersonIdFactory id.
      */
     public PersonBuilder withCurrentId() {
-        return withId(String.valueOf(PersonIdFactory.getId()));
+        return withId(new ID(PersonIdFactory.getId()));
     }
 
     /**
      * Sets the {@code personId} of the {@code Person} that we are building to the current PersonIdFactory id.
      */
     public PersonBuilder withNextId() {
-        return withId(String.valueOf(PersonIdFactory.getId() + 1));
+        return withId(new ID(PersonIdFactory.getId() + 1));
     }
 
     /**

@@ -34,6 +34,7 @@ import peoplesoft.model.person.Person;
 import peoplesoft.model.person.UniquePersonList;
 import peoplesoft.model.person.exceptions.PersonNotFoundException;
 import peoplesoft.model.util.Employment;
+import peoplesoft.model.util.ID;
 
 /**
  * Wraps all data at the address-book level
@@ -107,7 +108,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the given id exists in the address book.
      */
-    public boolean hasPerson(String personId) {
+    public boolean hasPerson(ID personId) {
         requireNonNull(personId);
         return persons.contains(personId);
     }
@@ -117,7 +118,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @throws PersonNotFoundException if there is no such person
      */
-    public Person getPerson(String personId) throws PersonNotFoundException {
+    public Person getPerson(ID personId) throws PersonNotFoundException {
         requireNonNull(personId);
         return persons.get(personId);
     }
@@ -154,7 +155,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a job with the same identity as {@code job} exists in the address book.
      */
-    public boolean hasJob(String jobId) {
+    public boolean hasJob(ID jobId) {
         requireNonNull(jobId);
         return jobs.contains(jobId);
     }
@@ -164,7 +165,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @throws JobNotFoundException if there is no such job
      */
-    public Job getJob(String jobId) throws JobNotFoundException {
+    public Job getJob(ID jobId) throws JobNotFoundException {
         requireNonNull(jobId);
         return jobs.get(jobId);
     }
@@ -311,7 +312,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                     0);
 
                 // just in case we get a jobId that already exists
-                while (upl.contains(String.valueOf(jobId))) {
+                while (upl.contains(new ID(jobId))) {
                     jobId++;
                 }
 
@@ -327,7 +328,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                     0);
 
                 // just in case we get a personId that already exists
-                while (upl.contains(String.valueOf(personId))) {
+                while (upl.contains(new ID(personId))) {
                     personId++;
                 }
 

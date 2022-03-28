@@ -10,6 +10,7 @@ import peoplesoft.model.ReadOnlyAddressBook;
 import peoplesoft.model.ReadOnlyUserPrefs;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
+import peoplesoft.model.util.ID;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -66,12 +67,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasPerson(String personId) {
+    public boolean hasPerson(ID personId) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public Person getPerson(String personId) {
+    public Person getPerson(ID personId) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -96,7 +97,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasJob(String jobId) {
+    public boolean hasJob(ID jobId) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -106,7 +107,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Job getJob(String jobId) {
+    public Job getJob(ID jobId) {
         throw new AssertionError("This method should not be called.");
     }
     @Override

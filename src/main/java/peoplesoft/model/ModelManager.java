@@ -16,6 +16,7 @@ import peoplesoft.model.job.Job;
 import peoplesoft.model.job.exceptions.JobNotFoundException;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.exceptions.PersonNotFoundException;
+import peoplesoft.model.util.ID;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -102,13 +103,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(String personId) {
+    public boolean hasPerson(ID personId) {
         requireNonNull(personId);
         return addressBook.hasPerson(personId);
     }
 
     @Override
-    public Person getPerson(String personId) throws PersonNotFoundException {
+    public Person getPerson(ID personId) throws PersonNotFoundException {
         requireNonNull(personId);
         return addressBook.getPerson(personId);
     }
@@ -156,13 +157,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasJob(String jobId) {
+    public boolean hasJob(ID jobId) {
         requireNonNull(jobId);
         return addressBook.hasJob(jobId);
     }
 
     @Override
-    public Job getJob(String jobId) throws JobNotFoundException {
+    public Job getJob(ID jobId) throws JobNotFoundException {
         requireNonNull(jobId);
         return addressBook.getJob(jobId);
     }

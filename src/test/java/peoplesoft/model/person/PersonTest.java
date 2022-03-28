@@ -13,6 +13,7 @@ import static peoplesoft.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import peoplesoft.model.util.ID;
 import peoplesoft.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -42,7 +43,7 @@ public class PersonTest {
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different id, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withId("500").build();
+        editedAlice = new PersonBuilder(ALICE).withId(new ID(500)).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
     }
 

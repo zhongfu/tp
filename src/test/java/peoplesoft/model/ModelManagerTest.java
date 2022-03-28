@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import peoplesoft.commons.core.GuiSettings;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.PersonContainsKeywordsPredicate;
+import peoplesoft.model.util.ID;
 import peoplesoft.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -80,7 +81,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_nullPersonId_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson((String) null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasPerson((ID) null));
     }
 
     @Test

@@ -23,11 +23,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.ID;
 
 /**
  * Represents a Person in the address book.
@@ -36,7 +36,7 @@ import peoplesoft.model.tag.Tag;
 @JsonSerialize(using = Person.PersonSerializer.class)
 @JsonDeserialize(using = Person.PersonDeserializer.class)
 public class Person {
-    private final String id;
+    private final ID id;
 
     // Identity fields
     private final Name name;
@@ -50,7 +50,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(String id, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(ID id, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(id, name, phone, email, address, tags);
         this.id = id;
         this.name = name;
@@ -60,7 +60,7 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public String getPersonId() {
+    public ID getPersonId() {
         return id;
     }
 
@@ -165,7 +165,7 @@ public class Person {
         public void serialize(Person val, JsonGenerator gen, SerializerProvider provider) throws IOException {
             gen.writeStartObject();
 
-            gen.writeStringField("id", val.getPersonId());
+            gen.writeObjectField("id", val.getPersonId());
             gen.writeObjectField("name", val.getName());
             gen.writeObjectField("phone", val.getPhone());
             gen.writeObjectField("email", val.getEmail());
@@ -212,8 +212,9 @@ public class Person {
 
             ObjectNode person = (ObjectNode) node;
 
-            String id = getNonNullNodeWithType(person, "id", ctx, TextNode.class)
-                .textValue();
+            ID id = getNonNullNode(person, "id", ctx)
+                .traverse(codec)
+                .readValueAs(ID.class);
 
             Name name = getNonNullNode(person, "name", ctx)
                 .traverse(codec)

@@ -14,6 +14,7 @@ import peoplesoft.model.job.Job;
 import peoplesoft.model.job.Money;
 import peoplesoft.model.job.Rate;
 import peoplesoft.model.util.Employment;
+import peoplesoft.model.util.ID;
 
 /**
  * Deletes a {@code Job} with a given {@code JobId}.
@@ -31,7 +32,7 @@ public class JobDeleteCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Deleted Job: %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
 
-    private final String toDelete;
+    private final ID toDelete;
 
     /**
      * Creates a {@code JobDeleteCommand} to delete a {@code Job} by {@code JobId}.

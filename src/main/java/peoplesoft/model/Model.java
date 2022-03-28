@@ -9,6 +9,7 @@ import peoplesoft.model.job.Job;
 import peoplesoft.model.job.exceptions.JobNotFoundException;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.exceptions.PersonNotFoundException;
+import peoplesoft.model.util.ID;
 
 /**
  * The API of the Model component.
@@ -66,14 +67,14 @@ public interface Model {
     /**
      * Returns true if a person with the given id exists in the address book.
      */
-    boolean hasPerson(String personId);
+    boolean hasPerson(ID personId);
 
     /**
      * Returns the person with the given id if it exists.
      *
      * @throws PersonNotFoundException if no such person exists
      */
-    Person getPerson(String personId);
+    Person getPerson(ID personId);
 
     /**
      * Deletes the given person.
@@ -111,14 +112,14 @@ public interface Model {
     /**
      * Returns true if a job with the given id exists in the address book.
      */
-    boolean hasJob(String jobId);
+    boolean hasJob(ID jobId);
 
     /**
      * Returns the job with the given id if it exists.
      *
      * @throws JobNotFoundException if no such job exists
      */
-    Job getJob(String jobId);
+    Job getJob(ID jobId);
 
     /**
      * Deletes the given job.
