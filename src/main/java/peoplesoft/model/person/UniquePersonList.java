@@ -52,7 +52,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(String personId) {
         requireNonNull(personId);
-        return internalList.stream().anyMatch(p -> p != null && personId.equals(p.getId()));
+        return internalList.stream().anyMatch(p -> p != null && personId.equals(p.getPersonId()));
     }
 
     /**
@@ -63,7 +63,7 @@ public class UniquePersonList implements Iterable<Person> {
     public Person get(String personId) throws PersonNotFoundException {
         requireNonNull(personId);
         return internalList.stream()
-            .filter(p -> p != null && personId.equals(p.getId()))
+            .filter(p -> p != null && personId.equals(p.getPersonId()))
             .findAny()
             .orElseThrow(PersonNotFoundException::new);
     }
@@ -74,7 +74,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd.getId())) {
+        if (contains(toAdd.getPersonId())) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
@@ -93,7 +93,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson.getId())) {
+        if (!target.isSamePerson(editedPerson) && contains(editedPerson.getPersonId())) {
             throw new DuplicatePersonException();
         }
 

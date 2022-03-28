@@ -26,7 +26,7 @@ public class PersonSerdesTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final Set<String> INVALID_TAGS = Collections.singleton("#friend");
 
-    private static final String VALID_PERSONID = BENSON.getId().toString();
+    private static final String VALID_PERSONID = BENSON.getPersonId().toString();
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();

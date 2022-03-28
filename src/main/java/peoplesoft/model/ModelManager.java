@@ -98,7 +98,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return hasPerson(person.getId());
+        return hasPerson(person.getPersonId());
     }
 
     @Override

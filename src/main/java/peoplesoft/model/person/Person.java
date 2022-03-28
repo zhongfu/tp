@@ -60,7 +60,7 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public String getId() {
+    public String getPersonId() {
         return id;
     }
 
@@ -98,7 +98,7 @@ public class Person {
         }
 
         return otherPerson != null
-            && getId().equals(otherPerson.getId());
+            && getPersonId().equals(otherPerson.getPersonId());
     }
 
     /**
@@ -134,7 +134,7 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("ID: ")
-                .append(getId())
+                .append(getPersonId())
                 .append("; Name: ")
                 .append(getName())
                 .append("; Phone: ")
@@ -165,7 +165,7 @@ public class Person {
         public void serialize(Person val, JsonGenerator gen, SerializerProvider provider) throws IOException {
             gen.writeStartObject();
 
-            gen.writeStringField("id", val.getId());
+            gen.writeStringField("id", val.getPersonId());
             gen.writeObjectField("name", val.getName());
             gen.writeObjectField("phone", val.getPhone());
             gen.writeObjectField("email", val.getEmail());
