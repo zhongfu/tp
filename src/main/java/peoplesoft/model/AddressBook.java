@@ -305,8 +305,10 @@ public class AddressBook implements ReadOnlyAddressBook {
             }
 
             if (objNode.has("jobIdState")) {
-                int jobId = getNonNullNodeWithType(objNode, "jobIdState", ctx, IntNode.class)
-                    .intValue();
+                // note jobId cannot be negative
+                int jobId = Math.max(
+                    getNonNullNodeWithType(objNode, "jobIdState", ctx, IntNode.class).intValue(),
+                    0);
 
                 // just in case we get a jobId that already exists
                 while (upl.contains(String.valueOf(jobId))) {
@@ -319,8 +321,10 @@ public class AddressBook implements ReadOnlyAddressBook {
             }
 
             if (objNode.has("personIdState")) {
-                int personId = getNonNullNodeWithType(objNode, "personIdState", ctx, IntNode.class)
-                    .intValue();
+                // note personId cannot be negative
+                int personId = Math.max(
+                    getNonNullNodeWithType(objNode, "personIdState", ctx, IntNode.class).intValue(),
+                    0);
 
                 // just in case we get a personId that already exists
                 while (upl.contains(String.valueOf(personId))) {

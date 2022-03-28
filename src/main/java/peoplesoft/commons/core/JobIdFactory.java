@@ -22,6 +22,9 @@ public class JobIdFactory {
      * @param id To set.
      */
     public static void setId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("id should not be negative");
+        }
         JobIdFactory.id = id;
     }
 
