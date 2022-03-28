@@ -50,9 +50,9 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Person toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+    public boolean contains(String personId) {
+        requireNonNull(personId);
+        return internalList.stream().anyMatch(p -> p != null && personId.equals(p.getId()));
     }
 
     /**
@@ -61,7 +61,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (contains(toAdd.getId())) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
@@ -80,7 +80,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePerson(editedPerson) && contains(editedPerson.getId())) {
             throw new DuplicatePersonException();
         }
 

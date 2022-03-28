@@ -28,6 +28,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import peoplesoft.commons.core.JobIdFactory;
+import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
@@ -55,12 +56,14 @@ public class AddressBookSerdesTest {
         String serializedEmployment = JsonUtil.toJsonString(Employment.getInstance().getAllJobs());
 
         String serializedJobIdState = String.valueOf(JobIdFactory.getId());
+        String serializedPersonIdState = String.valueOf(PersonIdFactory.getId());
 
         Map<String, String> entries = new LinkedHashMap<>();
         entries.put("persons", serializeList(serializedPersonList));
         entries.put("jobs", serializeList(List.of())); // TODO
         entries.put("employment", serializedEmployment);
         entries.put("jobIdState", serializedJobIdState);
+        entries.put("personIdState", serializedPersonIdState);
 
         String serialized = serializeObject(entries);
 
@@ -76,6 +79,7 @@ public class AddressBookSerdesTest {
         map.put("jobs", serializeList(List.of()));
         map.put("employment", JsonUtil.toJsonString(Employment.getInstance().getAllJobs()));
         map.put("jobIdState", JsonUtil.toJsonString(JobIdFactory.getId()));
+        map.put("personIdState", JsonUtil.toJsonString(PersonIdFactory.getId()));
 
         String serialized = serializeObject(map);
         // TODO not sure if these are deterministic
@@ -119,6 +123,7 @@ public class AddressBookSerdesTest {
         String serializedList = serializeList(Arrays.asList(
             serializePerson(ALICE),
             serializePerson(
+                "15",
                 "R@chel",
                 BENSON.getPhone().toString(),
                 BENSON.getAddress().toString(),
