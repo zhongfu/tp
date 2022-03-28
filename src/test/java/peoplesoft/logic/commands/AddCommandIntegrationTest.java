@@ -11,6 +11,7 @@ import peoplesoft.model.Model;
 import peoplesoft.model.ModelManager;
 import peoplesoft.model.UserPrefs;
 import peoplesoft.model.person.Person;
+import peoplesoft.model.util.ID;
 import peoplesoft.testutil.PersonBuilder;
 
 /**
@@ -27,7 +28,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().withNextId().build();
+        Person validPerson = new PersonBuilder().withId(new ID(95712384)).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
