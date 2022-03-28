@@ -38,8 +38,8 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder()
-            .withId(new ID(1)) // we're editing the person at index 0, i.e. id 1
-            .build();
+                .withId(new ID(1)) // we're editing the person at index 0, i.e. id 1
+                .build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 

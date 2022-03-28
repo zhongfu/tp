@@ -34,8 +34,8 @@ public class UniquePersonListSerdesTest {
         upl.setPersons(personList);
 
         List<String> serializedPersonList = personList.stream()
-            .map((p) -> serializePerson(p))
-            .collect(Collectors.toList());
+                .map((p) -> serializePerson(p))
+                .collect(Collectors.toList());
 
         String serialized = serializeList(serializedPersonList);
 
@@ -63,53 +63,53 @@ public class UniquePersonListSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("385", UniquePersonList.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("\"string\"", UniquePersonList.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "{\"issa\":\"object!\"}", UniquePersonList.class));
+                "{\"issa\":\"object!\"}", UniquePersonList.class));
     }
 
     @Test
     public void deserialize_nonPersonElement_throwsJsonMappingException() throws IOException {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeList(Arrays.asList(
-                serializePerson(BENSON),
-                "\"hello!\"",
-                serializePerson(ELLE))),
-            UniquePersonList.class));
+                serializeList(Arrays.asList(
+                    serializePerson(BENSON),
+                    "\"hello!\"",
+                    serializePerson(ELLE))),
+                UniquePersonList.class));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeList(Arrays.asList(
-                "null")),
-            UniquePersonList.class));
+                serializeList(Arrays.asList(
+                    "null")),
+                UniquePersonList.class));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeList(Arrays.asList(
-                "1234")),
-            UniquePersonList.class));
+                serializeList(Arrays.asList(
+                    "1234")),
+                UniquePersonList.class));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeList(Arrays.asList(
-                "\"i'm a list!\"")),
-            UniquePersonList.class));
+                serializeList(Arrays.asList(
+                    "\"i'm a list!\"")),
+                UniquePersonList.class));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeList(Arrays.asList(
-                "[null]")),
-            UniquePersonList.class));
+                serializeList(Arrays.asList(
+                    "[null]")),
+                UniquePersonList.class));
 
     }
 
     @Test
     public void deserialize_invalidPersonElement_throwsJsonMappingException() {
         String serialized = serializeList(Arrays.asList(
-            serializePerson(ALICE),
-            serializePerson(
-                "15",
-                "R@chel",
-                BENSON.getPhone().toString(),
-                BENSON.getAddress().toString(),
-                BENSON.getEmail().toString(),
-                BENSON.getRate().getAmount().printFullValue(), // TODO
-                Collections.singleton("friend")),
-            serializePerson(ELLE)));
+                serializePerson(ALICE),
+                serializePerson(
+                    "15",
+                    "R@chel",
+                    BENSON.getPhone().toString(),
+                    BENSON.getAddress().toString(),
+                    BENSON.getEmail().toString(),
+                    BENSON.getRate().getAmount().printFullValue(), // TODO
+                    Collections.singleton("friend")),
+                serializePerson(ELLE)));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, UniquePersonList.class));
     }
@@ -122,8 +122,8 @@ public class UniquePersonListSerdesTest {
         upl.setPersons(personList);
 
         List<String> serializedPersonList = personList.stream()
-            .map((p) -> serializePerson(p))
-            .collect(Collectors.toList());
+                .map((p) -> serializePerson(p))
+                .collect(Collectors.toList());
 
         String serialized = serializeList(serializedPersonList);
 

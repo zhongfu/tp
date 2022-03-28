@@ -31,7 +31,7 @@ public class EmailSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("5", Email.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("[\"im an array lol\"]", Email.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "{\"issa\":\"object!\"}", Email.class));
+                "{\"issa\":\"object!\"}", Email.class));
     }
 
     /**
@@ -44,18 +44,18 @@ public class EmailSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("\"\\t\"", Email.class)); // tab
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("\"hello@world.\"", Email.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "\"random\\\"_quote@in.here\"", Email.class));
+                "\"random\\\"_quote@in.here\"", Email.class));
     }
 
     @Test
     public void deserialize() throws IOException {
         assertEquals(new Email("random_email@gmail.com"),
-            JsonUtil.fromJsonString("\"random_email@gmail.com\"", Email.class));
+                JsonUtil.fromJsonString("\"random_email@gmail.com\"", Email.class));
 
         assertEquals(new Email("a__little__+__funky4@example.com"),
-            JsonUtil.fromJsonString("\"a__little__+__funky4@example.com\"", Email.class));
+                JsonUtil.fromJsonString("\"a__little__+__funky4@example.com\"", Email.class));
 
         assertEquals(new Email("35192341@xn--h9ja3mb.xn--fiqs8s"),
-            JsonUtil.fromJsonString("\"35192341@xn--h9ja3mb.xn--fiqs8s\"", Email.class));
+                JsonUtil.fromJsonString("\"35192341@xn--h9ja3mb.xn--fiqs8s\"", Email.class));
     }
 }

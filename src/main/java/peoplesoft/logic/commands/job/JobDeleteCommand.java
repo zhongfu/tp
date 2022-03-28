@@ -25,9 +25,9 @@ public class JobDeleteCommand extends Command {
     public static final String COMMAND_WORD = "jobdelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes the job identified by the job ID.\n"
-        + "Parameters: JOBID\n"
-        + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the job identified by the job ID.\n"
+            + "Parameters: JOBID\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Deleted Job: %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";

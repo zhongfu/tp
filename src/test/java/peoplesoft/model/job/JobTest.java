@@ -44,7 +44,7 @@ class JobTest {
 
         // same values -> returns true
         assertTrue(EATING.equals(new Job(new ID(1043), "Eating",
-            new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
+                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
 
         // null -> returns false
         assertFalse(EATING.equals(null));
@@ -55,16 +55,16 @@ class JobTest {
         // another value -> returns false
         assertFalse(EATING.equals(RUNNING));
         assertFalse(EATING.equals(new Job(new ID(1044), "Eating",
-            new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
+                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
         assertFalse(EATING.equals(new Job(new ID(1043), "Eating",
-            new Rate(new Money(5.5), Duration.ofHours(2)), Duration.ofDays(1), false)));
+                new Rate(new Money(5.5), Duration.ofHours(2)), Duration.ofDays(1), false)));
         assertFalse(EATING.equals(new Job(new ID(1043), "Running",
-            new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
+                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
         assertFalse(EATING.equals(new Job(new ID(1043), "Eating",
-            new Rate(new Money(6), Duration.ofHours(1)), Duration.ofDays(1), false)));
+                new Rate(new Money(6), Duration.ofHours(1)), Duration.ofDays(1), false)));
         assertFalse(EATING.equals(new Job(new ID(1043), "Eating",
-            new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(2), false)));
+                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(2), false)));
         assertFalse(EATING.equals(new Job(new ID(1043), "Eating",
-            new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), true)));
+                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), true)));
     }
 }

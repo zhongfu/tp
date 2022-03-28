@@ -31,7 +31,7 @@ public class AddressSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("5", Address.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("[\"im an array lol\"]", Address.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "{\"issa\":\"object!\"}", Address.class));
+                "{\"issa\":\"object!\"}", Address.class));
     }
 
     /**
@@ -48,7 +48,7 @@ public class AddressSerdesTest {
     public void deserialize() throws IOException {
         assertEquals(new Address("3"), JsonUtil.fromJsonString("\"3\"", Address.class));
         assertEquals(new Address("4 Oxley Road, #14-02, Singapore 325021"),
-            JsonUtil.fromJsonString("\"4 Oxley Road, #14-02, Singapore 325021\"", Address.class));
+                JsonUtil.fromJsonString("\"4 Oxley Road, #14-02, Singapore 325021\"", Address.class));
         assertEquals(new Address("Test address"), JsonUtil.fromJsonString("\"Test address\"", Address.class));
     }
 }

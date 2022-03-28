@@ -190,7 +190,7 @@ public class Person {
     protected static class PersonDeserializer extends StdDeserializer<Person> {
         private static final String MISSING_OR_INVALID_INSTANCE = "The person instance is invalid or missing!";
         private static final UnaryOperator<String> INVALID_VAL_FMTR =
-            k -> String.format("This person's %s value is invalid!", k);
+                k -> String.format("This person's %s value is invalid!", k);
 
         private PersonDeserializer(Class<?> vc) {
             super(vc);

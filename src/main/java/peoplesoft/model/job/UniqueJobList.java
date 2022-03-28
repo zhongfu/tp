@@ -184,8 +184,8 @@ public class UniqueJobList implements JobList {
             }
 
             List<Job> jobList = node // is ArrayNode
-                .traverse(codec)
-                .readValueAs(new TypeReference<List<Job>>(){});
+                    .traverse(codec)
+                    .readValueAs(new TypeReference<List<Job>>(){});
 
             UniqueJobList ujl = new UniqueJobList();
             ujl.setJobs(jobList);

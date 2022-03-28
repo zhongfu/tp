@@ -20,9 +20,9 @@ public class JobMarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Marks the job identified by the index number used in the displayed job list.\n"
-        + "Parameters: JOBID\n"
-        + "Example: " + COMMAND_WORD + " 1";
+            + ": Marks the job identified by the index number used in the displayed job list.\n"
+            + "Parameters: JOBID\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Marked Job %s as %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
@@ -52,7 +52,7 @@ public class JobMarkCommand extends Command {
         try {
             // TODO: This line breaks LoD
             Job jobToMark = model.getAddressBook().getJobList()
-                .filtered(job -> job.getJobId().equals(toMark)).get(0);
+                    .filtered(job -> job.getJobId().equals(toMark)).get(0);
             // Creates immutable instances and replaces the existing ones
             if (jobToMark.hasPaid()) {
                 state = true;

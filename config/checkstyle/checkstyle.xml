@@ -341,7 +341,19 @@
     <module name="Indentation">
       <property name="caseIndent" value="0" />
       <property name="lineWrappingIndentation" value="8" />
-      <property name="forceStrictCondition" value="true" />
+      <!-- note: forceStrictCondition not used because we might want to have more than 8 spaces
+           e.g.:
+
+           blah.blah()
+                   .blah()
+                   .blah()
+                   .blah()
+                   .blag(Abc.def()
+                           .efg());
+
+           forceStrictCondition doesn't take this into account, and forces the last line
+           to be at 8 indentation
+      -->
     </module>
 
     <module name="NoWhitespaceBefore">

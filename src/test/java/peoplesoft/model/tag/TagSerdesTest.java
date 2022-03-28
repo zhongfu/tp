@@ -31,7 +31,7 @@ public class TagSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("5", Tag.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("[\"im an array lol\"]", Tag.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "{\"issa\":\"object!\"}", Tag.class));
+                "{\"issa\":\"object!\"}", Tag.class));
     }
 
     /**
@@ -49,7 +49,7 @@ public class TagSerdesTest {
     public void deserialize() throws IOException {
         assertEquals(new Tag("3"), JsonUtil.fromJsonString("\"3\"", Tag.class));
         assertEquals(new Tag("TagWithS0meNumb3r5"),
-            JsonUtil.fromJsonString("\"TagWithS0meNumb3r5\"", Tag.class));
+                JsonUtil.fromJsonString("\"TagWithS0meNumb3r5\"", Tag.class));
         assertEquals(new Tag("TestTag"), JsonUtil.fromJsonString("\"TestTag\"", Tag.class));
     }
 }

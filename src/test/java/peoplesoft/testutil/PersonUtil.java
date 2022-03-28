@@ -41,7 +41,7 @@ public class PersonUtil {
         // TODO might need more elegance
         sb.append(PREFIX_RATE + person.getRate().getAmount().printFullValue() + " ");
         person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+                s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }

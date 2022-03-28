@@ -31,7 +31,7 @@ public class PhoneSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("385", Phone.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("[\"im an array lol\"]", Phone.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "{\"issa\":\"object!\"}", Phone.class));
+                "{\"issa\":\"object!\"}", Phone.class));
     }
 
     /**
@@ -50,6 +50,6 @@ public class PhoneSerdesTest {
     public void deserialize() throws IOException {
         assertEquals(new Phone("315"), JsonUtil.fromJsonString("\"315\"", Phone.class));
         assertEquals(new Phone("401959394939691849581729385719823791234134613"),
-            JsonUtil.fromJsonString("\"401959394939691849581729385719823791234134613\"", Phone.class));
+                JsonUtil.fromJsonString("\"401959394939691849581729385719823791234134613\"", Phone.class));
     }
 }
