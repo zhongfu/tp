@@ -66,6 +66,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasPerson(String personId) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Person getPerson(String personId) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void deletePerson(Person target) {
         throw new AssertionError("This method should not be called.");
     }
@@ -90,6 +100,15 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+    @Override
+    public boolean hasJob(Job job) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Job getJob(String jobId) {
+        throw new AssertionError("This method should not be called.");
+    }
     @Override
     public void deleteJob(Job target) {
         throw new AssertionError("This method should not be called.");

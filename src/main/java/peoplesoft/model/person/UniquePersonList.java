@@ -56,6 +56,19 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns the job with the given id.
+     *
+     * @throws PersonNotFoundException if the person does not exist
+     */
+    public Person get(String personId) throws PersonNotFoundException {
+        requireNonNull(personId);
+        return internalList.stream()
+            .filter(p -> p != null && personId.equals(p.getId()))
+            .findAny()
+            .orElseThrow(PersonNotFoundException::new);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

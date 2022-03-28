@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +13,9 @@ import javafx.collections.transformation.FilteredList;
 import peoplesoft.commons.core.GuiSettings;
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.model.job.Job;
+import peoplesoft.model.job.exceptions.JobNotFoundException;
 import peoplesoft.model.person.Person;
+import peoplesoft.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -95,7 +98,19 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person.getId());
+        return hasPerson(person.getId());
+    }
+
+    @Override
+    public boolean hasPerson(String personId) {
+        requireNonNull(personId);
+        return addressBook.hasPerson(personId);
+    }
+
+    @Override
+    public Person getPerson(String personId) throws PersonNotFoundException {
+        requireNonNull(personId);
+        return addressBook.getPerson(personId);
     }
 
     @Override
@@ -135,9 +150,21 @@ public class ModelManager implements Model {
     //=========== Job Operations =============================================================================
 
     @Override
+    public boolean hasJob(Job job) {
+        requireNonNull(job);
+        return hasPerson(job.getJobId());
+    }
+
+    @Override
     public boolean hasJob(String jobId) {
         requireNonNull(jobId);
         return addressBook.hasJob(jobId);
+    }
+
+    @Override
+    public Job getJob(String jobId) throws JobNotFoundException {
+        requireNonNull(jobId);
+        return addressBook.getJob(jobId);
     }
 
     @Override
@@ -172,6 +199,12 @@ public class ModelManager implements Model {
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
+    }
+
+    // good practice to include this when overriding equals()
+    @Override
+    public int hashCode() {
+        return Objects.hash(addressBook, userPrefs, filteredPersons, filteredJobs);
     }
 
     @Override

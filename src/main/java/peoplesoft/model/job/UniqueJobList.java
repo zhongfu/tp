@@ -45,6 +45,20 @@ public class UniqueJobList implements JobList {
         return internalList.stream().anyMatch(job -> job.getJobId().equals(jobId));
     }
 
+    /**
+     * Returns the job with the given id.
+     *
+     * @throws JobNotFoundException if the person does not exist
+     */
+    @Override
+    public Job get(String jobId) throws JobNotFoundException {
+        requireNonNull(jobId);
+        return internalList.stream()
+            .filter(j -> j != null && jobId.equals(j.getJobId()))
+            .findAny()
+            .orElseThrow(JobNotFoundException::new);
+    }
+
     @Override
     public void add(Job toAdd) {
         requireNonNull(toAdd);

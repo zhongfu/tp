@@ -3,6 +3,7 @@ package peoplesoft.model.job;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import peoplesoft.model.job.exceptions.JobNotFoundException;
 
 public interface JobList extends Iterable<Job> {
 
@@ -10,6 +11,8 @@ public interface JobList extends Iterable<Job> {
     // to compare by jobs but delete seems more intuitive to compare by jobId.
     // For now it is jobId.
     boolean contains(String jobId);
+
+    Job get(String jobId) throws JobNotFoundException;
 
     void add(Job toAdd);
 

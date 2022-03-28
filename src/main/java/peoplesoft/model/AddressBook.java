@@ -29,8 +29,10 @@ import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.JobList;
 import peoplesoft.model.job.UniqueJobList;
+import peoplesoft.model.job.exceptions.JobNotFoundException;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.UniquePersonList;
+import peoplesoft.model.person.exceptions.PersonNotFoundException;
 import peoplesoft.model.util.Employment;
 
 /**
@@ -111,13 +113,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns the person with the given id.
+     *
+     * @throws PersonNotFoundException if there is no such person
+     */
+    public Person getPerson(String personId) throws PersonNotFoundException {
+        requireNonNull(personId);
+        return persons.get(personId);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
     }
-
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
@@ -146,6 +157,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasJob(String jobId) {
         requireNonNull(jobId);
         return jobs.contains(jobId);
+    }
+
+    /**
+     * Returns the job with the given id.
+     *
+     * @throws JobNotFoundException if there is no such job
+     */
+    public Job getJob(String jobId) throws JobNotFoundException {
+        requireNonNull(jobId);
+        return jobs.get(jobId);
     }
 
     /**
