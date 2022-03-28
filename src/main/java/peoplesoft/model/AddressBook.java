@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
@@ -226,7 +228,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     protected static class AddressBookDeserializer extends StdDeserializer<AddressBook> {
-        private static final String MISSING_OR_INVALID_VALUE = "This address book is invalid!";
+        private static final String MISSING_OR_INVALID_INSTANCE = "The address book is invalid or missing!";
+        private static final UnaryOperator<String> INVALID_VAL_FMTR =
+            k -> String.format("This address book's %s value is invalid!", k);
 
         private AddressBookDeserializer(Class<?> vc) {
             super(vc);
@@ -238,13 +242,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         private static JsonNode getNonNullNode(ObjectNode node, String key, DeserializationContext ctx)
                 throws JsonMappingException {
-            JsonNode jsonNode = node.get(key);
-            if (jsonNode == null) {
-                throw JsonUtil.getWrappedIllegalValueException(
-                    ctx, String.format(MISSING_OR_INVALID_VALUE, key));
-            }
+            return JsonUtil.getNonNullNode(node, key, ctx, INVALID_VAL_FMTR);
+        }
 
-            return jsonNode;
+        private static <T> T getNonNullNodeWithType(ObjectNode node, String key, DeserializationContext ctx,
+                Class<T> cls) throws JsonMappingException {
+            return JsonUtil.getNonNullNodeWithType(node, key, ctx,
+                INVALID_VAL_FMTR, cls);
         }
 
         @Override
@@ -254,44 +258,44 @@ public class AddressBook implements ReadOnlyAddressBook {
             ObjectCodec codec = p.getCodec();
 
             if (!(node instanceof ObjectNode)) {
-                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
             }
 
             ObjectNode objNode = (ObjectNode) node;
 
-            UniquePersonList upl = codec.treeToValue(
-                    getNonNullNode(objNode, "persons", ctx),
-                    UniquePersonList.class);
+            UniquePersonList upl = getNonNullNode(objNode, "persons", ctx)
+                .traverse(codec)
+                .readValueAs(UniquePersonList.class);
 
-            UniqueJobList ujl = codec.treeToValue(
-                    getNonNullNode(objNode, "jobs", ctx),
-                    UniqueJobList.class);
+            UniqueJobList ujl = getNonNullNode(objNode, "jobs", ctx)
+                .traverse(codec)
+                .readValueAs(UniqueJobList.class);
 
-            JsonNode empNode = objNode.get("employment");
-            if (empNode == null) {
-                Employment.newInstance();
-            } else {
-                Employment emp = codec.treeToValue(empNode, Employment.class);
+            if (objNode.has("employment")) {
+                Employment emp = objNode.get("employment") // not null, we're good
+                    .traverse(codec)
+                    .readValueAs(Employment.class);
 
                 Employment.setInstance(emp);
+            } else {
+                Employment.newInstance();
             }
 
-            JsonNode jobIdNode = objNode.get("jobIdstate");
-            if (jobIdNode == null) {
-                JobIdFactory.setId(0);
-            } else {
-                int jobId = getNonNullNode(objNode, "jobIdState", ctx).intValue();
+            if (objNode.has("jobIdState")) {
+                int jobId = getNonNullNodeWithType(objNode, "jobIdState", ctx, IntNode.class)
+                    .intValue();
 
                 JobIdFactory.setId(jobId);
+            } else {
+                JobIdFactory.setId(0);
             }
 
-            AddressBook ab = new AddressBook(upl, ujl);
-            return ab;
+            return new AddressBook(upl, ujl);
         }
 
         @Override
         public AddressBook getNullValue(DeserializationContext ctx) throws JsonMappingException {
-            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
         }
     }
 }

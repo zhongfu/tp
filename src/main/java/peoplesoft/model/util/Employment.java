@@ -169,7 +169,7 @@ public class Employment {
     }
 
     protected static class EmploymentDeserializer extends StdDeserializer<Employment> {
-        private static final String MISSING_OR_INVALID_VALUE = "Invalid employment!";
+        private static final String MISSING_OR_INVALID_INSTANCE = "Invalid employment!";
 
         private EmploymentDeserializer(Class<?> vc) {
             super(vc);
@@ -186,21 +186,20 @@ public class Employment {
             ObjectCodec codec = p.getCodec();
 
             if (!(node instanceof ObjectNode)) {
-                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
             }
 
-            JsonParser mapParser = node.traverse(codec);
-            HashMap<String, Name> map = codec.readValue(mapParser,
-                    new TypeReference<HashMap<String, Name>>(){});
-
-            System.out.println(map);
+            // readValueAs Map is ok because we know `node` has to be a json object
+            HashMap<String, Name> map = node
+                .traverse(codec)
+                .readValueAs(new TypeReference<HashMap<String, Name>>(){});
 
             return new Employment(map);
         }
 
         @Override
         public Employment getNullValue(DeserializationContext ctx) throws JsonMappingException {
-            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
         }
     }
 }

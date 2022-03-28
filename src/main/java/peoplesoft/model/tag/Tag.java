@@ -90,7 +90,7 @@ public class Tag {
     }
 
     protected static class TagDeserializer extends StdDeserializer<Tag> {
-        private static final String MISSING_OR_INVALID_VALUE = "The tag value is invalid or missing!";
+        private static final String MISSING_OR_INVALID_INSTANCE = "The tag value is invalid or missing!";
 
         private TagDeserializer(Class<?> vc) {
             super(vc);
@@ -106,7 +106,7 @@ public class Tag {
             JsonNode node = p.readValueAsTree();
 
             if (!(node instanceof TextNode)) {
-                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
             }
 
             String tag = ((TextNode) node).textValue();
@@ -119,7 +119,7 @@ public class Tag {
 
         @Override
         public Tag getNullValue(DeserializationContext ctx) throws JsonMappingException {
-            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
         }
     }
 }

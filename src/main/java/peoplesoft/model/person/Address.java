@@ -88,7 +88,7 @@ public class Address {
     }
 
     protected static class AddressDeserializer extends StdDeserializer<Address> {
-        private static final String MISSING_OR_INVALID_VALUE = "The address value is invalid or missing!";
+        private static final String MISSING_OR_INVALID_INSTANCE = "The address value is invalid or missing!";
 
         private AddressDeserializer(Class<?> vc) {
             super(vc);
@@ -104,7 +104,7 @@ public class Address {
             JsonNode node = p.readValueAsTree();
 
             if (!(node instanceof TextNode)) {
-                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
             }
 
             String address = ((TextNode) node).textValue();
@@ -117,7 +117,7 @@ public class Address {
 
         @Override
         public Address getNullValue(DeserializationContext ctx) throws JsonMappingException {
-            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
         }
     }
 }
