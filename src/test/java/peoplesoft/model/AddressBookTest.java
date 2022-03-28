@@ -62,13 +62,13 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasPerson(ALICE.getId()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        assertTrue(addressBook.hasPerson(ALICE.getId()));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class AddressBookTest {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasPerson(editedAlice.getId()));
     }
 
     @Test

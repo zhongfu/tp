@@ -26,6 +26,7 @@ public class PersonSerdesTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final Set<String> INVALID_TAGS = Collections.singleton("#friend");
 
+    private static final String VALID_PERSONID = BENSON.getId().toString();
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
@@ -58,18 +59,25 @@ public class PersonSerdesTest {
     }
 
     @Test
-    public void deserialize_invalidName_throwsJsonMappingException() throws IOException {
+    public void deserialize_nullPersonId_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            INVALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
+            null, VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
+    }
 
+    @Test
+    public void deserialize_invalidName_throwsJsonMappingException() throws IOException {
+        final String serialized = serializePerson(
+            VALID_PERSONID, INVALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
+
+        assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
 
     @Test
     public void deserialize_nullName_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            null, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
+            VALID_PERSONID, null, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
@@ -77,7 +85,7 @@ public class PersonSerdesTest {
     @Test
     public void deserialize_invalidPhone_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
+            VALID_PERSONID, VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
@@ -85,7 +93,7 @@ public class PersonSerdesTest {
     @Test
     public void deserialize_nullPhone_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            VALID_NAME, null, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
+            VALID_PERSONID, VALID_NAME, null, VALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
@@ -93,7 +101,7 @@ public class PersonSerdesTest {
     @Test
     public void deserialize_invalidEmail_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            VALID_NAME, VALID_PHONE, VALID_ADDRESS, INVALID_EMAIL, VALID_TAGS);
+            VALID_PERSONID, VALID_NAME, VALID_PHONE, VALID_ADDRESS, INVALID_EMAIL, VALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
@@ -101,7 +109,7 @@ public class PersonSerdesTest {
     @Test
     public void deserialize_nullEmail_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            VALID_NAME, VALID_PHONE, VALID_ADDRESS, null, VALID_TAGS);
+            VALID_PERSONID, VALID_NAME, VALID_PHONE, VALID_ADDRESS, null, VALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
@@ -109,7 +117,7 @@ public class PersonSerdesTest {
     @Test
     public void deserialize_invalidAddress_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            VALID_NAME, VALID_PHONE, INVALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
+            VALID_PERSONID, VALID_NAME, VALID_PHONE, INVALID_ADDRESS, VALID_EMAIL, VALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
@@ -117,7 +125,7 @@ public class PersonSerdesTest {
     @Test
     public void deserialize_nullAddress_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            VALID_NAME, VALID_PHONE, null, VALID_EMAIL, VALID_TAGS);
+            VALID_PERSONID, VALID_NAME, VALID_PHONE, null, VALID_EMAIL, VALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
@@ -125,7 +133,7 @@ public class PersonSerdesTest {
     @Test
     public void deserialize_invalidTags_throwsJsonMappingException() {
         final String serialized = serializePerson(
-            VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL, INVALID_TAGS);
+            VALID_PERSONID, VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL, INVALID_TAGS);
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));
     }
@@ -139,7 +147,8 @@ public class PersonSerdesTest {
     @Test
     public void deserialize_invalidTagArray_throwsJsonMappingExceptionWithMsg() {
         final String serialized = serializePerson(
-            VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL, "\"invalid tag array representation\"");
+            VALID_PERSONID, VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL,
+            "\"invalid tag array representation\"");
 
         JsonMappingException ex = assertThrows(
             JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, Person.class));

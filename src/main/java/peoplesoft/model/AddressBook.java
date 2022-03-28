@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import javafx.collections.ObservableList;
 import peoplesoft.commons.core.JobIdFactory;
+import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.JobList;
@@ -102,11 +103,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the given id exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(String personId) {
+        requireNonNull(personId);
+        return persons.contains(personId);
     }
 
     /**
@@ -222,6 +223,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             gen.writeObjectField("jobs", val.jobs);
             gen.writeObjectField("employment", Employment.getInstance());
             gen.writeNumberField("jobIdState", JobIdFactory.getId());
+            gen.writeNumberField("personIdState", PersonIdFactory.getId());
 
             gen.writeEndObject();
         }
@@ -285,9 +287,28 @@ public class AddressBook implements ReadOnlyAddressBook {
                 int jobId = getNonNullNodeWithType(objNode, "jobIdState", ctx, IntNode.class)
                     .intValue();
 
+                // just in case we get a jobId that already exists
+                while (upl.contains(String.valueOf(jobId))) {
+                    jobId++;
+                }
+
                 JobIdFactory.setId(jobId);
             } else {
                 JobIdFactory.setId(0);
+            }
+
+            if (objNode.has("personIdState")) {
+                int personId = getNonNullNodeWithType(objNode, "personIdState", ctx, IntNode.class)
+                    .intValue();
+
+                // just in case we get a personId that already exists
+                while (upl.contains(String.valueOf(personId))) {
+                    personId++;
+                }
+
+                PersonIdFactory.setId(personId);
+            } else {
+                PersonIdFactory.setId(0);
             }
 
             return new AddressBook(upl, ujl);
