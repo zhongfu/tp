@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.ID;
 
 /**
  * Represents a Person in the address book.
@@ -35,6 +36,7 @@ import peoplesoft.model.tag.Tag;
 @JsonSerialize(using = Person.PersonSerializer.class)
 @JsonDeserialize(using = Person.PersonDeserializer.class)
 public class Person {
+    private final ID id;
 
     // Identity fields
     private final Name name;
@@ -48,13 +50,18 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(ID id, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(id, name, phone, email, address, tags);
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    public ID getPersonId() {
+        return id;
     }
 
     public Name getName() {
@@ -91,7 +98,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && getPersonId().equals(otherPerson.getPersonId());
     }
 
     /**
@@ -109,7 +116,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
+        return isSamePerson(otherPerson)
+                && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
@@ -119,13 +127,16 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(id, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append("ID: ")
+                .append(getPersonId())
+                .append("; Name: ")
+                .append(getName())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
@@ -154,6 +165,7 @@ public class Person {
         public void serialize(Person val, JsonGenerator gen, SerializerProvider provider) throws IOException {
             gen.writeStartObject();
 
+            gen.writeObjectField("id", val.getPersonId());
             gen.writeObjectField("name", val.getName());
             gen.writeObjectField("phone", val.getPhone());
             gen.writeObjectField("email", val.getEmail());
@@ -200,6 +212,10 @@ public class Person {
 
             ObjectNode person = (ObjectNode) node;
 
+            ID id = getNonNullNode(person, "id", ctx)
+                .traverse(codec)
+                .readValueAs(ID.class);
+
             Name name = getNonNullNode(person, "name", ctx)
                 .traverse(codec)
                 .readValueAs(Name.class);
@@ -220,7 +236,7 @@ public class Person {
                 .traverse(codec)
                 .readValueAs(new TypeReference<Set<Tag>>(){});
 
-            return new Person(name, phone, email, address, tags);
+            return new Person(id, name, phone, email, address, tags);
         }
 
         @Override

@@ -17,6 +17,7 @@ import peoplesoft.logic.parser.Prefix;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.Rate;
+import peoplesoft.model.util.ID;
 
 /**
  * Parses input parameters and returns a {@code Job}.
@@ -39,9 +40,16 @@ public class JobAddCommandParser {
         String name = ParserUtil.parseString(argMultimap.getValue(PREFIX_NAME).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
         Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
-        String id = !argMultimap.getPreamble().isBlank()
-                ? ParserUtil.parseString(argMultimap.getPreamble())
-                : JobIdFactory.nextId(); // Short circuit does not increment
+
+        ID id;
+        try {
+            id = !argMultimap.getPreamble().isBlank()
+                    ? new ID(ParserUtil.parseString(argMultimap.getPreamble()))
+                    : JobIdFactory.nextId(); // Short circuit does not increment
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    JobAddCommand.MESSAGE_USAGE));
+        }
 
         return new Job(id, name, rate, duration, false);
     }

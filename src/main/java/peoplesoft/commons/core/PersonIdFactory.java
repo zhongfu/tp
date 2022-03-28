@@ -3,13 +3,13 @@ package peoplesoft.commons.core;
 import peoplesoft.model.util.ID;
 
 /**
- * Class to generate unique {@code JobIds}.
+ * Class to generate unique person ids.
  */
-public class JobIdFactory {
+public class PersonIdFactory {
     private static int id = 0;
 
     /**
-     * Returns a unique {@code JobId}.
+     * Returns a unique person id.
      *
      * @return JobId.
      */
@@ -27,7 +27,7 @@ public class JobIdFactory {
         if (id < 0) {
             throw new IllegalArgumentException("id should not be negative");
         }
-        JobIdFactory.id = id;
+        PersonIdFactory.id = id;
     }
 
     /**

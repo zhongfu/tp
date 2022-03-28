@@ -102,6 +102,7 @@ public class UniquePersonListSerdesTest {
         String serialized = serializeList(Arrays.asList(
             serializePerson(ALICE),
             serializePerson(
+                "15",
                 "R@chel",
                 BENSON.getPhone().toString(),
                 BENSON.getAddress().toString(),

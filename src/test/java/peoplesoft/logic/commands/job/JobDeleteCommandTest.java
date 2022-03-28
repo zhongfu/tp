@@ -15,6 +15,7 @@ import peoplesoft.model.UserPrefs;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.Money;
 import peoplesoft.model.job.Rate;
+import peoplesoft.model.util.ID;
 
 public class JobDeleteCommandTest {
 
@@ -22,7 +23,7 @@ public class JobDeleteCommandTest {
     private static final String INCORRECT_ARGS = "incorrect";
 
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Job job = new Job(CORRECT_ARGS, "The Right Job",
+    private Job job = new Job(new ID(CORRECT_ARGS), "The Right Job",
             new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(2), false);
 
     @Test

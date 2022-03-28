@@ -24,13 +24,17 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import javafx.collections.ObservableList;
 import peoplesoft.commons.core.JobIdFactory;
+import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.JobList;
 import peoplesoft.model.job.UniqueJobList;
+import peoplesoft.model.job.exceptions.JobNotFoundException;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.UniquePersonList;
+import peoplesoft.model.person.exceptions.PersonNotFoundException;
 import peoplesoft.model.util.Employment;
+import peoplesoft.model.util.ID;
 
 /**
  * Wraps all data at the address-book level
@@ -102,11 +106,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the given id exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(ID personId) {
+        requireNonNull(personId);
+        return persons.contains(personId);
+    }
+
+    /**
+     * Returns the person with the given id.
+     *
+     * @throws PersonNotFoundException if there is no such person
+     */
+    public Person getPerson(ID personId) throws PersonNotFoundException {
+        requireNonNull(personId);
+        return persons.get(personId);
     }
 
     /**
@@ -116,7 +130,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
     }
-
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
@@ -142,9 +155,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a job with the same identity as {@code job} exists in the address book.
      */
-    public boolean hasJob(String jobId) {
+    public boolean hasJob(ID jobId) {
         requireNonNull(jobId);
         return jobs.contains(jobId);
+    }
+
+    /**
+     * Returns the job with the given id.
+     *
+     * @throws JobNotFoundException if there is no such job
+     */
+    public Job getJob(ID jobId) throws JobNotFoundException {
+        requireNonNull(jobId);
+        return jobs.get(jobId);
     }
 
     /**
@@ -222,6 +245,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             gen.writeObjectField("jobs", val.jobs);
             gen.writeObjectField("employment", Employment.getInstance());
             gen.writeNumberField("jobIdState", JobIdFactory.getId());
+            gen.writeNumberField("personIdState", PersonIdFactory.getId());
 
             gen.writeEndObject();
         }
@@ -282,12 +306,35 @@ public class AddressBook implements ReadOnlyAddressBook {
             }
 
             if (objNode.has("jobIdState")) {
-                int jobId = getNonNullNodeWithType(objNode, "jobIdState", ctx, IntNode.class)
-                    .intValue();
+                // note jobId cannot be negative
+                int jobId = Math.max(
+                    getNonNullNodeWithType(objNode, "jobIdState", ctx, IntNode.class).intValue(),
+                    0);
+
+                // just in case we get a jobId that already exists
+                while (upl.contains(new ID(jobId))) {
+                    jobId++;
+                }
 
                 JobIdFactory.setId(jobId);
             } else {
                 JobIdFactory.setId(0);
+            }
+
+            if (objNode.has("personIdState")) {
+                // note personId cannot be negative
+                int personId = Math.max(
+                    getNonNullNodeWithType(objNode, "personIdState", ctx, IntNode.class).intValue(),
+                    0);
+
+                // just in case we get a personId that already exists
+                while (upl.contains(new ID(personId))) {
+                    personId++;
+                }
+
+                PersonIdFactory.setId(personId);
+            } else {
+                PersonIdFactory.setId(0);
             }
 
             return new AddressBook(upl, ujl);

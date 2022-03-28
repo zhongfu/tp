@@ -9,6 +9,7 @@ import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.logic.parser.job.JobMarkCommandParser;
 import peoplesoft.model.Model;
 import peoplesoft.model.job.Job;
+import peoplesoft.model.util.ID;
 
 /**
  * Marks a {@code Job} as paid or unpaid.
@@ -26,7 +27,7 @@ public class JobMarkCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Marked Job %s as %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
 
-    private final String toMark;
+    private final ID toMark;
     private boolean state;
 
     /**

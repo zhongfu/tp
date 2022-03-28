@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.util.ID;
 
 /**
  * Represents a job. Immutable.
@@ -32,7 +33,7 @@ import peoplesoft.commons.util.JsonUtil;
 @JsonDeserialize(using = Job.JobDeserializer.class)
 public class Job {
 
-    private final String jobId;
+    private final ID jobId;
     private final String desc;
     private final Rate rate;
     private final Duration duration;
@@ -43,7 +44,7 @@ public class Job {
      * Constructor for an immutable job.
      * All fields must not be null.
      */
-    public Job(String jobId, String desc, Rate rate, Duration duration, boolean hasPaid) {
+    public Job(ID jobId, String desc, Rate rate, Duration duration, boolean hasPaid) {
         requireAllNonNull(jobId, desc, rate, duration, hasPaid);
         this.jobId = jobId;
         this.desc = desc;
@@ -52,7 +53,7 @@ public class Job {
         this.hasPaid = hasPaid;
     }
 
-    public String getJobId() {
+    public ID getJobId() {
         return jobId;
     }
 
@@ -170,7 +171,7 @@ public class Job {
         public void serialize(Job value, JsonGenerator gen, SerializerProvider provider)throws IOException {
             gen.writeStartObject();
 
-            gen.writeStringField("jobId", value.getJobId());
+            gen.writeObjectField("jobId", value.getJobId());
             gen.writeStringField("desc", value.getDesc());
             gen.writeObjectField("rate", value.getRate());
             gen.writeObjectField("duration", value.getDuration());
@@ -216,7 +217,9 @@ public class Job {
 
             ObjectNode job = (ObjectNode) node;
 
-            String jobId = getNonNullNodeWithType(job, "jobId", ctx, TextNode.class).textValue();
+            ID jobId = getNonNullNode(job, "jobId", ctx)
+                .traverse(codec)
+                .readValueAs(ID.class);
 
             String desc = getNonNullNodeWithType(job, "desc", ctx, TextNode.class).textValue();
 

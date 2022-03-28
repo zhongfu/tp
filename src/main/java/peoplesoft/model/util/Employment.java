@@ -43,7 +43,7 @@ public class Employment {
     /**
      * Maps {@code JobId} to {@code Name}.
      */
-    private HashMap<String, Name> map;
+    private HashMap<ID, Name> map;
 
     /**
      * Constructor for {@code getInstance}.
@@ -52,7 +52,7 @@ public class Employment {
         map = new HashMap<>();
     }
 
-    public Employment(HashMap<String, Name> map) {
+    public Employment(HashMap<ID, Name> map) {
         this.map = map;
     }
 
@@ -120,7 +120,7 @@ public class Employment {
      *
      * @return Map of jobs.
      */
-    public HashMap<String, Name> getAllJobs() {
+    public HashMap<ID, Name> getAllJobs() {
         return map;
     }
 
@@ -190,9 +190,9 @@ public class Employment {
             }
 
             // readValueAs Map is ok because we know `node` has to be a json object
-            HashMap<String, Name> map = node
+            HashMap<ID, Name> map = node
                 .traverse(codec)
-                .readValueAs(new TypeReference<HashMap<String, Name>>(){});
+                .readValueAs(new TypeReference<HashMap<ID, Name>>(){});
 
             return new Employment(map);
         }

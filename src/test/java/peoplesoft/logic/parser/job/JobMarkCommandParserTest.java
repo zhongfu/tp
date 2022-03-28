@@ -21,9 +21,9 @@ public class JobMarkCommandParserTest {
 
     @Test
     public void parse_validValue_returnsString() throws Exception {
-        assertEquals(VALID_STRING, parser.parse(VALID_STRING));
+        assertEquals(VALID_STRING, parser.parse(VALID_STRING).toString());
         // With whitespace
-        assertEquals(VALID_STRING, parser.parse(WHITESPACE + VALID_STRING + WHITESPACE));
+        assertEquals(VALID_STRING, parser.parse(WHITESPACE + VALID_STRING + WHITESPACE).toString());
         // TODO: Currently exactly the same as ParserUtil.parseString()
     }
 }

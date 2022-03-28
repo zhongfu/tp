@@ -1,14 +1,18 @@
 package peoplesoft.testutil;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.ID;
 import peoplesoft.model.util.SampleDataUtil;
 
 /**
@@ -21,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    private ID personId;
     private Name name;
     private Phone phone;
     private Email email;
@@ -31,6 +36,7 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
+        personId = PersonIdFactory.nextId();
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -42,11 +48,35 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
+        personId = personToCopy.getPersonId();
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+    }
+
+    /**
+     * Sets the {@code personId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withId(ID personId) {
+        requireNonNull(personId);
+        this.personId = personId;
+        return this;
+    }
+
+    /**
+     * Sets the {@code personId} of the {@code Person} that we are building to the current PersonIdFactory id.
+     */
+    public PersonBuilder withCurrentId() {
+        return withId(new ID(PersonIdFactory.getId()));
+    }
+
+    /**
+     * Sets the {@code personId} of the {@code Person} that we are building to the current PersonIdFactory id.
+     */
+    public PersonBuilder withNextId() {
+        return withId(new ID(PersonIdFactory.getId() + 1));
     }
 
     /**
@@ -90,7 +120,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(personId, name, phone, email, address, tags);
     }
 
 }

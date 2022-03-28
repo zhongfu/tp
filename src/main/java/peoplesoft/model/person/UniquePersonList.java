@@ -27,6 +27,7 @@ import javafx.collections.ObservableList;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.person.exceptions.DuplicatePersonException;
 import peoplesoft.model.person.exceptions.PersonNotFoundException;
+import peoplesoft.model.util.ID;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -50,9 +51,22 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Person toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+    public boolean contains(ID personId) {
+        requireNonNull(personId);
+        return internalList.stream().anyMatch(p -> p != null && personId.equals(p.getPersonId()));
+    }
+
+    /**
+     * Returns the job with the given id.
+     *
+     * @throws PersonNotFoundException if the person does not exist
+     */
+    public Person get(ID personId) throws PersonNotFoundException {
+        requireNonNull(personId);
+        return internalList.stream()
+            .filter(p -> p != null && personId.equals(p.getPersonId()))
+            .findAny()
+            .orElseThrow(PersonNotFoundException::new);
     }
 
     /**
@@ -61,7 +75,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (contains(toAdd.getPersonId())) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
@@ -80,7 +94,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePerson(editedPerson) && contains(editedPerson.getPersonId())) {
             throw new DuplicatePersonException();
         }
 
