@@ -191,6 +191,24 @@ However, it also has some drawbacks:
 * Developers writing serializers/deserializers will need to have basic knowledge of JSON, e.g. the types that are available, the structure of JSON objects and arrays, etc
 * Some knowledge of Jackson components (e.g. `JsonParser`, `JsonGenerator`, `ObjectNode`) is also required, as developers will need to use them to write values to/read values from the internal Jackson representation of a JSON value/object.
 
+### \[Proposed\] Addition of pay multipliers to Job
+The proposed addition of pay multipliers to `Job` objects is facilitated by `Employment` which implements the operation `Employment#calculatePay()`. `Employment#calculatePay()` calls `Job#calculatePay()` based on optional `Tag` parameters. 
+
+`Tag` contains a Map of `multiplierHistory` which stores pay multiplier values and their time of addition. This is then passed to `Job#calculatePay()` which returns the appropriately scaled pay amount. 
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Saves a Map of previous multipliers and time of addition in Tag.
+    * Pros: Easy to implement. Pay breakdown can be useful in the implementation of other features.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Saves pay amount as a fixed value and updates it when Tag is edited.
+    * Pros: Will use less memory as only one value is being stored.
+    * Cons: Loss of useful pay breakdown information.
+``
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -348,6 +366,17 @@ objects (to represent how some jobs may have multiple persons involved). Current
 written as a singleton. This may be changed to be a field of `AddressBook` due to potential obstacles with the
 testing of the serialization/deserialization of the class.
 
+#### Design considerations:
+
+**Aspect: How the relational mapping between Job and Person is stored:**
+
+* **Alternative 1 (current choice):** Saves the mapping of `Job` objects to `Person` objects in `Employment`.
+    * Pros: Guarantee of commutative association.
+    * Cons: Harder to implement. 
+
+* **Alternative 2 (rejected):** Saves a map of the ids of related `Person` objects in `Job` objects, and a map of the ids of related `Job` objects in `Person` objects.
+    * Pros: Easier to implement.
+    * Cons: Mutual associations are not guaranteed. The possible extension of a one-to-many relationship between `Person` and `Tag` would be harder to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -462,11 +491,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any _mainstream OS_ as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. Should not rely on database-management systems to store data.
-5. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file.
-6. Should not be hosted on remote servers.
-7. Should not make use of proprietary third-party frameworks, libraries and services.
-8. Should have a responsive GUI. GUI should function well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions and higher and for screen scales 100% and 125%. GUI should be usable - even if suboptimal - for resolutions 1280x720 and higher and for screen scales 150%.
-9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file.
+5. Should not be hosted on remote servers.
+6. Should not make use of proprietary third-party frameworks, libraries and services.
+7. Should have a responsive GUI. GUI should function well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions and higher and for screen scales 100% and 125%. GUI should be usable - even if suboptimal - for resolutions 1280x720 and higher and for screen scales 150%.
+8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
