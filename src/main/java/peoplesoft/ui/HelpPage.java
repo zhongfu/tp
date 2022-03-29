@@ -23,11 +23,17 @@ public class HelpPage extends Page {
     private static final String FXML = "HelpPage.fxml";
 
     @FXML
-    private TableView<String> table;
+    private Button openInBrowserButton;
+
+    @FXML
+    private Label helpMessage;
+
     /**
      * Tutorial on how to add data to a table
      * https://medium.com/@keeptoo/adding-data-to-javafx-tableview-stepwise-df582acbae4f
      */
+    @FXML
+    private TableView<String> table;
 
     /**
      * Creates a new {@code HelpPage}
@@ -37,12 +43,6 @@ public class HelpPage extends Page {
         logger.fine("Opening PeopleSoft's Help page.");
         helpMessage.setText(HELP_MESSAGE);
     }
-
-    @FXML
-    private Button openInBrowserButton;
-
-    @FXML
-    private Label helpMessage;
 
     /**
      * Opens the User Guide in the Browser.
