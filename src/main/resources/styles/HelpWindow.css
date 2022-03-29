@@ -1,8 +1,16 @@
+.root {
+
+    /* currently not working */
+    help-font-size: 13pt;
+}
+
 #copyButton, #helpMessage {
+    -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
 
 #copyButton {
+    -fx-font-size: 13pt;
     -fx-background-color: dimgray;
 }
 

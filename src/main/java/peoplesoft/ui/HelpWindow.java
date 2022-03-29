@@ -20,6 +20,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL =
             "https://ay2122s2-cs2103t-t11-4.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Open the User Guide";
+    public static final String COPIED_MESSAGE = "Browser opened";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -66,7 +67,7 @@ public class HelpWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing the link to PeopleSoft's help page.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -132,6 +133,8 @@ public class HelpWindow extends UiPart<Stage> {
             logger.warning("The URL in the application was wrong. Please contact developers.");
         } catch (IOException ie) {
             logger.warning("Unable to launch OS's browser. Please contact developers.");
+        } finally {
+            helpMessage.setText(COPIED_MESSAGE);
         }
     }
 }
