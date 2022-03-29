@@ -155,7 +155,7 @@ public class ParserUtil {
             res = new Rate(new Money(Double.parseDouble(trim)), Duration.ofHours(1));
         } catch (NumberFormatException e) {
             // TODO: add message/complex rate parsing %s/%s
-            throw new ParseException("Invalid value for rate");
+            throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
         }
         return res;
     }

@@ -22,6 +22,7 @@ public class JobListCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // TODO: UI interaction, currently prints to console
+        model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredJobList(),
                 Employment.getInstance().getAllJobs()));
     }

@@ -128,6 +128,7 @@ public class AddressBookSerdesTest {
                 BENSON.getPhone().toString(),
                 BENSON.getAddress().toString(),
                 BENSON.getEmail().toString(),
+                BENSON.getRate().getAmount().printFullValue(),
                 Collections.singleton("friend")),
             serializePerson(ELLE)));
 
