@@ -3,6 +3,8 @@ package peoplesoft.ui;
 /**
  * A relation class between mainwindow and sidebar which handles the page switching
  * todo: to be completed after making PeopleCell and JobCell for the 2 lists and displaying them properly.
+ *
+ * responsible for changing sidebar's colours and listening to commands from mainwindow and switching in main window
  */
 public class PageSwitcher {
     private MainWindow mw;

@@ -106,11 +106,13 @@
 }
 
 .list-cell {
+    -fx-background-color: transparent;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
 }
 
+/*
 .list-cell:filled:even {
     -fx-background-color: list-cell-even;
 }
@@ -120,8 +122,9 @@
 }
 
 .list-cell:filled:selected {
-    /*-fx-background-color: list-cell-selected;*/
+    -fx-background-color: list-cell-selected;
 }
+*/
 
 .list-cell:filled:selected #cardPane {
     -fx-border-color: selected;
@@ -203,13 +206,14 @@
 }
 
 .scroll-bar .thumb { /* the bar itself */
-    -fx-background-color: accent;
-    -fx-background-insets: 4; /* larger means thinner bar */
+    -fx-background-color: pane-light;
+    -fx-background-insets: 1; /* larger means thinner bar */
 }
 
 /* make other scroll controls invisible */
-.scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
+.scroll-bar .increment-button, .scroll-bar .decrement-button,
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-opacity: 0;
     -fx-padding: 0 0 0 0;
 }
 
@@ -218,11 +222,10 @@
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
-}
-
-.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-background-color: transparent;
+    -fx-opacity: 0;
+    -fx-padding: 1 3 1 3;
+    /*-fx-padding: 1 5 1 5;*/
 }
 
 #cardPane {
@@ -271,4 +274,8 @@
 
 .border-pane {
     -fx-background-color: bg;
+}
+
+.person-card .label {
+    -fx-text-fill: text-inverse;
 }
