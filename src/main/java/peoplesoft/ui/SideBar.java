@@ -11,9 +11,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 
 public class SideBar extends UiPart<Region> implements Initializable {
+    private static final String FXML = "SideBar.fxml";
+
     private static final int FONT_SIZE_SIDEBAR = 16;
     private static final String ACTIVE_COLOR = "#6076FF";
-    private static final String FXML = "SideBar.fxml";
     private static final String INACTIVE_COLOR = "transparent";
 
     private Button activePage;
@@ -52,31 +53,25 @@ public class SideBar extends UiPart<Region> implements Initializable {
     }
 
     /**
-     * The types of pages that can be called.
+     * Assigns parameters upon GUI initialisation.
+     *
+     * @param location
+     * @param resources
      */
-    public static enum ActivePage {
-        OVERVIEW, HELP
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         activePage = bOverview;
-        // switchToOverviewRunner(); // start with overview page
-    }
-
-    private void switchToOverviewRunner() {
-        mainWindow.loadPage(ActivePage.OVERVIEW);
-        switchButtonColor(bOverview);
     }
 
     @FXML
     private void switchToOverview(MouseEvent event) {
-        switchToOverviewRunner();
+        mainWindow.loadOverviewPage();
+        switchButtonColor(bOverview);
     }
 
     @FXML
     private void switchToHelp(MouseEvent event) {
-        mainWindow.loadPage(ActivePage.HELP);
+        mainWindow.loadHelpPage();
         switchButtonColor(bHelp);
     }
 
@@ -86,11 +81,9 @@ public class SideBar extends UiPart<Region> implements Initializable {
         switchButtonColor(bExit);
     }
 
-
     private void switchButtonColor(Button b) {
         activePage.setStyle("-fx-background-color: " + INACTIVE_COLOR);
         b.setStyle("-fx-background-color: " + ACTIVE_COLOR + "; -fx-background-radius: 10;");
         activePage = b;
     }
-
 }

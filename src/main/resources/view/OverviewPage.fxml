@@ -7,16 +7,9 @@
 
 <VBox fx:id="overview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1050.0" spacing="30.0" style="-fx-background-color: #1B1C31;" stylesheets="/styles/DarkTheme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="170.0" prefWidth="990.0" styleClass="main-pane">
-         <children>
-            <StackPane fx:id="commandBoxPlaceholder" focusTraversable="true" prefHeight="45.0" prefWidth="20.0" style="-fx-background-color: transparent;" VBox.vgrow="NEVER" />
-            <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0" prefHeight="2.0" style="-fx-background-color: #33344B;" />
-            <StackPane fx:id="resultDisplayPlaceholder" prefHeight="100.0" prefWidth="1280.0" style="-fx-background-color: transparent;" />
-         </children>
-      </VBox>
 
 
-      <VBox prefHeight="630.0" prefWidth="990.0" styleClass="main-pane"> <!-- bottom personlist -->
+      <VBox fx:id="personList" prefHeight="630.0" prefWidth="990.0" styleClass="main-pane"> <!-- bottom personlist -->
          <children>
             <StackPane fx:id="commandBoxPlaceholder1" alignment="CENTER_LEFT" focusTraversable="true" minHeight="-Infinity" prefHeight="80.0" style="-fx-background-color: transparent;">
                <children>
@@ -65,8 +58,8 @@
                      </font>
                   </Label>
                </children></HBox>
-            <StackPane fx:id="personListPanelPlaceholder" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0000ff;" />
-            <StackPane fx:id="roundCornerBottom11" prefHeight="11.0" prefWidth="20.0" style="-fx-background-color: transparent;" />
+            <StackPane fx:id="personListPanelPlaceholder" prefHeight="450.0" prefWidth="990.0" style="-fx-background-color: #0000ff;" />
+            <StackPane fx:id="roundCornerBottom" prefHeight="11.0" prefWidth="20.0" style="-fx-background-color: transparent;" />
          </children>
       </VBox>
    </children>

@@ -149,15 +149,6 @@
      -fx-text-fill: text-inverse;
 }
 
-.pane-with-border {
-     -fx-background-color: section-bg;
-     -fx-border-top-width: 1px;
-}
-
-.status-bar {
-    -fx-background-color: derive(base, 30%);
-}
-
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Inter";

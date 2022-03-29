@@ -1,18 +1,9 @@
 package peoplesoft.ui;
 
-import java.io.IOException;
-import java.util.Objects;
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -34,16 +25,19 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private HelpWindow helpWindow;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private SideBar sideBar;
-    private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private OverviewPage overviewPage;
+    private HelpPage helpPage;
 
     @FXML
     private BorderPane bp;
+
+    @FXML
+    private StackPane pagePlaceholder;
 
     @FXML
     private StackPane sideBarPlaceholder;
@@ -53,9 +47,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Button helpButton;
-
-    @FXML
-    private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -72,59 +63,21 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
-        // setAccelerators();
     }
-
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    /*
-    private void setAccelerators() {
-        setAccelerator(helpButton, KeyCombination.valueOf("F1"));
-    }
-     */
 
     /**
-     * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * Gets the primary stage. Used to show fatal errors.
+     *
+     * @return the primary stage
      */
-    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
-
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        helpWindow = new HelpWindow();
-
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -133,6 +86,10 @@ public class MainWindow extends UiPart<Stage> {
 
         sideBar = new SideBar(this);
         sideBarPlaceholder.getChildren().add(sideBar.getRoot());
+
+        helpPage = new HelpPage();
+        overviewPage = new OverviewPage(logic.getFilteredPersonList());
+        loadOverviewPage();
     }
 
     /**
@@ -151,49 +108,27 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Loads the page on the right side of the app
-     * @param page
+     *
+     * @param page to be loaded
      */
-    public void loadPage(SideBar.ActivePage page) {
-        Parent root = null;
-        String filename = "";
-
-        try {
-            switch(page) {
-            case OVERVIEW:
-                filename = "Overview";
-                break;
-            case HELP:
-                filename = "Help";
-                handleHelp();
-                break;
-            default:
-                throw new IllegalArgumentException("Tried to switch to an invalid page named " + page.name());
-            }
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/" + filename + ".fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        bp.setCenter(root);
+    private void loadPage(Page page) {
+        bp.setCenter(page.getRoot());
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Swaps the currently displayed page with the Overview page
      */
-    @FXML
-    public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+    public void loadOverviewPage() {
+        loadPage(overviewPage);
+    }
+
+    /**
+     * Swaps the currently displayed page with the Help page
+     */
+    public void loadHelpPage() {
+        loadPage(helpPage);
     }
 
     /**
@@ -204,7 +139,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 
@@ -220,11 +154,11 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+                loadHelpPage();
+            } else if (commandResult.isExit()) {
                 handleExit();
+            } else {
+                loadOverviewPage();
             }
 
             return commandResult;
