@@ -71,7 +71,6 @@
     -fx-border-color:
         transparent
         transparent
-        /*derive(-fx-base, 80%) was the 3rd one originally*/
         transparent
         transparent;
     -fx-border-insets: 0 10 1 0;
@@ -152,7 +151,6 @@
 
 .pane-with-border {
      -fx-background-color: section-bg;
-     /* -fx-border-color: section-border; */
      -fx-border-top-width: 1px;
 }
 
@@ -163,12 +161,11 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Inter";
-    -fx-font-size: 13pt;
-    -fx-text-fill: text-default;
+    -fx-font-size: 8pt;
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: text-faded !important;
 }
 
 .grid-pane {
@@ -248,6 +245,7 @@
     -fx-font-family: "Inter";
     -fx-font-size: 13pt;
     -fx-text-fill: text-inverse;
+    -fx-prompt-text-fill: text-faded;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -278,4 +276,8 @@
 .main-pane {
     -fx-background-color: pane;
     -fx-background-radius: 11px;
+}
+
+.border-pane {
+    -fx-background-color: bg;
 }

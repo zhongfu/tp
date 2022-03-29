@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<StackPane fx:id="placeHolder" style="-fx-background-color: transparent;"
-           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <TextArea fx:id="resultDisplay" styleClass="result-display" editable="false" />
+<StackPane fx:id="placeHolder" alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="990.0" styleClass="result-display" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <Label fx:id="resultDisplay" lineSpacing="1.0" prefHeight="53.0" prefWidth="950.0" styleClass="result-display" text="Command result will be displayed here" wrapText="true" />
+   <padding>
+      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+   </padding>
 </StackPane>
