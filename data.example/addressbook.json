@@ -1,34 +1,62 @@
 {
   "persons" : [ {
+    "id" : "1",
     "name" : "Nicole Tan",
     "phone" : "99338558",
     "email" : "nicole@stffhub.org",
     "address" : "1 Tech Drive, S138572",
+    "rate" : {
+      "amount" : "30.000000",
+      "duration" : "PT1H"
+    },
     "tagged" : [ "Intern", "Aircon" ]
   }, {
+    "id" : "2",
     "name" : "Kavya Singh",
     "phone" : "96736637",
     "email" : "kavya@stffhub.org",
     "address" : "2 Orchard Turn, S238801",
+    "rate" : {
+      "amount" : "40.000000",
+      "duration" : "PT1H"
+    },
     "tagged" : [ "Senior", "Electrician" ]
   }, {
+    "id" : "3",
     "name" : "Ethan Lee",
     "phone" : "91031282",
     "email" : "ethan@stffhub.org",
     "address" : "10 Anson Road, S079903",
+    "rate" : {
+      "amount" : "20.000000",
+      "duration" : "PT1H"
+    },
     "tagged" : [ "Appliances" ]
   }, {
+    "id" : "4",
     "name" : "Irfan Ibrahim",
     "phone" : "92492021",
     "email" : "irfan@stffhub.org",
     "address" : "Blk 47 Tampines Street 20, #17-35",
+    "rate" : {
+      "amount" : "48.000000",
+      "duration" : "PT1H"
+    },
     "tagged" : [ "Painting" ]
   }, {
+    "id" : "5",
     "name" : "Arjun Khatau",
     "phone" : "80445044",
     "email" : "arjun@stffhub.org",
     "address" : "50 Collyer Quay, S049321",
+    "rate" : {
+      "amount" : "33.000000",
+      "duration" : "PT1H"
+    },
     "tagged" : [ "Contract", "Aircon" ]
   } ],
-  "jobs" : [ ]
+  "jobs" : [ ],
+  "employment" : { },
+  "jobIdState" : 0,
+  "personIdState" : 0
 }

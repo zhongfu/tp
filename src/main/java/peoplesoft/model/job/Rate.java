@@ -34,6 +34,7 @@ import peoplesoft.commons.util.JsonUtil;
 @JsonSerialize(using = Rate.RateSerializer.class)
 @JsonDeserialize(using = Rate.RateDeserializer.class)
 public class Rate {
+    public static final String MESSAGE_CONSTRAINTS = "Value for rate should be a decimal number";
 
     public final Money amount;
     public final Duration duration;

@@ -1,10 +1,13 @@
 package peoplesoft.testutil;
 
+import java.time.Duration;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
+import peoplesoft.model.job.Money;
+import peoplesoft.model.job.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
@@ -36,6 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setRate(person.getRate());
         descriptor.setTags(person.getTags());
     }
 
@@ -68,6 +72,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRate(double rate) {
+        descriptor.setRate(new Rate(new Money(rate), Duration.ofHours(1)));
         return this;
     }
 

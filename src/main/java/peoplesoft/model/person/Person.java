@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.job.Rate;
 import peoplesoft.model.tag.Tag;
 import peoplesoft.model.util.ID;
 
@@ -45,18 +46,20 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Rate rate;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(ID id, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(id, name, phone, email, address, tags);
+    public Person(ID id, Name name, Phone phone, Email email, Address address, Rate rate, Set<Tag> tags) {
+        requireAllNonNull(id, name, phone, email, address, rate, tags);
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.rate = rate;
         this.tags.addAll(tags);
     }
 
@@ -78,6 +81,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Rate getRate() {
+        return rate;
     }
 
     /**
@@ -121,13 +128,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getRate().equals(getRate())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name, phone, email, address, tags);
+        return Objects.hash(id, name, phone, email, address, rate, tags);
     }
 
     @Override
@@ -142,7 +150,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Base Pay Rate: ")
+                .append(getRate());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -170,6 +180,7 @@ public class Person {
             gen.writeObjectField("phone", val.getPhone());
             gen.writeObjectField("email", val.getEmail());
             gen.writeObjectField("address", val.getAddress());
+            gen.writeObjectField("rate", val.getRate());
             gen.writeObjectField("tagged", val.getTags());
 
             gen.writeEndObject();
@@ -190,19 +201,19 @@ public class Person {
         }
 
         private static JsonNode getNonNullNode(ObjectNode node, String key, DeserializationContext ctx)
-                throws JsonMappingException {
+                    throws JsonMappingException {
             return JsonUtil.getNonNullNode(node, key, ctx, INVALID_VAL_FMTR);
         }
 
         private static <T> T getNonNullNodeWithType(ObjectNode node, String key, DeserializationContext ctx,
-                Class<T> cls) throws JsonMappingException {
+                    Class<T> cls) throws JsonMappingException {
             return JsonUtil.getNonNullNodeWithType(node, key, ctx,
-                INVALID_VAL_FMTR, cls);
+                    INVALID_VAL_FMTR, cls);
         }
 
         @Override
         public Person deserialize(JsonParser p, DeserializationContext ctx)
-                throws IOException, JsonProcessingException {
+                    throws IOException, JsonProcessingException {
             JsonNode node = p.readValueAsTree();
             ObjectCodec codec = p.getCodec();
 
@@ -213,30 +224,34 @@ public class Person {
             ObjectNode person = (ObjectNode) node;
 
             ID id = getNonNullNode(person, "id", ctx)
-                .traverse(codec)
-                .readValueAs(ID.class);
+                    .traverse(codec)
+                    .readValueAs(ID.class);
 
             Name name = getNonNullNode(person, "name", ctx)
-                .traverse(codec)
-                .readValueAs(Name.class);
+                    .traverse(codec)
+                    .readValueAs(Name.class);
 
             Phone phone = getNonNullNode(person, "phone", ctx)
-                .traverse(codec)
-                .readValueAs(Phone.class);
+                    .traverse(codec)
+                    .readValueAs(Phone.class);
 
             Email email = getNonNullNode(person, "email", ctx)
-                .traverse(codec)
-                .readValueAs(Email.class);
+                    .traverse(codec)
+                    .readValueAs(Email.class);
 
             Address address = getNonNullNode(person, "address", ctx)
-                .traverse(codec)
-                .readValueAs(Address.class);
+                    .traverse(codec)
+                    .readValueAs(Address.class);
+
+            Rate rate = getNonNullNode(person, "rate", ctx)
+                    .traverse(codec)
+                    .readValueAs(Rate.class);
 
             Set<Tag> tags = getNonNullNodeWithType(person, "tagged", ctx, ArrayNode.class)
-                .traverse(codec)
-                .readValueAs(new TypeReference<Set<Tag>>(){});
+                    .traverse(codec)
+                    .readValueAs(new TypeReference<Set<Tag>>(){});
 
-            return new Person(id, name, phone, email, address, tags);
+            return new Person(id, name, phone, email, address, rate, tags);
         }
 
         @Override

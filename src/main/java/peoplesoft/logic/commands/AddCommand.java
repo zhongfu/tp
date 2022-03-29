@@ -5,6 +5,7 @@ import static peoplesoft.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_PHONE;
+import static peoplesoft.logic.parser.CliSyntax.PREFIX_RATE;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_TAG;
 
 import peoplesoft.logic.commands.exceptions.CommandException;
@@ -24,12 +25,14 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_RATE + "RATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_RATE + "3.20 "
             + PREFIX_TAG + "Intern "
             + PREFIX_TAG + "Painting";
 

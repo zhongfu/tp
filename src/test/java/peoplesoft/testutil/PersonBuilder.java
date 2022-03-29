@@ -2,10 +2,13 @@ package peoplesoft.testutil;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
 import peoplesoft.commons.core.PersonIdFactory;
+import peoplesoft.model.job.Money;
+import peoplesoft.model.job.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
@@ -24,12 +27,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final double DEFAULT_RATE = 1.50;
 
     private ID personId;
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Rate rate;
     private Set<Tag> tags;
 
     /**
@@ -41,6 +46,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        rate = new Rate(new Money(DEFAULT_RATE), Duration.ofHours(1));
         tags = new HashSet<>();
     }
 
@@ -53,6 +59,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        rate = personToCopy.getRate();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -119,8 +126,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Rate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRate(double rate) {
+        this.rate = new Rate(new Money(rate), Duration.ofHours(1));
+        return this;
+    }
+
     public Person build() {
-        return new Person(personId, name, phone, email, address, tags);
+        return new Person(personId, name, phone, email, address, rate, tags);
     }
 
 }
