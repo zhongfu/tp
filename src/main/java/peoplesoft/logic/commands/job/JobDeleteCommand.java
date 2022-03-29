@@ -10,10 +10,10 @@ import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.logic.parser.job.JobDeleteCommandParser;
 import peoplesoft.model.Model;
+import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.Money;
 import peoplesoft.model.job.Rate;
-import peoplesoft.model.util.Employment;
 import peoplesoft.model.util.ID;
 
 /**

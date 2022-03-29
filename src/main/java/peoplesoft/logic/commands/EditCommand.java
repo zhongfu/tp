@@ -20,6 +20,7 @@ import peoplesoft.commons.core.index.Index;
 import peoplesoft.commons.util.CollectionUtil;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
+import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
@@ -27,7 +28,6 @@ import peoplesoft.model.person.Name;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
-import peoplesoft.model.util.Employment;
 
 /**
  * Edits the details of an existing person in the database.

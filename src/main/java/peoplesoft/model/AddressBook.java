@@ -26,6 +26,7 @@ import javafx.collections.ObservableList;
 import peoplesoft.commons.core.JobIdFactory;
 import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.JobList;
 import peoplesoft.model.job.UniqueJobList;
@@ -33,7 +34,6 @@ import peoplesoft.model.job.exceptions.JobNotFoundException;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.UniquePersonList;
 import peoplesoft.model.person.exceptions.PersonNotFoundException;
-import peoplesoft.model.util.Employment;
 import peoplesoft.model.util.ID;
 
 /**
