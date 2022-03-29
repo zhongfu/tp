@@ -1,4 +1,4 @@
-package peoplesoft.ui;
+package peoplesoft.ui.scenes;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class HelpPage extends Page {
     public static final String HELP_MESSAGE = "Open the User Guide";
     public static final String COPIED_MESSAGE = "Browser opened";
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(HelpPage.class);
     private static final String FXML = "HelpPage.fxml";
 
     @FXML

@@ -1,4 +1,4 @@
-package peoplesoft.ui;
+package peoplesoft.ui.regions;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
+import peoplesoft.ui.MainWindow;
+import peoplesoft.ui.UiPart;
 
 public class SideBar extends UiPart<Region> implements Initializable {
     private static final String FXML = "SideBar.fxml";

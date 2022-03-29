@@ -13,6 +13,12 @@ import peoplesoft.logic.Logic;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.ui.regions.CommandBox;
+import peoplesoft.ui.regions.ResultDisplay;
+import peoplesoft.ui.regions.SideBar;
+import peoplesoft.ui.scenes.HelpPage;
+import peoplesoft.ui.scenes.OverviewPage;
+import peoplesoft.ui.scenes.Page;
 
 /**
  * The Main Window. Provides the basic application layout containing

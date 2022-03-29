@@ -1,4 +1,4 @@
-package peoplesoft.ui;
+package peoplesoft.ui.regions;
 
 import java.util.Comparator;
 
@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import peoplesoft.model.person.Person;
+import peoplesoft.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -23,7 +24,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label idx;
     @FXML
     private Label phone;
     @FXML
@@ -39,7 +40,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + "");
+        idx.setText(displayedIndex + "");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
@@ -63,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
 
         // state check
         PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
+        return idx.getText().equals(card.idx.getText())
                 && person.equals(card.person);
     }
 }

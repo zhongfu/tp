@@ -39,7 +39,6 @@
             </HBox>
 
             <StackPane fx:id="personListPanelPlaceholder" prefHeight="380.0" prefWidth="480.0" style="-fx-background-color: #0000ff;" />
-            <StackPane fx:id="roundCornerBottom" prefHeight="11.0" prefWidth="20.0" style="-fx-background-color: transparent;" />
          </children>
       </VBox>
       <VBox fx:id="personList1" layoutX="40.0" layoutY="40.0" prefHeight="630.0" prefWidth="480.0" styleClass="main-pane">
@@ -69,8 +68,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <StackPane fx:id="personListPanelPlaceholder1" prefHeight="450.0" prefWidth="990.0" style="-fx-background-color: #0000ff;" />
-            <StackPane fx:id="roundCornerBottom1" prefHeight="11.0" prefWidth="20.0" style="-fx-background-color: transparent;" />
+            <StackPane fx:id="jobListPanelPlaceholder" prefHeight="450.0" prefWidth="990.0" style="-fx-background-color: #0000ff;" />
          </children>
       </VBox>
    </children>

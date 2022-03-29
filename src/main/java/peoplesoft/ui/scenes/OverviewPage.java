@@ -1,4 +1,4 @@
-package peoplesoft.ui;
+package peoplesoft.ui.scenes;
 
 import java.util.logging.Logger;
 
@@ -7,10 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.model.person.Person;
+import peoplesoft.ui.regions.PersonListPanel;
 
 public class OverviewPage extends Page {
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(HelpPage.class);
     private static final String FXML = "OverviewPage.fxml";
     private PersonListPanel personListPanel;
 

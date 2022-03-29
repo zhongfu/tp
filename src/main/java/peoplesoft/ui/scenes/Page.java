@@ -1,6 +1,7 @@
-package peoplesoft.ui;
+package peoplesoft.ui.scenes;
 
 import javafx.scene.layout.Region;
+import peoplesoft.ui.UiPart;
 
 /**
  * Models a page in the PeopleSoft application.

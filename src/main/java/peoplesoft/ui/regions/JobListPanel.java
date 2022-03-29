@@ -1,4 +1,4 @@
-package peoplesoft.ui;
+package peoplesoft.ui.regions;
 
 import java.util.logging.Logger;
 
@@ -9,30 +9,31 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.model.person.Person;
+import peoplesoft.ui.UiPart;
 
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class JobListPanel extends UiPart<Region> {
+    private static final String FXML = "JobListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(JobListPanel.class);
 
     @FXML
-    private ListView<Person> personListView;
+    private ListView<Person> jobListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code JobListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public JobListPanel(ObservableList<Person> jobList) {
         super(FXML);
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        jobListView.setItems(jobList);
+        jobListView.setCellFactory(listView -> new JobListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    class JobListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);

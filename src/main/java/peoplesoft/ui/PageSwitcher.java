@@ -1,5 +1,7 @@
 package peoplesoft.ui;
 
+import peoplesoft.ui.regions.SideBar;
+
 /**
  * A relation class between mainwindow and sidebar which handles the page switching
  * todo: to be completed after making PeopleCell and JobCell for the 2 lists and displaying them properly.
