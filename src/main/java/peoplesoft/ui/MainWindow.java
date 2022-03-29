@@ -169,15 +169,6 @@ public class MainWindow extends UiPart<Stage> {
             case OVERVIEW:
                 filename = "Overview";
                 break;
-            case JOBS:
-                filename = "Jobs";
-                break;
-            case EMPLOYEES:
-                filename = "Employees";
-                break;
-            case SETTINGS:
-                filename = "Settings";
-                break;
             case HELP:
                 filename = "Help";
                 handleHelp();

@@ -19,22 +19,13 @@ public class SideBar extends UiPart<Region> implements Initializable {
     private Button activePage;
 
     @FXML
-    private Button bEmployees;
-
-    @FXML
-    private Button bExit;
+    private Button bOverview;
 
     @FXML
     private Button bHelp;
 
     @FXML
-    private Button bJobs;
-
-    @FXML
-    private Button bOverview;
-
-    @FXML
-    private Button bSettings;
+    private Button bExit;
 
     private MainWindow mainWindow;
 
@@ -64,7 +55,7 @@ public class SideBar extends UiPart<Region> implements Initializable {
      * The types of pages that can be called.
      */
     public static enum ActivePage {
-        OVERVIEW, JOBS, EMPLOYEES, SETTINGS, HELP
+        OVERVIEW, HELP
     }
 
     @Override
@@ -81,24 +72,6 @@ public class SideBar extends UiPart<Region> implements Initializable {
     @FXML
     private void switchToOverview(MouseEvent event) {
         switchToOverviewRunner();
-    }
-
-    @FXML
-    private void switchToJobs(MouseEvent event) {
-        mainWindow.loadPage(ActivePage.JOBS);
-        switchButtonColor(bJobs);
-    }
-
-    @FXML
-    private void switchToEmployees(MouseEvent event) {
-        mainWindow.loadPage(ActivePage.EMPLOYEES);
-        switchButtonColor(bEmployees);
-    }
-
-    @FXML
-    private void switchToSettings(MouseEvent event) {
-        mainWindow.loadPage(ActivePage.SETTINGS);
-        switchButtonColor(bSettings);
     }
 
     @FXML
