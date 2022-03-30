@@ -17,25 +17,38 @@ import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.ID;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing white;spaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+        requireNonNull(oneBasedIndex);
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(Index.MESSAGE_CONSTRAINTS);
+        }
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+    public static Set<Index> parseIndexes(Collection<String> oneBasedIndexes) throws ParseException {
+        requireNonNull(oneBasedIndexes);
+        final Set<Index> indexSet = new HashSet<>();
+        for (String index : oneBasedIndexes) {
+            indexSet.add(parseIndex(index));
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return indexSet;
     }
 
     /**
@@ -171,12 +184,26 @@ public class ParserUtil {
         String trim = str.trim();
         Duration res;
         try {
-            // TODO: Improve scuffed representation
-            res = Duration.ofSeconds((long) (Double.parseDouble(trim) * 3600));
+            res = Duration.ofSeconds(Math.round(Double.parseDouble(trim) * 3600));
         } catch (NumberFormatException e) {
             // TODO: add message
             throw new ParseException("Invalid value for duration");
         }
         return res;
+    }
+
+    /**
+     * Parses a {@code String id} into an {@code ID}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code id} is invalid.
+     */
+    public static ID parseID(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!ID.isValidId(trimmedId)) {
+            throw new ParseException(ID.MESSAGE_CONSTRAINTS);
+        }
+        return new ID(trimmedId);
     }
 }

@@ -83,11 +83,10 @@ public class Employment {
         if (!map.containsKey(job.getJobId())) {
             map.put(job.getJobId(), new TreeSet<>());
         }
-        if (map.get(job.getJobId()).contains(person.getPersonId())) {
+        // Guaranteed to be non-null and Set handles duplicates
+        if (!map.get(job.getJobId()).add(person.getPersonId())) {
             throw new DuplicateEmploymentException();
         }
-        // Guaranteed to be non-null
-        map.get(job.getJobId()).add(person.getPersonId());
     }
 
     /**

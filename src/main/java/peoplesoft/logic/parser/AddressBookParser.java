@@ -21,6 +21,7 @@ import peoplesoft.logic.commands.job.JobDeleteCommand;
 import peoplesoft.logic.commands.job.JobListCommand;
 import peoplesoft.logic.commands.job.JobMarkCommand;
 import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.logic.parser.job.JobAssignCommandParser;
 
 /**
  * Parses user input.
@@ -88,7 +89,7 @@ public class AddressBookParser {
             return new JobMarkCommand(arguments);
 
         case JobAssignCommand.COMMAND_WORD:
-            return new JobAssignCommand(arguments);
+            return new JobAssignCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

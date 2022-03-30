@@ -9,6 +9,8 @@ package peoplesoft.commons.core.index;
  * convert it back to an int if the index will not be passed to a different component again.
  */
 public class Index {
+    public static final String MESSAGE_CONSTRAINTS = "Index should be a non-zero positive integer.";
+
     private int zeroBasedIndex;
 
     /**
@@ -43,6 +45,11 @@ public class Index {
      */
     public static Index fromOneBased(int oneBasedIndex) {
         return new Index(oneBasedIndex - 1);
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(zeroBasedIndex);
     }
 
     @Override
