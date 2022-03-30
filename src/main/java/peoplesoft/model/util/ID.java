@@ -26,7 +26,7 @@ import peoplesoft.commons.util.JsonUtil;
  */
 @JsonSerialize(using = ID.IdSerializer.class)
 @JsonDeserialize(using = ID.IdDeserializer.class)
-public class ID {
+public class ID implements Comparable<ID> {
     public static final String MESSAGE_CONSTRAINTS =
             "IDs should only begin and end with alphanumeric characters, "
             + "contain alphanumeric characters and hyphens, "
@@ -84,6 +84,11 @@ public class ID {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(ID o) {
+        return value.compareTo(o.value);
     }
 
     protected static class IdSerializer extends StdSerializer<ID> {

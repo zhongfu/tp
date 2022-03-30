@@ -20,7 +20,6 @@ import peoplesoft.commons.core.index.Index;
 import peoplesoft.commons.util.CollectionUtil;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
-import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
@@ -87,8 +86,6 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        // Replaces employment associations
-        Employment.getInstance().editPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

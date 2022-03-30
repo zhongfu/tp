@@ -41,21 +41,21 @@ public class EmploymentTest {
     public void associate_withoutDuplicates_success() {
         Employment employment = new Employment();
 
-        // Associate one person to a job
+        // Associate eating to Alice
         employment.associate(EATING, ALICE);
         assertTrue(employment.getAllJobs().containsKey(EATING.getJobId()));
         assertTrue(employment.getAllJobs().get(EATING.getJobId()).contains(ALICE.getPersonId()));
 
-        // Associate another person to the same job
+        // Associate eating to Bob
         employment.associate(EATING, BOB);
         assertTrue(employment.getAllJobs().get(EATING.getJobId()).contains(BOB.getPersonId()));
 
-        // Associate an associated person to another job
+        // Associate running to Alice
         employment.associate(RUNNING, ALICE);
         assertTrue(employment.getAllJobs().containsKey(RUNNING.getJobId()));
         assertTrue(employment.getAllJobs().get(RUNNING.getJobId()).contains(ALICE.getPersonId()));
 
-        // No association when not associated
+        // Running is not associated to Bob
         assertFalse(employment.getAllJobs().get(RUNNING.getJobId()).contains(BOB.getPersonId()));
     }
 
@@ -82,17 +82,17 @@ public class EmploymentTest {
         employment.associate(EATING, BOB);
         employment.associate(RUNNING, ALICE);
 
-        // Disassociate two jobs to same person
+        // Disassociate running from Alice
         employment.disassociate(RUNNING, ALICE);
         assertFalse(employment.getAllJobs().containsKey(RUNNING.getJobId()));
 
-        // Disassociate same job to two people
+        // Disassociate eating from Bob
         employment.disassociate(EATING, BOB);
         assertTrue(employment.getAllJobs().containsKey(EATING.getJobId()));
         assertTrue(employment.getAllJobs().get(EATING.getJobId()).contains(ALICE.getPersonId()));
         assertFalse(employment.getAllJobs().get(EATING.getJobId()).contains(BOB.getPersonId()));
 
-        // Disassociate one job to one person
+        // Disassociate eating from Alice
         employment.disassociate(EATING, ALICE);
         assertFalse(employment.getAllJobs().containsKey(EATING.getJobId()));
     }
@@ -134,28 +134,6 @@ public class EmploymentTest {
     }
 
     @Test
-    public void editPerson_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Employment().editPerson(null, ALICE));
-        assertThrows(NullPointerException.class, () -> new Employment().editPerson(ALICE, null));
-    }
-
-    @Test
-    public void editPerson_success() {
-        Employment employment = new Employment();
-        employment.associate(EATING, ALICE);
-        employment.associate(RUNNING, ALICE);
-
-        // Edit Alice to Bob
-        employment.editPerson(ALICE, BOB);
-        assertTrue(employment.getAllJobs().containsKey(EATING.getJobId()));
-        assertFalse(employment.getAllJobs().get(EATING.getJobId()).contains(ALICE.getPersonId()));
-        assertTrue(employment.getAllJobs().get(EATING.getJobId()).contains(BOB.getPersonId()));
-        assertTrue(employment.getAllJobs().containsKey(RUNNING.getJobId()));
-        assertFalse(employment.getAllJobs().get(RUNNING.getJobId()).contains(ALICE.getPersonId()));
-        assertTrue(employment.getAllJobs().get(RUNNING.getJobId()).contains(BOB.getPersonId()));
-    }
-
-    @Test
     public void deleteJob_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Employment().deleteJob(null));
     }
@@ -172,7 +150,7 @@ public class EmploymentTest {
         assertFalse(employment.getAllJobs().containsKey(EATING.getJobId()));
         assertTrue(employment.getAllJobs().containsKey(RUNNING.getJobId()));
 
-        // Delete Alice
+        // Delete running
         employment.deleteJob(RUNNING);
         assertFalse(employment.getAllJobs().containsKey(RUNNING));
     }

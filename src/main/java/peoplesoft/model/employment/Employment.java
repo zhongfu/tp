@@ -4,10 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -38,6 +39,7 @@ import peoplesoft.model.util.ID;
 @JsonSerialize(using = Employment.EmploymentSerializer.class)
 @JsonDeserialize(using = Employment.EmploymentDeserializer.class)
 public class Employment {
+    // TODO deserializing an Employment instance with invalid IDs.
     /**
      * Singleton instance.
      */
@@ -46,7 +48,7 @@ public class Employment {
     /**
      * Maps {@code JobId} to {@code PersonId}.
      */
-    private HashMap<ID, List<ID>> map;
+    private Map<ID, Set<ID>> map;
 
     /**
      * Constructor for a new employment.
@@ -60,7 +62,7 @@ public class Employment {
      *
      * @param map Map of values
      */
-    public Employment(HashMap<ID, List<ID>> map) {
+    public Employment(Map<ID, Set<ID>> map) {
         requireNonNull(map);
         this.map = map;
     }
@@ -76,7 +78,7 @@ public class Employment {
     public void associate(Job job, Person person) {
         requireAllNonNull(job, person);
         if (!map.containsKey(job.getJobId())) {
-            map.put(job.getJobId(), new ArrayList<>());
+            map.put(job.getJobId(), new TreeSet<>());
         }
         if (map.get(job.getJobId()).contains(person.getPersonId())) {
             throw new DuplicateEmploymentException();
@@ -113,25 +115,11 @@ public class Employment {
      */
     public void deletePerson(Person person) {
         requireAllNonNull(person);
-        for (Map.Entry<ID, List<ID>> e : map.entrySet()) {
+        for (Map.Entry<ID, Set<ID>> e : map.entrySet()) {
             e.getValue().removeIf(p -> p.equals(person.getPersonId()));
         }
         // If list of IDs for persons is empty, remove the entry from the map
         map.entrySet().removeIf(e -> e.getValue().isEmpty());
-    }
-
-    /**
-     * Edits all entries of a {@code Person}.
-     *
-     * @param toEdit {@code Person} to edit.
-     * @param editedPerson {@code Person} that replaces.
-     */
-    // Currently being used by EditCommand but may not be needed if person IDs cannot be edited
-    public void editPerson(Person toEdit, Person editedPerson) {
-        requireAllNonNull(toEdit, editedPerson);
-        for (Map.Entry<ID, List<ID>> e : map.entrySet()) {
-            e.getValue().replaceAll(p -> p.equals(toEdit.getPersonId()) ? editedPerson.getPersonId() : p);
-        }
     }
 
     /**
@@ -166,7 +154,7 @@ public class Employment {
      *
      * @return Map of jobs.
      */
-    public HashMap<ID, List<ID>> getAllJobs() {
+    public Map<ID, Set<ID>> getAllJobs() {
         return map;
     }
 
@@ -237,9 +225,9 @@ public class Employment {
             }
 
             // readValueAs Map is ok because we know `node` has to be a json object
-            HashMap<ID, List<ID>> map = node
+            Map<ID, Set<ID>> map = node
                 .traverse(codec)
-                .readValueAs(new TypeReference<HashMap<ID, List<ID>>>(){});
+                .readValueAs(new TypeReference<Map<ID, Set<ID>>>(){});
 
             return new Employment(map);
         }
