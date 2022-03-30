@@ -9,7 +9,7 @@
    <children>
 
 
-      <VBox fx:id="personList" prefHeight="630.0" prefWidth="480.0" styleClass="main-pane"> <!-- bottom personlist -->
+      <VBox fx:id="personList" prefWidth="480.0" styleClass="main-pane"> <!-- bottom personlist -->
          <children>
             <StackPane fx:id="headerSpace" alignment="CENTER_LEFT" focusTraversable="true" minHeight="-Infinity" prefHeight="60.0" style="-fx-background-color: transparent;">
                <children>
@@ -38,10 +38,10 @@
                </padding>
             </HBox>
 
-            <StackPane fx:id="personListPanelPlaceholder" prefHeight="380.0" prefWidth="480.0" style="-fx-background-color: #0000ff;" />
+            <StackPane fx:id="personListPanelPlaceholder" prefHeight="3000.0" prefWidth="480.0" />
          </children>
       </VBox>
-      <VBox fx:id="personList1" layoutX="40.0" layoutY="40.0" prefHeight="630.0" prefWidth="480.0" styleClass="main-pane">
+      <VBox fx:id="personList1" layoutX="40.0" layoutY="40.0" prefWidth="480.0" styleClass="main-pane">
          <children>
             <StackPane fx:id="commandBoxPlaceholder11" alignment="CENTER_LEFT" focusTraversable="true" minHeight="-Infinity" prefHeight="60.0" style="-fx-background-color: transparent;">
                <children>
@@ -58,17 +58,17 @@
             <HBox fx:id="listheader1" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="480.0" spacing="10.0" style="-fx-background-color: #33344B;">
                <children>
                   <Label fx:id="nm1" minWidth="-Infinity" prefHeight="17.0" prefWidth="17.0" text="#" textFill="WHITE" />
-                  <Label fx:id="name1" layoutX="35.0" layoutY="27.0" minWidth="-Infinity" prefWidth="100.0" text="Name" textFill="WHITE" />
-                  <Label fx:id="tags1" layoutX="35.0" layoutY="27.0" minWidth="-Infinity" prefWidth="75.0" text="Tags" textFill="WHITE" />
-                  <Label fx:id="phone1" layoutX="51.0" layoutY="27.0" prefWidth="70.0" text="Phone" textFill="WHITE" wrapText="true" />
-                  <Label fx:id="email1" layoutX="265.0" layoutY="27.0" prefWidth="80.0" text="Mail" textFill="WHITE" wrapText="true" />
-                  <Label fx:id="address1" layoutX="337.0" layoutY="27.0" prefWidth="59.0" text="Address" textFill="WHITE" wrapText="true" />
+                  <Label fx:id="name1" layoutX="35.0" layoutY="27.0" minWidth="-Infinity" prefWidth="100.0" text="Description" textFill="WHITE" />
+                  <Label fx:id="tags1" layoutX="35.0" layoutY="27.0" minWidth="-Infinity" prefWidth="75.0" text="Rate" textFill="WHITE" />
+                  <Label fx:id="phone1" layoutX="51.0" layoutY="27.0" prefWidth="70.0" text="Duration" textFill="WHITE" wrapText="true" />
+                  <Label fx:id="email1" layoutX="265.0" layoutY="27.0" prefWidth="80.0" text="Paid For" textFill="WHITE" wrapText="true" />
+                  <Label fx:id="address1" layoutX="337.0" layoutY="27.0" prefWidth="59.0" text="In Charge" textFill="WHITE" wrapText="true" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <StackPane fx:id="jobListPanelPlaceholder" prefHeight="450.0" prefWidth="990.0" style="-fx-background-color: #0000ff;" />
+            <StackPane fx:id="jobListPanelPlaceholder" prefHeight="3000.0" prefWidth="990.0" />
          </children>
       </VBox>
    </children>

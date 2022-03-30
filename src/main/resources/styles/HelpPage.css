@@ -1,5 +1,26 @@
 .root {
-    bg: #1d1d1d;
+    /* Final Colors */
+    bg: #1B1C31;
+    pane: #222338;
+    pane-light: #33344B;
+    accent: #6076FF;
+
+    text-norm: white;
+    text-faded: #858AAB;
+
+    tag-accent-bg: #282B4C;
+    tag-green: #19A589;
+    tag-green-bg: #19A589;
+    tag-yellow: #FF9860;
+    tag-yellow-bg: #382F3C;
+    tag-red: #E06767;
+    tag-red-bg: #352A3D;
+
+    /* Font Colors */
+    text-default: black;
+    text-inverse: white;
+    text-error: #FF5736;
+    -fx-focus-color: #000000;
 }
 
 #copyButton, #helpMessage {
@@ -9,7 +30,7 @@
 
 #copyButton {
     -fx-font-size: 13pt;
-    -fx-background-color: dimgray;
+    -fx-background-color: #ffff00;
 }
 
 #copyButton:hover {
@@ -17,11 +38,16 @@
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #ffff00;
 }
 
 #helpMessageContainer {
     -fx-background-color: derive(bg, 20%);
+}
+
+.bottom-help-panel {
+    -fx-background-color: tag-green;
+    -fx-background-radius: 11px;
 }
 
 /* For styling the help table */

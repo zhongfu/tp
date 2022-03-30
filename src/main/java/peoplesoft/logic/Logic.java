@@ -8,6 +8,7 @@ import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.ReadOnlyAddressBook;
+import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
 
 /**
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<Job> getFilteredJobList();
 
     /**
      * Returns the user prefs' address book file path.

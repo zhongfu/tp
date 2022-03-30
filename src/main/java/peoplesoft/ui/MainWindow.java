@@ -94,7 +94,7 @@ public class MainWindow extends UiPart<Stage> {
         sideBarPlaceholder.getChildren().add(sideBar.getRoot());
 
         helpPage = new HelpPage();
-        overviewPage = new OverviewPage(logic.getFilteredPersonList());
+        overviewPage = new OverviewPage(logic.getFilteredPersonList(), logic.getFilteredJobList());
         loadOverviewPage();
     }
 

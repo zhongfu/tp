@@ -6,7 +6,7 @@
 
 <VBox fx:id="help" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="1050.0" spacing="30.0" style="-fx-background-color: transparent;" stylesheets="@../styles/HelpPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+        <TableView fx:id="table" prefHeight="2160.0" prefWidth="1050.0">
             <columns>
                 <TableColumn prefWidth="75.0" text="Command" />
                 <TableColumn prefWidth="75.0" text="Format" />
@@ -16,7 +16,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <HBox fx:id="helpMessageContainer" alignment="CENTER_LEFT" prefHeight="60.0">
+        <HBox fx:id="helpMessageContainer" alignment="CENTER_LEFT" prefHeight="60.0" styleClass="bottom-help-panel">
             <children>
 
                 <Label fx:id="helpMessage" prefHeight="22.0" prefWidth="250.0" text="More details in the User Guide">

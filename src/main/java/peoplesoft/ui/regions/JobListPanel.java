@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import peoplesoft.commons.core.LogsCenter;
-import peoplesoft.model.person.Person;
+import peoplesoft.model.job.Job;
 import peoplesoft.ui.UiPart;
 
 /**
@@ -19,33 +19,33 @@ public class JobListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(JobListPanel.class);
 
     @FXML
-    private ListView<Person> jobListView;
+    private ListView<Job> jobListView;
 
     /**
      * Creates a {@code JobListPanel} with the given {@code ObservableList}.
      */
-    public JobListPanel(ObservableList<Person> jobList) {
+    public JobListPanel(ObservableList<Job> jobList) {
         super(FXML);
-        jobListView.setItems(jobList);
+        jobListView.setItems(jobList); // nullpointer
         jobListView.setCellFactory(listView -> new JobListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Job} using a {@code Job}.
      */
-    class JobListViewCell extends ListCell<Person> {
+    class JobListViewCell extends ListCell<Job> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Job job, boolean empty) {
+            super.updateItem(job, empty);
 
-            if (empty || person == null) {
+            if (empty || job == null) {
                 setGraphic(null);
                 setText(null);
             } else {
                 // add a new divider before also!
                 // <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0"
                 // prefHeight="2.0" style="-fx-background-color: #33344B;" />
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new JobCard(job, getIndex() + 1).getRoot());
             }
         }
     }

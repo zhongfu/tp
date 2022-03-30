@@ -1,6 +1,7 @@
 package peoplesoft.logic.commands.job;
 
 import static java.util.Objects.requireNonNull;
+import static peoplesoft.model.Model.PREDICATE_SHOW_ALL_JOBS;
 
 import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
@@ -16,13 +17,13 @@ public class JobListCommand extends Command {
     // TODO: change if needed
     public static final String COMMAND_WORD = "joblist";
 
-    public static final String MESSAGE_SUCCESS = "Listed all jobs: %s\nEmployment: %s";
+    public static final String MESSAGE_SUCCESS = "Listed all jobs: %s\nAssignment: %s";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // TODO: UI interaction, currently prints to console
-        model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
+        model.updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredJobList(),
                 Employment.getInstance().getAllJobs()));
     }
