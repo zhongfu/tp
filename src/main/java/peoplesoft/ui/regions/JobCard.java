@@ -20,12 +20,13 @@ import peoplesoft.ui.UiPart;
 public class JobCard extends UiPart<Region> {
 
     private static final String FXML = "JobListCard.fxml";
-    private final Image TICK = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/apple-tick-emoji.png")));
-    private final Image CROSS = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/apple-cross-emoji.png")));
 
     public final Job job;
+
+    private final Image cross = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/apple-cross-emoji.png")));
+    private final Image tick = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/apple-tick-emoji.png")));
 
     // what is shown is for proof of concept for now until jobs and payments are finalised
     @FXML
@@ -55,7 +56,7 @@ public class JobCard extends UiPart<Region> {
         desc.setText(job.getDesc());
         rate.setText(job.getRate().toString());
         duration.setText(job.getDuration().toString());
-        paidForIcon.setImage(job.hasPaid() ? TICK : CROSS);
+        paidForIcon.setImage(job.hasPaid() ? tick : cross);
         /*
         for when jobtags are a thing
         job.getTags().stream()

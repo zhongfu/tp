@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.model.job.Job;
-import peoplesoft.model.job.JobList;
 import peoplesoft.model.person.Person;
 import peoplesoft.ui.regions.JobListPanel;
 import peoplesoft.ui.regions.PersonListPanel;
