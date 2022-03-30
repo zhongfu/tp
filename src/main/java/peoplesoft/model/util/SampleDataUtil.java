@@ -2,6 +2,7 @@ package peoplesoft.model.util;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,19 +25,19 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new ID(1), new Name("Nicole Tan"), new Phone("99338558"), new Email("nicole@stffhub.org"),
                 new Address("1 Tech Drive, S138572"), new Rate(new Money(30), Duration.ofHours(1)),
-                getTagSet("Intern", "Aircon")),
+                getTagSet("Intern", "Aircon"), Map.of()),
             new Person(new ID(2), new Name("Kavya Singh"), new Phone("96736637"), new Email("kavya@stffhub.org"),
                 new Address("2 Orchard Turn, S238801"), new Rate(new Money(40), Duration.ofHours(1)),
-                getTagSet("Senior", "Electrician")),
+                getTagSet("Senior", "Electrician"), Map.of()),
             new Person(new ID(3), new Name("Ethan Lee"), new Phone("91031282"), new Email("ethan@stffhub.org"),
                 new Address("10 Anson Road, S079903"), new Rate(new Money(20), Duration.ofHours(1)),
-                getTagSet("Appliances")),
+                getTagSet("Appliances"), Map.of()),
             new Person(new ID(4), new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@stffhub.org"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Rate(new Money(48), Duration.ofHours(1)),
-                getTagSet("Painting")),
+                getTagSet("Painting"), Map.of()),
             new Person(new ID(5), new Name("Arjun Khatau"), new Phone("80445044"), new Email("arjun@stffhub.org"),
                 new Address("50 Collyer Quay, S049321"), new Rate(new Money(33), Duration.ofHours(1)),
-                getTagSet("Contract", "Aircon"))
+                getTagSet("Contract", "Aircon"), Map.of())
         };
     }
 

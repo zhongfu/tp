@@ -4,10 +4,13 @@ import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -48,11 +51,13 @@ public class Person {
     private final Address address;
     private final Rate rate;
     private final Set<Tag> tags = new HashSet<>();
+    private final Map<ID, Payment> payments = new HashMap<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(ID id, Name name, Phone phone, Email email, Address address, Rate rate, Set<Tag> tags) {
+    public Person(ID id, Name name, Phone phone, Email email, Address address, Rate rate, Set<Tag> tags,
+            Map<ID, Payment> payments) {
         requireAllNonNull(id, name, phone, email, address, rate, tags);
         this.id = id;
         this.name = name;
@@ -61,6 +66,7 @@ public class Person {
         this.address = address;
         this.rate = rate;
         this.tags.addAll(tags);
+        this.payments.putAll(payments);
     }
 
     public ID getPersonId() {
@@ -93,6 +99,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Map<ID, Payment> getPayments() {
+        return Collections.unmodifiableMap(payments);
     }
 
     /**
@@ -129,13 +139,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRate().equals(getRate())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getPayments().equals(getPayments());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name, phone, email, address, rate, tags);
+        return Objects.hash(id, name, phone, email, address, rate, tags, payments);
     }
 
     @Override
@@ -158,6 +169,13 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        Map<ID, Payment> payments = getPayments();
+        if (!payments.isEmpty()) {
+            builder.append("; Payments: [");
+            builder.append(payments.values().stream().map(String::valueOf).collect(Collectors.joining(", ")));
+            builder.append("]");
         }
         return builder.toString();
     }
@@ -182,6 +200,13 @@ public class Person {
             gen.writeObjectField("address", val.getAddress());
             gen.writeObjectField("rate", val.getRate());
             gen.writeObjectField("tagged", val.getTags());
+
+            gen.writeArrayFieldStart("payments");
+            for (Payment pymt : val.getPayments().values()) {
+                gen.writeObject(pymt);
+            }
+            gen.writeEndArray();
+
 
             gen.writeEndObject();
         }
@@ -251,7 +276,16 @@ public class Person {
                     .traverse(codec)
                     .readValueAs(new TypeReference<Set<Tag>>(){});
 
-            return new Person(id, name, phone, email, address, rate, tags);
+            Set<Payment> paymentsSet = getNonNullNodeWithType(person, "payments", ctx, ArrayNode.class)
+                    .traverse(codec)
+                    .readValueAs(new TypeReference<Set<Payment>>(){});
+
+            Map<ID, Payment> payments = new HashMap<>();
+            for (Payment pymt : paymentsSet) {
+                payments.put(pymt.getJobId(), pymt);
+            }
+
+            return new Person(id, name, phone, email, address, rate, tags, payments);
         }
 
         @Override

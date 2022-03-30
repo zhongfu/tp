@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -108,7 +109,8 @@ public class UniquePersonListSerdesTest {
                     BENSON.getAddress().toString(),
                     BENSON.getEmail().toString(),
                     BENSON.getRate().getAmount().printFullValue(), // TODO
-                    Collections.singleton("friend")),
+                    Collections.singleton("friend"),
+                    Set.of()),
                 serializePerson(ELLE)));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(serialized, UniquePersonList.class));

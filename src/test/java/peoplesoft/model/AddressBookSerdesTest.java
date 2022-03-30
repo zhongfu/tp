@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -129,7 +130,8 @@ public class AddressBookSerdesTest {
                         BENSON.getAddress().toString(),
                         BENSON.getEmail().toString(),
                         BENSON.getRate().getAmount().printFullValue(),
-                        Collections.singleton("friend")),
+                        Collections.singleton("friend"),
+                        Set.of()),
                 serializePerson(ELLE)));
 
         String serializedObject = serializeObject(Map.of("persons", serializedList));
