@@ -23,6 +23,9 @@ import peoplesoft.model.util.ID;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+    public static final String STRING_MESSAGE_CONSTRAINTS = "Empty string not allowed.";
+    public static final String DURATION_MESSAGE_CONSTRAINTS = "Expects a number for duration (in hours).";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing white;spaces will be
      * trimmed.
@@ -148,8 +151,7 @@ public class ParserUtil {
         requireNonNull(str);
         String res = str.trim();
         if (res.isBlank()) {
-            // TODO: add message
-            throw new ParseException("Empty string not allowed.");
+            throw new ParseException(STRING_MESSAGE_CONSTRAINTS);
         }
         return res;
     }
@@ -186,8 +188,7 @@ public class ParserUtil {
         try {
             res = Duration.ofSeconds(Math.round(Double.parseDouble(trim) * 3600));
         } catch (NumberFormatException e) {
-            // TODO: add message
-            throw new ParseException("Invalid value for duration");
+            throw new ParseException(DURATION_MESSAGE_CONSTRAINTS);
         }
         return res;
     }

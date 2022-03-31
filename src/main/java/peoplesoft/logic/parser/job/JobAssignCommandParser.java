@@ -17,7 +17,7 @@ import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.employment.Employment;
 
 /**
- * Parses a {@code jobId} and an {@code index} for {@code Person}.
+ * Parses an {@code Index} for {@code Job} and {@code Indexes} for {@code Person}.
  */
 public class JobAssignCommandParser implements Parser<JobAssignCommand> {
     /**

@@ -2,71 +2,65 @@ package peoplesoft.logic.commands.job;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
+import peoplesoft.commons.core.Messages;
+import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
-import peoplesoft.logic.parser.exceptions.ParseException;
-import peoplesoft.logic.parser.job.JobMarkCommandParser;
 import peoplesoft.model.Model;
 import peoplesoft.model.job.Job;
-import peoplesoft.model.util.ID;
 
 /**
  * Marks a {@code Job} as paid or unpaid.
  */
 public class JobMarkCommand extends Command {
 
-    // TODO: change if needed
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the job identified by the index number used in the displayed job list.\n"
-            + "Parameters: JOBID\n"
+            + "Parameters: JOB_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Marked Job %s as %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
 
-    private final ID toMark;
+    private final Index toMark;
     private boolean state;
 
     /**
-     * Creates a {@code JobDeleteCommand} to delete a {@code Job} by {@code JobId}.
+     * Creates a {@code JobMarkCommand} to mark a {@code Job} by {@code Index}.
      *
-     * @param args Arguments.
-     * @throws ParseException Thrown if there is an error with parsing.
+     * @param toMark Index of job to mark.
      */
-    public JobMarkCommand(String args) throws ParseException {
-        requireNonNull(args);
-        toMark = new JobMarkCommandParser().parse(args);
+    public JobMarkCommand(Index toMark) {
+        requireNonNull(toMark);
+        this.toMark = toMark;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Job> lastShownList = model.getFilteredJobList();
 
-        if (!model.hasJob(toMark)) {
-            throw new CommandException(MESSAGE_JOB_NOT_FOUND);
+        if (toMark.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
         }
 
-        try {
-            // TODO: This line breaks LoD
-            Job jobToMark = model.getAddressBook().getJobList()
-                    .filtered(job -> job.getJobId().equals(toMark)).get(0);
-            // Creates immutable instances and replaces the existing ones
-            if (jobToMark.hasPaid()) {
-                state = true;
-                model.setJob(jobToMark, jobToMark.setAsNotPaid());
-            } else {
-                state = false;
-                model.setJob(jobToMark, jobToMark.setAsPaid());
-            }
-        } catch (IndexOutOfBoundsException e) {
-            // Asserts that filtered list should always contain exactly the filtered element
-            assert false;
+        Job jobToMark = lastShownList.get(toMark.getZeroBased());
+
+        if (jobToMark.hasPaid()) {
+            state = true;
+            model.setJob(jobToMark, jobToMark.setAsNotPaid());
+        } else {
+            state = false;
+            model.setJob(jobToMark, jobToMark.setAsPaid());
         }
-        // TODO: rudimentary result message
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toMark, state ? "not paid" : "paid"));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, jobToMark.getDesc(),
+                state ? "not paid" : "paid"));
     }
 
     @Override

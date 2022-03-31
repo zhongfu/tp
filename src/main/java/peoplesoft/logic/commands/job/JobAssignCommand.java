@@ -60,14 +60,12 @@ public class JobAssignCommand extends Command {
         List<Person> lastShownPersons = model.getFilteredPersonList();
 
         if (jobIndex.getZeroBased() >= lastShownJobs.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX,
-                    jobIndex.getOneBased()));
+            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
         }
 
         for (Index i : personIndexes) {
             if (i.getZeroBased() >= lastShownPersons.size()) {
-                throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        i.getOneBased()));
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
         }
 

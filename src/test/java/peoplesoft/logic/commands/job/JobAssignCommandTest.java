@@ -26,6 +26,5 @@ public class JobAssignCommandTest {
                 new Employment()).execute(null));
     }
 
-    // TODO: Add model stubs to test command.
-    // Perhaps a common model stub class can be made.
+    // TODO Valid cases
 }

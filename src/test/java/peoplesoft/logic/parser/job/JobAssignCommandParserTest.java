@@ -68,7 +68,4 @@ public class JobAssignCommandParserTest {
                 Index.fromOneBased(1), Index.fromOneBased(3), Index.fromOneBased(4))), new Employment());
         assertParseSuccess(parser, "2 i/1 i/4 i/3", expected);
     }
-
-    // TODO: create test for successful construction
-    // Current issue is that a new jobId will be made and that may not be deterministic
 }

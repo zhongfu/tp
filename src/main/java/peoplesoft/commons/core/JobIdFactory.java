@@ -13,7 +13,6 @@ public class JobIdFactory {
      *
      * @return JobId.
      */
-    // TODO: currently missing functionality with serdes
     public static ID nextId() {
         return new ID(++id);
     }
