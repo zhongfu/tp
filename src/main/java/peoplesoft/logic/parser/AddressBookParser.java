@@ -12,6 +12,7 @@ import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.DeleteCommand;
 import peoplesoft.logic.commands.EditCommand;
 import peoplesoft.logic.commands.ExitCommand;
+import peoplesoft.logic.commands.ExportCommand;
 import peoplesoft.logic.commands.FindCommand;
 import peoplesoft.logic.commands.HelpCommand;
 import peoplesoft.logic.commands.ListCommand;
@@ -57,6 +58,9 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
