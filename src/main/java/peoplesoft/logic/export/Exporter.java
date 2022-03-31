@@ -42,10 +42,10 @@ public class Exporter {
         List<Job> jobsAssignedToPerson = Employment.getInstance().getJobs(personToExport, model);
 
         List<Job> assignedJobsCompleted = jobsAssignedToPerson.stream().filter(
-            job -> job.hasPaid()).collect(Collectors.toList());
+                job -> job.hasPaid()).collect(Collectors.toList());
 
         List<Job> assignedJobsIncomplete = jobsAssignedToPerson.stream().filter(
-            job -> !job.hasPaid()).collect(Collectors.toList());
+                job -> !job.hasPaid()).collect(Collectors.toList());
 
         String personalDetails = String.format("Name,%s,\nPhone, %s,\nEmail,%s,\nAddress,%s",
                 personToExport.getName(),
@@ -56,7 +56,7 @@ public class Exporter {
         String listHeader = "Job ID, Job Description, Rate, Duration, Payment";
 
         String earnedIncomeItemized = assignedJobsCompleted.stream().map(
-            job -> String.format("%s,%s,%s,%s,%s,",
+                job -> String.format("%s,%s,%s,%s,%s,",
                     job.getJobId(), job.getDesc(),
                     job.getRate(),
                     job.getDuration(),
@@ -64,7 +64,7 @@ public class Exporter {
         ).collect(Collectors.joining("\n"));
 
         String unearnedIncomeItemized = assignedJobsIncomplete.stream().map(
-            job -> String.format("%s,%s,%s,%s,%s,",
+                job -> String.format("%s,%s,%s,%s,%s,",
                     job.getJobId(),
                     job.getDesc(),
                     job.getRate(),
