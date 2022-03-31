@@ -29,7 +29,7 @@ public class JobAssignCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a job to one or more person(s). "
             + "Parameters: "
             + "JOB_INDEX "
-            + PREFIX_INDEX + "PERSON_INDEX...";
+            + PREFIX_INDEX + "PERSON_INDEX [PERSON_INDEX]...";
 
     public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s.";
     public static final String MESSAGE_DUPLICATE_EMPLOYMENT =
