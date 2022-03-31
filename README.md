@@ -8,7 +8,9 @@ PeopleSoft is a CLI-based contractor payroll management app. It helps **companie
 - manage jobs
 - calculate monthly salary
 
-It is written with the OOP paradigm in mind and has ~6 KLoC.
-* View the User Guide and Developer Guide on our **[Website](https://ay2122s2-cs2103t-t11-4.github.io/tp/)**.
+It is written with the OOP paradigm in mind and has ~6 KLoC.   
+View the User Guide and Developer Guide on our **[Website](https://ay2122s2-cs2103t-t11-4.github.io/tp/)**.  
+## Credits
+Inter Font from https://github.com/rsms/inter
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

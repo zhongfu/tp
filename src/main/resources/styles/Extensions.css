@@ -1,6 +1,7 @@
-
 .error {
-    -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
+    /* changes the element to this color */
+    /* Called by Ui.CommandBox.java, declared as ERROR_STYLE_CLASS */
+    -fx-text-fill: #FF5736 !important;
 }
 
 .list-cell:empty {

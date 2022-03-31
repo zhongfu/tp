@@ -1,4 +1,4 @@
-package peoplesoft.ui;
+package peoplesoft.ui.regions;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.ui.UiPart;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

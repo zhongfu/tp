@@ -1,0 +1,107 @@
+.root {
+    /* Final Colors */
+    bg: #1B1C31;
+    pane: #222338;
+    pane-light: #33344B;
+    accent: #6076FF;
+
+    text-norm: white;
+    text-faded: #858AAB;
+
+    tag-accent-bg: #282B4C;
+    tag-green: #19A589;
+    tag-green-bg: #19A589;
+    tag-yellow: #FF9860;
+    tag-yellow-bg: #382F3C;
+    tag-red: #E06767;
+    tag-red-bg: #352A3D;
+
+    /* Font Colors */
+    text-default: black;
+    text-inverse: white;
+    text-error: #FF5736;
+    -fx-focus-color: #000000;
+}
+
+#copyButton, #helpMessage {
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+}
+
+#copyButton {
+    -fx-font-size: 13pt;
+    -fx-background-color: #ffff00;
+}
+
+#copyButton:hover {
+    -fx-background-color: gray;
+}
+
+#copyButton:armed {
+    -fx-background-color: #ffff00;
+}
+
+#helpMessageContainer {
+    -fx-background-color: derive(bg, 20%);
+}
+
+.bottom-help-panel {
+    -fx-background-color: tag-green;
+    -fx-background-radius: 11px;
+}
+
+/* For styling the help table */
+/* Referenced from kinsley kajiva at https://gist.github.com/kinsleykajiva/ac452bc8280bc52be384e9af98f2ba0c */
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: bg;
+}
+.table-view .column-header .label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+.table-view .cell{
+    -fx-cell-size: 35;
+    -fx-alignment: center-left;
+    -fx-background-color: #29292D;
+    -fx-border-color: #29292D;
+    -fx-text-fill: lightgray;
+    -fx-alignment: CENTER_LEFT;
+
+}
+.table-row-cell:selected {
+    -fx-background-color: whitesmoke;
+    -fx-text-background-color: #6622CC;
+
+
+}
+
+/* scroll bar */
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button, .table-view .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: derive(#6622CC, 80%);
+
+    -fx-background-radius: 2em;
+    -fx-border-radius: 2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(#6622CC, 90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
