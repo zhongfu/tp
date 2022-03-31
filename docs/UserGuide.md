@@ -58,8 +58,8 @@ A handy reference for more experienced users who just need to know the format of
 |-------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `exit`      | `exit`                                                                           | NA                                                                                                       |
 | `help`      | `help`                                                                           | NA                                                                                                       |
-| `add`       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS h/HOURS [t/TAG]...​`                  | `add n/Nicole Tan  p/99338558  e/nicole@stffhub.org  a/1 Tech Drive, S138572  h/32 t/Hardware  t/Senior` |
-| `edit`      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HOURS] [t/TAG]...​` | `edit 2 n/Nicole Lee   t/OS`                                                                             |
+| `add`       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                  | `add n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
+| `edit`      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `edit 2 n/Nicole Lee t/OS`                                                                             |
 | `delete`    | `delete INDEX`                                                                   | `delete 3`                                                                                               |
 | `find`      | `find KEYWORD [MORE_KEYWORDS]...​`                                                 | `find Nicole Hardware`, `find Aircon`                                                                    |
 | `list`      | `list`                                                                           | NA                                                                                                       |
@@ -117,17 +117,18 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 ### Add an employee : `add`
 
-Adds a new employee to the system with the given attributes. `HOURS` refers to the number of hours worked by the employee.
-// SHOULD HOURS STILL BE A PART OF THE PERSON - ian
+Adds a new employee to the system with the given attributes.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS h/HOURS [t/TAG] [t/TAG]...`
+Rate refers to the hourly pay of the employee.
 
-Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 h/32 t/Hardware t/Senior`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG]...`
+
+Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior`
 
 ### Edit an employee’s information : `edit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
 Example: `edit 2 p/62353535` edits the second person's phone number to 62353535
 
