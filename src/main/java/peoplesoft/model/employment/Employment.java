@@ -62,9 +62,12 @@ public class Employment {
      *
      * @param map Map of values
      */
-    public Employment(Map<ID, Set<ID>> map) {
+    Employment(Map<ID, Set<ID>> map) {
         requireNonNull(map);
-        this.map = map;
+        this.map = new HashMap<>();
+        for (Map.Entry<ID, Set<ID>> e : map.entrySet()) {
+            this.map.put(e.getKey(), new TreeSet<>(e.getValue()));
+        }
     }
 
     /**
@@ -144,8 +147,8 @@ public class Employment {
         requireAllNonNull(person, model);
 
         // TODO: Updates UI, remove if not needed
-        model.updateFilteredJobList(job -> map.get(job.getJobId()) == null
-                ? false : map.get(job.getJobId()).contains(person.getPersonId()));
+        model.updateFilteredJobList(job -> map.get(job.getJobId()) != null
+                && map.get(job.getJobId()).contains(person.getPersonId()));
         return model.getFilteredJobList();
     }
 
