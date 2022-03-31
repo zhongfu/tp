@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import peoplesoft.model.Model;
+import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
-import peoplesoft.model.util.Employment;
+
 
 public class Exporter {
 
