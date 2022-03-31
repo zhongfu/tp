@@ -203,13 +203,13 @@ Example: `jobdelete 2` deletes the second job
 
 ### Mark a job as paid : `mark`
 
-Indicates that a job has been completed.
-
-❗️Caution: This is irreversible.
+Indicates that a job has been completed. To unmark an object, `mark` the job again.
 
 Format: `mark JOBID`
 
 Example: `mark 2` marks the second job
+
+Example: `mark 2` unmarks the second job after the previous example is performed
 
 ### Assign a job to an employee : `assign`
 
