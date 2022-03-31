@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.money.Money;
 import peoplesoft.model.money.Payment;
 import peoplesoft.model.money.Rate;
 import peoplesoft.model.tag.Tag;
@@ -104,6 +105,21 @@ public class Person {
 
     public Map<ID, Payment> getPayments() {
         return Collections.unmodifiableMap(payments);
+    }
+
+    /**
+     * Calculates the Money of all the {@code PendingPayment}s on this {@code Person} at a point in time
+     *
+     * @return Amount due.
+     */
+    public Money getAmountDue() {
+        Money sum = new Money(0);
+        for (Payment p : payments.values()) {
+            if (!p.isCompleted()) {
+                sum = sum.add(p.getAmount());
+            }
+        }
+        return sum;
     }
 
     /**
