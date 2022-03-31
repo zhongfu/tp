@@ -19,9 +19,15 @@ import peoplesoft.logic.commands.ListCommand;
 import peoplesoft.logic.commands.job.JobAddCommand;
 import peoplesoft.logic.commands.job.JobAssignCommand;
 import peoplesoft.logic.commands.job.JobDeleteCommand;
+import peoplesoft.logic.commands.job.JobFindCommand;
 import peoplesoft.logic.commands.job.JobListCommand;
 import peoplesoft.logic.commands.job.JobMarkCommand;
 import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.logic.parser.job.JobAddCommandParser;
+import peoplesoft.logic.parser.job.JobAssignCommandParser;
+import peoplesoft.logic.parser.job.JobDeleteCommandParser;
+import peoplesoft.logic.parser.job.JobFindCommandParser;
+import peoplesoft.logic.parser.job.JobMarkCommandParser;
 
 /**
  * Parses user input.
@@ -80,19 +86,22 @@ public class AddressBookParser {
             // Job related commands
 
         case JobAddCommand.COMMAND_WORD:
-            return new JobAddCommand(arguments);
+            return new JobAddCommandParser().parse(arguments);
 
         case JobListCommand.COMMAND_WORD:
             return new JobListCommand();
 
         case JobDeleteCommand.COMMAND_WORD:
-            return new JobDeleteCommand(arguments);
+            return new JobDeleteCommandParser().parse(arguments);
 
         case JobMarkCommand.COMMAND_WORD:
-            return new JobMarkCommand(arguments);
+            return new JobMarkCommandParser().parse(arguments);
+
+        case JobFindCommand.COMMAND_WORD:
+            return new JobFindCommandParser().parse(arguments);
 
         case JobAssignCommand.COMMAND_WORD:
-            return new JobAssignCommand(arguments);
+            return new JobAssignCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

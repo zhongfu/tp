@@ -2,68 +2,58 @@ package peoplesoft.logic.commands.job;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.Duration;
+import java.util.List;
 
+import peoplesoft.commons.core.Messages;
+import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
-import peoplesoft.logic.parser.exceptions.ParseException;
-import peoplesoft.logic.parser.job.JobDeleteCommandParser;
 import peoplesoft.model.Model;
 import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Job;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.Rate;
-import peoplesoft.model.util.ID;
 
 /**
  * Deletes a {@code Job} with a given {@code JobId}.
  */
 public class JobDeleteCommand extends Command {
 
-    //TODO: change if needed
     public static final String COMMAND_WORD = "jobdelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the job identified by the job ID.\n"
-            + "Parameters: JOBID\n"
+            + ": Deletes the job identified by the index.\n"
+            + "Parameters: JOB_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Deleted Job: %s";
-    public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
 
-    private final ID toDelete;
+    private final Index toDelete;
 
     /**
-     * Creates a {@code JobDeleteCommand} to delete a {@code Job} by {@code JobId}.
+     * Creates a {@code JobDeleteCommand} to delete a {@code Job} by {@code Index}.
      *
-     * @param args Arguments.
-     * @throws ParseException Thrown if there is an error with parsing.
+     * @param toDelete Index of job to delete.
      */
-    public JobDeleteCommand(String args) throws ParseException {
-        requireNonNull(args);
-        toDelete = new JobDeleteCommandParser().parse(args);
+    public JobDeleteCommand(Index toDelete) {
+        requireNonNull(toDelete);
+        this.toDelete = toDelete;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Job> lastShownList = model.getFilteredJobList();
 
-        if (!model.hasJob(toDelete)) {
-            throw new CommandException(MESSAGE_JOB_NOT_FOUND);
+        if (toDelete.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
         }
 
-        try {
-            Job jobToDelete = new Job(toDelete, "empty",
-                    new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(1), false);
-            // Currently handles deletions in JobList implementation (by jobId)
-            model.deleteJob(jobToDelete);
-            Employment.getInstance().deleteJob(jobToDelete);
-        } catch (IndexOutOfBoundsException e) {
-            // Asserts that filtered list should always contain exactly the filtered element
-            assert false;
-        }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
+        Job jobToDelete = lastShownList.get(toDelete.getZeroBased());
+        model.deleteJob(jobToDelete);
+        // Deletes employment associations
+        Employment.getInstance().deleteJob(jobToDelete);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, jobToDelete.getDesc()));
     }
 
     @Override

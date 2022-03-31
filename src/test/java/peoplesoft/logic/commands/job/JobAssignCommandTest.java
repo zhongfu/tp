@@ -2,38 +2,29 @@ package peoplesoft.logic.commands.job;
 
 import static peoplesoft.testutil.Assert.assertThrows;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
-import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.commons.core.index.Index;
+import peoplesoft.model.employment.Employment;
 
 public class JobAssignCommandTest {
-
-    private static final String CORRECT_ARGS = " 1ef4 i/1";
-
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new JobAssignCommand(null));
+        assertThrows(NullPointerException.class, () -> new JobAssignCommand(null, Set.of(),
+                new Employment()));
+        assertThrows(NullPointerException.class, () -> new JobAssignCommand(Index.fromOneBased(1), null,
+                new Employment()));
+        assertThrows(NullPointerException.class, () -> new JobAssignCommand(Index.fromOneBased(1), Set.of(),
+                null));
     }
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new JobAssignCommand(CORRECT_ARGS).execute(null));
+        assertThrows(NullPointerException.class, () -> new JobAssignCommand(Index.fromOneBased(1), Set.of(),
+                new Employment()).execute(null));
     }
 
-    @Test
-    public void execute_incorrectArgs_throwsCommandException() {
-        // TODO
-    }
-
-    // TODO: Add model stubs to test command.
-    // Perhaps a common model stub class can be made.
-
-    // TODO: May shift to parser depending on implementation
-    @Test
-    public void constructor_wrongFormatArgs_throwsParseException() {
-        // Empty name
-        assertThrows(ParseException.class, () -> new JobAssignCommand(" i/1"));
-        // Incorrect index parse
-        assertThrows(ParseException.class, () -> new JobAssignCommand("n/correct i/0"));
-    }
+    // TODO Valid cases
 }

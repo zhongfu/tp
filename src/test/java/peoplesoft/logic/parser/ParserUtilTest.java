@@ -2,7 +2,6 @@ package peoplesoft.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static peoplesoft.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static peoplesoft.testutil.Assert.assertThrows;
 import static peoplesoft.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.job.Money;
 import peoplesoft.model.job.Rate;
@@ -22,6 +22,7 @@ import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.ID;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -31,6 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_RATE = "hello";
     private static final String INVALID_DURATION = "world";
+    private static final String INVALID_ID = "@special_characters";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -41,6 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_STRING = "hello";
     private static final String VALID_RATE = "3.0";
     private static final String VALID_DURATION = "1.5";
+    private static final String VALID_ID = "a123-12ab3";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -51,7 +54,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, Index.MESSAGE_CONSTRAINTS, ()
                 -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
@@ -62,6 +65,30 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIndexes_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIndexes(null));
+    }
+
+    @Test
+    public void parseIndexes_collectionWithInvalidIndexes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexes(Arrays.asList("1", "ahh")));
+    }
+
+    @Test
+    public void parseIndexes_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseIndexes(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseIndexes_collectionWithValidIndexes_returnsIndexSet() throws Exception {
+        Set<Index> actualIndexSet = ParserUtil.parseIndexes(Arrays.asList("4", "3"));
+        Set<Index> expectedIndexSet = new HashSet<Index>(Arrays.asList(Index.fromOneBased(4),
+                Index.fromOneBased(3)));
+
+        assertEquals(expectedIndexSet, actualIndexSet);
     }
 
     @Test
@@ -215,6 +242,7 @@ public class ParserUtilTest {
     @Test
     public void parseString_validValue_returnsString() throws Exception {
         assertEquals(VALID_STRING, ParserUtil.parseString(VALID_STRING));
+
         // With whitespace
         assertEquals(VALID_STRING, ParserUtil.parseString(WHITESPACE + VALID_STRING + WHITESPACE));
     }
@@ -233,6 +261,7 @@ public class ParserUtilTest {
     public void parseRate_validValue_returnsRate() throws Exception {
         Rate expectedRate = new Rate(new Money(3.0), Duration.ofHours(1));
         assertEquals(expectedRate, ParserUtil.parseRate(VALID_RATE));
+
         // With whitespace
         assertEquals(expectedRate, ParserUtil.parseRate(WHITESPACE + VALID_RATE + WHITESPACE));
     }
@@ -244,14 +273,34 @@ public class ParserUtilTest {
 
     @Test
     public void parseDuration_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_RATE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION));
     }
 
     @Test
     public void parseDuration_validValue_returnsDuration() throws Exception {
         Duration expectedDuration = Duration.ofMinutes(90);
         assertEquals(expectedDuration, ParserUtil.parseDuration(VALID_DURATION));
+
         // With whitespace
         assertEquals(expectedDuration, ParserUtil.parseDuration(WHITESPACE + VALID_DURATION + WHITESPACE));
+    }
+
+    @Test
+    public void parseID_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseID(null));
+    }
+
+    @Test
+    public void parseID_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseID(INVALID_ID));
+    }
+
+    @Test
+    public void parseID_validValue_returnsString() throws Exception {
+        ID expectedId = new ID(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseID(VALID_ID));
+
+        // With whitespace
+        assertEquals(expectedId, ParserUtil.parseID(WHITESPACE + VALID_ID + WHITESPACE));
     }
 }

@@ -9,7 +9,6 @@ import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.logic.parser.exceptions.ParseException;
-import peoplesoft.logic.parser.job.JobAddCommandParser;
 import peoplesoft.model.Model;
 import peoplesoft.model.job.Job;
 
@@ -18,12 +17,10 @@ import peoplesoft.model.job.Job;
  */
 public class JobAddCommand extends Command {
 
-    // TODO: change if needed
     public static final String COMMAND_WORD = "job";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database. "
             + "Parameters: "
-            + "[JOBID] "
             + PREFIX_NAME + "NAME "
             + PREFIX_RATE + "RATE "
             + PREFIX_DURATION + "DURATION ";
@@ -34,14 +31,14 @@ public class JobAddCommand extends Command {
     private final Job toAdd;
 
     /**
-     * Creates a {@code JobAddCommand} to add a {@code Job} parsed from the arguments.
+     * Creates a {@code JobAddCommand} to add a {@code Job}.
      *
-     * @param args Arguments.
+     * @param toAdd Job.
      * @throws ParseException Thrown if there is an error with parsing.
      */
-    public JobAddCommand(String args) throws ParseException {
-        requireNonNull(args);
-        toAdd = new JobAddCommandParser().parse(args);
+    public JobAddCommand(Job toAdd) {
+        requireNonNull(toAdd);
+        this.toAdd = toAdd;
     }
 
     @Override

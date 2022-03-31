@@ -1,29 +1,48 @@
 package peoplesoft.logic.parser.job;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static peoplesoft.testutil.Assert.assertThrows;
+import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.commons.core.index.Index;
+import peoplesoft.logic.commands.job.JobMarkCommand;
 
 public class JobMarkCommandParserTest {
 
-    private static final String VALID_STRING = "valid";
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobMarkCommand.MESSAGE_USAGE);
+
     private static final String WHITESPACE = " \t\r\n";
 
     private JobMarkCommandParser parser = new JobMarkCommandParser();
 
     @Test
-    public void parse_whitespace_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(WHITESPACE));
+    public void parse_invalidPreamble_failure() {
+        // Whitespace
+        assertParseFailure(parser, WHITESPACE, MESSAGE_INVALID_FORMAT);
+
+        // Negative index
+        assertParseFailure(parser, "-5", MESSAGE_INVALID_FORMAT);
+
+        // Zero index
+        assertParseFailure(parser, "0", MESSAGE_INVALID_FORMAT);
+
+        // Invalid arguments being parsed as preamble
+        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+
+        // Invalid prefix being parsed as preamble
+        assertParseFailure(parser, "1 n/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_validValue_returnsString() throws Exception {
-        assertEquals(VALID_STRING, parser.parse(VALID_STRING).toString());
+        JobMarkCommand expected = new JobMarkCommand(Index.fromOneBased(1));
+        assertParseSuccess(parser, "1", expected);
+
         // With whitespace
-        assertEquals(VALID_STRING, parser.parse(WHITESPACE + VALID_STRING + WHITESPACE).toString());
-        // TODO: Currently exactly the same as ParserUtil.parseString()
+        expected = new JobMarkCommand(Index.fromOneBased(5));
+        assertParseSuccess(parser, WHITESPACE + "5" + WHITESPACE, expected);
     }
 }

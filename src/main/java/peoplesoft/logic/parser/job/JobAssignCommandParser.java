@@ -3,24 +3,29 @@ package peoplesoft.logic.parser.job;
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_INDEX;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
+import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.job.JobAssignCommand;
 import peoplesoft.logic.parser.ArgumentMultimap;
 import peoplesoft.logic.parser.ArgumentTokenizer;
+import peoplesoft.logic.parser.Parser;
+import peoplesoft.logic.parser.ParserUtil;
 import peoplesoft.logic.parser.Prefix;
 import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.model.employment.Employment;
 
 /**
- * Parses a {@code jobId} and an {@code index} for {@code Person}.
+ * Parses an {@code Index} for {@code Job} and {@code Indexes} for {@code Person}.
  */
-public class JobAssignCommandParser {
+public class JobAssignCommandParser implements Parser<JobAssignCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code JobAssignCommand}
      * and returns an {@code ArgumentMultimap} for {@code JobAssignCommand}.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ArgumentMultimap parse(String args) throws ParseException {
+    public JobAssignCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
@@ -28,7 +33,18 @@ public class JobAssignCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     JobAssignCommand.MESSAGE_USAGE));
         }
-        return argMultimap;
+        Index jobIndex;
+        Set<Index> personIndexes;
+
+        try {
+            jobIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+            personIndexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_INDEX));
+        } catch (ParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    JobAssignCommand.MESSAGE_USAGE));
+        }
+
+        return new JobAssignCommand(jobIndex, personIndexes, Employment.getInstance());
     }
 
     /**

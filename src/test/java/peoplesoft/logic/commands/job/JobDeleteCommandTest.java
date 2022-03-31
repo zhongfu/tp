@@ -9,6 +9,8 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
 
+import peoplesoft.commons.core.Messages;
+import peoplesoft.commons.core.index.Index;
 import peoplesoft.model.Model;
 import peoplesoft.model.ModelManager;
 import peoplesoft.model.UserPrefs;
@@ -19,12 +21,11 @@ import peoplesoft.model.util.ID;
 
 public class JobDeleteCommandTest {
 
-    private static final String CORRECT_ARGS = "correct";
-    private static final String INCORRECT_ARGS = "incorrect";
+    private static final String TEST_ID = "test";
+    private static final Job JOB = new Job(new ID(TEST_ID), "The Right Job",
+            new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(2), false);
 
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Job job = new Job(new ID(CORRECT_ARGS), "The Right Job",
-            new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(2), false);
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
@@ -33,21 +34,23 @@ public class JobDeleteCommandTest {
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new JobDeleteCommand(CORRECT_ARGS).execute(null));
+        assertThrows(NullPointerException.class, () -> new JobDeleteCommand(Index.fromOneBased(1))
+                .execute(null));
     }
 
     @Test
-    public void execute_incorrectArgs_throwsCommandException() throws Exception {
-        JobDeleteCommand cmd = new JobDeleteCommand(INCORRECT_ARGS);
-        assertCommandFailure(cmd, expectedModel, JobDeleteCommand.MESSAGE_JOB_NOT_FOUND);
+    public void execute_incorrectArgs_throwsCommandException() {
+        // No job at index 3
+        JobDeleteCommand cmd = new JobDeleteCommand(Index.fromOneBased(3));
+        assertCommandFailure(cmd, expectedModel, Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_correctArgs_success() throws Exception {
+    public void execute_correctArgs_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.addJob(job);
-        JobDeleteCommand cmd = new JobDeleteCommand(CORRECT_ARGS);
-        assertCommandSuccess(cmd, model, String.format(JobDeleteCommand.MESSAGE_SUCCESS, job.getJobId()),
+        model.addJob(JOB);
+        JobDeleteCommand cmd = new JobDeleteCommand(Index.fromOneBased(1));
+        assertCommandSuccess(cmd, model, String.format(JobDeleteCommand.MESSAGE_SUCCESS, JOB.getDesc()),
                 expectedModel);
     }
 }
