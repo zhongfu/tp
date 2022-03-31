@@ -34,6 +34,7 @@ public class JobAssignCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s.";
     public static final String MESSAGE_DUPLICATE_EMPLOYMENT =
             "%s person(s) have already been assigned to this job.";
+    public static final String MESSAGE_ASSIGN_MARKED_JOB = "Un-mark the job before assigning it.";
 
     private Index jobIndex;
     private Set<Index> personIndexes;
@@ -71,6 +72,10 @@ public class JobAssignCommand extends Command {
 
         Job job = lastShownJobs.get(jobIndex.getZeroBased());
         Set<Person> persons = getPersons(personIndexes, lastShownPersons);
+
+        if (job.hasPaid()) {
+            throw new CommandException(MESSAGE_ASSIGN_MARKED_JOB);
+        }
 
         if (job.isFinal()) {
             throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
