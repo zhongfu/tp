@@ -19,9 +19,9 @@ import peoplesoft.model.util.ID;
 
 public class EmploymentTest {
     private static final Job EATING = new Job(new ID(1043), "Eating",
-        new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false);
+            new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false);
     private static final Job RUNNING = new Job(new ID(3175), "Running",
-        new Rate(new Money(6), Duration.ofHours(4)), Duration.ofHours(8), true);
+            new Rate(new Money(6), Duration.ofHours(4)), Duration.ofHours(8), true);
 
     @Test
     public void constructor_null_throwsNullPointerException() {

@@ -229,8 +229,8 @@ public class Employment {
 
             // readValueAs Map is ok because we know `node` has to be a json object
             Map<ID, Set<ID>> map = node
-                .traverse(codec)
-                .readValueAs(new TypeReference<Map<ID, Set<ID>>>(){});
+                    .traverse(codec)
+                    .readValueAs(new TypeReference<Map<ID, Set<ID>>>(){});
 
             return new Employment(map);
         }

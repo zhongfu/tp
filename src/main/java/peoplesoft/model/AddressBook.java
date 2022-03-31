@@ -254,7 +254,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     protected static class AddressBookDeserializer extends StdDeserializer<AddressBook> {
         private static final String MISSING_OR_INVALID_INSTANCE = "The address book is invalid or missing!";
         private static final UnaryOperator<String> INVALID_VAL_FMTR =
-            k -> String.format("This address book's %s value is invalid!", k);
+                k -> String.format("This address book's %s value is invalid!", k);
 
         private AddressBookDeserializer(Class<?> vc) {
             super(vc);
@@ -288,17 +288,17 @@ public class AddressBook implements ReadOnlyAddressBook {
             ObjectNode objNode = (ObjectNode) node;
 
             UniquePersonList upl = getNonNullNode(objNode, "persons", ctx)
-                .traverse(codec)
-                .readValueAs(UniquePersonList.class);
+                    .traverse(codec)
+                    .readValueAs(UniquePersonList.class);
 
             UniqueJobList ujl = getNonNullNode(objNode, "jobs", ctx)
-                .traverse(codec)
-                .readValueAs(UniqueJobList.class);
+                    .traverse(codec)
+                    .readValueAs(UniqueJobList.class);
 
             if (objNode.has("employment")) {
                 Employment emp = objNode.get("employment") // not null, we're good
-                    .traverse(codec)
-                    .readValueAs(Employment.class);
+                        .traverse(codec)
+                        .readValueAs(Employment.class);
 
                 Employment.setInstance(emp);
             } else {
@@ -308,8 +308,8 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (objNode.has("jobIdState")) {
                 // note jobId cannot be negative
                 int jobId = Math.max(
-                    getNonNullNodeWithType(objNode, "jobIdState", ctx, IntNode.class).intValue(),
-                    0);
+                        getNonNullNodeWithType(objNode, "jobIdState", ctx, IntNode.class).intValue(),
+                        0);
 
                 // just in case we get a jobId that already exists
                 while (upl.contains(new ID(jobId))) {
@@ -324,8 +324,8 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (objNode.has("personIdState")) {
                 // note personId cannot be negative
                 int personId = Math.max(
-                    getNonNullNodeWithType(objNode, "personIdState", ctx, IntNode.class).intValue(),
-                    0);
+                        getNonNullNodeWithType(objNode, "personIdState", ctx, IntNode.class).intValue(),
+                        0);
 
                 // just in case we get a personId that already exists
                 while (upl.contains(new ID(personId))) {

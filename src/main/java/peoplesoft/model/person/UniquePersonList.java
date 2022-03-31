@@ -205,8 +205,8 @@ public class UniquePersonList implements Iterable<Person> {
             }
 
             List<Person> personList = node // is ArrayNode
-                .traverse(codec)
-                .readValueAs(new TypeReference<List<Person>>(){});
+                    .traverse(codec)
+                    .readValueAs(new TypeReference<List<Person>>(){});
 
             UniquePersonList upl = new UniquePersonList();
             upl.setPersons(personList);

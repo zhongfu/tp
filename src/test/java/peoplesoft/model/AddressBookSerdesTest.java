@@ -45,8 +45,8 @@ public class AddressBookSerdesTest {
         ab.setJobs(jobList);
 
         List<String> serializedPersonList = personList.stream()
-            .map((p) -> serializePerson(p))
-            .collect(Collectors.toList());
+                .map((p) -> serializePerson(p))
+                .collect(Collectors.toList());
 
         // TODO
         /*List<String> serializedJobList = jobList.stream()
@@ -100,37 +100,37 @@ public class AddressBookSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("385", AddressBook.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("\"string\"", AddressBook.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "[\"i'm\",\"an\",\"array\"]", AddressBook.class));
+                "[\"i'm\",\"an\",\"array\"]", AddressBook.class));
     }
 
     @Test
     public void deserialize_invalidAddressBookObject_throwsJsonMappingException() throws IOException {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeObject(Map.of("person", "[]")), // should be "persons"
-            AddressBook.class));
+                serializeObject(Map.of("person", "[]")), // should be "persons"
+                AddressBook.class));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeObject(Map.of()),
-            AddressBook.class));
+                serializeObject(Map.of()),
+                AddressBook.class));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeObject(Map.of("persons", "null")),
-            AddressBook.class));
+                serializeObject(Map.of("persons", "null")),
+                AddressBook.class));
     }
 
     @Test
     public void deserialize_invalidPersonElement_throwsJsonMappingException() {
         String serializedList = serializeList(Arrays.asList(
-            serializePerson(ALICE),
-            serializePerson(
-                "15",
-                "R@chel",
-                BENSON.getPhone().toString(),
-                BENSON.getAddress().toString(),
-                BENSON.getEmail().toString(),
-                BENSON.getRate().getAmount().printFullValue(),
-                Collections.singleton("friend")),
-            serializePerson(ELLE)));
+                serializePerson(ALICE),
+                serializePerson(
+                        "15",
+                        "R@chel",
+                        BENSON.getPhone().toString(),
+                        BENSON.getAddress().toString(),
+                        BENSON.getEmail().toString(),
+                        BENSON.getRate().getAmount().printFullValue(),
+                        Collections.singleton("friend")),
+                serializePerson(ELLE)));
 
         String serializedObject = serializeObject(Map.of("persons", serializedList));
 
@@ -147,8 +147,8 @@ public class AddressBookSerdesTest {
         ab.setJobs(jobList);
 
         List<String> serializedPersonList = personList.stream()
-            .map((p) -> serializePerson(p))
-            .collect(Collectors.toList());
+                .map((p) -> serializePerson(p))
+                .collect(Collectors.toList());
 
         // TODO
         /*List<String> serializedJobList = jobList.stream()

@@ -35,13 +35,13 @@ public class PersonTest {
 
         // same id, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE)
-            .withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB)
-            .withAddress(VALID_ADDRESS_BOB)
-            .withRate(VALID_RATE_BOB)
-            .withTags(VALID_TAG_HUSBAND)
-            .build();
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withRate(VALID_RATE_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different id, all other attributes same -> returns false

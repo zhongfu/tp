@@ -142,18 +142,18 @@ public class Job {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("ID: ")
-            .append(getJobId())
-            .append("; Name: ")
-            .append(getDesc())
-            .append("; Rate: ")
-            .append(getRate())
-            .append("; Duration: ")
-            .append(getDuration().toHoursPart())
-            .append("H")
-            .append(getDuration().toMinutesPart())
-            .append("M")
-            .append("; Has paid: ")
-            .append(hasPaid());
+                .append(getJobId())
+                .append("; Name: ")
+                .append(getDesc())
+                .append("; Rate: ")
+                .append(getRate())
+                .append("; Duration: ")
+                .append(getDuration().toHoursPart())
+                .append("H")
+                .append(getDuration().toMinutesPart())
+                .append("M")
+                .append("; Has paid: ")
+                .append(hasPaid());
 
         return builder.toString();
     }
@@ -184,7 +184,7 @@ public class Job {
     protected static class JobDeserializer extends StdDeserializer<Job> {
         private static final String MISSING_OR_INVALID_INSTANCE = "The job instance is invalid or missing!";
         private static final UnaryOperator<String> INVALID_VAL_FMTR =
-            k -> String.format("This job's %s value is invalid!", k);
+                k -> String.format("This job's %s value is invalid!", k);
 
         private JobDeserializer(Class<?> vc) {
             super(vc);
@@ -218,18 +218,18 @@ public class Job {
             ObjectNode job = (ObjectNode) node;
 
             ID jobId = getNonNullNode(job, "jobId", ctx)
-                .traverse(codec)
-                .readValueAs(ID.class);
+                    .traverse(codec)
+                    .readValueAs(ID.class);
 
             String desc = getNonNullNodeWithType(job, "desc", ctx, TextNode.class).textValue();
 
             Rate rate = getNonNullNode(job, "rate", ctx)
-                .traverse(codec)
-                .readValueAs(Rate.class);
+                    .traverse(codec)
+                    .readValueAs(Rate.class);
 
             Duration duration = getNonNullNode(job, "duration", ctx)
-                .traverse(codec)
-                .readValueAs(Duration.class);
+                    .traverse(codec)
+                    .readValueAs(Duration.class);
 
             Boolean hasPaid = getNonNullNodeWithType(job, "hasPaid", ctx, BooleanNode.class).booleanValue();
 

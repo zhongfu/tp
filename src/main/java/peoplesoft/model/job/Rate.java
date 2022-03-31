@@ -130,7 +130,7 @@ public class Rate {
     protected static class RateDeserializer extends StdDeserializer<Rate> {
         private static final String MISSING_OR_INVALID_INSTANCE = "The rate instance is invalid or missing!";
         private static final UnaryOperator<String> INVALID_VAL_FMTR =
-            k -> String.format("This rate's %s value is invalid!", k);
+                k -> String.format("This rate's %s value is invalid!", k);
 
         private RateDeserializer(Class<?> vc) {
             super(vc);
@@ -164,11 +164,11 @@ public class Rate {
             ObjectNode rate = (ObjectNode) node;
 
             Money amount = getNonNullNode(rate, "amount", ctx)
-                .traverse(codec)
-                .readValueAs(Money.class);
+                    .traverse(codec)
+                    .readValueAs(Money.class);
 
             String durationString = getNonNullNodeWithType(rate, "duration", ctx, TextNode.class)
-                .textValue();
+                    .textValue();
 
             Duration duration;
             try {

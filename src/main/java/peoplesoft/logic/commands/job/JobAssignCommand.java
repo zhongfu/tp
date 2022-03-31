@@ -31,9 +31,9 @@ public class JobAssignCommand extends Command {
     public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a job to a person. "
-        + "Parameters: "
-        + "JOBID "
-        + PREFIX_INDEX + "INDEX ";
+            + "Parameters: "
+            + "JOBID "
+            + PREFIX_INDEX + "INDEX ";
 
     public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s\n%s has the following jobs: %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
