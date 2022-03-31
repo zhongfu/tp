@@ -1,7 +1,7 @@
 package peoplesoft.model.job.util;
 
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.exceptions.NegativeMoneyValueException;
+import peoplesoft.model.money.Money;
+import peoplesoft.model.money.exceptions.NegativeMoneyValueException;
 
 /**
  * Contains utility method for validating the value of {@code Money}.

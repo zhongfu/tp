@@ -49,6 +49,11 @@ public class JobDeleteCommand extends Command {
         }
 
         Job jobToDelete = lastShownList.get(toDelete.getZeroBased());
+
+        if (jobToDelete.isFinal()) {
+            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
+        }
+
         model.deleteJob(jobToDelete);
         // Deletes employment associations
         Employment.getInstance().deleteJob(jobToDelete);

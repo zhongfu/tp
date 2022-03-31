@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_RATE = new Prefix("r/");
     public static final Prefix PREFIX_DURATION = new Prefix("d/");
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
+    public static final Prefix PREFIX_CONFIRMATION = new Prefix("y/");
 }

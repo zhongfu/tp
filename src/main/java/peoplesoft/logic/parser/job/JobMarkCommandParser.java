@@ -7,9 +7,10 @@ import peoplesoft.logic.commands.job.JobMarkCommand;
 import peoplesoft.logic.parser.Parser;
 import peoplesoft.logic.parser.ParserUtil;
 import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.model.employment.Employment;
 
 /**
- * Parses an {@code Index} to mark.
+ * Parses an {@code Index} of a {@code Job} to mark.
  */
 public class JobMarkCommandParser implements Parser<JobMarkCommand> {
     /**
@@ -20,7 +21,7 @@ public class JobMarkCommandParser implements Parser<JobMarkCommand> {
     public JobMarkCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new JobMarkCommand(index);
+            return new JobMarkCommand(index, Employment.getInstance());
         } catch (ParseException pe) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobMarkCommand.MESSAGE_USAGE), pe);

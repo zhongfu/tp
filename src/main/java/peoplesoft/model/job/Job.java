@@ -24,6 +24,10 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.job.exceptions.JobNotPaidException;
+import peoplesoft.model.job.exceptions.ModifyFinalizedJobException;
+import peoplesoft.model.money.Money;
+import peoplesoft.model.money.Rate;
 import peoplesoft.model.util.ID;
 
 /**
@@ -35,22 +39,34 @@ public class Job {
 
     private final ID jobId;
     private final String desc;
-    private final Rate rate;
     private final Duration duration;
 
     private final boolean hasPaid;
+    private final boolean isFinal;
 
     /**
      * Constructor for an immutable job.
      * All fields must not be null.
      */
-    public Job(ID jobId, String desc, Rate rate, Duration duration, boolean hasPaid) {
-        requireAllNonNull(jobId, desc, rate, duration, hasPaid);
+    public Job(ID jobId, String desc, Duration duration) {
+        requireAllNonNull(jobId, desc, duration);
         this.jobId = jobId;
         this.desc = desc;
-        this.rate = rate;
+        this.duration = duration;
+        this.hasPaid = false;
+        this.isFinal = false;
+    }
+
+    /**
+     * Constructor used internally.
+     */
+    private Job(ID jobId, String desc, Duration duration, boolean hasPaid, boolean isFinal) {
+        requireAllNonNull(jobId, desc, duration, hasPaid, isFinal);
+        this.jobId = jobId;
+        this.desc = desc;
         this.duration = duration;
         this.hasPaid = hasPaid;
+        this.isFinal = isFinal;
     }
 
     public ID getJobId() {
@@ -61,10 +77,6 @@ public class Job {
         return desc;
     }
 
-    public Rate getRate() {
-        return rate;
-    }
-
     public Duration getDuration() {
         return duration;
     }
@@ -73,13 +85,19 @@ public class Job {
         return hasPaid;
     }
 
+    // TODO: Not sure if checks should be within Job or within whatever uses Job
+    public boolean isFinal() {
+        return isFinal;
+    }
+
     /**
      * Returns the pay of the job.
      * Calculated from rate and duration.
      *
+     * @param rate Rate of job.
      * @return Pay.
      */
-    public Money calculatePay() {
+    public Money calculatePay(Rate rate) {
         return rate.calculateAmount(duration);
     }
 
@@ -87,18 +105,40 @@ public class Job {
      * Returns a new instance of the job with isPaid as true;
      *
      * @return Paid job.
+     * @throws ModifyFinalizedJobException Job should not be modified after it is finalized.
      */
-    public Job setAsPaid() {
-        return new Job(jobId, desc, rate, duration, true);
+    public Job setAsPaid() throws ModifyFinalizedJobException {
+        if (isFinal) {
+            throw new ModifyFinalizedJobException();
+        }
+        return new Job(jobId, desc, duration, true, false);
     }
 
     /**
      * Returns a new instance of the job with isPaid as false;
      *
      * @return Unpaid job.
+     * @throws ModifyFinalizedJobException Job should not be modified after it is finalized.
      */
-    public Job setAsNotPaid() {
-        return new Job(jobId, desc, rate, duration, false);
+    public Job setAsNotPaid() throws ModifyFinalizedJobException {
+        if (isFinal) {
+            throw new ModifyFinalizedJobException();
+        }
+        return new Job(jobId, desc, duration, false, false);
+    }
+
+    /**
+     * Finalizes payments of a job. Requires the job to be paid.
+     * A finalized job cannot (and should not) be modified.
+     *
+     * @return Finalized job.
+     * @throws JobNotPaidException If job is not paid.
+     */
+    public Job setAsFinal() throws JobNotPaidException {
+        if (!hasPaid) {
+            throw new JobNotPaidException();
+        }
+        return new Job(jobId, desc, duration, true, true);
     }
 
     /**
@@ -128,14 +168,14 @@ public class Job {
         Job otherJob = (Job) other;
         return otherJob.getJobId().equals(getJobId())
                 && otherJob.getDesc().equals(getDesc())
-                && otherJob.getRate().equals(getRate())
                 && otherJob.getDuration().equals(getDuration())
-                && otherJob.hasPaid() == hasPaid();
+                && otherJob.hasPaid() == hasPaid()
+                && otherJob.isFinal() == isFinal();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(jobId, desc, rate, duration, hasPaid);
+        return Objects.hash(jobId, desc, duration, hasPaid, isFinal);
     }
 
     @Override
@@ -145,8 +185,6 @@ public class Job {
                 .append(getJobId())
                 .append("; Name: ")
                 .append(getDesc())
-                .append("; Rate: ")
-                .append(getRate())
                 .append("; Duration: ")
                 .append(getDuration().toHoursPart())
                 .append("H")
@@ -173,9 +211,9 @@ public class Job {
 
             gen.writeObjectField("jobId", value.getJobId());
             gen.writeStringField("desc", value.getDesc());
-            gen.writeObjectField("rate", value.getRate());
             gen.writeObjectField("duration", value.getDuration());
             gen.writeBooleanField("hasPaid", value.hasPaid());
+            gen.writeBooleanField("isFinal", value.isFinal());
 
             gen.writeEndObject();
         }
@@ -223,17 +261,15 @@ public class Job {
 
             String desc = getNonNullNodeWithType(job, "desc", ctx, TextNode.class).textValue();
 
-            Rate rate = getNonNullNode(job, "rate", ctx)
-                    .traverse(codec)
-                    .readValueAs(Rate.class);
-
             Duration duration = getNonNullNode(job, "duration", ctx)
                     .traverse(codec)
                     .readValueAs(Duration.class);
 
             Boolean hasPaid = getNonNullNodeWithType(job, "hasPaid", ctx, BooleanNode.class).booleanValue();
 
-            return new Job(jobId, desc, rate, duration, hasPaid);
+            Boolean isFinal = getNonNullNodeWithType(job, "isFinal", ctx, BooleanNode.class).booleanValue();
+
+            return new Job(jobId, desc, duration, hasPaid, isFinal);
         }
 
         @Override

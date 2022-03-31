@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.job.JobMarkCommand;
+import peoplesoft.model.employment.Employment;
 
 public class JobMarkCommandParserTest {
 
@@ -38,11 +39,11 @@ public class JobMarkCommandParserTest {
 
     @Test
     public void parse_validValue_returnsString() throws Exception {
-        JobMarkCommand expected = new JobMarkCommand(Index.fromOneBased(1));
+        JobMarkCommand expected = new JobMarkCommand(Index.fromOneBased(1), new Employment());
         assertParseSuccess(parser, "1", expected);
 
         // With whitespace
-        expected = new JobMarkCommand(Index.fromOneBased(5));
+        expected = new JobMarkCommand(Index.fromOneBased(5), new Employment());
         assertParseSuccess(parser, WHITESPACE + "5" + WHITESPACE, expected);
     }
 }

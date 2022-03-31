@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.Rate;
+import peoplesoft.model.money.Money;
+import peoplesoft.model.money.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;

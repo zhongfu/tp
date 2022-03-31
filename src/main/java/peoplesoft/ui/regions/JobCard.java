@@ -54,7 +54,6 @@ public class JobCard extends UiPart<Region> {
         this.job = job;
         idx.setText(displayedIndex + "");
         desc.setText(job.getDesc());
-        rate.setText(job.getRate().toString());
         duration.setText(job.getDuration().toString());
         paidForIcon.setImage(job.hasPaid() ? tick : cross);
         /*

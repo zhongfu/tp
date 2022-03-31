@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 import peoplesoft.model.AddressBook;
 import peoplesoft.model.ReadOnlyAddressBook;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.Rate;
+import peoplesoft.model.money.Money;
+import peoplesoft.model.money.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;

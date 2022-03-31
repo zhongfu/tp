@@ -16,14 +16,11 @@ import peoplesoft.model.ModelManager;
 import peoplesoft.model.UserPrefs;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.job.JobContainsKeywordsPredicate;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.Rate;
 import peoplesoft.model.util.ID;
 
 public class JobFindCommandTest {
     private static final String TEST_ID = "test";
-    private static final Job JOB = new Job(new ID(TEST_ID), "The Right Job",
-            new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(2), false);
+    private static final Job JOB = new Job(new ID(TEST_ID), "The Right Job", Duration.ofHours(2));
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());

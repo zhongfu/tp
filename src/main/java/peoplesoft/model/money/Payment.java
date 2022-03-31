@@ -1,4 +1,4 @@
-package peoplesoft.model.person;
+package peoplesoft.model.money;
 
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
@@ -24,8 +24,8 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.Job;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.exceptions.PaymentAlreadyPaidException;
+import peoplesoft.model.money.exceptions.PaymentAlreadyPaidException;
+import peoplesoft.model.person.Person;
 import peoplesoft.model.util.ID;
 
 /**
@@ -65,7 +65,16 @@ public abstract class Payment {
         this.amount = payment.amount;
     }
 
-    static Payment createPayment(Person person, Job job, Money amount) {
+    /**
+     * Creates a {@code PendingPayment} object.
+     *
+     * @param person Person.
+     * @param job Job.
+     * @param amount Amount to pay.
+     * @return
+     */
+    // TODO: not sure if should be public, but currently public for testing
+    public static Payment createPayment(Person person, Job job, Money amount) {
         requireAllNonNull(person, job, amount);
         return new PendingPayment(person.getPersonId(), job.getJobId(), amount);
     }
@@ -138,7 +147,7 @@ public abstract class Payment {
 
         @Override
         public boolean isCompleted() {
-            return false;
+            return true;
         }
 
         @Override
@@ -189,7 +198,7 @@ public abstract class Payment {
 
         @Override
         public String toString() {
-            return super.toString() + "; paid: yes";
+            return super.toString() + "; paid: no";
         }
     }
 

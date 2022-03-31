@@ -43,8 +43,8 @@ public class JobAssignCommand extends Command {
      * Creates a {@code JobAssignCommand} to assign a {@code Job} to a set of {@code Person}s.
      *
      * @param jobIndex Index of the job.
-     * @param personIndexes Set of indexes of persons
-     * @param employment Employment to use (for easier testing)
+     * @param personIndexes Set of indexes of persons.
+     * @param employment Employment to use (for easier testing).
      */
     public JobAssignCommand(Index jobIndex, Set<Index> personIndexes, Employment employment) {
         requireAllNonNull(jobIndex, personIndexes, employment);
@@ -71,6 +71,10 @@ public class JobAssignCommand extends Command {
 
         Job job = lastShownJobs.get(jobIndex.getZeroBased());
         Set<Person> persons = getPersons(personIndexes, lastShownPersons);
+
+        if (job.isFinal()) {
+            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
+        }
 
         int dupeCount = 0;
         StringBuilder stringPersons = new StringBuilder();

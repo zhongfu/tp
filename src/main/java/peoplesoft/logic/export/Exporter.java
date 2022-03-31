@@ -56,20 +56,17 @@ public class Exporter {
         String listHeader = "Job ID, Job Description, Rate, Duration, Payment";
 
         String earnedIncomeItemized = assignedJobsCompleted.stream().map(
-                job -> String.format("%s,%s,%s,%s,%s,",
-                    job.getJobId(), job.getDesc(),
-                    job.getRate(),
-                    job.getDuration(),
-                    job.calculatePay())
+                job -> String.format("%s,%s,%s,",
+                    job.getJobId(),
+                    job.getDesc(),
+                    job.getDuration())
         ).collect(Collectors.joining("\n"));
 
         String unearnedIncomeItemized = assignedJobsIncomplete.stream().map(
-                job -> String.format("%s,%s,%s,%s,%s,",
+                job -> String.format("%s,%s,%s,",
                     job.getJobId(),
                     job.getDesc(),
-                    job.getRate(),
-                    job.getDuration(),
-                    job.calculatePay())
+                    job.getDuration())
         ).collect(Collectors.joining("\n"));
 
         String exportableMessage = personalDetails

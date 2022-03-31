@@ -3,7 +3,6 @@ package peoplesoft.logic.commands.job;
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_DURATION;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
-import static peoplesoft.logic.parser.CliSyntax.PREFIX_RATE;
 
 import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
@@ -22,7 +21,6 @@ public class JobAddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_RATE + "RATE "
             + PREFIX_DURATION + "DURATION ";
 
     public static final String MESSAGE_SUCCESS = "New job added: %s";
