@@ -73,7 +73,7 @@ public class Exporter {
                 + "\n" + "\n\nEarned Income"
                 + "\n" + listHeader
                 + "\n" + earnedIncomeItemized
-                + "\n" + "\nUnearned Income"
+                + "\n" + "\nOutstanding Income"
                 + "\n" + unearnedIncomeItemized;
 
         FileWriter fileWriter = new FileWriter(storageFile);
