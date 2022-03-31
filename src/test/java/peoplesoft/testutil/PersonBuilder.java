@@ -3,7 +3,9 @@ package peoplesoft.testutil;
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import peoplesoft.commons.core.PersonIdFactory;
@@ -12,6 +14,7 @@ import peoplesoft.model.job.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
+import peoplesoft.model.person.Payment;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
@@ -36,6 +39,7 @@ public class PersonBuilder {
     private Address address;
     private Rate rate;
     private Set<Tag> tags;
+    private Map<ID, Payment> payments;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,6 +52,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         rate = new Rate(new Money(DEFAULT_RATE), Duration.ofHours(1));
         tags = new HashSet<>();
+        payments = new HashMap<>();
     }
 
     /**
@@ -61,6 +66,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         rate = personToCopy.getRate();
         tags = new HashSet<>(personToCopy.getTags());
+        payments = new HashMap<>(personToCopy.getPayments());
     }
 
     /**
@@ -134,8 +140,21 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code payments} field of the {@code Person} that we are building, using an {@code Iterable}
+     * of {@code Payment}s
+     */
+    public PersonBuilder withPayments(Iterable<Payment> payments) {
+        this.payments = new HashMap<>();
+        for (Payment pymt : payments) {
+            requireNonNull(pymt);
+            this.payments.put(pymt.getJobId(), pymt);
+        }
+        return this;
+    }
+
     public Person build() {
-        return new Person(personId, name, phone, email, address, rate, tags);
+        return new Person(personId, name, phone, email, address, rate, tags, payments);
     }
 
 }

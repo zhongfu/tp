@@ -8,6 +8,7 @@ import static peoplesoft.logic.parser.CliSyntax.PREFIX_PHONE;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_RATE;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -18,9 +19,11 @@ import peoplesoft.model.job.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
+import peoplesoft.model.person.Payment;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.ID;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -48,8 +51,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Map<ID, Payment> payments = Map.of();
 
-        Person person = new Person(PersonIdFactory.nextId(), name, phone, email, address, rate, tagList);
+        Person person = new Person(PersonIdFactory.nextId(), name, phone, email, address, rate, tagList, payments);
 
         return new AddCommand(person);
     }

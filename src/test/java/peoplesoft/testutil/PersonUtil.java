@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import peoplesoft.logic.commands.AddCommand;
 import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
+import peoplesoft.model.person.Payment;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.tag.Tag;
 
@@ -82,7 +83,8 @@ public class PersonUtil {
             person.getAddress().toString(),
             person.getEmail().toString(),
             person.getRate().getAmount().printFullValue(), // TODO
-            person.getTags().stream().map((tag) -> tag.tagName).collect(Collectors.toSet()));
+            person.getTags().stream().map((tag) -> tag.tagName).collect(Collectors.toSet()),
+            person.getPayments().values().stream().map(PersonUtil::serializePayment).collect(Collectors.toSet()));
     }
 
     /**
@@ -94,21 +96,26 @@ public class PersonUtil {
      * @param email the string representation of the {@code Person}'s email address
      * @param rate the string representation of the {@code Person}'s rate
      * @param tags a {@code Set} of the tags assigned to the {@code Person}
+     * @param payments a {@code Set} of serialized representations of each {@code Payment}
      * @return a JSON serialization of the given {@code Person}
      */
     public static String serializePerson(String personId, String name, String phone, String address, String email,
-                String rate, Set<String> tags) {
+                String rate, Set<String> tags, Set<String> payments) {
         return serializePerson(
-            personId,
-            name,
-            phone,
-            address,
-            email,
-            rate,
-            TestUtil.serializeList(
-            tags.stream()
-                .map((tag) -> tag == null ? "null" : "\"" + tag + "\"")
-                .collect(Collectors.toList())));
+                personId,
+                name,
+                phone,
+                address,
+                email,
+                rate,
+                TestUtil.serializeList(
+                        tags.stream()
+                                .map((tag) -> tag == null ? "null" : "\"" + tag + "\"")
+                                .collect(Collectors.toList())),
+                TestUtil.serializeList(
+                        payments.stream()
+                                .map(String::valueOf) // assuming we already have strnig reprs
+                                .collect(Collectors.toList())));
     }
 
     /**
@@ -123,7 +130,7 @@ public class PersonUtil {
      * @return a JSON serialization of the given {@code Person}
      */
     public static String serializePerson(String personId, String name, String phone, String address, String email,
-                String rate, String tags) {
+                String rate, String tags, String payments) {
         Map<String, String> map = new LinkedHashMap<>();
 
         map.put("id", personId == null ? "null" : "\"" + personId + "\"");
@@ -134,9 +141,33 @@ public class PersonUtil {
         map.put("rate", rate == null ? "null" : "{\n  \"amount\" : \"" + rate + "\",\n  \"duration\""
                 + " : \"PT1H\"\n}");
         map.put("tagged", tags);
+        map.put("payments", payments);
 
-        String res = TestUtil.serializeObject(map);
-        System.out.println(res);
-        return res;
+        return TestUtil.serializeObject(map);
+    }
+
+    /**
+     * Serializes a {@code Payment} object into a rudimentary JSON representation.
+     */
+    public static String serializePayment(Payment pymt) {
+        return serializePayment(
+                pymt.isCompleted() ? "COMPLETED" : "PENDING",
+                pymt.getPersonId().toString(),
+                pymt.getJobId().toString(),
+                pymt.getAmount().toString());
+    }
+
+    /**
+     * Creates a JSON representation of a {@code Payment} object using the given fields.
+     */
+    public static String serializePayment(String state, String personId, String jobId, String amount) {
+        Map<String, String> map = new LinkedHashMap<>();
+
+        map.put("state", state == null ? "null" : "\"" + state + "\"");
+        map.put("personId", state == null ? "null" : "\"" + personId + "\"");
+        map.put("jobId", state == null ? "null" : "\"" + jobId + "\"");
+        map.put("amount", state == null ? "null" : "\"" + amount + "\"");
+
+        return TestUtil.serializeObject(map);
     }
 }

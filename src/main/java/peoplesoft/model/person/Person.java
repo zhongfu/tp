@@ -4,10 +4,13 @@ import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -48,11 +51,13 @@ public class Person {
     private final Address address;
     private final Rate rate;
     private final Set<Tag> tags = new HashSet<>();
+    private final Map<ID, Payment> payments = new HashMap<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(ID id, Name name, Phone phone, Email email, Address address, Rate rate, Set<Tag> tags) {
+    public Person(ID id, Name name, Phone phone, Email email, Address address, Rate rate, Set<Tag> tags,
+            Map<ID, Payment> payments) {
         requireAllNonNull(id, name, phone, email, address, rate, tags);
         this.id = id;
         this.name = name;
@@ -61,6 +66,7 @@ public class Person {
         this.address = address;
         this.rate = rate;
         this.tags.addAll(tags);
+        this.payments.putAll(payments);
     }
 
     public ID getPersonId() {
@@ -93,6 +99,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Map<ID, Payment> getPayments() {
+        return Collections.unmodifiableMap(payments);
     }
 
     /**
@@ -129,13 +139,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRate().equals(getRate())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getPayments().equals(getPayments());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name, phone, email, address, rate, tags);
+        return Objects.hash(id, name, phone, email, address, rate, tags, payments);
     }
 
     @Override
@@ -158,6 +169,13 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        Map<ID, Payment> payments = getPayments();
+        if (!payments.isEmpty()) {
+            builder.append("; Payments: [");
+            builder.append(payments.values().stream().map(String::valueOf).collect(Collectors.joining(", ")));
+            builder.append("]");
         }
         return builder.toString();
     }
@@ -182,6 +200,13 @@ public class Person {
             gen.writeObjectField("address", val.getAddress());
             gen.writeObjectField("rate", val.getRate());
             gen.writeObjectField("tagged", val.getTags());
+
+            gen.writeArrayFieldStart("payments");
+            for (Payment pymt : val.getPayments().values()) {
+                gen.writeObject(pymt);
+            }
+            gen.writeEndArray();
+
 
             gen.writeEndObject();
         }
@@ -251,7 +276,20 @@ public class Person {
                     .traverse(codec)
                     .readValueAs(new TypeReference<Set<Tag>>(){});
 
-            return new Person(id, name, phone, email, address, rate, tags);
+            // we deserialize the Payment objects one by one
+            // because ctx.readValue() doesn't take TypeReferences
+            // and we need to use the ctx to pass the current person ID down
+            ctx.setAttribute("personId", id);
+            Map<ID, Payment> payments = new HashMap<>();
+            ArrayNode paymentsNode = getNonNullNodeWithType(person, "payments", ctx, ArrayNode.class);
+            for (JsonNode paymentNode : paymentsNode) {
+                Payment pymt = ctx.readValue(paymentNode.traverse(codec), Payment.class);
+                if (payments.put(pymt.getJobId(), pymt) != null) { // check if jobId already exists in the map
+                    throw JsonUtil.getWrappedIllegalValueException(ctx, INVALID_VAL_FMTR.apply("payments"));
+                }
+            }
+
+            return new Person(id, name, phone, email, address, rate, tags, payments);
         }
 
         @Override

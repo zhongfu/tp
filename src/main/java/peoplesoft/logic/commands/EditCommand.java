@@ -12,6 +12,7 @@ import static peoplesoft.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -24,9 +25,11 @@ import peoplesoft.model.job.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
+import peoplesoft.model.person.Payment;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
+import peoplesoft.model.util.ID;
 
 /**
  * Edits the details of an existing person in the database.
@@ -102,9 +105,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Map<ID, Payment> payments = personToEdit.getPayments();
 
         return new Person(personToEdit.getPersonId(),
-            updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRate, updatedTags);
+            updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRate, updatedTags, payments);
     }
 
     @Override
