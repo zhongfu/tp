@@ -276,13 +276,17 @@ public class Person {
                     .traverse(codec)
                     .readValueAs(new TypeReference<Set<Tag>>(){});
 
-            Set<Payment> paymentsSet = getNonNullNodeWithType(person, "payments", ctx, ArrayNode.class)
-                    .traverse(codec)
-                    .readValueAs(new TypeReference<Set<Payment>>(){});
-
+            // we deserialize the Payment objects one by one
+            // because ctx.readValue() doesn't take TypeReferences
+            // and we need to use the ctx to pass the current person ID down
+            ctx.setAttribute("personId", id);
             Map<ID, Payment> payments = new HashMap<>();
-            for (Payment pymt : paymentsSet) {
-                payments.put(pymt.getJobId(), pymt);
+            ArrayNode paymentsNode = getNonNullNodeWithType(person, "payments", ctx, ArrayNode.class);
+            for (JsonNode paymentNode : paymentsNode) {
+                Payment pymt = ctx.readValue(paymentNode.traverse(codec), Payment.class);
+                if (payments.put(pymt.getJobId(), pymt) != null) { // check if jobId already exists in the map
+                    throw JsonUtil.getWrappedIllegalValueException(ctx, INVALID_VAL_FMTR.apply("payments"));
+                }
             }
 
             return new Person(id, name, phone, email, address, rate, tags, payments);

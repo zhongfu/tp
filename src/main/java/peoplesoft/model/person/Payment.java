@@ -217,7 +217,7 @@ public abstract class Payment {
             }
 
             gen.writeStringField("state", state);
-            gen.writeObjectField("personId", val.getPersonId());
+            // personId association is implicit (since Payment objs are contained within Persons)
             gen.writeObjectField("jobId", val.getJobId());
             gen.writeObjectField("amount", val.getAmount());
 
@@ -264,9 +264,14 @@ public abstract class Payment {
             String state = getNonNullNodeWithType(payment, "state", ctx, TextNode.class)
                     .textValue();
 
-            ID personId = getNonNullNode(payment, "personId", ctx)
-                    .traverse(codec)
-                    .readValueAs(ID.class);
+            Object personIdAttr = ctx.getAttribute("personId");
+            if (!(personIdAttr instanceof ID)) {
+                // this would be a programming error, not a user error or w/e
+                // TODO should we still throw a JsonMappingException to recover gracefully?
+                throw new IllegalStateException("personId not present in deser ctx, or is of wrong type!");
+            }
+
+            ID personId = (ID) personIdAttr;
 
             ID jobId = getNonNullNode(payment, "jobId", ctx)
                     .traverse(codec)
