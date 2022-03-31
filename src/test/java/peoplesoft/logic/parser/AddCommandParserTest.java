@@ -36,7 +36,7 @@ import static peoplesoft.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import peoplesoft.logic.commands.AddCommand;
-import peoplesoft.model.job.Rate;
+import peoplesoft.model.money.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;

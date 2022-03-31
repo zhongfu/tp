@@ -1,4 +1,4 @@
-package peoplesoft.model.job;
+package peoplesoft.model.money;
 
 import static java.util.Objects.requireNonNull;
 

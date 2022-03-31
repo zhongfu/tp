@@ -7,15 +7,19 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
 
-import peoplesoft.model.job.exceptions.NegativeMoneyValueException;
 import peoplesoft.model.job.exceptions.NonPositiveDurationException;
+import peoplesoft.model.money.Money;
+import peoplesoft.model.money.Rate;
+import peoplesoft.model.money.exceptions.NegativeMoneyValueException;
 
 public class RateTest {
 
     @Test
     public void rate() {
-        assertEquals(new Rate(new Money(5.0), Duration.ofHours(1)), new Rate(new Money(5.0), Duration.ofHours(1)));
-        assertEquals(new Rate(new Money(0), Duration.ofHours(1)), new Rate(new Money(0), Duration.ofHours(1)));
+        assertEquals(new Rate(new Money(5.0), Duration.ofHours(1)),
+                new Rate(new Money(5.0), Duration.ofHours(1)));
+        assertEquals(new Rate(new Money(0), Duration.ofHours(1)),
+                new Rate(new Money(0), Duration.ofHours(1)));
     }
 
     @Test

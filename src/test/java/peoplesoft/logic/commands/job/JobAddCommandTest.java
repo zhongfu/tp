@@ -7,14 +7,11 @@ import java.time.Duration;
 import org.junit.jupiter.api.Test;
 
 import peoplesoft.model.job.Job;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.Rate;
 import peoplesoft.model.util.ID;
 
 public class JobAddCommandTest {
 
-    private static final Job EATING = new Job(new ID(1043), "Eating",
-            new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false);
+    private static final Job EATING = new Job(new ID(1043), "Eating", Duration.ofHours(1));
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {

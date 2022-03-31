@@ -1,4 +1,4 @@
-package peoplesoft.model.person;
+package peoplesoft.model.money;
 
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
@@ -24,8 +24,8 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.Job;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.exceptions.PaymentAlreadyPaidException;
+import peoplesoft.model.money.exceptions.PaymentAlreadyPaidException;
+import peoplesoft.model.person.Person;
 import peoplesoft.model.util.ID;
 
 /**

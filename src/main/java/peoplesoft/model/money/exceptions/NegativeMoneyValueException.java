@@ -1,4 +1,4 @@
-package peoplesoft.model.job.exceptions;
+package peoplesoft.model.money.exceptions;
 
 /**
  * Signals that the operation will result in money with negative value.

@@ -1,4 +1,4 @@
-package peoplesoft.model.job;
+package peoplesoft.model.money;
 
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 import static peoplesoft.model.job.util.DurationUtil.requirePositive;

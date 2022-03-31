@@ -8,19 +8,20 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
 
+import peoplesoft.model.money.Money;
+import peoplesoft.model.money.Rate;
 import peoplesoft.model.util.ID;
 
 class JobTest {
 
-    private static final Job EATING = new Job(new ID(1043), "Eating",
-            new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false);
-    private static final Job RUNNING = new Job(new ID(3175), "Running",
-            new Rate(new Money(6), Duration.ofHours(4)), Duration.ofHours(8), true);
+    private static final Job EATING = new Job(new ID(1043), "Eating", Duration.ofDays(1));
+    private static final Job RUNNING = new Job(new ID(3175), "Running", Duration.ofHours(8));
+    private static final Rate RATE_ONE = new Rate(new Money(1), Duration.ofHours(1));
 
     @Test
     public void calculatePay() {
-        assertTrue(EATING.calculatePay().getValue().compareTo(BigDecimal.valueOf(132)) == 0);
-        assertTrue(RUNNING.calculatePay().getValue().compareTo(BigDecimal.valueOf(12)) == 0);
+        assertTrue(EATING.calculatePay(RATE_ONE).getValue().compareTo(BigDecimal.valueOf(24)) == 0);
+        assertTrue(RUNNING.calculatePay(RATE_ONE).getValue().compareTo(BigDecimal.valueOf(8)) == 0);
     }
 
     @Test
@@ -43,8 +44,7 @@ class JobTest {
         assertTrue(EATING.equals(EATING));
 
         // same values -> returns true
-        assertTrue(EATING.equals(new Job(new ID(1043), "Eating",
-                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
+        assertTrue(EATING.equals(new Job(new ID(1043), "Eating", Duration.ofDays(1))));
 
         // null -> returns false
         assertFalse(EATING.equals(null));
@@ -54,17 +54,12 @@ class JobTest {
 
         // another value -> returns false
         assertFalse(EATING.equals(RUNNING));
-        assertFalse(EATING.equals(new Job(new ID(1044), "Eating",
-                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
-        assertFalse(EATING.equals(new Job(new ID(1043), "Eating",
-                new Rate(new Money(5.5), Duration.ofHours(2)), Duration.ofDays(1), false)));
-        assertFalse(EATING.equals(new Job(new ID(1043), "Running",
-                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), false)));
-        assertFalse(EATING.equals(new Job(new ID(1043), "Eating",
-                new Rate(new Money(6), Duration.ofHours(1)), Duration.ofDays(1), false)));
-        assertFalse(EATING.equals(new Job(new ID(1043), "Eating",
-                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(2), false)));
-        assertFalse(EATING.equals(new Job(new ID(1043), "Eating",
-                new Rate(new Money(5.5), Duration.ofHours(1)), Duration.ofDays(1), true)));
+        assertFalse(EATING.equals(new Job(new ID(1044), "Eating", Duration.ofDays(1))));
+        assertFalse(EATING.equals(new Job(new ID(1043), "Running", Duration.ofDays(1))));
+        assertFalse(EATING.equals(new Job(new ID(1043), "Eating", Duration.ofDays(2))));
+        assertFalse(EATING.equals(new Job(new ID(1043), "Eating", Duration.ofDays(1))
+                .setAsPaid()));
+        assertFalse(EATING.equals(new Job(new ID(1043), "Eating", Duration.ofDays(1))
+                .setAsPaid().setAsFinal()));
     }
 }

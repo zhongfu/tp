@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.parser.exceptions.ParseException;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.Rate;
+import peoplesoft.model.money.Money;
+import peoplesoft.model.money.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 import peoplesoft.logic.commands.AddCommand;
 import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
-import peoplesoft.model.person.Payment;
+import peoplesoft.model.money.Payment;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.tag.Tag;
 

@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
+import peoplesoft.model.money.Money;
+
 public class MoneyTest {
 
     private static final Money ZERO = new Money(0);

@@ -29,7 +29,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
-import peoplesoft.model.job.Rate;
+import peoplesoft.model.money.Payment;
+import peoplesoft.model.money.Rate;
 import peoplesoft.model.tag.Tag;
 import peoplesoft.model.util.ID;
 

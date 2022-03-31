@@ -15,17 +15,15 @@ import peoplesoft.model.Model;
 import peoplesoft.model.ModelManager;
 import peoplesoft.model.UserPrefs;
 import peoplesoft.model.job.Job;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.Rate;
 import peoplesoft.model.util.ID;
 
 public class JobMarkCommandTest {
 
     private static final String TEST_ID = "test";
-    private static final Job UNPAID = new Job(new ID(TEST_ID), "The Right Job",
-            new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(2), false);
-    private static final Job PAID = new Job(new ID(TEST_ID), "The Right Job",
-            new Rate(new Money(1), Duration.ofHours(1)), Duration.ofHours(2), true);
+    private static final Job UNPAID = new Job(new ID(TEST_ID), "The Right Job", Duration.ofHours(2))
+            .setAsNotPaid();
+    private static final Job PAID = new Job(new ID(TEST_ID), "The Right Job", Duration.ofHours(2))
+            .setAsPaid();
 
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 

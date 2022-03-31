@@ -9,12 +9,12 @@ import java.util.Map;
 import java.util.Set;
 
 import peoplesoft.commons.core.PersonIdFactory;
-import peoplesoft.model.job.Money;
-import peoplesoft.model.job.Rate;
+import peoplesoft.model.money.Money;
+import peoplesoft.model.money.Payment;
+import peoplesoft.model.money.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
-import peoplesoft.model.person.Payment;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
