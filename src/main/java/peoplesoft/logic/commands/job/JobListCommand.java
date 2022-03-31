@@ -6,7 +6,7 @@ import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
-import peoplesoft.model.util.Employment;
+import peoplesoft.model.employment.Employment;
 
 /**
  * Lists the {@code Jobs} stored in {@code AddressBook}.

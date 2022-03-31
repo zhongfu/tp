@@ -6,7 +6,7 @@ import peoplesoft.commons.core.JobIdFactory;
 import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.model.AddressBook;
 import peoplesoft.model.Model;
-import peoplesoft.model.util.Employment;
+import peoplesoft.model.employment.Employment;
 
 /**
  * Clears the address book.
