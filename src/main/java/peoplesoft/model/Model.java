@@ -6,7 +6,10 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import peoplesoft.commons.core.GuiSettings;
 import peoplesoft.model.job.Job;
+import peoplesoft.model.job.exceptions.JobNotFoundException;
 import peoplesoft.model.person.Person;
+import peoplesoft.model.person.exceptions.PersonNotFoundException;
+import peoplesoft.model.util.ID;
 
 /**
  * The API of the Model component.
@@ -62,6 +65,18 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the given id exists in the address book.
+     */
+    boolean hasPerson(ID personId);
+
+    /**
+     * Returns the person with the given id if it exists.
+     *
+     * @throws PersonNotFoundException if no such person exists
+     */
+    Person getPerson(ID personId);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -90,9 +105,21 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if a job with the same job id as {@code job} exists in the address book.
+     * Returns true if a job with the same identity as {@code job} exists in the address book.
      */
-    boolean hasJob(String jobId);
+    boolean hasJob(Job job);
+
+    /**
+     * Returns true if a job with the given id exists in the address book.
+     */
+    boolean hasJob(ID jobId);
+
+    /**
+     * Returns the job with the given id if it exists.
+     *
+     * @throws JobNotFoundException if no such job exists
+     */
+    Job getJob(ID jobId);
 
     /**
      * Deletes the given job.

@@ -9,6 +9,7 @@ import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.logic.parser.job.JobMarkCommandParser;
 import peoplesoft.model.Model;
 import peoplesoft.model.job.Job;
+import peoplesoft.model.util.ID;
 
 /**
  * Marks a {@code Job} as paid or unpaid.
@@ -19,14 +20,14 @@ public class JobMarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Marks the job identified by the index number used in the displayed job list.\n"
-        + "Parameters: JOBID\n"
-        + "Example: " + COMMAND_WORD + " 1";
+            + ": Marks the job identified by the index number used in the displayed job list.\n"
+            + "Parameters: JOBID\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Marked Job %s as %s";
     public static final String MESSAGE_JOB_NOT_FOUND = "This job does not exist";
 
-    private final String toMark;
+    private final ID toMark;
     private boolean state;
 
     /**
@@ -51,7 +52,7 @@ public class JobMarkCommand extends Command {
         try {
             // TODO: This line breaks LoD
             Job jobToMark = model.getAddressBook().getJobList()
-                .filtered(job -> job.getJobId().equals(toMark)).get(0);
+                    .filtered(job -> job.getJobId().equals(toMark)).get(0);
             // Creates immutable instances and replaces the existing ones
             if (jobToMark.hasPaid()) {
                 state = true;

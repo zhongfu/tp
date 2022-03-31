@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="help" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="1050.0" spacing="30.0" style="-fx-background-color: transparent;" stylesheets="@../styles/HelpPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TableView fx:id="table" prefHeight="2160.0" prefWidth="1050.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="Command" />
+                <TableColumn prefWidth="75.0" text="Format" />
+                <TableColumn prefWidth="75.0" text="Examples" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+        <HBox fx:id="helpMessageContainer" alignment="CENTER_LEFT" prefHeight="60.0" styleClass="bottom-help-panel">
+            <children>
+
+                <Label fx:id="helpMessage" minWidth="250.0" prefHeight="22.0" prefWidth="250.0" text="More details in the User Guide">
+                </Label>
+                <Pane fx:id="spacer" nodeOrientation="RIGHT_TO_LEFT" prefWidth="4320.0">
+               <children>
+                      <Button fx:id="openInBrowserButton" minWidth="110.0" mnemonicParsing="false" onAction="#openInBrowser" prefHeight="25.0" prefWidth="110.0" text="Open in Browser">
+                </Button>
+               </children></Pane>
+
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+</VBox>

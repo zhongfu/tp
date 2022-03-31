@@ -192,7 +192,7 @@ public class Money {
     }
 
     protected static class MoneyDeserializer extends StdDeserializer<Money> {
-        private static final String MISSING_OR_INVALID_VALUE = "The money value is invalid or missing!";
+        private static final String MISSING_OR_INVALID_INSTANCE = "The money value is invalid or missing!";
 
         private MoneyDeserializer(Class<?> vc) {
             super(vc);
@@ -208,13 +208,13 @@ public class Money {
             JsonNode node = p.readValueAsTree();
 
             if (!(node instanceof TextNode)) {
-                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
             }
 
             String valString = ((TextNode) node).textValue();
 
             if (!Money.isValidMoneyString(valString)) {
-                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
             }
 
             return new Money(new BigDecimal(valString));
@@ -222,7 +222,7 @@ public class Money {
 
         @Override
         public Money getNullValue(DeserializationContext ctx) throws JsonMappingException {
-            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
         }
     }
 }

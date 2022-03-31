@@ -1,4 +1,4 @@
-package peoplesoft.ui;
+package peoplesoft.ui.scenes;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -9,20 +9,20 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.control.TableView;
 import peoplesoft.commons.core.LogsCenter;
+import peoplesoft.ui.regions.ResultDisplay;
 
-/**
- * Controller for a help page
- */
-public class HelpWindow extends UiPart<Stage> {
+public class HelpPage extends Page {
 
     public static final String USERGUIDE_URL =
             "https://ay2122s2-cs2103t-t11-4.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Open the User Guide";
+    public static final String COPIED_MESSAGE = "Browser opened";
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final String FXML = "HelpWindow.fxml";
+    private static ResultDisplay display;
+    private static final Logger logger = LogsCenter.getLogger(HelpPage.class);
+    private static final String FXML = "HelpPage.fxml";
 
     @FXML
     private Button openInBrowserButton;
@@ -31,65 +31,20 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
 
     /**
-     * Creates a new HelpWindow.
-     *
-     * @param root Stage to use as the root of the HelpWindow.
+     * Tutorial on how to add data to a table from
+     * https://medium.com/@keeptoo/adding-data-to-javafx-tableview-stepwise-df582acbae4f
      */
-    public HelpWindow(Stage root) {
-        super(FXML, root);
+    @FXML
+    private TableView<String> table;
+
+    /**
+     * Creates a new {@code HelpPage}
+     */
+    public HelpPage(ResultDisplay rd) {
+        super(FXML);
+        logger.fine("Opening PeopleSoft's Help page.");
         helpMessage.setText(HELP_MESSAGE);
-    }
-
-    /**
-     * Creates a new HelpWindow.
-     */
-    public HelpWindow() {
-        this(new Stage());
-    }
-
-    /**
-     * Shows the help window.
-     * @throws IllegalStateException
-     * <ul>
-     *     <li>
-     *         if this method is called on a thread other than the JavaFX Application Thread.
-     *     </li>
-     *     <li>
-     *         if this method is called during animation or layout processing.
-     *     </li>
-     *     <li>
-     *         if this method is called on the primary stage.
-     *     </li>
-     *     <li>
-     *         if {@code dialogStage} is already showing.
-     *     </li>
-     * </ul>
-     */
-    public void show() {
-        logger.fine("Showing help page about the application.");
-        getRoot().show();
-        getRoot().centerOnScreen();
-    }
-
-    /**
-     * Returns true if the help window is currently being shown.
-     */
-    public boolean isShowing() {
-        return getRoot().isShowing();
-    }
-
-    /**
-     * Hides the help window.
-     */
-    public void hide() {
-        getRoot().hide();
-    }
-
-    /**
-     * Focuses on the help window.
-     */
-    public void focus() {
-        getRoot().requestFocus();
+        display = rd;
     }
 
     /**
@@ -121,17 +76,24 @@ public class HelpWindow extends UiPart<Stage> {
                     Process open = runtime.exec("xdg-open " + USERGUIDE_URL);
                     logger.fine("Opened. Exit value is " + open.exitValue());
                 } else {
-                    logger.warning("Unable to launch browser due to the OS.");
+                    String msg = "Unable to launch browser due to the OS.";
+                    logger.warning(msg);
+                    display.setFeedbackToUser(msg);
                 }
 
             }
 
             logger.fine("User Guide successfully opened in browser.");
+            display.setFeedbackToUser(COPIED_MESSAGE);
 
         } catch (URISyntaxException se) {
-            logger.warning("The URL in the application was wrong. Please contact developers.");
+            String msg = "The URL in the application was wrong. Please contact developers.";
+            logger.warning(msg);
+            display.setFeedbackToUser(msg);
         } catch (IOException ie) {
-            logger.warning("Unable to launch OS's browser. Please contact developers.");
+            String msg = "Unable to launch OS's browser. Please contact developers.";
+            logger.warning(msg);
+            display.setFeedbackToUser(msg);
         }
     }
 }

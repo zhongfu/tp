@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import javafx.collections.FXCollections;
@@ -26,6 +27,7 @@ import javafx.collections.ObservableList;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.person.exceptions.DuplicatePersonException;
 import peoplesoft.model.person.exceptions.PersonNotFoundException;
+import peoplesoft.model.util.ID;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -49,9 +51,22 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Person toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+    public boolean contains(ID personId) {
+        requireNonNull(personId);
+        return internalList.stream().anyMatch(p -> p != null && personId.equals(p.getPersonId()));
+    }
+
+    /**
+     * Returns the job with the given id.
+     *
+     * @throws PersonNotFoundException if the person does not exist
+     */
+    public Person get(ID personId) throws PersonNotFoundException {
+        requireNonNull(personId);
+        return internalList.stream()
+            .filter(p -> p != null && personId.equals(p.getPersonId()))
+            .findAny()
+            .orElseThrow(PersonNotFoundException::new);
     }
 
     /**
@@ -60,7 +75,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (contains(toAdd.getPersonId())) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
@@ -79,7 +94,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePerson(editedPerson) && contains(editedPerson.getPersonId())) {
             throw new DuplicatePersonException();
         }
 
@@ -169,7 +184,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     protected static class UniquePersonListDeserializer extends StdDeserializer<UniquePersonList> {
-        private static final String MISSING_OR_INVALID_VALUE = "The person list is invalid or missing!";
+        private static final String MISSING_OR_INVALID_INSTANCE = "The person list is invalid or missing!";
 
         private UniquePersonListDeserializer(Class<?> vc) {
             super(vc);
@@ -185,9 +200,13 @@ public class UniquePersonList implements Iterable<Person> {
             JsonNode node = p.readValueAsTree();
             ObjectCodec codec = p.getCodec();
 
-            JsonParser listParser = node.traverse(codec);
-            List<Person> personList =
-                codec.readValue(listParser, new TypeReference<List<Person>>(){});
+            if (!(node instanceof ArrayNode)) {
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
+            }
+
+            List<Person> personList = node // is ArrayNode
+                    .traverse(codec)
+                    .readValueAs(new TypeReference<List<Person>>(){});
 
             UniquePersonList upl = new UniquePersonList();
             upl.setPersons(personList);
@@ -197,7 +216,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         @Override
         public UniquePersonList getNullValue(DeserializationContext ctx) throws JsonMappingException {
-            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
         }
     }
 }

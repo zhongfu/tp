@@ -112,7 +112,7 @@ public class Email {
     }
 
     protected static class EmailDeserializer extends StdDeserializer<Email> {
-        private static final String MISSING_OR_INVALID_VALUE = "The email value is invalid or missing!";
+        private static final String MISSING_OR_INVALID_INSTANCE = "The email value is invalid or missing!";
 
         private EmailDeserializer(Class<?> vc) {
             super(vc);
@@ -128,7 +128,7 @@ public class Email {
             JsonNode node = p.readValueAsTree();
 
             if (!(node instanceof TextNode)) {
-                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
             }
 
             String email = ((TextNode) node).textValue();
@@ -141,7 +141,7 @@ public class Email {
 
         @Override
         public Email getNullValue(DeserializationContext ctx) throws JsonMappingException {
-            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
         }
     }
 }

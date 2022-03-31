@@ -10,6 +10,7 @@ import peoplesoft.model.ReadOnlyAddressBook;
 import peoplesoft.model.ReadOnlyUserPrefs;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
+import peoplesoft.model.util.ID;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -66,6 +67,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasPerson(ID personId) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Person getPerson(ID personId) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void deletePerson(Person target) {
         throw new AssertionError("This method should not be called.");
     }
@@ -86,10 +97,19 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasJob(String jobId) {
+    public boolean hasJob(ID jobId) {
         throw new AssertionError("This method should not be called.");
     }
 
+    @Override
+    public boolean hasJob(Job job) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Job getJob(ID jobId) {
+        throw new AssertionError("This method should not be called.");
+    }
     @Override
     public void deleteJob(Job target) {
         throw new AssertionError("This method should not be called.");

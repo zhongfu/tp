@@ -20,8 +20,8 @@ import peoplesoft.commons.util.JsonUtil;
 
 public class RateSerdesTest {
     private static final Rate VALID_RATE = new Rate(
-        new Money(new BigDecimal("19.25")),
-        Duration.ofMinutes(90));
+            new Money(new BigDecimal("19.25")),
+            Duration.ofMinutes(90));
 
     private static final String VALID_AMOUNT = "\"19.250000\"";
     private static final String VALID_DURATION = "\"PT1H30M\"";
@@ -55,7 +55,7 @@ public class RateSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("\"string\"", Rate.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("[\"im an array lol\"]", Rate.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "{\"issa\":\"object!\"}", Rate.class));
+                "{\"issa\":\"object!\"}", Rate.class));
     }
 
     @Test

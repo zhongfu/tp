@@ -2,25 +2,38 @@
 layout: page
 title: Developer Guide
 ---
+
+## Introduction
+
+PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
+
+**PeopleSoft helps to:**
+* Simplify the management of data
+* Reduce menial labour
+* Reduce mistakes due to human error in calculation / accidental edits
+* Helps employees be assured that their hours and pay are registered correctly in the system
+
+--------------------------------------------------------------------------------------------------------------------
+
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Acknowledgements
 
 * Project adapted from [addressbook-level3](https://se-education.org/addressbook-level3/DeveloperGuide.html#product-scope)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## Design
 
 <div markdown="span" class="alert alert-primary">
 
@@ -123,6 +136,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* allows for the automatic serialization and deserialization of `AddressBook` objects (and any component objects, e.g. `Person`, `Email`, etc) to and from JSON.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -151,9 +165,49 @@ Classes used by multiple components are in the `peoplesoft.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### JSON serialization and deserialization
+
+The serialization and deserialization of model objects (e.g. `AddressBook`, `UniquePersonList`, `Person`, `Tag`) is handled by custom serializers and deserializers, implemented as nested class within each model class.
+
+These serializers and deserializers are automatically used by Jackson during serialization and deserialization.
+
+The serializer and deserializer for each class determine how the objects are to be serialized and deserialized, including but not limited to:  
+* which fields are to be stored,
+* how each field should be (de)serialized, e.g. by directly converting it to/from a JSON type, or by delegating it to Jackson (which will use the serializer/deserializer for the field type), and
+* how the fields and current object are to be represented as (or parsed from) JSON values, e.g. objects, strings, numbers.
+
+This architecture has some advantages:  
+* The serdes implementations are kept together with the related classes; developers adding new model classes will not have to modify files in other packages.
+   * The previous implementation (with `JsonAdaptedPerson`, etc) requires that developers update the `JsonAdapted` classes belonging in the `Storage` component; this may not be immediately evident to developers.
+* Developers adding new model classes can incorporate existing types (that already have corresponding serializers/deserializers) without needing to duplicate the serdes code, unlike with the previous implementation.
+* Developers will also not need to (practically) duplicate classes, e.g. `Job` -> `JsonAdaptedJob` (with the `@JsonCreator` annotation), just so that Jackson has something to serialize from/deserialize to.
+
+However, it also has some drawbacks:  
+* It can be rather verbose, since each serializer/deserializer class contains a portion of boilerplate code
+* Developers writing serializers/deserializers will need to have basic knowledge of JSON, e.g. the types that are available, the structure of JSON objects and arrays, etc
+* Some knowledge of Jackson components (e.g. `JsonParser`, `JsonGenerator`, `ObjectNode`) is also required, as developers will need to use them to write values to/read values from the internal Jackson representation of a JSON value/object.
+
+### \[Proposed\] Addition of pay multipliers to Job
+The proposed addition of pay multipliers to `Job` objects is facilitated by `Employment` which implements the operation `Employment#calculatePay()`. `Employment#calculatePay()` calls `Job#calculatePay()` based on optional `Tag` parameters. 
+
+`Tag` contains a Map of `multiplierHistory` which stores pay multiplier values and their time of addition. This is then passed to `Job#calculatePay()` which returns the appropriately scaled pay amount. 
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Saves a Map of previous multipliers and time of addition in Tag.
+    * Pros: Easy to implement. Pay breakdown can be useful in the implementation of other features.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Saves pay amount as a fixed value and updates it when Tag is edited.
+    * Pros: Will use less memory as only one value is being stored.
+    * Cons: Loss of useful pay breakdown information.
+``
+
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -312,10 +366,21 @@ objects (to represent how some jobs may have multiple persons involved). Current
 written as a singleton. This may be changed to be a field of `AddressBook` due to potential obstacles with the
 testing of the serialization/deserialization of the class.
 
+#### Design considerations:
+
+**Aspect: How the relational mapping between Job and Person is stored:**
+
+* **Alternative 1 (current choice):** Saves the mapping of `Job` objects to `Person` objects in `Employment`.
+    * Pros: Guarantee of commutative association.
+    * Cons: Harder to implement. 
+
+* **Alternative 2 (rejected):** Saves a map of the ids of related `Person` objects in `Job` objects, and a map of the ids of related `Job` objects in `Person` objects.
+    * Pros: Easier to implement.
+    * Cons: Mutual associations are not guaranteed. The possible extension of a one-to-many relationship between `Person` and `Tag` would be harder to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -325,22 +390,24 @@ testing of the serialization/deserialization of the class.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
 **Target user profile**:
 HR Managers of companies offering contractor services
-* have a need to manage a significant number of contacts
+* have a need to manage a significant number of employees and jobs
+* employee pay is calculated based on hours worked
 * prefer desktop apps over other types
 * can type fast
 * prefer typing to mouse interactions
 * are reasonably comfortable using CLI apps
 
 **Value proposition**:
-* HR-related functions like retrieving contact information, hiring, grouping by user type etc.
-* Organize many dimensions of information; increase maintainability and simplify the management of data.
-* Increase the speed and ease of use.
+* Simplify the management of data
+* Reduce menial labour
+* Reduce mistakes due to human error in calculation / accidental edits
+* Helps employees be assured that their hours and pay are registered correctly in the system
 
 
 
@@ -348,25 +415,26 @@ HR Managers of companies offering contractor services
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​                                                                   | So that I can…​                                                               |
-|-----|-------------------------------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* *` | new user                                  | see usage instructions                                                         | refer to instructions when I forget how to use the App                        |
-| `* *` | potential user                            | see the app populated with sample data                                         | easily see how the app will look like when it is in use                       |
-| `* * *` | user                                      | add a new employee                                                             |                                                                               |
-| `* * *` | user                                      | add tags to employees                                                          | identify their roles                                                          |
-| `* * *` | user                                      | view the number of hours an employee has worked                                | compensate them accordingly                                                   |
-| `* * *` | user                                      | edit an employee's information                                                 | rectify mistakes or update their personal information if need be              |
-| `* * *` | user                                      | delete an employee                                                             |                                                                               |
-| `* * *` | user                                      | delete all employees                                                           | mass-remove entries that I no longer need                                     |
-| `* * *` | user                             | list all employees                                                             |                                                                               |
-| `* * *` | user                                       | find a person by name or tag                                                   | locate details of persons without having to go through the entire list        |
-| `* * *` | user                                      | view the salary owed to a given employee                                       | pay them                                                                      |
-| `* * *` | user                                      | pay for a given type of job                                                    |                                                                               |
-| `* * *` | user                             | load and save data in human-readable data files                                | I can backup the data externally or access it in a different application      |
-| `* * *` | user                                      | exit the application                                                           |                                                                               |
-| `* *` | user                                      | log into separate modes for HR-related functions and for job-related functions | easily access relevant data for the type of work I am doing at any given time |
-| `* *` | user                                      | edit pay multiplier factors (e.g. overtime, experience, emergency on-calls)    | apply changes in payment policies across the organization                     |
-| `*` | user                                      | view expiring contractor licenses                                              | renew them on time                                                            |
+| Priority | As a …​        | I want to …​                                                                   | So that I can…​                                                               |
+|----------|----------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* *`    | new user       | see usage instructions                                                         | refer to instructions when I forget how to use the App                        |
+| `* *`    | potential user | see the app populated with sample data                                         | easily see how the app will look like when it is in use                       |
+| `* * *`  | HR Manager     | add a new employee                                                             |                                                                               |
+| `* * *`  | HR Manager     | add tags to employees                                                          | identify their roles                                                          |
+| `* * *`  | HR Manager     | edit an employee's information                                                 | rectify mistakes or update their personal information if need be              |
+| `* * *`  | HR Manager     | delete an employee                                                             |                                                                               |
+| `* * *`  | HR Manager     | delete all employees                                                           | mass-remove entries that I no longer need                                     |
+| `* * *`  | HR Manager     | list all employees                                                             |                                                                               |
+| `* * *`  | HR Manager     | find a person by name or tag                                                   | locate details of persons without having to go through the entire list        |
+| `* * *`  | HR Manager     | view the salary owed to a given employee                                       | pay them                                                                      |
+| `* * *`  | HR Manager     | pay for a given type of job                                                    |                                                                               |
+| `* * *`  | HR Manager     | load and save data in human-readable data files                                | I can backup the data externally or access it in a different application      |
+| `* * *`  | HR Manager     | exit the application                                                           |                                                                               |
+| `* * *`  | HR Manager     | create, update, read, delete jobs                                              | manage the jobs that my employees are working on                              |
+| `* * *`  | HR Manager     | see which jobs each employee is working on                                     | pay them accordingly                                                          |
+| `* *`    | HR Manager     | log into separate modes for HR-related functions and for job-related functions | easily access relevant data for the type of work I am doing at any given time |
+| `* *`    | HR Manager     | edit pay multiplier factors (e.g. overtime, experience, emergency on-calls)    | apply changes in payment policies across the organization                     |
+
 
 ### Use cases
 
@@ -420,15 +488,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1. Should work on any _mainstream OS_ as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. Should not rely on database-management systems to store data.
-4. Should be compatible with Java 11
-5. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file.
-6. Should not be hosted on remote servers
-7. Should not make use of proprietary third-party frameworks, libraries and services
-8. Should have a responsive GUI. GUI should function well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions and higher and for screen scales 100% and 125%. GUI should be usable - even if suboptimal - for resolutions 1280x720 and higher and for screen scales 150%.
-9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should not require an installer; should be packaged into a single reasonably-sized (i.e. within 100MB) JAR file.
+5. Should not be hosted on remote servers.
+6. Should not make use of proprietary third-party frameworks, libraries and services.
+7. Should have a responsive GUI. GUI should function well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions and higher and for screen scales 100% and 125%. GUI should be usable - even if suboptimal - for resolutions 1280x720 and higher and for screen scales 150%.
+8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 

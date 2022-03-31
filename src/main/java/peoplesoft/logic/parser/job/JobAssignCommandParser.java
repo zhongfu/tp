@@ -24,9 +24,9 @@ public class JobAssignCommandParser {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
-            || argMultimap.getPreamble().isBlank()) {
+                || argMultimap.getPreamble().isBlank()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                JobAssignCommand.MESSAGE_USAGE));
+                    JobAssignCommand.MESSAGE_USAGE));
         }
         return argMultimap;
     }

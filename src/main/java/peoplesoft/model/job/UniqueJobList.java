@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import javafx.collections.FXCollections;
@@ -26,6 +27,7 @@ import javafx.collections.ObservableList;
 import peoplesoft.commons.util.JsonUtil;
 import peoplesoft.model.job.exceptions.DuplicateJobException;
 import peoplesoft.model.job.exceptions.JobNotFoundException;
+import peoplesoft.model.util.ID;
 
 /**
  * Implementation of {@code JobList}.
@@ -39,9 +41,23 @@ public class UniqueJobList implements JobList {
             FXCollections.unmodifiableObservableList(internalList);
 
     @Override
-    public boolean contains(String jobId) {
+    public boolean contains(ID jobId) {
         requireNonNull(jobId);
         return internalList.stream().anyMatch(job -> job.getJobId().equals(jobId));
+    }
+
+    /**
+     * Returns the job with the given id.
+     *
+     * @throws JobNotFoundException if the person does not exist
+     */
+    @Override
+    public Job get(ID jobId) throws JobNotFoundException {
+        requireNonNull(jobId);
+        return internalList.stream()
+            .filter(j -> j != null && jobId.equals(j.getJobId()))
+            .findAny()
+            .orElseThrow(JobNotFoundException::new);
     }
 
     @Override
@@ -147,7 +163,7 @@ public class UniqueJobList implements JobList {
     }
 
     protected static class UniqueJobListDeserializer extends StdDeserializer<UniqueJobList> {
-        private static final String MISSING_OR_INVALID_VALUE = "The job list is invalid or missing!";
+        private static final String MISSING_OR_INVALID_INSTANCE = "The job list is invalid or missing!";
 
         private UniqueJobListDeserializer(Class<?> vc) {
             super(vc);
@@ -163,9 +179,13 @@ public class UniqueJobList implements JobList {
             JsonNode node = p.readValueAsTree();
             ObjectCodec codec = p.getCodec();
 
-            JsonParser listParser = node.traverse(codec);
-            List<Job> jobList =
-                codec.readValue(listParser, new TypeReference<List<Job>>(){});
+            if (!(node instanceof ArrayNode)) {
+                throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
+            }
+
+            List<Job> jobList = node // is ArrayNode
+                    .traverse(codec)
+                    .readValueAs(new TypeReference<List<Job>>(){});
 
             UniqueJobList ujl = new UniqueJobList();
             ujl.setJobs(jobList);
@@ -175,7 +195,7 @@ public class UniqueJobList implements JobList {
 
         @Override
         public UniqueJobList getNullValue(DeserializationContext ctx) throws JsonMappingException {
-            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_VALUE);
+            throw JsonUtil.getWrappedIllegalValueException(ctx, MISSING_OR_INVALID_INSTANCE);
         }
     }
 }

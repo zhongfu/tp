@@ -1,12 +1,15 @@
 package peoplesoft.model.job;
 
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
+import static peoplesoft.model.job.util.DurationUtil.requirePositive;
+import static peoplesoft.model.job.util.MoneyUtil.requireNonNegative;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -20,6 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
@@ -30,6 +34,7 @@ import peoplesoft.commons.util.JsonUtil;
 @JsonSerialize(using = Rate.RateSerializer.class)
 @JsonDeserialize(using = Rate.RateDeserializer.class)
 public class Rate {
+    public static final String MESSAGE_CONSTRAINTS = "Value for rate should be a decimal number";
 
     public final Money amount;
     public final Duration duration;
@@ -37,10 +42,13 @@ public class Rate {
     /**
      * Constructs a {@code Rate} instance.
      *
-     * @param amount A value as a double.
+     * @param amount Money per unit time
+     * @param duration Unit time duration
      */
     public Rate(Money amount, Duration duration) {
         requireAllNonNull(amount, duration);
+        requireNonNegative(amount);
+        requirePositive(duration);
         this.amount = amount;
         this.duration = duration;
     }
@@ -91,7 +99,7 @@ public class Rate {
     /**
      * Prints the 2 decimal place currency format of the value.
      *
-     * @returns Value in currency format as a string.
+     * @return Value in currency format as a string.
      */
     @Override
     public String toString() {
@@ -121,7 +129,8 @@ public class Rate {
 
     protected static class RateDeserializer extends StdDeserializer<Rate> {
         private static final String MISSING_OR_INVALID_INSTANCE = "The rate instance is invalid or missing!";
-        private static final String MISSING_OR_INVALID_VALUE = "The rate's %s field is invalid or missing!";
+        private static final UnaryOperator<String> INVALID_VAL_FMTR =
+                k -> String.format("This rate's %s value is invalid!", k);
 
         private RateDeserializer(Class<?> vc) {
             super(vc);
@@ -133,13 +142,13 @@ public class Rate {
 
         private static JsonNode getNonNullNode(ObjectNode node, String key, DeserializationContext ctx)
                 throws JsonMappingException {
-            JsonNode jsonNode = node.get(key);
-            if (jsonNode == null) {
-                throw JsonUtil.getWrappedIllegalValueException(
-                        ctx, String.format(MISSING_OR_INVALID_VALUE, key));
-            }
+            return JsonUtil.getNonNullNode(node, key, ctx, INVALID_VAL_FMTR);
+        }
 
-            return jsonNode;
+        private static <T> T getNonNullNodeWithType(ObjectNode node, String key, DeserializationContext ctx,
+                Class<T> cls) throws JsonMappingException {
+            return JsonUtil.getNonNullNodeWithType(node, key, ctx,
+                INVALID_VAL_FMTR, cls);
         }
 
         @Override
@@ -154,16 +163,19 @@ public class Rate {
 
             ObjectNode rate = (ObjectNode) node;
 
-            Money amount = codec.treeToValue(
-                getNonNullNode(rate, "amount", ctx), Money.class);
+            Money amount = getNonNullNode(rate, "amount", ctx)
+                    .traverse(codec)
+                    .readValueAs(Money.class);
 
-            String durationString = getNonNullNode(rate, "duration", ctx).textValue();
+            String durationString = getNonNullNodeWithType(rate, "duration", ctx, TextNode.class)
+                    .textValue();
+
             Duration duration;
             try {
                 duration = Duration.parse(durationString);
             } catch (NullPointerException | DateTimeParseException e) {
                 throw JsonUtil.getWrappedIllegalValueException(
-                    ctx, String.format(MISSING_OR_INVALID_VALUE, "duration"), e);
+                    ctx, INVALID_VAL_FMTR.apply("duration"), e);
             }
 
             return new Rate(amount, duration);

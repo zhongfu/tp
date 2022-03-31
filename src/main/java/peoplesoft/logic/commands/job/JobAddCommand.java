@@ -22,11 +22,11 @@ public class JobAddCommand extends Command {
     public static final String COMMAND_WORD = "job";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database. "
-        + "Parameters: "
-        + "[JOBID] "
-        + PREFIX_NAME + "NAME "
-        + PREFIX_RATE + "RATE "
-        + PREFIX_DURATION + "DURATION ";
+            + "Parameters: "
+            + "[JOBID] "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_RATE + "RATE "
+            + PREFIX_DURATION + "DURATION ";
 
     public static final String MESSAGE_SUCCESS = "New job added: %s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the database";

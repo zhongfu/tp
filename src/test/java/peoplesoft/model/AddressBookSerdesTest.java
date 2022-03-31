@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -28,10 +29,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import peoplesoft.commons.core.JobIdFactory;
+import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
-import peoplesoft.model.util.Employment;
 
 public class AddressBookSerdesTest {
     @Test
@@ -44,8 +46,8 @@ public class AddressBookSerdesTest {
         ab.setJobs(jobList);
 
         List<String> serializedPersonList = personList.stream()
-            .map((p) -> serializePerson(p))
-            .collect(Collectors.toList());
+                .map((p) -> serializePerson(p))
+                .collect(Collectors.toList());
 
         // TODO
         /*List<String> serializedJobList = jobList.stream()
@@ -55,12 +57,14 @@ public class AddressBookSerdesTest {
         String serializedEmployment = JsonUtil.toJsonString(Employment.getInstance().getAllJobs());
 
         String serializedJobIdState = String.valueOf(JobIdFactory.getId());
+        String serializedPersonIdState = String.valueOf(PersonIdFactory.getId());
 
         Map<String, String> entries = new LinkedHashMap<>();
         entries.put("persons", serializeList(serializedPersonList));
         entries.put("jobs", serializeList(List.of())); // TODO
         entries.put("employment", serializedEmployment);
         entries.put("jobIdState", serializedJobIdState);
+        entries.put("personIdState", serializedPersonIdState);
 
         String serialized = serializeObject(entries);
 
@@ -76,6 +80,7 @@ public class AddressBookSerdesTest {
         map.put("jobs", serializeList(List.of()));
         map.put("employment", JsonUtil.toJsonString(Employment.getInstance().getAllJobs()));
         map.put("jobIdState", JsonUtil.toJsonString(JobIdFactory.getId()));
+        map.put("personIdState", JsonUtil.toJsonString(PersonIdFactory.getId()));
 
         String serialized = serializeObject(map);
         // TODO not sure if these are deterministic
@@ -96,35 +101,38 @@ public class AddressBookSerdesTest {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("385", AddressBook.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString("\"string\"", AddressBook.class));
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            "[\"i'm\",\"an\",\"array\"]", AddressBook.class));
+                "[\"i'm\",\"an\",\"array\"]", AddressBook.class));
     }
 
     @Test
     public void deserialize_invalidAddressBookObject_throwsJsonMappingException() throws IOException {
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeObject(Map.of("person", "[]")), // should be "persons"
-            AddressBook.class));
+                serializeObject(Map.of("person", "[]")), // should be "persons"
+                AddressBook.class));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeObject(Map.of()),
-            AddressBook.class));
+                serializeObject(Map.of()),
+                AddressBook.class));
 
         assertThrows(JsonMappingException.class, () -> JsonUtil.fromJsonString(
-            serializeObject(Map.of("persons", "null")),
-            AddressBook.class));
+                serializeObject(Map.of("persons", "null")),
+                AddressBook.class));
     }
 
     @Test
     public void deserialize_invalidPersonElement_throwsJsonMappingException() {
         String serializedList = serializeList(Arrays.asList(
-            serializePerson(ALICE),
-            serializePerson(
-                "R@chel",
-                BENSON.getPhone().toString(),
-                BENSON.getAddress().toString(),
-                BENSON.getEmail().toString(),
-                Collections.singleton("friend")),
-            serializePerson(ELLE)));
+                serializePerson(ALICE),
+                serializePerson(
+                        "15",
+                        "R@chel",
+                        BENSON.getPhone().toString(),
+                        BENSON.getAddress().toString(),
+                        BENSON.getEmail().toString(),
+                        BENSON.getRate().getAmount().printFullValue(),
+                        Collections.singleton("friend"),
+                        Set.of()),
+                serializePerson(ELLE)));
 
         String serializedObject = serializeObject(Map.of("persons", serializedList));
 
@@ -141,8 +149,8 @@ public class AddressBookSerdesTest {
         ab.setJobs(jobList);
 
         List<String> serializedPersonList = personList.stream()
-            .map((p) -> serializePerson(p))
-            .collect(Collectors.toList());
+                .map((p) -> serializePerson(p))
+                .collect(Collectors.toList());
 
         // TODO
         /*List<String> serializedJobList = jobList.stream()

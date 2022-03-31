@@ -1,5 +1,7 @@
 package peoplesoft.commons.core;
 
+import peoplesoft.model.util.ID;
+
 /**
  * Class to generate unique {@code JobIds}.
  */
@@ -12,8 +14,8 @@ public class JobIdFactory {
      * @return JobId.
      */
     // TODO: currently missing functionality with serdes
-    public static String nextId() {
-        return String.valueOf(++id);
+    public static ID nextId() {
+        return new ID(++id);
     }
 
     /**
@@ -22,6 +24,9 @@ public class JobIdFactory {
      * @param id To set.
      */
     public static void setId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("id should not be negative");
+        }
         JobIdFactory.id = id;
     }
 

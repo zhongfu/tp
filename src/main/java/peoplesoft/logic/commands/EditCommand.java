@@ -5,12 +5,14 @@ import static peoplesoft.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_PHONE;
+import static peoplesoft.logic.parser.CliSyntax.PREFIX_RATE;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_TAG;
 import static peoplesoft.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,13 +21,15 @@ import peoplesoft.commons.core.index.Index;
 import peoplesoft.commons.util.CollectionUtil;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
+import peoplesoft.model.job.Rate;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
+import peoplesoft.model.person.Payment;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.Phone;
 import peoplesoft.model.tag.Tag;
-import peoplesoft.model.util.Employment;
+import peoplesoft.model.util.ID;
 
 /**
  * Edits the details of an existing person in the database.
@@ -42,6 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_RATE + "RATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -84,8 +89,6 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        // Replaces employment associations
-        Employment.getInstance().editPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
@@ -100,9 +103,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Map<ID, Payment> payments = personToEdit.getPayments();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(personToEdit.getPersonId(),
+            updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRate, updatedTags, payments);
     }
 
     @Override
@@ -132,6 +138,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Rate rate;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -145,6 +152,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRate(toCopy.rate);
             setTags(toCopy.tags);
         }
 
@@ -185,6 +193,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setRate(Rate rate) {
+            this.rate = rate;
+        }
+
+        public Optional<Rate> getRate() {
+            return Optional.ofNullable(rate);
         }
 
         /**

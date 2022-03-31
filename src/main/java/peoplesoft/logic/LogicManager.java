@@ -14,6 +14,7 @@ import peoplesoft.logic.parser.AddressBookParser;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.Model;
 import peoplesoft.model.ReadOnlyAddressBook;
+import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
 import peoplesoft.storage.Storage;
 
@@ -62,6 +63,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Job> getFilteredJobList() {
+        return model.getFilteredJobList();
     }
 
     @Override

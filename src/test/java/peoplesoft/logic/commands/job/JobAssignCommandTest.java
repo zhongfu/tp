@@ -8,7 +8,7 @@ import peoplesoft.logic.parser.exceptions.ParseException;
 
 public class JobAssignCommandTest {
 
-    private static final String CORRECT_ARGS = " n/correct i/1";
+    private static final String CORRECT_ARGS = " 1ef4 i/1";
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
