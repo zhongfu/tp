@@ -14,7 +14,7 @@ import peoplesoft.model.person.Person;
 
 
 /**
- * Deletes a person identified using it's displayed index from the database.
+ * Exports a person identified using it's displayed index from the database.
  */
 public class ExportCommand extends Command {
 

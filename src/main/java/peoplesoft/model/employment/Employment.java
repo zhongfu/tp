@@ -152,6 +152,21 @@ public class Employment {
     }
 
     /**
+     * Returns a list of {@code Person}s assigned to a {@code Job}.
+     * Also updates the FilteredPersonList for UI.
+     *
+     * @param job Job.
+     * @param model Model.
+     * @return List of persons.
+     */
+    public List<Person> getPersons(Job job, Model model) {
+        requireAllNonNull(job, model);
+        model.updateFilteredPersonList(person -> map.get(job.getJobId()) != null
+                && map.get(job.getJobId()).contains(person.getPersonId()));
+        return model.getFilteredPersonList();
+    }
+
+    /**
      * Returns a list of {@code Jobs} that a {@code Person} has.
      *
      * @return Map of jobs.

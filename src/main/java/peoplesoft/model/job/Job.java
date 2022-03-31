@@ -85,6 +85,7 @@ public class Job {
         return hasPaid;
     }
 
+    // TODO: Not sure if checks should be within Job or within whatever uses Job
     public boolean isFinal() {
         return isFinal;
     }

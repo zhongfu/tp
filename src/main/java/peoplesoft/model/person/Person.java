@@ -208,7 +208,6 @@ public class Person {
             }
             gen.writeEndArray();
 
-
             gen.writeEndObject();
         }
     }

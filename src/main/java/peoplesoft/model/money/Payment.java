@@ -65,7 +65,16 @@ public abstract class Payment {
         this.amount = payment.amount;
     }
 
-    static Payment createPayment(Person person, Job job, Money amount) {
+    /**
+     * Creates a {@code PendingPayment} object.
+     *
+     * @param person Person.
+     * @param job Job.
+     * @param amount Amount to pay.
+     * @return
+     */
+    // TODO: not sure if should be public, but currently public for testing
+    public static Payment createPayment(Person person, Job job, Money amount) {
         requireAllNonNull(person, job, amount);
         return new PendingPayment(person.getPersonId(), job.getJobId(), amount);
     }
@@ -138,7 +147,7 @@ public abstract class Payment {
 
         @Override
         public boolean isCompleted() {
-            return false;
+            return true;
         }
 
         @Override
