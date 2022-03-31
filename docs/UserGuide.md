@@ -5,8 +5,8 @@ title: User Guide
 
 PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
 
-You can key in your employees' data and the jobs that they are working on. 
-Then, you can assign the employees to the respective jobs that they are working on. 
+You can input your employees' data and the jobs that you want to keep track of.
+Then, you can assign the employees to the jobs that they are working on.
 After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates. 
 You can also generate a PDF payslip for your employees to refer to.
 
@@ -58,10 +58,10 @@ A handy reference for more experienced users who just need to know the format of
 |-------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `exit`      | `exit`                                                                           | NA                                                                                                       |
 | `help`      | `help`                                                                           | NA                                                                                                       |
-| `add`       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS h/HOURS [t/TAG]…​`                  | `add n/Nicole Tan  p/99338558  e/nicole@stffhub.org  a/1 Tech Drive, S138572  h/32 t/Hardware  t/Senior` |
-| `edit`      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HOURS] [t/TAG]…​` | `edit 2 n/Nicole Lee   t/OS`                                                                             |
+| `add`       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                  | `add n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
+| `edit`      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `edit 2 n/Nicole Lee t/OS`                                                                             |
 | `delete`    | `delete INDEX`                                                                   | `delete 3`                                                                                               |
-| `find`      | `find KEYWORD [MORE_KEYWORDS]…​`                                                 | `find Nicole Hardware`, `find Aircon`                                                                    |
+| `find`      | `find KEYWORD [MORE_KEYWORDS]...​`                                                 | `find Nicole Hardware`, `find Aircon`                                                                    |
 | `list`      | `list`                                                                           | NA                                                                                                       |
 | `clear`     | `clear`                                                                          | NA                                                                                                       |
 | `job`       | `job JOBID n/NAME r/RATE d/DURATION`                                             | `job 1 n/Fix HDB Lock r/40 d/1`                                                                          |
@@ -87,8 +87,8 @@ A handy reference for more experienced users who just need to know the format of
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be typed as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` or even 0 times.
+* Items with `...​` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]...​` can be used as `t/friend`, `t/friend t/family` or even 0 times.
 
 * If an attribute is expected only once but you typed it multiple times, only the last occurrence of the attribute will be taken.<br>
   e.g. if you specify `n/Jake n/Jason`, only `n/Jason` will be taken.
@@ -117,17 +117,18 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 ### Add an employee : `add`
 
-Adds a new employee to the system with the given attributes. `HOURS` refers to the number of hours worked by the employee.
-// SHOULD HOURS STILL BE A PART OF THE PERSON - ian
+Adds a new employee to the system with the given attributes.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS h/HOURS [t/TAG] [t/TAG]…`
+Rate refers to the hourly pay of the employee.
 
-Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 h/32 t/Hardware t/Senior`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG]...`
+
+Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior`
 
 ### Edit an employee’s information : `edit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
 Example: `edit 2 p/62353535` edits the second person's phone number to 62353535
 
@@ -141,7 +142,7 @@ Example: `delete 3` deletes the third person
 ### Search for a person by name or tag : `find`
 Finds all people by a certain name and/or tag. If you wish to search by tags alone, use a `*` instead of typing a name. If multiple tags are entered, only entries that match **all** tags are returned.
 
-Format: `find [* OR NAME] [TAG]…​`
+Format: `find [* OR NAME] [TAG]...​`
 
 Examples:
 
