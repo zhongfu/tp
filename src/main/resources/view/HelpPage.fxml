@@ -19,11 +19,13 @@
         <HBox fx:id="helpMessageContainer" alignment="CENTER_LEFT" prefHeight="60.0" styleClass="bottom-help-panel">
             <children>
 
-                <Label fx:id="helpMessage" prefHeight="22.0" prefWidth="250.0" text="More details in the User Guide">
+                <Label fx:id="helpMessage" minWidth="250.0" prefHeight="22.0" prefWidth="250.0" text="More details in the User Guide">
                 </Label>
-                <Pane fx:id="spacer" prefHeight="25.0" prefWidth="590.0" />
-                <Button fx:id="openInBrowserButton" mnemonicParsing="false" onAction="#openInBrowser" prefHeight="25.0" prefWidth="110.0" text="Open in Browser">
+                <Pane fx:id="spacer" nodeOrientation="RIGHT_TO_LEFT" prefWidth="4320.0">
+               <children>
+                      <Button fx:id="openInBrowserButton" minWidth="110.0" mnemonicParsing="false" onAction="#openInBrowser" prefHeight="25.0" prefWidth="110.0" text="Open in Browser">
                 </Button>
+               </children></Pane>
 
             </children>
             <padding>

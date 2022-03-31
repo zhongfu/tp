@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import peoplesoft.commons.core.LogsCenter;
+import peoplesoft.ui.regions.ResultDisplay;
 
 public class HelpPage extends Page {
 
@@ -19,6 +20,7 @@ public class HelpPage extends Page {
     public static final String HELP_MESSAGE = "Open the User Guide";
     public static final String COPIED_MESSAGE = "Browser opened";
 
+    private static ResultDisplay display;
     private static final Logger logger = LogsCenter.getLogger(HelpPage.class);
     private static final String FXML = "HelpPage.fxml";
 
@@ -29,7 +31,7 @@ public class HelpPage extends Page {
     private Label helpMessage;
 
     /**
-     * Tutorial on how to add data to a table
+     * Tutorial on how to add data to a table from
      * https://medium.com/@keeptoo/adding-data-to-javafx-tableview-stepwise-df582acbae4f
      */
     @FXML
@@ -38,10 +40,11 @@ public class HelpPage extends Page {
     /**
      * Creates a new {@code HelpPage}
      */
-    public HelpPage() {
+    public HelpPage(ResultDisplay rd) {
         super(FXML);
         logger.fine("Opening PeopleSoft's Help page.");
         helpMessage.setText(HELP_MESSAGE);
+        display = rd;
     }
 
     /**
@@ -73,19 +76,24 @@ public class HelpPage extends Page {
                     Process open = runtime.exec("xdg-open " + USERGUIDE_URL);
                     logger.fine("Opened. Exit value is " + open.exitValue());
                 } else {
-                    logger.warning("Unable to launch browser due to the OS.");
+                    String msg = "Unable to launch browser due to the OS.";
+                    logger.warning(msg);
+                    display.setFeedbackToUser(msg);
                 }
 
             }
 
             logger.fine("User Guide successfully opened in browser.");
+            display.setFeedbackToUser(COPIED_MESSAGE);
 
         } catch (URISyntaxException se) {
-            logger.warning("The URL in the application was wrong. Please contact developers.");
+            String msg = "The URL in the application was wrong. Please contact developers.";
+            logger.warning(msg);
+            display.setFeedbackToUser(msg);
         } catch (IOException ie) {
-            logger.warning("Unable to launch OS's browser. Please contact developers.");
-        } finally {
-            helpMessage.setText(COPIED_MESSAGE);
+            String msg = "Unable to launch OS's browser. Please contact developers.";
+            logger.warning(msg);
+            display.setFeedbackToUser(msg);
         }
     }
 }

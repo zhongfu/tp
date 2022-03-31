@@ -79,14 +79,14 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample PeopleSoft");
+                logger.info("Data file not found. Will be starting with new sample data.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty PeopleSoft");
+            logger.warning("Data file not in the correct format. Will be starting with a new save file.");
             initialData = new AddressBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty PeopleSoft");
+            logger.warning("Problem while reading from the file. Will be starting with a new save file.");
             initialData = new AddressBook();
         }
 

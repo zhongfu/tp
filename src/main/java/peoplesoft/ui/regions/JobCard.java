@@ -32,7 +32,7 @@ public class JobCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label idx; // job ID
+    private Label idx; // displayed index, not job ID
     @FXML
     private Label desc; // string
     @FXML
@@ -79,7 +79,10 @@ public class JobCard extends UiPart<Region> {
 
         // state check
         JobCard card = (JobCard) other;
-        return idx.getText().equals(card.idx.getText())
-                && job.equals(card.job);
+        assert idx != null;
+        assert card.idx != null;
+
+        return idx.getText().equals(card.idx.getText()) // same display id, not job ID
+                && Objects.equals(job, card.job);
     }
 }

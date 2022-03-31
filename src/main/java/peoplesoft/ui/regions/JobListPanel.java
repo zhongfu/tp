@@ -26,7 +26,7 @@ public class JobListPanel extends UiPart<Region> {
      */
     public JobListPanel(ObservableList<Job> jobList) {
         super(FXML);
-        jobListView.setItems(jobList); // nullpointer
+        jobListView.setItems(jobList);
         jobListView.setCellFactory(listView -> new JobListViewCell());
     }
 

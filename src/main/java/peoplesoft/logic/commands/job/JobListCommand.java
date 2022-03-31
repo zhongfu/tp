@@ -7,24 +7,20 @@ import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
-import peoplesoft.model.util.Employment;
 
 /**
  * Lists the {@code Jobs} stored in {@code AddressBook}.
  */
 public class JobListCommand extends Command {
 
-    // TODO: change if needed
     public static final String COMMAND_WORD = "joblist";
 
-    public static final String MESSAGE_SUCCESS = "Listed all jobs: %s\nAssignment: %s";
+    public static final String MESSAGE_SUCCESS = "Listed all jobs";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // TODO: UI interaction, currently prints to console
         model.updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredJobList(),
-                Employment.getInstance().getAllJobs()));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
