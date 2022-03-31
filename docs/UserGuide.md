@@ -70,6 +70,11 @@ A handy reference for more experienced users who just need to know the format of
 | `mark`      | `mark JOBID`                                                                     | `mark 2`                                                                                                 |
 | `assign`    | `assign JOBID i/INDEX`                                                           | `assign 2 i/1`                                                                                           |
 
+
+## For v1.3.1
+Commands include `pay PERSON_INDEX y/`, and `export PERSON_INDEX`. Writeups `coming soon`.
+Paying the person makes the payments immutable. Exporting gets you the .csv file of a person in your data folder. It is a payment slip for the employee's reference.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features

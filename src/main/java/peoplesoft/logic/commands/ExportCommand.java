@@ -21,7 +21,8 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports a .csv file with the jobs the person worked on, including how much pay they should expect to receive.\n"
+            + ": Exports a .csv file with the jobs the person worked on, "
+            + "including how much pay they should expect to receive.\n"
             + "Format: " + COMMAND_WORD + " INDEX. Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_EXPORT_PERSON_SUCCESS = "Exported Person Details: %1$s";
