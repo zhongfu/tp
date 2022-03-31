@@ -33,14 +33,14 @@ public class JobAssignCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s.";
     public static final String MESSAGE_DUPLICATE_EMPLOYMENT =
-            "A total of %s persons have existing employments.";
+            "%s person(s) have already been assigned to this job.";
 
     private Index jobIndex;
     private Set<Index> personIndexes;
     private Employment instance;
 
     /**
-     * Creates a {@code JobAssignCommand} to assign a {@code Job} to a set of {@code Persons}.
+     * Creates a {@code JobAssignCommand} to assign a {@code Job} to a set of {@code Person}s.
      *
      * @param jobIndex Index of the job.
      * @param personIndexes Set of indexes of persons

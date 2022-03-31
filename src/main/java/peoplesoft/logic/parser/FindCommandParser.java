@@ -24,7 +24,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             trimmedArgs = ParserUtil.parseString(args);
         } catch (ParseException pe) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE), pe);
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
