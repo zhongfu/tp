@@ -209,7 +209,7 @@ Format: `mark JOBID`
 
 Example: `mark 2` marks the second job
 
-Continued Example: `mark 2` unmarks the second job
+Example: `mark 2` unmarks the second job after the previous example is performed
 
 ### Assign a job to an employee : `assign`
 
