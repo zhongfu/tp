@@ -56,20 +56,20 @@ A handy reference for more experienced users who just need to know the format of
 
 | Command     | Format                                                                           | Examples                                                                                                 |
 |-------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `exit`      | `exit`                                                                           | NA                                                                                                       |
-| `help`      | `help`                                                                           | NA                                                                                                       |
 | `add`       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                  | `add n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
-| `edit`      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `edit 2 n/Nicole Lee t/OS`                                                                             |
-| `delete`    | `delete INDEX`                                                                   | `delete 3`                                                                                               |
-| `find`      | `find KEYWORD [MORE_KEYWORDS]...​`                                                 | `find Nicole Hardware`, `find Aircon`                                                                    |
+| `edit`      | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `edit 2 n/Nicole Lee t/OS`                                                                             |
+| `delete`    | `delete PERSON_INDEX`                                                                   | `delete 3`                                                                                               |
+| `find`      | `find KEYWORD [MORE_KEYWORDS]...​`                                            | `find Nicole Hardware`, `find Aircon`                                                                    |
 | `list`      | `list`                                                                           | NA                                                                                                       |
 | `clear`     | `clear`                                                                          | NA                                                                                                       |
-| `job`       | `job JOBID n/NAME r/RATE d/DURATION`                                             | `job 1 n/Fix HDB Lock r/40 d/1`                                                                          |
+| `job`       | `job n/NAME d/DURATION`                                                          | `job n/Fix HDB Lock d/1`                                                                          |
 | `joblist`   | `joblist`                                                                        | NA                                                                                                       |
-| `jobdelete` | `jobdelete JOBID`                                                                | `jobdelete 3`                                                                                            |
-| `mark`      | `mark JOBID`                                                                     | `mark 2`                                                                                                 |
-| `assign`    | `assign JOBID i/INDEX`                                                           | `assign 2 i/1`                                                                                           |
-
+| `jobdelete` | `jobdelete JOB_INDEX`                                                            | `jobdelete 3`                                                                                            |
+| `mark`      | `mark JOB_INDEX`                                                                 | `mark 2`                                                                                                 |
+| `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                        | `assign 2 i/1`                                                                                           |
+| `pay`       | `pay JOB_INDEX y/`                                                               | `pay 2 y/`                                                                                               |
+| `exit`      | `exit`                                                                           | NA                                                                                                       |
+| `help`      | `help`
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -98,19 +98,6 @@ A handy reference for more experienced users who just need to know the format of
 
 </div>
 
-### Exit the program : `exit`
-Exits the program immediately.
-
-Format: `exit`
-
-### List all the commands: `help`
-Opens the help page which shows the command list like the one above.
-
-Format: `help`
-
-Prompted when the user makes a typo (i.e. tries to use an invalid command) :
-Format: `Looks like you used an invalid command. Use the command help to access a list of all available commands.`
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Employee-related commands
@@ -128,19 +115,20 @@ Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S1385
 ### Edit an employee’s information : `edit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
+Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
 Example: `edit 2 p/62353535` edits the second person's phone number to 62353535
 
 ### Delete an employee : `delete`
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.
 
-Format: `delete INDEX`
+Format: `delete PERSON_INDEX`
 
 Example: `delete 3` deletes the third person
 
 ### Search for a person by name or tag : `find`
-Finds all people by a certain name and/or tag. If you wish to search by tags alone, use a `*` instead of typing a name. If multiple tags are entered, only entries that match **all** tags are returned.
+Finds all people by a certain name and/or tag. If you wish to search by tags alone, use a `*` instead of typing a name.
+If multiple tags are entered, only entries that match **all** tags are returned.
 
 Format: `find [* OR NAME] [TAG]...​`
 
@@ -170,7 +158,7 @@ Removes all the employees’ information in the company from the app. Useful for
 
 Format: `clear`
 
-Example: `clear` removes all the employees from the app // ian: does it remove all jobs from the app too?
+Example: `clear` removes all the employees and jobs from the app
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -180,7 +168,7 @@ Example: `clear` removes all the employees from the app // ian: does it remove a
 
 Adds a new job to the system with the given attributes. `RATE` refers to how much the employee is paid per hour. `DURATION` refers to how long the job took.
 
-Format: `job JOBID n/NAME r/RATE d/DURATION`
+Format: `job n/NAME d/DURATION`
 
 Example: `job 2 n/Fix HDB Lock r/40 d/1` creates a job with id 2, where the employees worked for 1 hour and are paid an hourly rate of $40 to fix a HDB lock
 
@@ -198,29 +186,58 @@ Deletes the job that was referred to by the index.
 
 ❗️Caution: This is irreversible.
 
-Format: `jobdelete JOBID`
+Format: `jobdelete JOB_INDEX`
 
 Example: `jobdelete 2` deletes the second job
 
-### Mark a job as paid : `mark`
+### Mark a job as done or not done : `mark`
 
-Indicates that a job has been completed. To unmark an object, `mark` the job again.
+Indicates that a job has been completed and is pending payment. To un-mark an object, `mark` the job again.
+A job needs to be [assigned](#assign-a-job-to-an-employee--assign) to at least one person before it can be marked.
 
-Format: `mark JOBID`
+Format: `mark JOB_INDEX`
 
 Example: `mark 2` marks the second job
 
-Example: `mark 2` unmarks the second job after the previous example is performed
+Example: `mark 2` un-marks the second job after the previous example is performed
 
 ### Assign a job to an employee : `assign`
 
-Assigns a job to an employee that is working on it.
+Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-paid--mark) job cannot be assigned to
+any person.
 
-Format: `assign JOBID i/PERSON'S_INDEX`
+Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
 
 Example: `assign 2 i/3` assigns the second job to the first employee
 
+### Finalize payments for a job : `pay`
+
+Finalizes the payments of a job. This command is irreversible, and the finalized job cannot be
+modified in any way except by `clear`. A job needs to be [marked](#mark-a-job-as-paid--mark) before it can be
+finalized.
+
+Format: `pay JOB_INDEX y/`
+
+Example: `pay 2 y/` finalizes the payments of the second job
+
 // To add the generate payslip() function here
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Miscellaneous commands
+
+### Exit the program : `exit`
+Exits the program immediately.
+
+Format: `exit`
+
+### List all the commands: `help`
+Opens the help page which shows the command list like the one above.
+
+Format: `help`
+
+Prompted when the user makes a typo (i.e. tries to use an invalid command) :
+Format: `Looks like you used an invalid command. Use the command help to access a list of all available commands.`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -250,4 +267,4 @@ Example: `assign 2 i/3` assigns the second job to the first employee
 
 **Index**: The item's number in a list.
 
-e.g. The second person in the list has an INDEX of 2.
+e.g. The second person in the list has an `INDEX` of 2.
