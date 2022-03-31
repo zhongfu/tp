@@ -8,8 +8,8 @@ import peoplesoft.commons.core.Messages;
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
+import peoplesoft.model.employment.Employment;
 import peoplesoft.model.person.Person;
-import peoplesoft.model.util.Employment;
 
 /**
  * Deletes a person identified using it's displayed index from the database.

@@ -30,9 +30,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import peoplesoft.commons.core.JobIdFactory;
 import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
-import peoplesoft.model.util.Employment;
 
 public class AddressBookSerdesTest {
     @Test
