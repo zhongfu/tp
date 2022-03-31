@@ -1,4 +1,4 @@
-package peoplesoft.model.job;
+package peoplesoft.model.money;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,7 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import peoplesoft.commons.util.JsonUtil;
-import peoplesoft.model.money.Money;
 
 public class MoneySerdesTest {
     public static final String VERY_BIG_NUMBER_STRING =

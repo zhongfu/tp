@@ -1,4 +1,4 @@
-package peoplesoft.model.job;
+package peoplesoft.model.money;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static peoplesoft.testutil.Assert.assertThrows;
@@ -8,8 +8,6 @@ import java.time.Duration;
 import org.junit.jupiter.api.Test;
 
 import peoplesoft.model.job.exceptions.NonPositiveDurationException;
-import peoplesoft.model.money.Money;
-import peoplesoft.model.money.Rate;
 import peoplesoft.model.money.exceptions.NegativeMoneyValueException;
 
 public class RateTest {

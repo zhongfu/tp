@@ -1,4 +1,4 @@
-package peoplesoft.model.job;
+package peoplesoft.model.money;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,8 +8,6 @@ import static peoplesoft.testutil.Assert.assertThrows;
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
-
-import peoplesoft.model.money.Money;
 
 public class MoneyTest {
 

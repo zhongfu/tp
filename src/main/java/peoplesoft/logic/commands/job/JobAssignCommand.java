@@ -72,6 +72,10 @@ public class JobAssignCommand extends Command {
         Job job = lastShownJobs.get(jobIndex.getZeroBased());
         Set<Person> persons = getPersons(personIndexes, lastShownPersons);
 
+        if (job.isFinal()) {
+            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
+        }
+
         int dupeCount = 0;
         StringBuilder stringPersons = new StringBuilder();
 

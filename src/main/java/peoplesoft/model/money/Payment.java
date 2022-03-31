@@ -198,7 +198,7 @@ public abstract class Payment {
 
         @Override
         public String toString() {
-            return super.toString() + "; paid: yes";
+            return super.toString() + "; paid: no";
         }
     }
 

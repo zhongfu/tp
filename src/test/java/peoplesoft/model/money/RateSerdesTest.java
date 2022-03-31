@@ -1,4 +1,4 @@
-package peoplesoft.model.job;
+package peoplesoft.model.money;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,8 +17,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import peoplesoft.commons.util.JsonUtil;
-import peoplesoft.model.money.Money;
-import peoplesoft.model.money.Rate;
 
 public class RateSerdesTest {
     private static final Rate VALID_RATE = new Rate(

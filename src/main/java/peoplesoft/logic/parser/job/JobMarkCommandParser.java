@@ -10,7 +10,7 @@ import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.employment.Employment;
 
 /**
- * Parses an {@code Index} to mark.
+ * Parses an {@code Index} of a {@code Job} to mark.
  */
 public class JobMarkCommandParser implements Parser<JobMarkCommand> {
     /**

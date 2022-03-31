@@ -57,8 +57,9 @@ public class JobMarkCommand extends Command {
 
         Job jobToMark = lastShownList.get(toMark.getZeroBased());
 
+        // Not sure if this should be caught here or later.
         if (jobToMark.isFinal()) {
-            throw new CommandException("Cannot modify a job that has finalized payment.");
+            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
         }
 
         try {
@@ -66,15 +67,15 @@ public class JobMarkCommand extends Command {
                 // Because of implementation of removePendingPayments, the exception will never be thrown
                 // unless there are no persons at all.
                 PaymentHandler.removePendingPayments(jobToMark, model, instance);
-                state = true;
                 model.setJob(jobToMark, jobToMark.setAsNotPaid());
+                state = true;
             } else {
                 PaymentHandler.createPendingPayments(jobToMark, model, instance);
-                state = false;
                 model.setJob(jobToMark, jobToMark.setAsPaid());
+                state = false;
             }
         } catch (PaymentRequiresPersonException e) {
-            throw new CommandException("Need at least one person assigned to this job.", e);
+            throw new CommandException(Messages.MESSAGE_ASSIGN_PERSON_TO_JOB, e);
         } finally {
             // Turns out model equals() tests filtered lists
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
