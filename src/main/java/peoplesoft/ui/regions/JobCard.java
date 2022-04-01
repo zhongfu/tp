@@ -36,9 +36,9 @@ public class JobCard extends UiPart<Region> {
     @FXML
     private Label desc; // string
     @FXML
-    private Label rate; // $1.00 / 1H
-    @FXML
     private Label duration; // 1H0M
+    @FXML
+    private ImageView doneIcon; // false
     @FXML
     private ImageView paidForIcon; // false
     // @FXML
@@ -55,7 +55,9 @@ public class JobCard extends UiPart<Region> {
         idx.setText(displayedIndex + "");
         desc.setText(job.getDesc());
         duration.setText(job.getDuration().toString());
-        paidForIcon.setImage(job.hasPaid() ? tick : cross);
+        doneIcon.setImage(job.hasPaid() ? tick : cross);
+        paidForIcon.setImage(job.isFinal() ? tick : cross);
+
         /*
         for when jobtags are a thing
         job.getTags().stream()
