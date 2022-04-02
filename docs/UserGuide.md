@@ -71,8 +71,8 @@ A handy reference for more experienced users who just need to know the format of
 | `job`       | `job n/NAME d/DURATION`                                                                  | `job n/Fix HDB Lock d/1`                                                                                |
 | `joblist`   | `joblist`                                                                                | NA                                                                                                      |
 | `jobdelete` | `jobdelete JOB_INDEX`                                                                    | `jobdelete 3`                                                                                           |
-| `mark`      | `mark JOB_INDEX`                                                                         | `mark 2`                                                                                                |
 | `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                   | `assign 2 i/1`                                                                                          |
+| `mark`      | `mark JOB_INDEX`                                                                         | `mark 2`                                                                                                |
 | `pay`       | `pay JOB_INDEX y/`                                                                       | `pay 2 y/`                                                                                              |
 | `exit`      | `exit`                                                                                   | NA                                                                                                      |
 | `help`      | `help`                                                                                   | NA                                                                                                      |
@@ -195,6 +195,15 @@ Format: `jobdelete JOB_INDEX`
 
 Example: `jobdelete 2` deletes the second job
 
+### Assign a job to an employee : `assign`
+
+Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-done-or-not-done--mark) job cannot be assigned to
+any person.
+
+Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
+
+Example: `assign 2 i/3` assigns the second job to the first employee
+
 ### Mark a job as done or not done : `mark`
 
 Indicates that a job has been completed and is pending payment. To un-mark an object, `mark` the job again.
@@ -205,15 +214,6 @@ Format: `mark JOB_INDEX`
 Example: `mark 2` marks the second job
 
 Example: `mark 2` un-marks the second job after the previous example is performed
-
-### Assign a job to an employee : `assign`
-
-Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-done-or-not-done--mark) job cannot be assigned to
-any person.
-
-Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
-
-Example: `assign 2 i/3` assigns the second job to the first employee
 
 ### Finalize payments for a job : `pay`
 
