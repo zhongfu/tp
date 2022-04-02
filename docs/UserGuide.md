@@ -208,7 +208,7 @@ Example: `mark 2` un-marks the second job after the previous example is performe
 
 ### Assign a job to an employee : `assign`
 
-Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-paid--mark) job cannot be assigned to
+Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-done-or-not-done--mark) job cannot be assigned to
 any person.
 
 Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
@@ -218,7 +218,7 @@ Example: `assign 2 i/3` assigns the second job to the first employee
 ### Finalize payments for a job : `pay`
 
 Finalizes the payments of a job. This command is irreversible, and the finalized job cannot be
-modified in any way except by `clear`. A job needs to be [marked](#mark-a-job-as-paid--mark) before it can be
+modified in any way except by `clear`. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
 finalized.
 
 Format: `pay JOB_INDEX y/`
