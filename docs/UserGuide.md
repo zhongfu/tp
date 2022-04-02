@@ -154,8 +154,7 @@ Example: `list` shows all the employees in the company
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
 
-[coming in v1.3] Require confirmation with a `yes clear` for clearing all data with `clear`. // ian's idea: get them to type 'yes clear' to confirm
-
+[coming in v1.3] Require confirmation with a `yes clear` for clearing all data with `clear`.
 Format: `clear`
 
 Example: `clear` removes all the employees and jobs from the app
@@ -219,8 +218,6 @@ finalized.
 Format: `pay JOB_INDEX y/`
 
 Example: `pay 2 y/` finalizes the payments of the second job
-
-// To add: generate payslip() function here
 
 --------------------------------------------------------------------------------------------------------------------
 
