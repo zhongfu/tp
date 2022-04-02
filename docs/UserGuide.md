@@ -19,7 +19,7 @@ You can also generate a PDF payslip for your employees to refer to.
 * Words in `this format` are commands to be typed into PeopleSoft.<br>
 
 * Words in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 </div>
 
@@ -36,7 +36,7 @@ You can also generate a PDF payslip for your employees to refer to.
 
 3. Move it to the folder that you want the data to be saved in.
 
-4. Double-click the file to start the app. The GUI should appear as pictured in a few seconds. Note how the app contains some sample data.
+4. Double-click the file to start the app. The GUI should appear as pictured in a few seconds. If this does not work on your system, open an instance of the command line (command prompt for Windows, the terminal on Mac and Linux), navigate to directory where the file is located, and type `java -jar peoplesoft.jar`. Note how the app contains some sample data.
 
 <br><br>
  
@@ -54,22 +54,22 @@ You can also generate a PDF payslip for your employees to refer to.
 
 A handy reference for more experienced users who just need to know the format of a command.
 
-| Command     | Format                                                                           | Examples                                                                                                 |
-|-------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `add`       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                  | `add n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
-| `edit`      | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `edit 2 n/Nicole Lee t/OS`                                                                             |
-| `delete`    | `delete PERSON_INDEX`                                                                   | `delete 3`                                                                                               |
-| `find`      | `find KEYWORD [MORE_KEYWORDS]...​`                                            | `find Nicole Hardware`, `find Aircon`                                                                    |
-| `list`      | `list`                                                                           | NA                                                                                                       |
-| `clear`     | `clear`                                                                          | NA                                                                                                       |
-| `job`       | `job n/NAME d/DURATION`                                                          | `job n/Fix HDB Lock d/1`                                                                          |
-| `joblist`   | `joblist`                                                                        | NA                                                                                                       |
-| `jobdelete` | `jobdelete JOB_INDEX`                                                            | `jobdelete 3`                                                                                            |
-| `mark`      | `mark JOB_INDEX`                                                                 | `mark 2`                                                                                                 |
-| `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                        | `assign 2 i/1`                                                                                           |
-| `pay`       | `pay JOB_INDEX y/`                                                               | `pay 2 y/`                                                                                               |
-| `exit`      | `exit`                                                                           | NA                                                                                                       |
-| `help`      | `help`
+| Command     | Format                                                                                   | Examples                                                                                                |
+|-------------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| `add`       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                         | `add n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
+| `edit`      | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `edit 2 n/Nicole Lee t/OS`                                                                              |
+| `delete`    | `delete PERSON_INDEX`                                                                    | `delete 3`                                                                                              |
+| `find`      | `find KEYWORD [MORE_KEYWORDS]...​`                                                       | `find Nicole Hardware`, `find Aircon`                                                                   |
+| `list`      | `list`                                                                                   | NA                                                                                                      |
+| `clear`     | `clear`                                                                                  | NA                                                                                                      |
+| `job`       | `job n/NAME d/DURATION`                                                                  | `job n/Fix HDB Lock d/1`                                                                                |
+| `joblist`   | `joblist`                                                                                | NA                                                                                                      |
+| `jobdelete` | `jobdelete JOB_INDEX`                                                                    | `jobdelete 3`                                                                                           |
+| `mark`      | `mark JOB_INDEX`                                                                         | `mark 2`                                                                                                |
+| `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                   | `assign 2 i/1`                                                                                          |
+| `pay`       | `pay JOB_INDEX y/`                                                                       | `pay 2 y/`                                                                                              |
+| `exit`      | `exit`                                                                                   | NA                                                                                                      |
+| `help`      | `help`                                                                                   | NA                                                                                                      |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -85,12 +85,12 @@ A handy reference for more experienced users who just need to know the format of
   e.g. if the command asks for `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also fine.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be typed as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be typed as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `...​` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]...​` can be used as `t/friend`, `t/friend t/family` or even 0 times.
 
-* If an attribute is expected only once but you typed it multiple times, only the last occurrence of the attribute will be taken.<br>
+* If an attribute is expected only once, but you type it multiple times, only the last occurrence of the attribute will be taken.<br>
   e.g. if you specify `n/Jake n/Jason`, only `n/Jason` will be taken.
 
 * For commands that do not need attributes, (like `help`, `list`, `exit` and `clear`) anything typed after the command word will be ignored.<br>
@@ -154,8 +154,7 @@ Example: `list` shows all the employees in the company
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
 
-[coming in v1.3] Requests for confirmation from the user before clearing. // ian's idea: get them to type 'yes clear' to confirm
-
+[coming in v1.3] Require confirmation with a `yes clear` for clearing all data with `clear`.
 Format: `clear`
 
 Example: `clear` removes all the employees and jobs from the app
@@ -220,8 +219,6 @@ Format: `pay JOB_INDEX y/`
 
 Example: `pay 2 y/` finalizes the payments of the second job
 
-// To add the generate payslip() function here
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Miscellaneous commands
@@ -259,7 +256,7 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 **Q**: How do I report a bug? How do I suggest a feature?
 
-**A**: You may create an issue under the `Issues` tab on our [Github Page](https://github.com/AY2122S2-CS2103T-T11-4/tp/tree/v1.3.tag). You may suggest a feature in the same way.
+**A**: You may create an issue under the `Issues` tab on our [GitHub Page](https://github.com/AY2122S2-CS2103T-T11-4/tp/tree/v1.3.tag). You may suggest a feature in the same way.
 
 --------------------------------------------------------------------------------------------------------------------
 
