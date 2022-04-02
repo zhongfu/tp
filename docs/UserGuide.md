@@ -121,6 +121,8 @@ Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S1385
 ### Edit an employee’s information : `edit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
+Rate updates will only take effect with jobs that are pending completion; payout amounts for already-completed jobs will not change.
+
 Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
 Example: `edit 2 p/62353535` edits the second person's phone number to 62353535
@@ -206,8 +208,11 @@ Example: `assign 2 i/3` assigns the second job to the first employee
 
 ### Mark a job as done or not done : `mark`
 
-Indicates that a job has been completed and is pending payment. To un-mark an object, `mark` the job again.
+Indicates that a job has been completed and is pending payment. To un-mark a job, `mark` the job again.
 A job needs to be [assigned](#assign-a-job-to-an-employee--assign) to at least one person before it can be marked.
+
+Note: the hourly rate(s) paid out to each employee will be fixed after a job is marked as done; further changes to any employee's rate will not cause the payout amounts to change.
+To update the payout amounts to reflect the new hourly rates, un-mark and mark the job again.
 
 Format: `mark JOB_INDEX`
 
