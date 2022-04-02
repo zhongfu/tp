@@ -18,8 +18,14 @@ You can also generate a PDF payslip for your employees to refer to.
 
 * Words in `this format` are commands to be typed into PeopleSoft.<br>
 
+* Words in `UPPERCASE` are to be replaced with an appropriate value.<br>
+  e.g. `n/NAME` means that `NAME` should be substituted with a name, e.g. `n/John Doe`.
+
 * Words in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Words in parentheses are required, and denote that one of the given choices (delimited by the pipe symbol `|`) are to be selected.<br>
+  e.g. `find (*|NAME)` means that `find *` and `find John` are valid commands.
 
 </div>
 
@@ -127,10 +133,10 @@ Format: `delete PERSON_INDEX`
 Example: `delete 3` deletes the third person
 
 ### Search for a person by name or tag : `find`
-Finds all people by a certain name and/or tag. If you wish to search by tags alone, use a `*` instead of typing a name.
+Finds all people by a certain name and/or tag. If you wish to search by tags alone, use the wildcard operator `*` instead of typing a name.
 If multiple tags are entered, only entries that match **all** tags are returned.
 
-Format: `find [* OR NAME] [TAG]...​`
+Format: `find (*|NAME) [TAG]...​`
 
 Examples:
 
