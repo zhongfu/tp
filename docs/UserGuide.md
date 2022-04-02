@@ -116,7 +116,7 @@ Rate refers to the hourly pay of the employee.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG]...`
 
-Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior`
+Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
 
 ### Edit an employee’s information : `edit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
@@ -132,7 +132,7 @@ Deletes the employee referred to by the index. This is irreversible. Removes the
 
 Format: `delete PERSON_INDEX`
 
-Example: `delete 3` deletes the third person
+Example: `delete 3` deletes the third person in the list
 
 ### Search for a person by name or tag : `find`
 Finds all people by a certain name and/or tag. If you wish to search by tags alone, use the wildcard operator `*` instead of typing a name.
@@ -216,7 +216,7 @@ To update the payout amounts to reflect the new hourly rates, un-mark and mark t
 
 Format: `mark JOB_INDEX`
 
-Example: `mark 2` marks the second job
+Example: `mark 2` marks the second job, assuming it is not already marked as complete
 
 Example: `mark 2` un-marks the second job after the previous example is performed
 
