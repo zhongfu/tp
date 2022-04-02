@@ -175,7 +175,7 @@ Adds a new job to the system with the given attributes. `RATE` refers to how muc
 
 Format: `job n/NAME d/DURATION`
 
-Example: `job 2 n/Fix HDB Lock r/40 d/1` creates a job with id 2, where the employees worked for 1 hour and are paid an hourly rate of $40 to fix a HDB lock
+Example: `job 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
 
 ### List all jobs : `joblist`
 
