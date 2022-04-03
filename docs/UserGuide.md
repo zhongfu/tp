@@ -18,8 +18,14 @@ You can also generate a PDF payslip for your employees to refer to.
 
 * Words in `this format` are commands to be typed into PeopleSoft.<br>
 
+* Words in `UPPERCASE` are to be replaced with an appropriate value.<br>
+  e.g. `n/NAME` means that `NAME` should be substituted with a name, e.g. `n/John Doe`.
+
 * Words in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Words in parentheses are required, and denote that one of the given choices (delimited by the pipe symbol `|`) are to be selected.<br>
+  e.g. `find (*|NAME)` means that `find *` and `find John` are valid commands.
 
 </div>
 
@@ -65,8 +71,8 @@ A handy reference for more experienced users who just need to know the format of
 | `job`       | `job n/NAME d/DURATION`                                                                  | `job n/Fix HDB Lock d/1`                                                                                |
 | `joblist`   | `joblist`                                                                                | NA                                                                                                      |
 | `jobdelete` | `jobdelete JOB_INDEX`                                                                    | `jobdelete 3`                                                                                           |
-| `mark`      | `mark JOB_INDEX`                                                                         | `mark 2`                                                                                                |
 | `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                   | `assign 2 i/1`                                                                                          |
+| `mark`      | `mark JOB_INDEX`                                                                         | `mark 2`                                                                                                |
 | `pay`       | `pay JOB_INDEX y/`                                                                       | `pay 2 y/`                                                                                              |
 | `exit`      | `exit`                                                                                   | NA                                                                                                      |
 | `help`      | `help`                                                                                   | NA                                                                                                      |
@@ -110,10 +116,12 @@ Rate refers to the hourly pay of the employee.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG]...`
 
-Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior`
+Example: `add n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
 
 ### Edit an employee’s information : `edit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
+
+Rate updates will only take effect with jobs that are pending completion; payout amounts for already-completed jobs will not change.
 
 Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
@@ -124,13 +132,13 @@ Deletes the employee referred to by the index. This is irreversible. Removes the
 
 Format: `delete PERSON_INDEX`
 
-Example: `delete 3` deletes the third person
+Example: `delete 3` deletes the third person in the list
 
 ### Search for a person by name or tag : `find`
-Finds all people by a certain name and/or tag. If you wish to search by tags alone, use a `*` instead of typing a name.
+Finds all people by a certain name and/or tag. If you wish to search by tags alone, use the wildcard operator `*` instead of typing a name.
 If multiple tags are entered, only entries that match **all** tags are returned.
 
-Format: `find [* OR NAME] [TAG]...​`
+Format: `find (*|NAME) [TAG]...​`
 
 Examples:
 
@@ -169,7 +177,7 @@ Adds a new job to the system with the given attributes. `RATE` refers to how muc
 
 Format: `job n/NAME d/DURATION`
 
-Example: `job 2 n/Fix HDB Lock r/40 d/1` creates a job with id 2, where the employees worked for 1 hour and are paid an hourly rate of $40 to fix a HDB lock
+Example: `job 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
 
 ### List all jobs : `joblist`
 
@@ -189,30 +197,33 @@ Format: `jobdelete JOB_INDEX`
 
 Example: `jobdelete 2` deletes the second job
 
-### Mark a job as done or not done : `mark`
-
-Indicates that a job has been completed and is pending payment. To un-mark an object, `mark` the job again.
-A job needs to be [assigned](#assign-a-job-to-an-employee--assign) to at least one person before it can be marked.
-
-Format: `mark JOB_INDEX`
-
-Example: `mark 2` marks the second job
-
-Example: `mark 2` un-marks the second job after the previous example is performed
-
 ### Assign a job to an employee : `assign`
 
-Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-paid--mark) job cannot be assigned to
+Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-done-or-not-done--mark) job cannot be assigned to
 any person.
 
 Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
 
 Example: `assign 2 i/3` assigns the second job to the first employee
 
+### Mark a job as done or not done : `mark`
+
+Indicates that a job has been completed and is pending payment. To un-mark a job, `mark` the job again.
+A job needs to be [assigned](#assign-a-job-to-an-employee--assign) to at least one person before it can be marked.
+
+Note: the hourly rate(s) paid out to each employee will be fixed after a job is marked as done; further changes to any employee's rate will not cause the payout amounts to change.
+To update the payout amounts to reflect the new hourly rates, un-mark and mark the job again.
+
+Format: `mark JOB_INDEX`
+
+Example: `mark 2` marks the second job, assuming it is not already marked as complete
+
+Example: `mark 2` un-marks the second job after the previous example is performed
+
 ### Finalize payments for a job : `pay`
 
 Finalizes the payments of a job. This command is irreversible, and the finalized job cannot be
-modified in any way except by `clear`. A job needs to be [marked](#mark-a-job-as-paid--mark) before it can be
+modified in any way except by `clear`. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
 finalized.
 
 Format: `pay JOB_INDEX y/`
