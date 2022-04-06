@@ -8,8 +8,9 @@
    <children>
       <Label fx:id="idx" maxHeight="17.0" maxWidth="17.0" minHeight="17.0" minWidth="17.0" prefHeight="17.0" prefWidth="17.0" text="1" />
       <Label fx:id="name" layoutX="35.0" layoutY="27.0" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="Nicole Lee Siying Rajara" wrapText="true" />
-      <Label fx:id="amtDue" layoutX="202.0" layoutY="37.0" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="\$8888.88" wrapText="true" />
+      <Label fx:id="amtDue" layoutX="202.0" layoutY="37.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="\$8888.88" wrapText="true" />
       <FlowPane fx:id="tags" alignment="CENTER_LEFT" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" prefWrapLength="50.0" />
+      <Label fx:id="basePay" layoutX="302.0" layoutY="37.0" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="\$30 / H" wrapText="true" />
       <Label fx:id="phone" layoutX="51.0" layoutY="27.0" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="62353535" wrapText="true" />
       <Label fx:id="email" layoutX="265.0" layoutY="27.0" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="nicole@staffhub.org" wrapText="true" />
       <Label fx:id="address" layoutX="337.0" layoutY="27.0" maxWidth="59.0" minWidth="59.0" prefWidth="59.0" text="S888888 1 Tech Drive" wrapText="true" />
