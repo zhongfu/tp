@@ -30,10 +30,13 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_RATE = "hello";
+    private static final String INVALID_RATE_1 = "hello";
+    private static final String INVALID_RATE_2 = "-5";
+    private static final String INVALID_RATE_3 = "1000001";
     private static final String INVALID_DURATION_1 = "world";
     private static final String INVALID_DURATION_2 = "-5";
-    private static final String INVALID_DURATION_3 = "1000001";
+    private static final String INVALID_DURATION_3 = "0";
+    private static final String INVALID_DURATION_4 = "1000001";
     private static final String INVALID_ID = "@special_characters";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -43,7 +46,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_STRING = "hello";
-    private static final String VALID_RATE = "3.0";
+    private static final String VALID_RATE_1 = "3.0";
+    private static final String VALID_RATE_2 = "0";
     private static final String VALID_DURATION = "1.5";
     private static final String VALID_ID = "a123-12ab3";
 
@@ -256,16 +260,22 @@ public class ParserUtilTest {
 
     @Test
     public void parseRate_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseRate(INVALID_RATE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRate(INVALID_RATE_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRate(INVALID_RATE_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRate(INVALID_RATE_3));
     }
 
     @Test
     public void parseRate_validValue_returnsRate() throws Exception {
         Rate expectedRate = new Rate(new Money(3.0), Duration.ofHours(1));
-        assertEquals(expectedRate, ParserUtil.parseRate(VALID_RATE));
+        assertEquals(expectedRate, ParserUtil.parseRate(VALID_RATE_1));
 
         // With whitespace
-        assertEquals(expectedRate, ParserUtil.parseRate(WHITESPACE + VALID_RATE + WHITESPACE));
+        assertEquals(expectedRate, ParserUtil.parseRate(WHITESPACE + VALID_RATE_1 + WHITESPACE));
+
+        // Rate of zero
+        expectedRate = new Rate(new Money(0), Duration.ofHours(1));
+        assertEquals(expectedRate, ParserUtil.parseRate(VALID_RATE_2));
     }
 
     @Test
@@ -278,6 +288,7 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION_1));
         assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION_2));
         assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION_3));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION_4));
     }
 
     @Test
