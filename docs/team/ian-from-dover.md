@@ -39,6 +39,7 @@ PeopleSoft is a Payroll management app for companies offering contractor-based s
     * Added `Glossary` section (PR [\#86](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/86/files) also)
     * Updated command summary with new commands
     * Did cosmetic tweaks to existing documentation of features `mark`: [\#118](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/118/)
+    * Extensively researched previous UGs to consolidate best practices for the team. [\#203](https://github.com/AY2122S2-CS2103T-T11-4/tp/issues/203)
   * Developer Guide:
     * Added implementation details of the GUI. // TO BE COMPLETED
     * Added introduction, target user profile and value proposition
