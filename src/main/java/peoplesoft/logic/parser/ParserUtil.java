@@ -24,10 +24,11 @@ import peoplesoft.model.util.ID;
  */
 public class ParserUtil {
     public static final String STRING_MESSAGE_CONSTRAINTS = "Empty string not allowed.";
-    public static final String DURATION_MESSAGE_CONSTRAINTS = "Expects a number for duration (in hours).";
+    public static final String DURATION_MESSAGE_CONSTRAINTS = "Expects a positive number for duration (in hours).";
+    public static final String DURATION_MESSAGE_TOO_LARGE = "Inputted value for duration is too large.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing white;spaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
@@ -184,13 +185,34 @@ public class ParserUtil {
     public static Duration parseDuration(String str) throws ParseException {
         requireNonNull(str);
         String trim = str.trim();
-        Duration res;
+        double dur;
         try {
-            res = Duration.ofSeconds(Math.round(Double.parseDouble(trim) * 3600));
+            dur = Double.parseDouble(trim);
         } catch (NumberFormatException e) {
             throw new ParseException(DURATION_MESSAGE_CONSTRAINTS);
         }
+        if (!isValidDuration(dur)) {
+            throw new ParseException(DURATION_MESSAGE_CONSTRAINTS);
+        }
+        if (!isDurationTooLarge(dur)) {
+            throw new ParseException(DURATION_MESSAGE_TOO_LARGE);
+        }
+        Duration res = Duration.ofMinutes(Math.round(dur * 60));
         return res;
+    }
+
+    /**
+     * Returns if duration is greater than zero.
+     */
+    private static boolean isValidDuration(double dur) {
+        return dur > 0;
+    }
+
+    /**
+     * Returns if duration is too large.
+     */
+    private static boolean isDurationTooLarge(double dur) {
+        return dur < 1000000;
     }
 
     /**

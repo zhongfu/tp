@@ -31,7 +31,9 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_RATE = "hello";
-    private static final String INVALID_DURATION = "world";
+    private static final String INVALID_DURATION_1 = "world";
+    private static final String INVALID_DURATION_2 = "-5";
+    private static final String INVALID_DURATION_3 = "1000001";
     private static final String INVALID_ID = "@special_characters";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -273,7 +275,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseDuration_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION_3));
     }
 
     @Test

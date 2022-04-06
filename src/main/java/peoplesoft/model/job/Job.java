@@ -265,6 +265,10 @@ public class Job {
                     .traverse(codec)
                     .readValueAs(Duration.class);
 
+            if (duration.isNegative() || duration.isZero() || duration.toMinutes() > 60000000) {
+                throw JsonUtil.getWrappedIllegalValueException(ctx, INVALID_VAL_FMTR.apply("duration"));
+            }
+
             Boolean hasPaid = getNonNullNodeWithType(job, "hasPaid", ctx, BooleanNode.class).booleanValue();
 
             Boolean isFinal = getNonNullNodeWithType(job, "isFinal", ctx, BooleanNode.class).booleanValue();
