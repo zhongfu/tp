@@ -53,15 +53,15 @@ public class JobCard extends UiPart<Region> {
         super(FXML);
 
         // calculate time
-        int HH = job.getDuration().toHoursPart();
+        int hH = job.getDuration().toHoursPart();
         int mins = job.getDuration().toMinutesPart();
-        String MM = mins == 0 ? "" : (mins + "m");
+        String mM = mins == 0 ? "" : (mins + "m");
 
         // assign values
         this.job = job;
         idx.setText(displayedIndex + "");
         desc.setText(job.getDesc());
-        duration.setText(String.format("%dh%s", HH, MM));
+        duration.setText(String.format("%dh%s", hH, mM));
         doneIcon.setImage(job.hasPaid() ? tick : cross);
         paidForIcon.setImage(job.isFinal() ? tick : cross);
 
