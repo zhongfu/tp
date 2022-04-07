@@ -188,7 +188,7 @@ Format: `jobfind NAME`
 
 Examples:
 
-`jobfind` finds all the jobs with 'Painting' in its name
+`jobfind Painting` finds all the jobs with 'Painting' in its name
 
 ### List all jobs : `joblist`
 
