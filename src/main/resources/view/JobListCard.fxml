@@ -11,8 +11,8 @@
    <children>
       <Label fx:id="idx" minWidth="17.0" prefHeight="17.0" prefWidth="17.0" text="1" />
       <Label fx:id="desc" layoutX="35.0" layoutY="27.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Fix washing machine" wrapText="true" />
-      <Label fx:id="duration" layoutX="265.0" layoutY="27.0" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="PT48H" wrapText="true" />
-      <StackPane alignment="CENTER_LEFT" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+      <Label fx:id="duration" layoutX="265.0" layoutY="27.0" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="14h 30m" wrapText="true" />
+      <StackPane alignment="CENTER_LEFT" maxWidth="30.0" minWidth="30.0" prefWidth="30.0">
          <children>
             <ImageView fx:id="doneIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,7 +21,7 @@
             </ImageView>
          </children>
       </StackPane>
-      <StackPane alignment="CENTER_LEFT" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+      <StackPane alignment="CENTER_LEFT" maxWidth="30.0" minWidth="30.0" prefWidth="30.0">
          <children>
             <ImageView fx:id="paidForIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                <image>

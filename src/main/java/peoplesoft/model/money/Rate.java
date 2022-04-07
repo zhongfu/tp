@@ -6,6 +6,8 @@ import static peoplesoft.model.job.util.MoneyUtil.requireNonNegative;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -106,8 +108,20 @@ public class Rate {
      */
     @Override
     public String toString() {
-        // TODO make it more user friendly, e.g. $5 / hour
-        return String.format("%s/H", amount, duration.toHours());
+        BigDecimal value = amount.getValue();
+        float hours = duration.toHours();
+        BigDecimal perHour = value.divide(BigDecimal.valueOf(hours), RoundingMode.HALF_UP);
+
+        // @@author Sergey Vyacheslavovich Brunov for converting big decimal to 2dp
+        // retrieved from https://stackoverflow.com/a/10457320/16777554
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        df.setMinimumFractionDigits(0);
+        df.setGroupingUsed(false);
+
+        String result = df.format(perHour);
+
+        return String.format("$%s/h", result);
     }
 
     protected static class RateSerializer extends StdSerializer<Rate> {
