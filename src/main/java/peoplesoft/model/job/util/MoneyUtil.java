@@ -1,7 +1,5 @@
 package peoplesoft.model.job.util;
 
-import java.math.BigDecimal;
-
 import peoplesoft.model.money.Money;
 import peoplesoft.model.money.exceptions.NegativeMoneyValueException;
 
@@ -13,7 +11,7 @@ public class MoneyUtil {
      * Throws NegativeMoneyValueException if {@code money} is negative.
      */
     public static void requireNonNegative(Money money) {
-        if (money.getValue().compareTo(BigDecimal.ZERO) < 0) {
+        if (money.getValue().signum() < 0) {
             throw new NegativeMoneyValueException();
         }
     }
