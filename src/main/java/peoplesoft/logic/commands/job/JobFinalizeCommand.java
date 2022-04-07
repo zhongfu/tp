@@ -33,7 +33,7 @@ public class JobFinalizeCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Finalized payments for Job %s.";
     public static final String MESSAGE_JOB_NOT_PAID_FAILURE =
-            "Payments cannot be finalized if the Job is not yet marked as paid.";
+            "Payments cannot be finalized if the job is not yet marked as paid.";
     // TODO: change message if needed
 
     private final Index toFinalize;
