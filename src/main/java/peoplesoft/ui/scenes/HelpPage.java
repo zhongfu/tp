@@ -57,35 +57,29 @@ public class HelpPage extends Page {
         String oS = System.getProperty("os.name").toLowerCase();
         logger.fine("Operating system detected: " + oS);
 
+        Runtime runtime = Runtime.getRuntime();
+
         try {
-            if (Desktop.isDesktopSupported()) { // Windows
+            if (oS.contains("mac")) {
+                logger.fine("Using 'open' on Mac to open webpage.");
+                Process open = runtime.exec("open " + USERGUIDE_URL);
+                logger.fine("Opened.");
+            } else if (oS.contains("nix") || oS.contains("nux")) {
+                logger.fine("Using 'xdg-open' on Linux to open webpage.");
+                Process open = runtime.exec("xdg-open " + USERGUIDE_URL);
+                logger.fine("Opened.");
+            } else if (oS.contains("win") && Desktop.isDesktopSupported()) {
                 logger.fine("Using Desktop.browse on Windows to open webpage.");
                 Desktop desktop = Desktop.getDesktop();
                 desktop.browse(new URI(USERGUIDE_URL));
-
             } else {
-                Runtime runtime = Runtime.getRuntime();
-
-                if (oS.contains("mac")) {
-                    logger.fine("Using 'open' on Mac to open webpage.");
-                    Process open = runtime.exec("open " + USERGUIDE_URL);
-                    logger.fine("Opened. Exit value is " + open.exitValue());
-
-                } else if (oS.contains("nix") || oS.contains("nux")) {
-                    logger.fine("Using 'xdg-open' on Linux to open webpage.");
-                    Process open = runtime.exec("xdg-open " + USERGUIDE_URL);
-                    logger.fine("Opened. Exit value is " + open.exitValue());
-                } else {
-                    String msg = "Unable to launch browser due to the OS.";
-                    logger.warning(msg);
-                    display.setFeedbackToUser(msg);
-                }
-
+                String msg = "Unable to launch browser due to the OS.";
+                logger.warning(msg);
+                display.setFeedbackToUser(msg);
+                return;
             }
-
             logger.fine("User Guide successfully opened in browser.");
             display.setFeedbackToUser(COPIED_MESSAGE);
-
         } catch (URISyntaxException se) {
             String msg = "The URL in the application was wrong. Please contact developers.";
             logger.warning(msg);
