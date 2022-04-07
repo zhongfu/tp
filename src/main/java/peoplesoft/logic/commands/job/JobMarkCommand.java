@@ -64,8 +64,8 @@ public class JobMarkCommand extends Command {
 
         try {
             if (jobToMark.hasPaid()) {
-                // Because of implementation of removePendingPayments, the exception will never be thrown
-                // unless there are no persons at all.
+                // Because of implementation of removePendingPayments, the exception will only be thrown
+                // when there are no persons at all.
                 PaymentHandler.removePendingPayments(jobToMark, model, instance);
                 model.setJob(jobToMark, jobToMark.setAsNotPaid());
                 state = true;

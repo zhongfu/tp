@@ -69,6 +69,7 @@ A handy reference for more experienced users who just need to know the format of
 | `list`      | `list`                                                                                   | NA                                                                                                      |
 | `clear`     | `clear`                                                                                  | NA                                                                                                      |
 | `job`       | `job n/NAME d/DURATION`                                                                  | `job n/Fix HDB Lock d/1`                                                                                |
+| `jobfind`   | `jobfind NAME`                                                                           | `jobfind Painting`                                                                                      |
 | `joblist`   | `joblist`                                                                                | NA                                                                                                      |
 | `jobdelete` | `jobdelete JOB_INDEX`                                                                    | `jobdelete 3`                                                                                           |
 | `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                   | `assign 2 i/1`                                                                                          |
@@ -178,6 +179,16 @@ Adds a new job to the system with the given attributes. `RATE` refers to how muc
 Format: `job n/NAME d/DURATION`
 
 Example: `job 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
+
+## Search for a job by name : `jobfind`
+
+Finds all jobs by a certain name.
+
+Format: `jobfind NAME`
+
+Examples:
+
+`jobfind Painting` finds all the jobs with 'Painting' in its name
 
 ### List all jobs : `joblist`
 

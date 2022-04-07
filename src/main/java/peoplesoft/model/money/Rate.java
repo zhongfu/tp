@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import peoplesoft.commons.util.JsonUtil;
+import peoplesoft.model.money.exceptions.NegativeMoneyValueException;
 
 /**
  * Represents a rate of payment, e.g. $5 per hour. Immutable.
@@ -36,7 +37,8 @@ import peoplesoft.commons.util.JsonUtil;
 @JsonSerialize(using = Rate.RateSerializer.class)
 @JsonDeserialize(using = Rate.RateDeserializer.class)
 public class Rate {
-    public static final String MESSAGE_CONSTRAINTS = "Value for rate should be a decimal number";
+    public static final String MESSAGE_CONSTRAINTS = "Value for rate should be a non-negative decimal number.";
+    public static final String MESSAGE_TOO_LARGE = "Value for rate is too large.";
 
     public final Money amount;
     public final Duration duration;
@@ -44,10 +46,11 @@ public class Rate {
     /**
      * Constructs a {@code Rate} instance.
      *
-     * @param amount Money per unit time
-     * @param duration Unit time duration
+     * @param amount Money per unit time.
+     * @param duration Unit time duration.
+     * @throws NegativeMoneyValueException Throws when money is negative.
      */
-    public Rate(Money amount, Duration duration) {
+    public Rate(Money amount, Duration duration) throws NegativeMoneyValueException {
         requireAllNonNull(amount, duration);
         requireNonNegative(amount);
         requirePositive(duration);

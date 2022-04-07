@@ -2,6 +2,7 @@ package peoplesoft.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import peoplesoft.commons.util.StringUtil;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.money.Money;
 import peoplesoft.model.money.Rate;
+import peoplesoft.model.money.exceptions.NegativeMoneyValueException;
 import peoplesoft.model.person.Address;
 import peoplesoft.model.person.Email;
 import peoplesoft.model.person.Name;
@@ -24,10 +26,11 @@ import peoplesoft.model.util.ID;
  */
 public class ParserUtil {
     public static final String STRING_MESSAGE_CONSTRAINTS = "Empty string not allowed.";
-    public static final String DURATION_MESSAGE_CONSTRAINTS = "Expects a number for duration (in hours).";
+    public static final String DURATION_MESSAGE_CONSTRAINTS = "Expects a positive number for duration (in hours).";
+    public static final String DURATION_MESSAGE_TOO_LARGE = "Value for duration is too large.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing white;spaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
@@ -168,11 +171,21 @@ public class ParserUtil {
         Rate res;
         try {
             res = new Rate(new Money(Double.parseDouble(trim)), Duration.ofHours(1));
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NegativeMoneyValueException e) {
             // TODO: add message/complex rate parsing %s/%s
-            throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Rate.MESSAGE_CONSTRAINTS, e);
+        }
+        if (isRateTooLarge(res)) {
+            throw new ParseException(Rate.MESSAGE_TOO_LARGE);
         }
         return res;
+    }
+
+    /**
+     * Returns if rate is too large.
+     */
+    private static boolean isRateTooLarge(Rate rate) {
+        return rate.getAmount().getValue().compareTo(BigDecimal.valueOf(1000000)) > 0;
     }
 
     /**
@@ -184,13 +197,34 @@ public class ParserUtil {
     public static Duration parseDuration(String str) throws ParseException {
         requireNonNull(str);
         String trim = str.trim();
-        Duration res;
+        double dur;
         try {
-            res = Duration.ofSeconds(Math.round(Double.parseDouble(trim) * 3600));
+            dur = Double.parseDouble(trim);
         } catch (NumberFormatException e) {
+            throw new ParseException(DURATION_MESSAGE_CONSTRAINTS, e);
+        }
+        Duration res = Duration.ofMinutes(Math.round(dur * 60));
+        if (!isDurationNonNegative(res)) {
             throw new ParseException(DURATION_MESSAGE_CONSTRAINTS);
         }
+        if (isDurationTooLarge(res)) {
+            throw new ParseException(DURATION_MESSAGE_TOO_LARGE);
+        }
         return res;
+    }
+
+    /**
+     * Returns if duration is greater than zero.
+     */
+    private static boolean isDurationNonNegative(Duration dur) {
+        return dur.compareTo(Duration.ZERO) > 0;
+    }
+
+    /**
+     * Returns if duration is too large.
+     */
+    private static boolean isDurationTooLarge(Duration dur) {
+        return dur.compareTo(Duration.ofHours(100000)) > 0;
     }
 
     /**

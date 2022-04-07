@@ -64,22 +64,23 @@ public class JobAssignCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
         }
 
+        Job job = lastShownJobs.get(jobIndex.getZeroBased());
+
+        if (job.isFinal()) {
+            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
+        }
+
+        if (job.hasPaid()) {
+            throw new CommandException(MESSAGE_ASSIGN_MARKED_JOB);
+        }
+
         for (Index i : personIndexes) {
             if (i.getZeroBased() >= lastShownPersons.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
         }
 
-        Job job = lastShownJobs.get(jobIndex.getZeroBased());
         Set<Person> persons = getPersons(personIndexes, lastShownPersons);
-
-        if (job.hasPaid()) {
-            throw new CommandException(MESSAGE_ASSIGN_MARKED_JOB);
-        }
-
-        if (job.isFinal()) {
-            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
-        }
 
         int dupeCount = 0;
         StringBuilder stringPersons = new StringBuilder();
