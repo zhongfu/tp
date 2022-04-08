@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.person;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
@@ -47,7 +47,7 @@ public class PersonAddCommandParser implements Parser<PersonAddCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_RATE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonAddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MSG_INVALID_CMD_FORMAT, PersonAddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

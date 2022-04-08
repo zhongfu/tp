@@ -1,7 +1,7 @@
 package peoplesoft.logic.parser.person;
 
 import static java.util.Objects.requireNonNull;
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
@@ -45,7 +45,7 @@ public class PersonEditCommandParser implements Parser<PersonEditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MSG_INVALID_CMD_FORMAT,
                     PersonEditCommand.MESSAGE_USAGE), pe);
         }
 

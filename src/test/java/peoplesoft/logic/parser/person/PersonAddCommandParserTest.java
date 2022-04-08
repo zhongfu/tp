@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.person;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static peoplesoft.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static peoplesoft.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -99,7 +99,11 @@ public class PersonAddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
+<<<<<<< HEAD:src/test/java/peoplesoft/logic/parser/person/PersonAddCommandParserTest.java
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonAddCommand.MESSAGE_USAGE);
+=======
+        String expectedMessage = String.format(MSG_INVALID_CMD_FORMAT, AddCommand.MESSAGE_USAGE);
+>>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands):src/test/java/peoplesoft/logic/parser/AddCommandParserTest.java
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -160,6 +164,10 @@ public class PersonAddCommandParserTest {
         assertParseFailure(parser,
                 PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + RATE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+<<<<<<< HEAD:src/test/java/peoplesoft/logic/parser/person/PersonAddCommandParserTest.java
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonAddCommand.MESSAGE_USAGE));
+=======
+                String.format(MSG_INVALID_CMD_FORMAT, AddCommand.MESSAGE_USAGE));
+>>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands):src/test/java/peoplesoft/logic/parser/AddCommandParserTest.java
     }
 }

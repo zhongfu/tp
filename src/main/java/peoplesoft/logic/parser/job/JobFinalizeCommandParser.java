@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_CONFIRMATION;
 
 import java.util.stream.Stream;
@@ -29,7 +29,7 @@ public class JobFinalizeCommandParser implements Parser<JobFinalizeCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CONFIRMATION) || argMultimap.getPreamble().isBlank()
                 || !argMultimap.getValue(PREFIX_CONFIRMATION).get().isBlank()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MSG_INVALID_CMD_FORMAT,
                 JobFinalizeCommand.MESSAGE_USAGE));
         }
         try {
@@ -37,7 +37,7 @@ public class JobFinalizeCommandParser implements Parser<JobFinalizeCommand> {
             return new JobFinalizeCommand(index, Employment.getInstance());
         } catch (ParseException pe) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobFinalizeCommand.MESSAGE_USAGE), pe);
+                String.format(MSG_INVALID_CMD_FORMAT, JobFinalizeCommand.MESSAGE_USAGE), pe);
         }
     }
 

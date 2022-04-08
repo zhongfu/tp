@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -16,7 +16,7 @@ import peoplesoft.model.employment.Employment;
 public class JobAssignCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobAssignCommand.MESSAGE_USAGE);
+            String.format(MSG_INVALID_CMD_FORMAT, JobAssignCommand.MESSAGE_USAGE);
 
     private JobAssignCommandParser parser = new JobAssignCommandParser();
 

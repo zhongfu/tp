@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.ExportCommand;
@@ -22,7 +22,7 @@ public class ExportCommandParser implements Parser<ExportCommand> {
             return new ExportCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE), pe);
+                    String.format(MSG_INVALID_CMD_FORMAT, ExportCommand.MESSAGE_USAGE), pe);
         }
     }
 

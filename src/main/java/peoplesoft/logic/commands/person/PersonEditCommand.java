@@ -43,7 +43,7 @@ public class PersonEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + "Format: PERSON_INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -79,7 +79,7 @@ public class PersonEditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());

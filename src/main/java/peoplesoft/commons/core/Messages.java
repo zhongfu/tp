@@ -5,15 +5,29 @@ package peoplesoft.commons.core;
  */
 public class Messages {
 
-    // TODO: prefix all with MSG_ instead to make it shorter. and CMD for command, IDX for index
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_JOB_DISPLAYED_INDEX = "Invalid index for job";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "Invalid index for person";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_JOBS_LISTED_OVERVIEW = "%1$d jobs listed!";
-    public static final String MESSAGE_MODIFY_FINAL_JOB = "Cannot modify a job that has finalized payment.";
-    public static final String MESSAGE_ASSIGN_PERSON_TO_JOB = "Assign at least one person to this job.";
-    // should add all the command explainers to here also
+    // -- General Commands --
+    public static final String MSG_UNKNOWN_CMD = "Unknown command";
+    public static final String MSG_INVALID_CMD_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MSG_EMPTY_STRING = "A field has been left empty!\nEnter the missing information.";
+    public static final String MSG_DURATION_CONSTRAINTS = "The duration should be a positive number (in hours).";
+    public static final String MSG_DURATION_TOO_LARGE = "The input duration is too long.\n"
+            + "Consider adding the job as two jobs and splitting the duration between them.";
+
+    // -- Person Commands --
+    public static final String MSG_INVALID_PERSON_DISPLAYED_IDX = "Invalid index for person";
+    public static final String MSG_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+
+    // -- Job Commands --
+    public static final String MSG_INVALID_JOB_DISPLAYED_IDX = "The specified job number "
+            + "is not in the displayed list. \nConsider using the JOBLIST command to list all jobs.";
+    public static final String MSG_JOBS_LISTED_OVERVIEW = "%1$d jobs listed!";
+    public static final String MSG_MODIFY_FINAL_JOB = "Cannot modify a job that has been payed.";
+    public static final String MSG_ASSIGN_PERSON_TO_JOB = "Assign at least one person to this job.";
+    public static final String MSG_DUPLICATE_JOB = "This job already exists in the database";
+    public static final String MSG_DUPLICATE_EMPLOYMENT =
+            "%s person(s) have already been assigned to this job.";
+    public static final String MSG_ASSIGN_MARKED_JOB = "Unmark the job before assigning it.";
+    public static final String MSG_JOB_NOT_PAID_FAILURE = // TODO: change message if needed
+            "Payments cannot be finalized if the job is not yet marked as paid.";
 
 }

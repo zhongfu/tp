@@ -24,11 +24,10 @@ public class JobMarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the job identified by the index number used in the displayed job list.\n"
-            + "Parameters: JOB_INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Marks the chosen job as completed.\n"
+            + "Example: " + COMMAND_WORD + " 2";
 
-    public static final String MESSAGE_SUCCESS = "Marked Job %s as %s";
+    public static final String MESSAGE_SUCCESS = "Marked job \"%s\" as %s.";
 
     private final Index toMark;
     private boolean state;
@@ -52,14 +51,14 @@ public class JobMarkCommand extends Command {
         List<Job> lastShownList = model.getFilteredJobList();
 
         if (toMark.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MSG_INVALID_JOB_DISPLAYED_IDX);
         }
 
         Job jobToMark = lastShownList.get(toMark.getZeroBased());
 
         // Not sure if this should be caught here or later.
         if (jobToMark.isFinal()) {
-            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
+            throw new CommandException(Messages.MSG_MODIFY_FINAL_JOB);
         }
 
         try {
@@ -75,14 +74,14 @@ public class JobMarkCommand extends Command {
                 state = false;
             }
         } catch (PaymentRequiresPersonException e) {
-            throw new CommandException(Messages.MESSAGE_ASSIGN_PERSON_TO_JOB, e);
+            throw new CommandException(Messages.MSG_ASSIGN_PERSON_TO_JOB, e);
         } finally {
             // Turns out model equals() tests filtered lists
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, jobToMark.getDesc(),
-                state ? "not paid" : "paid"));
+                state ? "Not Paid" : "Paid"));
     }
 
     @Override

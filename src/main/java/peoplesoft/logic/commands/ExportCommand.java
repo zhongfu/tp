@@ -41,7 +41,7 @@ public class ExportCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
         }
 
         Person personToExport = lastShownList.get(targetIndex.getZeroBased());

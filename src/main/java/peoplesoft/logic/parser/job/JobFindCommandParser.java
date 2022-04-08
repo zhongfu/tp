@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 
 import java.util.Arrays;
 
@@ -23,7 +23,7 @@ public class JobFindCommandParser implements Parser<JobFindCommand> {
             trimmedArgs = ParserUtil.parseString(args);
         } catch (ParseException pe) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobFindCommand.MESSAGE_USAGE), pe);
+                String.format(MSG_INVALID_CMD_FORMAT, JobFindCommand.MESSAGE_USAGE), pe);
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_INDEX;
 
 import java.util.Set;
@@ -30,7 +30,7 @@ public class JobAssignCommandParser implements Parser<JobAssignCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
                 || argMultimap.getPreamble().isBlank()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MSG_INVALID_CMD_FORMAT,
                     JobAssignCommand.MESSAGE_USAGE));
         }
         Index jobIndex;
@@ -40,7 +40,7 @@ public class JobAssignCommandParser implements Parser<JobAssignCommand> {
             jobIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
             personIndexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_INDEX));
         } catch (ParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MSG_INVALID_CMD_FORMAT,
                     JobAssignCommand.MESSAGE_USAGE));
         }
 

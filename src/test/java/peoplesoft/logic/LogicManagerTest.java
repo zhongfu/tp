@@ -1,8 +1,8 @@
 package peoplesoft.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static peoplesoft.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_PERSON_DISPLAYED_IDX;
+import static peoplesoft.commons.core.Messages.MSG_UNKNOWN_CMD;
 import static peoplesoft.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static peoplesoft.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static peoplesoft.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -54,13 +54,18 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, MSG_UNKNOWN_CMD);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
+<<<<<<< HEAD
         String deleteCommand = "persondelete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+=======
+        String deleteCommand = "delete 9";
+        assertCommandException(deleteCommand, MSG_INVALID_PERSON_DISPLAYED_IDX);
+>>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands)
     }
 
     @Test

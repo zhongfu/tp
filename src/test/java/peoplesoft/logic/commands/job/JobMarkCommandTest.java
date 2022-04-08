@@ -48,7 +48,7 @@ public class JobMarkCommandTest {
     public void execute_incorrectArgs_throwsCommandException() {
         // No job at index 3
         JobMarkCommand cmd = new JobMarkCommand(Index.fromOneBased(3), new Employment());
-        assertCommandFailure(cmd, expectedModel, Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+        assertCommandFailure(cmd, expectedModel, Messages.MSG_INVALID_JOB_DISPLAYED_IDX);
     }
 
     @Test

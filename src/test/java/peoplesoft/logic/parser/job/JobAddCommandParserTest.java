@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_DURATION;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -13,7 +13,7 @@ import peoplesoft.logic.parser.ParserUtil;
 public class JobAddCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobAddCommand.MESSAGE_USAGE);
+            String.format(MSG_INVALID_CMD_FORMAT, JobAddCommand.MESSAGE_USAGE);
 
     private static final String VALID_NAME = " " + PREFIX_NAME + "name";
     private static final String VALID_DURATION = " " + PREFIX_DURATION + "3";

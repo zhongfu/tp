@@ -22,10 +22,9 @@ public class JobDeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the job identified by the index.\n"
-            + "Parameters: JOB_INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 3";
 
-    public static final String MESSAGE_SUCCESS = "Deleted Job: %s";
+    public static final String MESSAGE_SUCCESS = "\"%s\" has been deleted.";
 
     private final Index toDelete;
 
@@ -45,13 +44,13 @@ public class JobDeleteCommand extends Command {
         List<Job> lastShownList = model.getFilteredJobList();
 
         if (toDelete.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MSG_INVALID_JOB_DISPLAYED_IDX);
         }
 
         Job jobToDelete = lastShownList.get(toDelete.getZeroBased());
 
         if (jobToDelete.isFinal()) {
-            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
+            throw new CommandException(Messages.MSG_MODIFY_FINAL_JOB);
         }
 
         model.deleteJob(jobToDelete);

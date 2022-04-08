@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.person;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static peoplesoft.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -27,7 +27,11 @@ public class PersonDeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+<<<<<<< HEAD:src/test/java/peoplesoft/logic/parser/person/PersonDeleteCommandParserTest.java
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonDeleteCommand.MESSAGE_USAGE));
+=======
+        assertParseFailure(parser, "a", String.format(MSG_INVALID_CMD_FORMAT, DeleteCommand.MESSAGE_USAGE));
+>>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands):src/test/java/peoplesoft/logic/parser/DeleteCommandParserTest.java
     }
 }

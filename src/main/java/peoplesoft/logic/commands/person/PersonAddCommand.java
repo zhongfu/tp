@@ -22,7 +22,7 @@ public class PersonAddCommand extends Command {
     public static final String COMMAND_WORD = "personadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the database. "
-            + "Parameters: "
+            + "Format: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "

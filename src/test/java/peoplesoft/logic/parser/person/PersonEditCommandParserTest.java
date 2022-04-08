@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.person;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static peoplesoft.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static peoplesoft.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -48,7 +48,11 @@ public class PersonEditCommandParserTest {
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
+<<<<<<< HEAD:src/test/java/peoplesoft/logic/parser/person/PersonEditCommandParserTest.java
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonEditCommand.MESSAGE_USAGE);
+=======
+            String.format(MSG_INVALID_CMD_FORMAT, EditCommand.MESSAGE_USAGE);
+>>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands):src/test/java/peoplesoft/logic/parser/EditCommandParserTest.java
 
     private PersonEditCommandParser parser = new PersonEditCommandParser();
 
