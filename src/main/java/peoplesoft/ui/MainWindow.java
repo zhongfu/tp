@@ -14,6 +14,7 @@ import peoplesoft.logic.Logic;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.logic.parser.exceptions.ParseException;
+import peoplesoft.model.Model;
 import peoplesoft.ui.regions.CommandBox;
 import peoplesoft.ui.regions.ResultDisplay;
 import peoplesoft.ui.regions.SideBar;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
 
     // Independent Ui parts residing in this Ui container
     private SideBar sideBar;
@@ -75,12 +77,13 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.model = model;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -109,7 +112,8 @@ public class MainWindow extends UiPart<Stage> {
         sideBarPlaceholder.getChildren().add(sideBar.getRoot());
 
         helpPage = new HelpPage(resultDisplay);
-        overviewPage = new OverviewPage(logic.getFilteredPersonList(), logic.getFilteredJobList());
+        overviewPage = new OverviewPage(logic.getFilteredPersonList(),
+                logic.getFilteredJobList(), model);
         pageSwitcher = new PageSwitcher(this, sideBar);
         sideBar.setPageSwitcher(pageSwitcher);
         loadOverviewPage();

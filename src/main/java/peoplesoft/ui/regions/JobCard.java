@@ -4,7 +4,13 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import java.util.HashMap;
+import java.util.Objects;
+
+import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,11 +18,13 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.TextAlignment;
 import peoplesoft.model.job.Job;
+import peoplesoft.model.person.Person;
 import peoplesoft.ui.UiPart;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Job}.
  */
 public class JobCard extends UiPart<Region> {
 
@@ -29,35 +37,34 @@ public class JobCard extends UiPart<Region> {
     private final Image tick = new Image(Objects.requireNonNull(this.getClass()
             .getResourceAsStream("/images/apple-tick-emoji.png")));
 
-    // what is shown is for proof of concept for now until jobs and payments are finalised
     @FXML
     private HBox cardPane;
     @FXML
     private Label idx; // displayed index, not job ID
     @FXML
-    private Label desc; // string
+    private Label desc;
     @FXML
-    private Label duration; // 1H0M
+    private Label duration;
     @FXML
     private StackPane doneIconCol;
     @FXML
     private ImageView doneIcon; // false
     @FXML
-    private StackPane paidForIconCol;
-    @FXML
     private ImageView paidForIcon; // false
     @FXML
-    private FlowPane involved; // Todo: get the associated people from employment to display in here
-    // @FXML
-    // private FlowPane tags; // Todo: implement tags when oviya merges her part
+    private StackPane paidForIconCol;
+    @FXML
+    private FlowPane assigned;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public JobCard(Job job, int displayedIndex, List<ReadOnlyDoubleProperty> colWidths) {
+    public JobCard(Job job, int displayedIndex, HashMap<Integer, Person> assignedIndexes,
+            List<ReadOnlyDoubleProperty> colWidths) {
         super(FXML);
 
-        List<? extends Region> cols = List.of(idx, desc, duration, doneIconCol, paidForIconCol, involved);
+        List<? extends Region> cols = List.of(idx, desc, duration, doneIconCol,
+                paidForIconCol, assigned);
         if (cols.size() != colWidths.size()) {
             throw new RuntimeException("JobCard colWidths count != cols count");
         }
@@ -79,12 +86,17 @@ public class JobCard extends UiPart<Region> {
         doneIcon.setImage(job.hasPaid() ? tick : cross);
         paidForIcon.setImage(job.isFinal() ? tick : cross);
 
-        /*
-        for when jobtags are a thing
-        job.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-         */
+        // Display people assigned to the job
+        ReadOnlyDoubleProperty asgnPaneWidthProperty = assigned.widthProperty();
+        ObservableList<Node> visibleAssignemnts = assigned.getChildren();
+
+        assignedIndexes.forEach((idx, person) -> {
+            Label lbl = new Label(idx + " – " + person.getName());
+            lbl.setWrapText(true);
+            lbl.setTextAlignment(TextAlignment.CENTER);
+            lbl.maxWidthProperty().bind(asgnPaneWidthProperty);
+            visibleAssignemnts.add(lbl);
+        });
     }
 
     @Override

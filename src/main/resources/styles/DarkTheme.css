@@ -8,15 +8,6 @@
     /* Source: https://stackoverflow.com/questions/13566210/declaring-variable-in-javafx-css-file */
     /* Docs https://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html */
 
-    /* Panel Colors */
-    base: white;
-    section-bg: base;
-    section-border: #ababab;
-    cmd-bg-and-box-outline: #cdcdcd;
-
-    tag: accent;
-    tag-alt: #FFAA02;
-
     list-cell-even: #cdcdcd;
     list-cell-odd: #dedede;
     list-cell-selected: derive(list-cell-even, -10%);
@@ -26,20 +17,22 @@
     text-default: black;
     text-inverse: white;
     text-error: #FF5736;
-    -fx-focus-color: #000000;
+    -fx-focus-color: black;
 
     /* Final Colors */
-    bg: #1B1C31;
-    pane: #222338;
-    pane-light: #33344B;
-    accent: #6076FF;
-
     text-norm: white;
     text-faded: #858AAB;
 
-    tag-accent-bg: #282B4C;
-    tag-green: #19A589;
-    tag-green-bg: #19A589;
+    bg: #1B1A2B;
+    pane: #201f31;
+    pane-light: #2e2d42;
+    accent: #6368ff;
+
+    tag: #262645;
+    tag-green: #249b7e;
+    tag-green-bg: #202a38;
+
+    /* Unused */
     tag-yellow: #FF9860;
     tag-yellow-bg: #382F3C;
     tag-red: #E06767;
@@ -195,15 +188,15 @@
 }
 
 #tags {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
+    -fx-hgap: 8;
+    -fx-vgap: 8;
 }
 
 #tags .label {
-    -fx-text-fill: text-inverse;
+    -fx-text-fill: accent;
     -fx-background-color: tag;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
+    -fx-padding: 7 7 7 7;
+    -fx-border-radius: 6;
     -fx-background-radius: 2;
     -fx-font-family: "Inter Regular";
     -fx-font-size: 11;

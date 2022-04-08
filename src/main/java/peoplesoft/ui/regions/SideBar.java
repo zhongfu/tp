@@ -14,7 +14,7 @@ import peoplesoft.ui.UiPart;
 public class SideBar extends UiPart<Region> implements Initializable {
     private static final String FXML = "SideBar.fxml";
 
-    private static final String ACTIVE_COLOR = "#6076FF";
+    private static final String ACTIVE_COLOR = "#6368ff";
     private static final String INACTIVE_COLOR = "transparent";
 
     private Button activePage;
