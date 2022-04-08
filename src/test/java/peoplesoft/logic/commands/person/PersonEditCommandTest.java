@@ -107,11 +107,7 @@ public class PersonEditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         PersonEditCommand personEditCommand = new PersonEditCommand(outOfBoundIndex, descriptor);
 
-<<<<<<< HEAD:src/test/java/peoplesoft/logic/commands/person/PersonEditCommandTest.java
-        assertCommandFailure(personEditCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-=======
-        assertCommandFailure(editCommand, model, Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
->>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands):src/test/java/peoplesoft/logic/commands/EditCommandTest.java
+        assertCommandFailure(personEditCommand, model, Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
     }
 
     /**
@@ -128,11 +124,7 @@ public class PersonEditCommandTest {
         PersonEditCommand personEditCommand = new PersonEditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-<<<<<<< HEAD:src/test/java/peoplesoft/logic/commands/person/PersonEditCommandTest.java
-        assertCommandFailure(personEditCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-=======
-        assertCommandFailure(editCommand, model, Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
->>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands):src/test/java/peoplesoft/logic/commands/EditCommandTest.java
+        assertCommandFailure(personEditCommand, model, Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
     }
 
     @Test

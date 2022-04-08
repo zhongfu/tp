@@ -59,13 +59,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-<<<<<<< HEAD
         String deleteCommand = "persondelete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-=======
-        String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MSG_INVALID_PERSON_DISPLAYED_IDX);
->>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands)
     }
 
     @Test

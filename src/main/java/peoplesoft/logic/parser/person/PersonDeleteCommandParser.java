@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.person;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.person.PersonDeleteCommand;
@@ -24,7 +24,7 @@ public class PersonDeleteCommandParser implements Parser<PersonDeleteCommand> {
             return new PersonDeleteCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonDeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MSG_INVALID_CMD_FORMAT , PersonDeleteCommand.MESSAGE_USAGE), pe);
         }
     }
 

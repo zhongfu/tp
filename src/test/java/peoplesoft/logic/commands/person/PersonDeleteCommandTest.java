@@ -44,11 +44,7 @@ public class PersonDeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(outOfBoundIndex);
 
-<<<<<<< HEAD:src/test/java/peoplesoft/logic/commands/person/PersonDeleteCommandTest.java
-        assertCommandFailure(personDeleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-=======
-        assertCommandFailure(deleteCommand, model, Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
->>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands):src/test/java/peoplesoft/logic/commands/DeleteCommandTest.java
+        assertCommandFailure(personDeleteCommand, model, Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
     }
 
     @Test
@@ -77,11 +73,7 @@ public class PersonDeleteCommandTest {
 
         PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(outOfBoundIndex);
 
-<<<<<<< HEAD:src/test/java/peoplesoft/logic/commands/person/PersonDeleteCommandTest.java
-        assertCommandFailure(personDeleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-=======
-        assertCommandFailure(deleteCommand, model, Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
->>>>>>> a2a3ef33 (Debug and fix ResultDisplay messages for all job commands):src/test/java/peoplesoft/logic/commands/DeleteCommandTest.java
+        assertCommandFailure(personDeleteCommand, model, Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
     }
 
     @Test
