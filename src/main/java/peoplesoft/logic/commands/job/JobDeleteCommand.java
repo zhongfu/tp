@@ -18,7 +18,7 @@ import peoplesoft.model.job.Job;
  */
 public class JobDeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "jobdelete";
+    public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the job identified by the index.\n"
