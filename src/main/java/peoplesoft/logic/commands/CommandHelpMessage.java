@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
  * Handle help instructions for commands.
  */
 public class CommandHelpMessage {
-    private static final String PROPERTY_DELIMITER = "----";
-    private static final String MESSAGE_DELIMITER = "--------";
+    public static final String PROPERTY_DELIMITER = "----";
+    public static final String MESSAGE_DELIMITER = "--------";
 
     private final SimpleStringProperty command;
     private final SimpleStringProperty format;
@@ -62,7 +62,7 @@ public class CommandHelpMessage {
      * @param commands list of commands
      * @return string delimited by -------- and ----
      */
-    public static String asObservableList(ObservableList<CommandHelpMessage> commands) {
+    public static String asString(ObservableList<CommandHelpMessage> commands) {
         StringBuilder parsedCommandMessages = new StringBuilder();
 
         for (CommandHelpMessage msg: commands) {
@@ -79,7 +79,7 @@ public class CommandHelpMessage {
      * @param str string to be parsed
      * @return ObservableList of help messages for commands in string.
      */
-    public ObservableList<CommandHelpMessage> parse(String str) {
+    public static ObservableList<CommandHelpMessage> asObservableList(String str) {
         ObservableList<CommandHelpMessage> commandHelpMessages =
                 FXCollections.observableArrayList();
 
