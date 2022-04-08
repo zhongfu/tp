@@ -65,14 +65,14 @@ public class JobMarkCommandTest {
         expectedModel.addJob(PAID);
         expectedModel.setPerson(ALICE, aliceToo);
         JobMarkCommand cmd = new JobMarkCommand(Index.fromOneBased(1), emp);
-        assertCommandSuccess(cmd, model, String.format(JobMarkCommand.MESSAGE_SUCCESS, PAID.getDesc(), "paid"),
+        assertCommandSuccess(cmd, model, String.format(JobMarkCommand.MESSAGE_SUCCESS, PAID.getDesc(), "Paid"),
                 expectedModel);
 
         // Mark as not paid
         expectedModel.setJob(PAID, UNPAID);
         expectedModel.setPerson(aliceToo, ALICE);
         cmd = new JobMarkCommand(Index.fromOneBased(1), emp);
-        assertCommandSuccess(cmd, model, String.format(JobMarkCommand.MESSAGE_SUCCESS, UNPAID.getDesc(), "not paid"),
+        assertCommandSuccess(cmd, model, String.format(JobMarkCommand.MESSAGE_SUCCESS, UNPAID.getDesc(), "Not Paid"),
                 expectedModel);
     }
 }
