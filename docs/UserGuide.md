@@ -215,7 +215,7 @@ any person.
 
 Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
 
-Example: `assign 2 i/3` assigns the second job to the first employee
+Example: `assign 2 i/3` assigns the second job to the third employee
 
 ### Mark a job as done or not done : `mark`
 
