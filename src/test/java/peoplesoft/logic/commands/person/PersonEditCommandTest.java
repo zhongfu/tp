@@ -25,7 +25,6 @@ import peoplesoft.model.Model;
 import peoplesoft.model.ModelManager;
 import peoplesoft.model.UserPrefs;
 import peoplesoft.model.person.Person;
-import peoplesoft.model.util.ID;
 import peoplesoft.testutil.EditPersonDescriptorBuilder;
 import peoplesoft.testutil.PersonBuilder;
 
@@ -39,7 +38,7 @@ public class PersonEditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder()
-                .withId(new ID(1)) // we're editing the person at index 0, i.e. id 1
+                .withId(model.getFilteredPersonList().get(0).getPersonId()) // preserve current ID
                 .build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         PersonEditCommand personEditCommand = new PersonEditCommand(INDEX_FIRST_PERSON, descriptor);
