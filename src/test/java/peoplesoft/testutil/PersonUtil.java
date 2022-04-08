@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import peoplesoft.logic.commands.AddCommand;
-import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
+import peoplesoft.logic.commands.person.PersonAddCommand;
+import peoplesoft.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
 import peoplesoft.model.money.Payment;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.tag.Tag;
@@ -27,7 +27,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return PersonAddCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

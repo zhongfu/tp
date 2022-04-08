@@ -1,4 +1,4 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 
@@ -6,6 +6,8 @@ import java.util.List;
 
 import peoplesoft.commons.core.Messages;
 import peoplesoft.commons.core.index.Index;
+import peoplesoft.logic.commands.Command;
+import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
 import peoplesoft.model.employment.Employment;
@@ -14,7 +16,7 @@ import peoplesoft.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the database.
  */
-public class DeleteCommand extends Command {
+public class PersonDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "persondelete";
 
@@ -27,7 +29,7 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public PersonDeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -50,7 +52,7 @@ public class DeleteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof PersonDeleteCommand // instanceof handles nulls
+                && targetIndex.equals(((PersonDeleteCommand) other).targetIndex)); // state check
     }
 }

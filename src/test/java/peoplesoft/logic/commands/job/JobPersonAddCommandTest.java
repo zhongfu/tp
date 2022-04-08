@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.util.ID;
 
-public class JobAddCommandTest {
+public class JobPersonAddCommandTest {
 
     private static final Job EATING = new Job(new ID(1043), "Eating", Duration.ofHours(1));
 

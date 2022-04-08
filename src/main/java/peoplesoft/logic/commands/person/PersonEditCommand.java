@@ -1,4 +1,4 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -19,6 +19,8 @@ import java.util.Set;
 import peoplesoft.commons.core.Messages;
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.commons.util.CollectionUtil;
+import peoplesoft.logic.commands.Command;
+import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
 import peoplesoft.model.money.Payment;
@@ -34,7 +36,7 @@ import peoplesoft.model.util.ID;
 /**
  * Edits the details of an existing person in the database.
  */
-public class EditCommand extends Command {
+public class PersonEditCommand extends Command {
 
     public static final String COMMAND_WORD = "personedit";
 
@@ -63,7 +65,7 @@ public class EditCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public PersonEditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -119,12 +121,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof PersonEditCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        PersonEditCommand e = (PersonEditCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }

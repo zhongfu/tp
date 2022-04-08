@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
+import peoplesoft.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
 import peoplesoft.model.money.Money;
 import peoplesoft.model.money.Rate;
 import peoplesoft.model.person.Address;

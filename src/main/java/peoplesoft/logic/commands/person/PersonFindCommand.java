@@ -1,8 +1,10 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 
 import peoplesoft.commons.core.Messages;
+import peoplesoft.logic.commands.Command;
+import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.model.Model;
 import peoplesoft.model.person.PersonContainsKeywordsPredicate;
 
@@ -10,7 +12,7 @@ import peoplesoft.model.person.PersonContainsKeywordsPredicate;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class PersonFindCommand extends Command {
 
     public static final String COMMAND_WORD = "personfind";
 
@@ -21,7 +23,7 @@ public class FindCommand extends Command {
 
     private final PersonContainsKeywordsPredicate predicate;
 
-    public FindCommand(PersonContainsKeywordsPredicate predicate) {
+    public PersonFindCommand(PersonContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -36,7 +38,7 @@ public class FindCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                || (other instanceof PersonFindCommand // instanceof handles nulls
+                && predicate.equals(((PersonFindCommand) other).predicate)); // state check
     }
 }
