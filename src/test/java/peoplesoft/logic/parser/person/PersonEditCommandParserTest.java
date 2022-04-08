@@ -1,4 +1,4 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -50,7 +50,7 @@ public class PersonEditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonEditCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private PersonEditCommandParser parser = new PersonEditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

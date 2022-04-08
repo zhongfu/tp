@@ -1,4 +1,4 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -14,6 +14,11 @@ import java.util.stream.Stream;
 
 import peoplesoft.commons.core.PersonIdFactory;
 import peoplesoft.logic.commands.person.PersonAddCommand;
+import peoplesoft.logic.parser.ArgumentMultimap;
+import peoplesoft.logic.parser.ArgumentTokenizer;
+import peoplesoft.logic.parser.Parser;
+import peoplesoft.logic.parser.ParserUtil;
+import peoplesoft.logic.parser.Prefix;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.money.Payment;
 import peoplesoft.model.money.Rate;
@@ -28,7 +33,7 @@ import peoplesoft.model.util.ID;
 /**
  * Parses input arguments and creates a new PersonAddCommand object
  */
-public class AddCommandParser implements Parser<PersonAddCommand> {
+public class PersonAddCommandParser implements Parser<PersonAddCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the PersonAddCommand

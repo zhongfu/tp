@@ -1,4 +1,4 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

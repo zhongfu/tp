@@ -1,17 +1,19 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
 import peoplesoft.logic.commands.person.PersonFindCommand;
+import peoplesoft.logic.parser.Parser;
+import peoplesoft.logic.parser.ParserUtil;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.person.PersonContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new PersonFindCommand object
  */
-public class FindCommandParser implements Parser<PersonFindCommand> {
+public class PersonFindCommandParser implements Parser<PersonFindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the PersonFindCommand

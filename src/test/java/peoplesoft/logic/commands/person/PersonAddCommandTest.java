@@ -1,4 +1,4 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,8 +11,9 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import peoplesoft.logic.commands.CommandResult;
+import peoplesoft.logic.commands.ModelStub;
 import peoplesoft.logic.commands.exceptions.CommandException;
-import peoplesoft.logic.commands.person.PersonAddCommand;
 import peoplesoft.model.AddressBook;
 import peoplesoft.model.ReadOnlyAddressBook;
 import peoplesoft.model.person.Person;

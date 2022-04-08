@@ -1,4 +1,4 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import peoplesoft.commons.core.Messages;
 import peoplesoft.commons.core.index.Index;
-import peoplesoft.logic.commands.person.PersonDeleteCommand;
 import peoplesoft.model.Model;
 import peoplesoft.model.ModelManager;
 import peoplesoft.model.UserPrefs;

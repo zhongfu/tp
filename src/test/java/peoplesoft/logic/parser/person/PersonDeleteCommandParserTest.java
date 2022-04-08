@@ -1,4 +1,4 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -18,7 +18,7 @@ import peoplesoft.logic.commands.person.PersonDeleteCommand;
  */
 public class PersonDeleteCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private PersonDeleteCommandParser parser = new PersonDeleteCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

@@ -30,6 +30,10 @@ import peoplesoft.logic.parser.job.JobDeleteCommandParser;
 import peoplesoft.logic.parser.job.JobFinalizeCommandParser;
 import peoplesoft.logic.parser.job.JobFindCommandParser;
 import peoplesoft.logic.parser.job.JobMarkCommandParser;
+import peoplesoft.logic.parser.person.PersonAddCommandParser;
+import peoplesoft.logic.parser.person.PersonDeleteCommandParser;
+import peoplesoft.logic.parser.person.PersonEditCommandParser;
+import peoplesoft.logic.parser.person.PersonFindCommandParser;
 
 /**
  * Parses user input.
@@ -59,13 +63,13 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case PersonAddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new PersonAddCommandParser().parse(arguments);
 
         case PersonEditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new PersonEditCommandParser().parse(arguments);
 
         case PersonDeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new PersonDeleteCommandParser().parse(arguments);
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
@@ -74,7 +78,7 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case PersonFindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            return new PersonFindCommandParser().parse(arguments);
 
         case PersonListCommand.COMMAND_WORD:
             return new PersonListCommand();

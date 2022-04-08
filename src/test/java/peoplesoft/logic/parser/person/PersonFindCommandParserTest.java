@@ -1,4 +1,4 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -13,7 +13,7 @@ import peoplesoft.model.person.PersonContainsKeywordsPredicate;
 
 public class PersonFindCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private PersonFindCommandParser parser = new PersonFindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

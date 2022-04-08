@@ -1,4 +1,4 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static peoplesoft.logic.commands.CommandTestUtil.assertCommandFailure;
 import static peoplesoft.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -7,7 +7,6 @@ import static peoplesoft.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import peoplesoft.logic.commands.person.PersonAddCommand;
 import peoplesoft.model.Model;
 import peoplesoft.model.ModelManager;
 import peoplesoft.model.UserPrefs;

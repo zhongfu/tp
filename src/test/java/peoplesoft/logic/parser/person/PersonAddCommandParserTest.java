@@ -1,4 +1,4 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -46,7 +46,7 @@ import peoplesoft.model.tag.Tag;
 import peoplesoft.testutil.PersonBuilder;
 
 public class PersonAddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private PersonAddCommandParser parser = new PersonAddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

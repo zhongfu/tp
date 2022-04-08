@@ -1,4 +1,4 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -17,13 +17,17 @@ import java.util.Set;
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.person.PersonEditCommand;
 import peoplesoft.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
+import peoplesoft.logic.parser.ArgumentMultimap;
+import peoplesoft.logic.parser.ArgumentTokenizer;
+import peoplesoft.logic.parser.Parser;
+import peoplesoft.logic.parser.ParserUtil;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new PersonEditCommand object
  */
-public class EditCommandParser implements Parser<PersonEditCommand> {
+public class PersonEditCommandParser implements Parser<PersonEditCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the PersonEditCommand

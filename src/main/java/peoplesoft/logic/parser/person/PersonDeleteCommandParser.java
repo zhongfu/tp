@@ -1,15 +1,17 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.person.PersonDeleteCommand;
+import peoplesoft.logic.parser.Parser;
+import peoplesoft.logic.parser.ParserUtil;
 import peoplesoft.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new PersonDeleteCommand object
  */
-public class DeleteCommandParser implements Parser<PersonDeleteCommand> {
+public class PersonDeleteCommandParser implements Parser<PersonDeleteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the PersonDeleteCommand
