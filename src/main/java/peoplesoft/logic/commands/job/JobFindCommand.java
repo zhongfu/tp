@@ -14,7 +14,9 @@ public class JobFindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose description contain all of "
             + "the specified keywords (case-insensitive) and displays them in the list.\n"
-            + "Format: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Format: "
+            + COMMAND_WORD + " "
+            + "KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " electric aircon appliances";
 
     private final JobContainsKeywordsPredicate predicate;

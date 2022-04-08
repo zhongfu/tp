@@ -23,11 +23,14 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports a .csv file with the jobs the person worked on, "
             + "including how much pay they should expect to receive.\n"
-            + "Format: " + COMMAND_WORD + " INDEX. Example: " + COMMAND_WORD + " 1";
+            + "Format: " + COMMAND_WORD + " INDEX. \n"
+            + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_EXPORT_PERSON_SUCCESS = "Exported Person Details: %1$s";
+    public static final String MESSAGE_EXPORT_PERSON_SUCCESS = "%s's details were "
+            + "exported to a .CSV in your data folder.";
 
-    public static final String MESSAGE_EXPORT_PERSON_FAILURE = "Failed to Export due to IO Error";
+    public static final String MESSAGE_EXPORT_PERSON_FAILURE = "Failed to Export "
+            + "due to a problem with saving.";
 
     private final Index targetIndex;
 
