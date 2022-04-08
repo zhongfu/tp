@@ -1,4 +1,4 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,7 +12,7 @@ import static peoplesoft.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
+import peoplesoft.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
 import peoplesoft.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

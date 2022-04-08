@@ -16,7 +16,7 @@ import peoplesoft.model.job.Job;
  */
 public class JobAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "job";
+    public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database. "
             + "Parameters: "

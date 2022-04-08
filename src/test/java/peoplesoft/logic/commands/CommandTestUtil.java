@@ -16,6 +16,7 @@ import java.util.List;
 
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.exceptions.CommandException;
+import peoplesoft.logic.commands.person.PersonEditCommand;
 import peoplesoft.model.AddressBook;
 import peoplesoft.model.Model;
 import peoplesoft.model.person.Person;
@@ -63,8 +64,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final PersonEditCommand.EditPersonDescriptor DESC_AMY;
+    public static final PersonEditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

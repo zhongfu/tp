@@ -18,7 +18,7 @@ import peoplesoft.model.job.Job;
 import peoplesoft.model.job.JobContainsKeywordsPredicate;
 import peoplesoft.model.util.ID;
 
-public class JobFindCommandTest {
+public class JobPersonFindCommandTest {
     private static final String TEST_ID = "test";
     private static final Job JOB = new Job(new ID(TEST_ID), "The Right Job", Duration.ofHours(2));
 

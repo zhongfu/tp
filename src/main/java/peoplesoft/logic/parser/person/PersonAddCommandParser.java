@@ -1,4 +1,4 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -13,7 +13,12 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import peoplesoft.commons.core.PersonIdFactory;
-import peoplesoft.logic.commands.AddCommand;
+import peoplesoft.logic.commands.person.PersonAddCommand;
+import peoplesoft.logic.parser.ArgumentMultimap;
+import peoplesoft.logic.parser.ArgumentTokenizer;
+import peoplesoft.logic.parser.Parser;
+import peoplesoft.logic.parser.ParserUtil;
+import peoplesoft.logic.parser.Prefix;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.money.Payment;
 import peoplesoft.model.money.Rate;
@@ -26,23 +31,23 @@ import peoplesoft.model.tag.Tag;
 import peoplesoft.model.util.ID;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new PersonAddCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class PersonAddCommandParser implements Parser<PersonAddCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the PersonAddCommand
+     * and returns an PersonAddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public PersonAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_RATE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_RATE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonAddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -55,7 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person = new Person(PersonIdFactory.nextId(), name, phone, email, address, rate, tagList, payments);
 
-        return new AddCommand(person);
+        return new PersonAddCommand(person);
     }
 
     /**

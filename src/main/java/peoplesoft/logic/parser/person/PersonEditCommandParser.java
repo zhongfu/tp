@@ -1,4 +1,4 @@
-package peoplesoft.logic.parser;
+package peoplesoft.logic.parser.person;
 
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -15,22 +15,26 @@ import java.util.Optional;
 import java.util.Set;
 
 import peoplesoft.commons.core.index.Index;
-import peoplesoft.logic.commands.EditCommand;
-import peoplesoft.logic.commands.EditCommand.EditPersonDescriptor;
+import peoplesoft.logic.commands.person.PersonEditCommand;
+import peoplesoft.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
+import peoplesoft.logic.parser.ArgumentMultimap;
+import peoplesoft.logic.parser.ArgumentTokenizer;
+import peoplesoft.logic.parser.Parser;
+import peoplesoft.logic.parser.ParserUtil;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new PersonEditCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class PersonEditCommandParser implements Parser<PersonEditCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the PersonEditCommand
+     * and returns an PersonEditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public PersonEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -41,7 +45,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PersonEditCommand.MESSAGE_USAGE), pe);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -63,10 +68,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(PersonEditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new PersonEditCommand(index, editPersonDescriptor);
     }
 
     /**

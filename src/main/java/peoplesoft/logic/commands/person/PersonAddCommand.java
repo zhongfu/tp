@@ -1,4 +1,4 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -8,6 +8,8 @@ import static peoplesoft.logic.parser.CliSyntax.PREFIX_PHONE;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_RATE;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_TAG;
 
+import peoplesoft.logic.commands.Command;
+import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.Model;
 import peoplesoft.model.person.Person;
@@ -15,9 +17,9 @@ import peoplesoft.model.person.Person;
 /**
  * Adds a person to the database.
  */
-public class AddCommand extends Command {
+public class PersonAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "personadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the database. "
             + "Parameters: "
@@ -42,9 +44,9 @@ public class AddCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an PersonAddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public PersonAddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -64,7 +66,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof PersonAddCommand // instanceof handles nulls
+                && toAdd.equals(((PersonAddCommand) other).toAdd));
     }
 }

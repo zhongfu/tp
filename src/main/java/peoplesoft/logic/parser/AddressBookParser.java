@@ -6,16 +6,11 @@ import static peoplesoft.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import peoplesoft.logic.commands.AddCommand;
 import peoplesoft.logic.commands.ClearCommand;
 import peoplesoft.logic.commands.Command;
-import peoplesoft.logic.commands.DeleteCommand;
-import peoplesoft.logic.commands.EditCommand;
 import peoplesoft.logic.commands.ExitCommand;
 import peoplesoft.logic.commands.ExportCommand;
-import peoplesoft.logic.commands.FindCommand;
 import peoplesoft.logic.commands.HelpCommand;
-import peoplesoft.logic.commands.ListCommand;
 import peoplesoft.logic.commands.job.JobAddCommand;
 import peoplesoft.logic.commands.job.JobAssignCommand;
 import peoplesoft.logic.commands.job.JobDeleteCommand;
@@ -23,6 +18,11 @@ import peoplesoft.logic.commands.job.JobFinalizeCommand;
 import peoplesoft.logic.commands.job.JobFindCommand;
 import peoplesoft.logic.commands.job.JobListCommand;
 import peoplesoft.logic.commands.job.JobMarkCommand;
+import peoplesoft.logic.commands.person.PersonAddCommand;
+import peoplesoft.logic.commands.person.PersonDeleteCommand;
+import peoplesoft.logic.commands.person.PersonEditCommand;
+import peoplesoft.logic.commands.person.PersonFindCommand;
+import peoplesoft.logic.commands.person.PersonListCommand;
 import peoplesoft.logic.parser.exceptions.ParseException;
 import peoplesoft.logic.parser.job.JobAddCommandParser;
 import peoplesoft.logic.parser.job.JobAssignCommandParser;
@@ -30,6 +30,10 @@ import peoplesoft.logic.parser.job.JobDeleteCommandParser;
 import peoplesoft.logic.parser.job.JobFinalizeCommandParser;
 import peoplesoft.logic.parser.job.JobFindCommandParser;
 import peoplesoft.logic.parser.job.JobMarkCommandParser;
+import peoplesoft.logic.parser.person.PersonAddCommandParser;
+import peoplesoft.logic.parser.person.PersonDeleteCommandParser;
+import peoplesoft.logic.parser.person.PersonEditCommandParser;
+import peoplesoft.logic.parser.person.PersonFindCommandParser;
 
 /**
  * Parses user input.
@@ -58,14 +62,14 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case PersonAddCommand.COMMAND_WORD:
+            return new PersonAddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case PersonEditCommand.COMMAND_WORD:
+            return new PersonEditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case PersonDeleteCommand.COMMAND_WORD:
+            return new PersonDeleteCommandParser().parse(arguments);
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
@@ -73,11 +77,11 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case PersonFindCommand.COMMAND_WORD:
+            return new PersonFindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case PersonListCommand.COMMAND_WORD:
+            return new PersonListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

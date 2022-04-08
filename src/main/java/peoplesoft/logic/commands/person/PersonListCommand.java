@@ -1,16 +1,18 @@
-package peoplesoft.logic.commands;
+package peoplesoft.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 import static peoplesoft.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import peoplesoft.logic.commands.Command;
+import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.model.Model;
 
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListCommand extends Command {
+public class PersonListCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "personlist";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
