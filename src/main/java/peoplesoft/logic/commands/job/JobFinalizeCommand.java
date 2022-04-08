@@ -25,6 +25,10 @@ public class JobFinalizeCommand extends Command {
 
     public static final String COMMAND_WORD = "pay";
 
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " 1 " + PREFIX_CONFIRMATION;
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " JOB_INDEX " + PREFIX_CONFIRMATION;
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finalizes payments for the job identified by the index number used in the displayed job list.\n"
             + "Note: This command is irreversible!\n"

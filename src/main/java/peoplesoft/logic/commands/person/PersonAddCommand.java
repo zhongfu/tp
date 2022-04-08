@@ -21,6 +21,23 @@ public class PersonAddCommand extends Command {
 
     public static final String COMMAND_WORD = "personadd";
 
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " "
+            + PREFIX_NAME + "Nicole Tan "
+            + PREFIX_PHONE + "99338558 "
+            + PREFIX_EMAIL + "nicole@stffhub.org "
+            + PREFIX_ADDRESS + "1 Tech Drive, S138572 "
+            + PREFIX_RATE + "37.50 "
+            + PREFIX_TAG + "Hardware "
+            + PREFIX_TAG + "Senior";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_RATE + "RATE "
+            + "[" + PREFIX_TAG + "TAG]...";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the database. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "

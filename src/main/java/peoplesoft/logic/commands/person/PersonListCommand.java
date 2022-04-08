@@ -14,6 +14,10 @@ public class PersonListCommand extends Command {
 
     public static final String COMMAND_WORD = "personlist";
 
+    public static final String COMMAND_EXAMPLES = "N.A.";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD;
+
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
 

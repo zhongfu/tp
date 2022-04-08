@@ -23,6 +23,10 @@ public class JobMarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " 2";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " JOB_INDEX";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the job identified by the index number used in the displayed job list.\n"
             + "Parameters: JOB_INDEX\n"

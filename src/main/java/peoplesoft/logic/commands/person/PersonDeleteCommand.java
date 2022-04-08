@@ -20,6 +20,10 @@ public class PersonDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "persondelete";
 
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " 3";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " PERSON_INDEX";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: PERSON_INDEX (must be a positive integer)\n"

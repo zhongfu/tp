@@ -12,6 +12,10 @@ public class JobFindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " Painting";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " KEYWORD";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose description contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
