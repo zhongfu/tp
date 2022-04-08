@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="SidePane" prefHeight="720.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #222338;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="SidePane" prefHeight="720.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #222338;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane onMouseClicked="#switchToOverview" prefHeight="100.0" prefWidth="230.0">
          <children>

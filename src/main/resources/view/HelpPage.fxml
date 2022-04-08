@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="help" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="1050.0" spacing="30.0" style="-fx-background-color: transparent;" stylesheets="@../styles/HelpPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="help" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="1050.0" spacing="30.0" style="-fx-background-color: transparent;" stylesheets="@../styles/HelpPage.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <TableView fx:id="table" prefHeight="2160.0" prefWidth="1050.0">
             <columns>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root height="720.0" maxWidth="1280.0" minHeight="600.0" minWidth="860.0" onCloseRequest="#handleExit" title="PeopleSoft" type="javafx.stage.Stage" width="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root height="720.0" maxWidth="1280.0" minHeight="600.0" minWidth="860.0" onCloseRequest="#handleExit" title="PeopleSoft" type="javafx.stage.Stage" width="1280.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/logo/Logo32.png" />
     </icons>
