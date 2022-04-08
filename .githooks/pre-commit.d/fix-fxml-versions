@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+JAVAFX_VER=11
+
+# only care about staged changes for files ending in .fxml
+git diff --cached --name-only | { grep -E "src/main/.*\.fxml$" || test $? == 1; } | while read fn; do
+    # suppress only exit code 1; let set -e catch everything else
+    javafx_lines="$(git show ":$fn" | { grep -E -o 'http://javafx.com/javafx/[^"]+' || test $? == 1; })"
+
+    # sanity check: only one line
+    javafx_num_lines=$(wc -l <<< "$javafx_lines")
+    if [[ $javafx_num_lines -ne 1 ]]; then
+        >&2 echo "error: staged file $fn doesn't have exactly 1 line with javafx xmlns url (got: $javafx_num_lines)"
+        exit 1
+    fi
+
+    javafx_cur_ver=$(grep -E -o "[0-9]+" <<< "$javafx_lines")
+
+    if [[ $javafx_cur_ver -ne $JAVAFX_VER ]]; then
+        echo "staged file $fn has incorrect javafx ver $javafx_cur_ver; changing to ver $JAVAFX_VER in working tree and index"
+        # working tree, hopefully it breaks nothing
+        sed -i "s|http://javafx.com/javafx/$javafx_cur_ver|http://javafx.com/javafx/$JAVAFX_VER|" "$fn" || test $? == 1
+
+        # index (i.e. staged)
+        partial_patch="$(git show ":$fn" | sed "s|http://javafx.com/javafx/$javafx_cur_ver|http://javafx.com/javafx/$JAVAFX_VER|" | { diff -u <(git show ":$fn") - || test $? == 1; } | tail -n +3)"
+        patch="--- a/$fn"$'\n'"+++ b/$fn"$'\n'"$partial_patch"
+        git apply --cached <<< "$patch"
+    fi
+done

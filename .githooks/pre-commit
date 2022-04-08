@@ -21,7 +21,7 @@ if [[ -d .git/hooks/${TYPE}.d ]]; then
         if [[ -f "$script" && -x "$script" ]]; then
             filename="$(basename "$script")"
             echo -e '\033[1;96m### Running '"$TYPE"' script '"$filename"'\033[0m'
-            . $script
+            bash $script
             echo -e '\033[1;96m### Finished running '"$TYPE"' script '"$filename"'\033[0m\n'
         fi
     done
