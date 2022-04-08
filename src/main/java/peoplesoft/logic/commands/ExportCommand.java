@@ -19,6 +19,8 @@ import peoplesoft.model.person.Person;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " 1";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " INDEX";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports a .csv file with the jobs the person worked on, "
