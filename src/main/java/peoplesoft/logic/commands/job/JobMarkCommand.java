@@ -57,7 +57,7 @@ public class JobMarkCommand extends Command {
 
         Job jobToMark = lastShownList.get(toMark.getZeroBased());
 
-        // Not sure if this should be caught here or later.
+        // Todo: Not sure if this should be caught here or later.
         if (jobToMark.isFinal()) {
             throw new CommandException(Messages.MSG_MODIFY_FINAL_JOB);
         }

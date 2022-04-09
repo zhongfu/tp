@@ -53,6 +53,8 @@ public class JobAddCommand extends Command {
         }
 
         model.addJob(toAdd);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
