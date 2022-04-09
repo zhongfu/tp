@@ -1,7 +1,9 @@
 package peoplesoft.ui.regions;
 
+import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -18,14 +20,17 @@ public class JobListPanel extends UiPart<Region> {
     private static final String FXML = "JobListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(JobListPanel.class);
 
+    private List<ReadOnlyDoubleProperty> colWidths;
+
     @FXML
     private ListView<Job> jobListView;
 
     /**
      * Creates a {@code JobListPanel} with the given {@code ObservableList}.
      */
-    public JobListPanel(ObservableList<Job> jobList) {
+    public JobListPanel(ObservableList<Job> jobList, List<ReadOnlyDoubleProperty> colWidths) {
         super(FXML);
+        this.colWidths = colWidths;
         jobListView.setItems(jobList);
         jobListView.setCellFactory(listView -> new JobListViewCell());
     }
@@ -45,7 +50,7 @@ public class JobListPanel extends UiPart<Region> {
                 // add a new divider before also!
                 // <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0"
                 // prefHeight="2.0" style="-fx-background-color: #33344B;" />
-                setGraphic(new JobCard(job, getIndex() + 1).getRoot());
+                setGraphic(new JobCard(job, getIndex() + 1, colWidths).getRoot());
             }
         }
     }

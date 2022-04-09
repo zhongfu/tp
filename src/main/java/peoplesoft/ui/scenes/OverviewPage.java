@@ -1,9 +1,15 @@
 package peoplesoft.ui.scenes;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.model.job.Job;
@@ -19,10 +25,14 @@ public class OverviewPage extends Page {
     private JobListPanel jobListPanel;
 
     @FXML
+    private HBox personListHeader;
+    @FXML
+    private HBox jobListHeader;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
     @FXML
     private StackPane jobListPanelPlaceholder;
-
 
     /**
      * Creates a {@code OverPage} with the given {@code ObservableList<Person>}
@@ -30,10 +40,18 @@ public class OverviewPage extends Page {
     public OverviewPage(ObservableList<Person> filteredPersonList, ObservableList<Job> filteredJobList) {
         super(FXML);
         logger.fine("Opening PeopleSoft's Overview page.");
-        personListPanel = new PersonListPanel(filteredPersonList);
-        jobListPanel = new JobListPanel(filteredJobList);
+        List<ReadOnlyDoubleProperty> personColWidths = personListHeader.getChildren().stream()
+                .map(node -> ((Region) node).widthProperty())
+                .filter(Objects::nonNull)
+                .collect(Collectors.toUnmodifiableList());
+        personListPanel = new PersonListPanel(filteredPersonList, personColWidths);
+
+        List<ReadOnlyDoubleProperty> jobColWidths = jobListHeader.getChildren().stream()
+                .map(node -> ((Region) node).widthProperty())
+                .collect(Collectors.toList());
+        jobListPanel = new JobListPanel(filteredJobList, jobColWidths);
+
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
     }
-
 }
