@@ -106,7 +106,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the given id exists in the address book.
+     * Returns true if a person with the given data fields exists in the address book.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);

@@ -136,6 +136,29 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the data fields.
+     * This defines a weak notion of equality between two persons.
+     */
+    public boolean isDuplicate(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Person)) {
+            return false;
+        }
+
+        Person otherPerson = (Person) other;
+        return otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getRate().equals(getRate())
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getPayments().equals(getPayments());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -150,7 +173,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
+        return isSamePerson(otherPerson)
+                && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
