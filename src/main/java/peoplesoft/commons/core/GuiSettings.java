@@ -1,17 +1,21 @@
 package peoplesoft.commons.core;
 
 import java.awt.Point;
-import java.io.Serializable;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * A Serializable class that contains the GUI settings.
  * Guarantees: immutable.
  */
-public class GuiSettings implements Serializable {
+public class GuiSettings {
+    public static final double MIN_WIDTH = 1250;
+    public static final double MIN_HEIGHT = 500;
 
-    private static final double DEFAULT_HEIGHT = 720;
     private static final double DEFAULT_WIDTH = 1280;
+    private static final double DEFAULT_HEIGHT = 720;
 
     private final double windowWidth;
     private final double windowHeight;
@@ -29,9 +33,15 @@ public class GuiSettings implements Serializable {
     /**
      * Constructs a {@code GuiSettings} with the specified height, width and position.
      */
-    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition) {
-        this.windowWidth = windowWidth;
-        this.windowHeight = windowHeight;
+    @JsonCreator
+    public GuiSettings(
+            @JsonProperty("windowWidth") double windowWidth,
+            @JsonProperty("windowHeight") double windowHeight,
+            @JsonProperty("xPosition") int xPosition,
+            @JsonProperty("yPosition") int yPosition) {
+        // silently coerce loaded widths/heights to the minimum
+        this.windowWidth = Math.max(windowWidth, MIN_WIDTH);
+        this.windowHeight = Math.max(windowHeight, MIN_HEIGHT);
         windowCoordinates = new Point(xPosition, yPosition);
     }
 
