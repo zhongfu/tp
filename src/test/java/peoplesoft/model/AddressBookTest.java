@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.person.exceptions.DuplicatePersonException;
+import peoplesoft.model.util.ID;
 import peoplesoft.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -57,25 +58,47 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasPerson((Person) null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE.getPersonId()));
+        assertFalse(addressBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE.getPersonId()));
+        assertTrue(addressBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).build();
+        assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void hasPerson_nullId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPerson((ID) null));
+    }
+
+    @Test
+    public void hasPerson_idNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPerson(ALICE.getPersonId()));
+    }
+
+    @Test
+    public void hasPerson_idInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasPerson(ALICE.getPersonId()));
+    }
+
+    @Test
+    public void hasPerson_personWithSameIdInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).build();
         assertTrue(addressBook.hasPerson(editedAlice.getPersonId()));
     }
 
