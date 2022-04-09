@@ -2,6 +2,7 @@ package peoplesoft.ui.controls;
 
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -27,6 +28,10 @@ public class PeoplesoftTablePane<S> extends VBox {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public final void setItems(ObservableList<S> items) {
+        table.setItems(items);
     }
 
     public final TableView<S> getTable() {

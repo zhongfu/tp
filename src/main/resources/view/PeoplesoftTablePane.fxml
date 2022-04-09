@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -17,9 +18,9 @@
 
      but i'm not sure how to make that work, so we'll have to make do with getTable()
 -->
-<fx:root type="javafx.scene.layout.VBox" stylesheets="@../styles/PeoplesoftTablePane.css" styleClass="main-pane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.layout.VBox" stylesheets="@../styles/PeoplesoftTablePane.css" styleClass="pane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane alignment="CENTER_LEFT" focusTraversable="true" prefHeight="60.0" styleClass="header-space">
+      <StackPane alignment="CENTER_LEFT" focusTraversable="true" minHeight="60.0" styleClass="header-space">
          <children>
             <Label fx:id="label" styleClass="header-label" textFill="WHITE"/>
          </children>
@@ -27,7 +28,11 @@
             <Insets left="20.0" />
          </padding>
       </StackPane>
-      <TableView fx:id="table" stylesheets="@../styles/PeoplesoftTable.css">
-      </TableView>
+      <AnchorPane>
+         <children>
+            <TableView fx:id="table" stylesheets="@../styles/PeoplesoftTable.css" prefHeight="10000" GridPane.vgrow="ALWAYS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            </TableView>
+         </children>
+      </AnchorPane>
    </children>
 </fx:root>
