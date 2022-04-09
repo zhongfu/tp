@@ -9,10 +9,10 @@
 
 <HBox alignment="CENTER_LEFT" prefWidth="475.0" spacing="10.0" styleClass="person-card" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="idx" minWidth="17.0" prefHeight="17.0" prefWidth="17.0" text="1" />
-      <Label fx:id="desc" layoutX="35.0" layoutY="27.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Fix washing machine" wrapText="true" />
-      <Label fx:id="duration" layoutX="265.0" layoutY="27.0" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="14h 30m" wrapText="true" />
-      <StackPane fx:id="doneIconCol" alignment="CENTER_LEFT" maxWidth="30.0" minWidth="30.0" prefWidth="30.0">
+      <Label fx:id="idx" minHeight="17.0" prefHeight="17.0" prefWidth="17.0" text="1" />
+      <Label fx:id="desc" layoutX="35.0" layoutY="27.0" prefWidth="100.0" text="Fix washing machine" wrapText="true" />
+      <Label fx:id="duration" layoutX="265.0" layoutY="27.0" prefWidth="60.0" text="14h 30m" wrapText="true" />
+      <StackPane fx:id="doneIconCol" alignment="CENTER_LEFT" prefWidth="30.0">
          <children>
             <ImageView fx:id="doneIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,7 +21,7 @@
             </ImageView>
          </children>
       </StackPane>
-      <StackPane fx:id="paidForIconCol" alignment="CENTER_LEFT" maxWidth="30.0" minWidth="30.0" prefWidth="30.0">
+      <StackPane fx:id="paidForIconCol" alignment="CENTER_LEFT" prefWidth="30.0">
          <children>
             <ImageView fx:id="paidForIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
