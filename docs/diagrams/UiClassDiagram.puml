@@ -9,12 +9,18 @@ Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
+
 Class ResultDisplay
+Class SideBar
+Class CommandBox
+Class HelpPage
+Class OverviewPage
+Class "{abstract}\nPage" as Page
+
 Class PersonListPanel
 Class PersonCard
-Class StatusBarFooter
-Class CommandBox
+Class JobListPanel
+Class JobCard
 }
 
 package Model <<Rectangle>> {
@@ -28,33 +34,38 @@ Class HiddenLogic #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
-UiManager .left.|> Ui
+UiManager -left-|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
+
+MainWindow *-down-> "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" SideBar
+MainWindow *-down-> "1" HelpPage
+MainWindow *-down-> "1" OverviewPage
 
-PersonListPanel -down-> "*" PersonCard
-
-MainWindow -left-|> UiPart
+MainWindow --left--|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+SideBar --|> UiPart
 
-PersonCard ..> Model
+OverviewPage --|> Page
+HelpPage --|> Page
+
+Page --|> UiPart
+
+OverviewPage *-down-> "1" PersonListPanel
+OverviewPage *-down-> "1" JobListPanel
+
+PersonListPanel *-down-> "*" PersonCard
+JobListPanel *-down-> "*" JobCard
+
+PersonCard .right.> Model
+JobCard .right.> Model
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+SideBar -[hidden]right- CommandBox
+CommandBox -[hidden]right- ResultDisplay
 
-MainWindow -[hidden]-|> UiPart
 @enduml

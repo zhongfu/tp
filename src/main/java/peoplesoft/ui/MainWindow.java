@@ -3,7 +3,6 @@ package peoplesoft.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -50,9 +49,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane commandBoxPlaceholder;
-
-    @FXML
-    private Button helpButton;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
