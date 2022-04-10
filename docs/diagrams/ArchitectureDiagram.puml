@@ -27,7 +27,7 @@ Main -[#grey]-> Storage
 Main -up[#grey]-> Model
 Main -down[hidden]-> Commons
 
-Storage -up[STORAGE_COLOR].> Model
-Storage .right[STORAGE_COLOR].>File
+Storage -up[STORAGE_COLOR_T3].> Model
+Storage .right[STORAGE_COLOR_T3].>File
 User ..> UI
 @enduml

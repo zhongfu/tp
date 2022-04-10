@@ -42,11 +42,11 @@ public class PersonDeleteCommand extends Command {
             throw new CommandException(Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
+        Person p = lastShownList.get(targetIndex.getZeroBased()); // p is the person to delete
+        model.deletePerson(p);
         // Deletes employment associations
-        Employment.getInstance().deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName()));
+        Employment.getInstance().deletePerson(p);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, p));
     }
 
     @Override
