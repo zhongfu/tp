@@ -3,6 +3,17 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
+' @@author arrow from nowhere adapted from Anthony-Gaudino
+' https://forum.plantuml.net/6378/inwards-outwards-arrow-to-from-a-class-from-to-nowhere
+skinparam rectangle {
+    BorderColor<<i>> transparent
+    FontColor<<i>> transparent
+    StereotypeFontColor<<i>> transparent
+}
+
+rectangle invis <<i>> {
+}
+' @@author
 
 package Logic {
 Class "<<interface>>\nLogic" as Logic
@@ -19,8 +30,7 @@ Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Logic
+invis ..> Logic
 
 LogicManager .up.|> Logic
 ModelManager .up.|> Model
