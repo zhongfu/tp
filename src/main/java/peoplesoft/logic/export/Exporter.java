@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +16,8 @@ import peoplesoft.model.person.Person;
 
 
 public class Exporter {
+
+    private static final DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_hh-mm-ss");
 
     private final Person personToExport;
 
@@ -26,7 +30,9 @@ public class Exporter {
     private Exporter(Person personToExport, Model model) {
         this.personToExport = personToExport;
         this.model = model;
-        this.targetFileName = personToExport.getName().fullName + ".csv";
+        this.targetFileName = (personToExport.getName().toString() // assume only alphanumeric + spaces
+                    .replace(" ", "-")) // just in case
+                + "_" + dtFormatter.format(LocalDateTime.now()) + ".csv";
         this.storageFile = Path.of("data", this.targetFileName).toFile();
     }
 
