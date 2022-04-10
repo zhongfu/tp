@@ -110,18 +110,15 @@ public class HelpCommand extends Command {
             COMMAND_FORMAT,
             COMMAND_EXAMPLES);
 
-    public static final ObservableList<CommandHelpMessage> commands =
+    public static final ObservableList<CommandHelpMessage> COMMANDS =
             FXCollections.observableArrayList(
             PERSON_ADD_COMMAND, PERSON_EDIT_COMMAND, PERSON_DELETE_COMMAND, PERSON_FIND_COMMAND,
             PERSON_LIST_COMMAND, JOB_ADD_COMMAND, JOB_ASSIGN_COMMAND, JOB_DELETE_COMMAND,
             JOB_FIND_COMMAND, JOB_LIST_COMMAND, JOB_MARK_COMMAND, JOB_FINALIZE_COMMAND,
             CLEAR_COMMAND, EXIT_COMMAND, EXPORT_COMMAND, HELP_COMMAND);
 
-    public static final String PARSED_COMMANDS =
-            CommandHelpMessage.asString(commands);
-
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(PARSED_COMMANDS, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }
