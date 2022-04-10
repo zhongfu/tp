@@ -101,12 +101,6 @@ public class PersonTest {
         // same object -> returns true
         assertTrue(ALICE.isDuplicate(ALICE));
 
-        // null -> returns false
-        assertFalse(ALICE.isDuplicate(null));
-
-        // different type -> returns false
-        assertFalse(ALICE.isDuplicate(5));
-
         // different person -> returns false
         assertFalse(ALICE.isDuplicate(BOB));
 
