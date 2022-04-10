@@ -5,21 +5,21 @@ title: Ian Hong's Project Portfolio Page
 
 ### Project: PeopleSoft
 
-PeopleSoft is a Payroll management app for companies offering contractor-based services.
+PeopleSoft is a Payroll management app for companies handling contractor-based services.
 
 
 ### Summary of Contributions
 
 * **Role in team**: Team leader and frontend developer
 * **New Feature**: Added the ability to open the User Guide directly in the web browser. (Pull Request [\#77](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/77))
-  * **What it does**: allows the user to open the User Guide directly in the web browser.
+  * **What it does**: Allows the user to open the User Guide directly in the web browser.
   * **Justification**: This feature improves the product because it significantly reduces the number of steps a user needs to do to search for help. It also follows Jakob Nielsen's Revised Usability Heuristic H2-10: Help and documentation.
   * **Highlights**: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
   * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
 * **New Feature**: Added the sidebar and allowed the user to navigate between pages either using it, or using commands. (Pull Request [\#222](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/222))
-  * **What it does**: gives the user multiple ways to change between pages (through both GUI and CLI)
+  * **What it does**: Gives the user multiple ways to change between pages (through both GUI and CLI)
   * **Justification**: This feature improves the product because it allows those unfamiliar with CLIs to easily navigate the app, and also provides an accelerator for experienced users (through typing) to navigate to their desired page. It also follows Jakob Nielsen's Revised Usability Heuristic H2-7: Flexibility & Efficiency.
   * **Highlights**: The implementation required the use of an association class. Comments left will guide a new collaborator in adding additional pages.
 
