@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import peoplesoft.model.person.exceptions.DuplicatePersonException;
 import peoplesoft.model.person.exceptions.PersonNotFoundException;
+import peoplesoft.model.util.ID;
 import peoplesoft.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -25,25 +26,47 @@ public class UniquePersonListTest {
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.contains((Person) null));
     }
 
     @Test
     public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniquePersonList.contains(ALICE.getPersonId()));
+        assertFalse(uniquePersonList.contains(ALICE));
     }
 
     @Test
     public void contains_personInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        assertTrue(uniquePersonList.contains(ALICE.getPersonId()));
+        assertTrue(uniquePersonList.contains(ALICE));
     }
 
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).build();
+        assertTrue(uniquePersonList.contains(editedAlice));
+    }
+
+    @Test
+    public void contains_nullId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.contains((ID) null));
+    }
+
+    @Test
+    public void contains_idNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.contains(ALICE.getPersonId()));
+    }
+
+    @Test
+    public void contains_idInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.contains(ALICE.getPersonId()));
+    }
+
+    @Test
+    public void contains_personWithSameIdInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).build();
         assertTrue(uniquePersonList.contains(editedAlice.getPersonId()));
     }
 

@@ -17,7 +17,7 @@ For PeopleSoft, we've elected to use custom serializers and deserializers for mo
 
 # Implementing serializers and deserializers for new model classes
 
-For this example, we will be implementing a class named `Foo`. It contains fields of various types, such as:  
+For this example, we will be implementing a class named `Foo`. It contains fields of various types, such as:
 * primitive types,
 * custom, non-generic types (with custom serializers),
 * other non-generic types, and
@@ -40,7 +40,7 @@ public class Foo {
 
 ## Step 2: Add the boilerplate code for the `FooSerializer` and `FooDeserializer` classes (as nested classes within `Foo`)
 
-The skeleton code for the serdes classes are largely similar; the main things that you should be looking at are:  
+The skeleton code for the serdes classes are largely similar; the main things that you should be looking at are:
 * the type arguments for the classes that our serdes classes inherit from,
 * the `serialize()` and `deserialize()` methods, which contain the main logic for serdes,
 * the error messages (and error message formatter) in `FooDeserializer`,
@@ -216,7 +216,7 @@ First, we will want to read the JSON value as a `JsonNode` instance with `p.read
             ObjectCodec codec = p.getCodec();
 ```
 
-Next, we'll have to handle this `JsonNode` instance. 
+Next, we'll have to handle this `JsonNode` instance.
 
 ### 5a: Simple model classes
 
@@ -224,7 +224,7 @@ For simple types (such as `Name`, which only has one `String` field), it's quite
 
 We'll first need to read the node that our deserializer has to parse. The actual (runtime) type of this node will depend on the JSON value that we were given.
 
-There are many `JsonNode` subtypes available, including but not limited to:  
+There are many `JsonNode` subtypes available, including but not limited to:
 * `TextNode`
 * `IntNode`
 * `ObjectNode`
@@ -374,7 +374,7 @@ Other than these, the process is largely similar to that of [simple model classe
 
 This is rather important -- writing serdes classes can often lead to many bugs, as you're effectively parsing arbitrary input. Writing tests for serializing and deserializing your new model classes can help you catch elementary mistakes, and ensure that the behavior stays just as expected even in edge cases.
 
-You can examine the `*SerdesTest.java` classes in `src/test/java/peoplesoft/model` for some ideas for test cases. Here are some to get you started:  
+You can examine the `*SerdesTest.java` classes in `src/test/java/peoplesoft/model` for some ideas for test cases. Here are some to get you started:
 * serialization results in expected JSON representation
 * deserializing null value fails
 * deserializing from an inappropriate JSON type fails (including arrays with mixed types, if relevant)
