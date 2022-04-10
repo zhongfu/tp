@@ -15,14 +15,16 @@
 
 .bottom-help-panel {
     -fx-background-color: pane;
-    -fx-background-radius: 11px;
+    -fx-background-radius: 11;
 }
 
 .bottom-help-panel .label {
     -fx-text-fill: text-norm;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 12;
 }
 
-/* For styling the help table */
+/* @@author For styling the help table */
 /* Referenced from kinsley kajiva at https://gist.github.com/kinsleykajiva/ac452bc8280bc52be384e9af98f2ba0c */
 
 .table-view .column-header,
@@ -75,9 +77,12 @@
     -fx-background-radius: 2em;
 
 }
+/* @@author */
 
 .button {
     -fx-background-color: pane-light;
-    -fx-background-radius: 8px;
+    -fx-background-radius: 8;
     -fx-text-fill: text-norm;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 12;
 }

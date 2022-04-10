@@ -24,7 +24,7 @@
                </padding>
             </StackPane>
 
-            <HBox fx:id="personListHeader" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="480.0" spacing="10.0" style="-fx-background-color: #33344B;">
+            <HBox fx:id="personListHeader" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="480.0" spacing="10.0" style="-fx-background-color: #33344B;" styleClass="employees-list">
                <children>
                   <Label fx:id="nm" minHeight="17.0" prefHeight="17.0" prefWidth="${personListHeader.width*0.034}" text="#" textFill="WHITE" />
                   <Label fx:id="name" layoutX="35.0" layoutY="27.0" prefWidth="${personListHeader.width*0.12}" text="Name" textFill="WHITE" />
@@ -57,7 +57,7 @@
                   <Insets left="20.0" />
                </padding>
             </StackPane>
-            <HBox fx:id="jobListHeader" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="380.0" spacing="10.0" style="-fx-background-color: #33344B;">
+            <HBox fx:id="jobListHeader" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="380.0" spacing="10.0" style="-fx-background-color: #33344B;" styleClass="jobs-list">
                <children>
                   <Label fx:id="nm1" minHeight="30.0" minWidth="17.0" prefHeight="${jobListHeader.width*0.09375}" prefWidth="17.0" text="#" textFill="WHITE" />
                   <Label fx:id="name1" layoutX="35.0" layoutY="27.0" prefWidth="${jobListHeader.width*0.3125}" text="Description" textFill="WHITE" />

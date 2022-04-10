@@ -1,10 +1,12 @@
 package peoplesoft.ui;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import peoplesoft.commons.core.GuiSettings;
 import peoplesoft.commons.core.LogsCenter;
@@ -26,6 +28,7 @@ import peoplesoft.ui.scenes.Page;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final int UNUSED_FONT_SIZE = 10;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -52,6 +55,21 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private final Font interRegular = Font.loadFont(Objects
+            .requireNonNull(this.getClass()
+            .getResourceAsStream("/fonts/Inter-Regular.otf")), UNUSED_FONT_SIZE);
+
+    @FXML
+    private final Font interMedium = Font.loadFont(Objects
+            .requireNonNull(this.getClass()
+            .getResourceAsStream("/fonts/Inter-Medium.otf")), UNUSED_FONT_SIZE);
+
+    @FXML
+    private final Font interBold = Font.loadFont(Objects
+            .requireNonNull(this.getClass()
+            .getResourceAsStream("/fonts/Inter-Bold.otf")), UNUSED_FONT_SIZE);
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
