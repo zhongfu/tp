@@ -18,19 +18,28 @@ PeopleSoft is a Payroll management app for companies offering contractor-based s
 
   * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added the sidebar and allowed the user to navigate between pages either using it, or using commands. (Pull Request [\#222](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/222))
+  * **What it does**: gives the user multiple ways to change between pages (through both GUI and CLI)
+  * **Justification**: This feature improves the product because it allows those unfamiliar with CLIs to easily navigate the app, and also provides an accelerator for experienced users (through typing) to navigate to their desired page. It also follows Jakob Nielsen's Revised Usability Heuristic H2-7: Flexibility & Efficiency.
+  * **Highlights**: The implementation required the use of an association class. Comments left will guide a new collaborator in adding additional pages.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ian-from-dover&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=ian-from-dover&tabRepo=AY2122S2-CS2103T-T11-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Team tasks**:
-  * Reviewed [29 PRs](https://github.com/AY2122S2-CS2103T-T11-4/tp/pulls?page=1&q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me) and offered non-trivial comments. (Eg. PR [#52](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/52), [#109](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/109))
+  * Reviewed [39 PRs](https://github.com/AY2122S2-CS2103T-T11-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aian-from-dover+) and offered non-trivial comments. (Eg. PR [\#52](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/52), [\#109](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/109))
   * Ensured that issues and internal milestones were on schedule
   * Drafted meeting agendas and facilitated meeting discussion
+  * Regularly updated tP deliverables document and served as point of contact for tutor.
   * Made the release `v1.3.0` on GitHub
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Beautified the GUI and DG color schemes (Pull requests [\#61](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/61), [\#221](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/221))
+  * Implemented the displaying of almost all the features, including and not limited to:
+    * `assign`ing people to jobs (PR [\#216](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/216))
+    * Making the ResultDisplay language HR-manager friendly (PR [\#214](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/214))
+    * Create new fields belonging to `People` such as `basePay` (PR [\#205](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/205))
+    * Created the `JobListCards` and `JobListPanel` to display all the job information (PR [\#61](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/61) and [\#125](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/125))
+    * Fixed bugs relating to all of the above.
 
 * **Documentation**:
   * User Guide:
@@ -39,13 +48,13 @@ PeopleSoft is a Payroll management app for companies offering contractor-based s
     * Added `Glossary` section (PR [\#86](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/86/files) also)
     * Updated command summary with new commands
     * Did cosmetic tweaks to existing documentation of features `mark`: [\#118](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/118/)
-    * Extensively researched previous UGs to consolidate best practices for the team. [\#203](https://github.com/AY2122S2-CS2103T-T11-4/tp/issues/203)
-  * Developer Guide:
-    * Added implementation details of the GUI. // TO BE COMPLETED
-    * Added introduction, target user profile and value proposition
+    * Extensively researched 20 previous UGs to consolidate best practices for the team. [\#203](https://github.com/AY2122S2-CS2103T-T11-4/tp/issues/203)
+  * Developer Guide: (PR [\#221](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/221))
+    * Added introduction, target user profile and value proposition to the front
+    * Added implementation details of the GUI under the [UI component section](https://ay2122s2-cs2103t-t11-4.github.io/tp/DeveloperGuide.html).
     * Tweaked User Stories
   * Readme:
-    * Added GIFs and crafted the write-up for skimming. (PR [#36](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/36))
+    * Added animated preview and crafted the write-up for skimming. (PR [\#36](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/36) and [\#222](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/222))
 
 * **Community**:
   * Contributed to [3 forum discussions](https://github.com/nus-cs2103-AY2122S2/forum/issues?q=is%3Aissue+author%3Aian-from-dover)
@@ -53,6 +62,6 @@ PeopleSoft is a Payroll management app for companies offering contractor-based s
 
 * **Tools**:
   * Implemented a UI Kit found in Figma by emulating its design using JavaFX.
+  * Touched up all icons and images in Adobe Photoshop.
   * Brainstormed multiple user interfaces by drawing wireframe sketches before chancing upon the UI Kit.
-  * [INSERT IMAGE OF THE ABOVE]
-  * Touch upped icons and images in Adobe Photoshop.
+  * ![Sketches](../images/ian_sketches.jpg)
