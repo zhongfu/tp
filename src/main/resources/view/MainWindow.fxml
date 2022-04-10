@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.Double?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
@@ -8,7 +9,13 @@
 <?import javafx.stage.*?>
 <?import peoplesoft.commons.core.GuiSettings?>
 
-<fx:root height="720.0" minHeight="${GuiSettings.MIN_HEIGHT}" minWidth="${GuiSettings.MIN_WIDTH}" onCloseRequest="#handleExit" title="PeopleSoft" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root height="720.0" onCloseRequest="#handleExit" title="PeopleSoft" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <minHeight>
+        <GuiSettings fx:constant="MIN_HEIGHT"/>
+    </minHeight>
+    <minWidth>
+        <GuiSettings fx:constant="MIN_WIDTH"/>
+    </minWidth>
     <icons>
         <Image url="@/images/logo/Logo32.png" />
     </icons>
