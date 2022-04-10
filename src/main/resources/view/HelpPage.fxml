@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox fx:id="help" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="1050.0" spacing="30.0" style="-fx-background-color: transparent;" stylesheets="@../styles/HelpPage.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -16,21 +18,36 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <HBox fx:id="helpMessageContainer" alignment="CENTER_LEFT" prefHeight="60.0" styleClass="bottom-help-panel">
+        <HBox fx:id="helpMessageContainer" alignment="CENTER_LEFT" minHeight="57.0" prefHeight="57.0" styleClass="bottom-help-panel">
             <children>
 
-                <Label fx:id="helpMessage" minWidth="250.0" prefHeight="22.0" prefWidth="250.0" text="More details in the User Guide">
-                </Label>
-                <Pane fx:id="spacer" nodeOrientation="RIGHT_TO_LEFT" prefWidth="4320.0">
+                <Label fx:id="helpMessage" minWidth="250.0" prefHeight="22.0" prefWidth="250.0" styleClass="bottom-help-panel" text="More details in the User Guide">
+               <font>
+                  <Font name="Inter Regular" size="13.0" />
+               </font></Label>
+            <StackPane fx:id="spacer" alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefWidth="9999.0">
                <children>
-                      <Button fx:id="openInBrowserButton" minWidth="110.0" mnemonicParsing="false" onAction="#openInBrowser" prefHeight="25.0" prefWidth="110.0" text="Open in Browser">
-                </Button>
-               </children></Pane>
+                      <Button fx:id="openInBrowserButton" graphicTextGap="8.0" minHeight="20.0" minWidth="150.0" mnemonicParsing="false" onAction="#openInBrowser" prefHeight="37.0" prefWidth="150.0" text="Open in Browser">
+                     <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                           <image>
+                              <Image url="@../images/open_browser.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font></Button>
+               </children>
+            </StackPane>
 
             </children>
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
+         <padding>
+            <Insets left="20.0" right="10.0" />
+         </padding>
         </HBox>
     </children>
     <padding>
