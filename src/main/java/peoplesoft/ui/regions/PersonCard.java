@@ -1,6 +1,7 @@
 package peoplesoft.ui.regions;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.ObservableList;
@@ -45,8 +46,18 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, List<ReadOnlyDoubleProperty> colWidths) {
         super(FXML);
+
+        List<? extends Region> cols = List.of(idx, name, amtDue, tags, phone, basePay, email, address);
+        if (cols.size() != colWidths.size()) {
+            throw new RuntimeException("JobCard colWidths count != cols count");
+        }
+        for (int i = 0; i < cols.size(); i++) {
+            cols.get(i).minWidthProperty().bind(colWidths.get(i));
+            cols.get(i).maxWidthProperty().bind(colWidths.get(i));
+        }
+
         this.person = person;
         idx.setText(displayedIndex + "");
         name.setText(person.getName().fullName);
