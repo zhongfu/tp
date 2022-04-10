@@ -11,7 +11,7 @@
         <children>
             <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@../images/buttons/command.png" />
+                    <Image url="@../images/command.png" />
                 </image>
             </ImageView>
             <TextField fx:id="commandTextField" onAction="#handleCommandEntered" prefHeight="30.0" prefWidth="940.0" promptText="Type command here..." styleClass="cmd-txt-field">
