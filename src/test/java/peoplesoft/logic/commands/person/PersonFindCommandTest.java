@@ -3,7 +3,7 @@ package peoplesoft.logic.commands.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static peoplesoft.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static peoplesoft.commons.core.Messages.MSG_PERSONS_LISTED_OVERVIEW;
 import static peoplesoft.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static peoplesoft.testutil.TypicalPersons.BENSON;
 import static peoplesoft.testutil.TypicalPersons.DANIEL;
@@ -56,7 +56,7 @@ public class PersonFindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MSG_PERSONS_LISTED_OVERVIEW, 0);
         PersonContainsKeywordsPredicate predicate = preparePredicate(" ");
         PersonFindCommand command = new PersonFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -66,7 +66,7 @@ public class PersonFindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MSG_PERSONS_LISTED_OVERVIEW, 2);
         PersonContainsKeywordsPredicate predicate = preparePredicate("Meier friends");
         PersonFindCommand command = new PersonFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

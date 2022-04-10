@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_DURATION;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 
+import peoplesoft.commons.core.Messages;
 import peoplesoft.logic.commands.Command;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
@@ -20,19 +21,23 @@ public class JobAddCommand extends Command {
 
     public static final String COMMAND_EXAMPLES = COMMAND_WORD + " "
             + PREFIX_NAME + "Fix HDB Lock "
-            + PREFIX_DURATION + "1 ";
+            + PREFIX_DURATION + "1";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_DURATION + "DURATION ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database.\n"
+            + "Format: "
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
-            + PREFIX_DURATION + "DURATION ";
+            + PREFIX_DURATION + "DURATION\n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_NAME + "Fix washing machine "
+            + PREFIX_DURATION + "2.5\n";
 
     public static final String MESSAGE_SUCCESS = "New job added: %s";
-    public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the database";
 
     private final Job toAdd;
 
@@ -51,8 +56,8 @@ public class JobAddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasJob(toAdd.getJobId())) {
-            throw new CommandException(MESSAGE_DUPLICATE_JOB);
+        if (model.hasJob(toAdd.getJobId())) { // Note: user will never trigger this error
+            throw new CommandException(Messages.MSG_DUPLICATE_JOB);
         }
 
         model.addJob(toAdd);

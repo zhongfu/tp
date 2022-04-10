@@ -7,7 +7,7 @@ PeopleSoft is a desktop app for **calculating the salary for shift-based contrac
 
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
-After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates. 
+After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates.
 You can also generate a PDF payslip for your employees to refer to.
 
 ## How to use this guide
@@ -45,7 +45,7 @@ You can also generate a PDF payslip for your employees to refer to.
 4. Double-click the file to start the app. The GUI should appear as pictured in a few seconds. If this does not work on your system, open an instance of the command line (command prompt for Windows, the terminal on Mac and Linux), navigate to directory where the file is located, and type `java -jar peoplesoft.jar`. Note how the app contains some sample data.
 
 <br><br>
- 
+
    ![Ui](images/Ui.png)<br>
    _The PeopleSoft interface_
 
@@ -87,7 +87,7 @@ A handy reference for more experienced users who just need to know the format of
 
 * Words in `UPPER_CASE` are the attributes to be filled in by you.<br>
   e.g. in `personadd n/NAME`, the `NAME` attribute could be `personadd n/John Doe`.
- 
+
 * Attributes can be in any order.<br>
   e.g. if the command asks for `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also fine.
 
@@ -268,7 +268,7 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 **Q**: What happens if I want to edit the data externally?
 
-**A**: PeopleSoft data is saved as a JSON file under `/data/peoplesoft.json`. 
+**A**: PeopleSoft data is saved as a JSON file under `/data/peoplesoft.json`.
 
 ❗️Caution: Do not edit the data directly unless you are sure that its format will remain valid. If your changes to the data file makes its format invalid, PeopleSoft will discard all data and start with an empty data file at the next run.
 

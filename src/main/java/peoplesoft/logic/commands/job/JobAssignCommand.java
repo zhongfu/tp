@@ -34,15 +34,13 @@ public class JobAssignCommand extends Command {
             + "JOB_INDEX "
             + PREFIX_INDEX + "PERSON_INDEX [i/PERSON_INDEX]...";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a job to one or more person(s). "
-            + "Parameters: "
-            + "JOB_INDEX "
-            + PREFIX_INDEX + "PERSON_INDEX [PERSON_INDEX]...";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a job to one or more person(s).\n"
+            + "Format: " + COMMAND_WORD + " JOB_INDEX "
+            + PREFIX_INDEX + "PERSON_INDEX [PERSON_INDEX]... (as many persons as needed)\n"
+            + "Example: " + COMMAND_WORD + " 2 "
+            + PREFIX_INDEX + "3 " + PREFIX_INDEX + "4";
 
-    public static final String MESSAGE_SUCCESS = "Assigned Job %s to %s.";
-    public static final String MESSAGE_DUPLICATE_EMPLOYMENT =
-            "%s person(s) have already been assigned to this job.";
-    public static final String MESSAGE_ASSIGN_MARKED_JOB = "Un-mark the job before assigning it.";
+    public static final String MESSAGE_SUCCESS = "Assigned job \"%s\" to %s.";
 
     private Index jobIndex;
     private Set<Index> personIndexes;
@@ -69,22 +67,22 @@ public class JobAssignCommand extends Command {
         List<Person> lastShownPersons = model.getFilteredPersonList();
 
         if (jobIndex.getZeroBased() >= lastShownJobs.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MSG_INVALID_JOB_DISPLAYED_IDX);
         }
 
         Job job = lastShownJobs.get(jobIndex.getZeroBased());
 
         if (job.isFinal()) {
-            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
+            throw new CommandException(Messages.MSG_MODIFY_FINAL_JOB);
         }
 
         if (job.hasPaid()) {
-            throw new CommandException(MESSAGE_ASSIGN_MARKED_JOB);
+            throw new CommandException(Messages.MSG_ASSIGN_MARKED_JOB);
         }
 
         for (Index i : personIndexes) {
             if (i.getZeroBased() >= lastShownPersons.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
             }
         }
 
@@ -108,9 +106,9 @@ public class JobAssignCommand extends Command {
 
         if (dupeCount > 0) {
             if (successPersons.isBlank()) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_EMPLOYMENT, dupeCount));
+                throw new CommandException(String.format(Messages.MSG_DUPLICATE_EMPLOYMENT, dupeCount));
             } else {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_EMPLOYMENT, dupeCount) + "\n"
+                throw new CommandException(String.format(Messages.MSG_DUPLICATE_EMPLOYMENT, dupeCount) + "\n"
                         + String.format(MESSAGE_SUCCESS, job.getDesc(), successPersons));
             }
         }

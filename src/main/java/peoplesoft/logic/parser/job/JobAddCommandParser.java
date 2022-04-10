@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_DURATION;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -33,7 +33,7 @@ public class JobAddCommandParser implements Parser<JobAddCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DURATION)
                 || !argMultimap.getPreamble().isBlank()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MSG_INVALID_CMD_FORMAT,
                     JobAddCommand.MESSAGE_USAGE));
         }
         String name = ParserUtil.parseString(argMultimap.getValue(PREFIX_NAME).get());

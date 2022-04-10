@@ -25,11 +25,17 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports a .csv file with the jobs the person worked on, "
             + "including how much pay they should expect to receive.\n"
-            + "Format: " + COMMAND_WORD + " INDEX. Example: " + COMMAND_WORD + " 1";
+            + "All the jobs the person worked on will be displayed under the Jobs list.\n"
+            + "Format: " + COMMAND_WORD + " INDEX. \n"
+            + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_EXPORT_PERSON_SUCCESS = "Exported Person Details: %1$s";
+    public static final String MESSAGE_EXPORT_PERSON_SUCCESS = "%s's details were "
+            + "exported to a .CSV in your data folder using their name. \n"
+            + "Now displaying the jobs that they were assigned to.\n"
+            + "Use the \"list\" command to see all jobs again.";
 
-    public static final String MESSAGE_EXPORT_PERSON_FAILURE = "Failed to Export due to IO Error";
+    public static final String MESSAGE_EXPORT_PERSON_FAILURE = "Failed to export "
+            + "due to a problem with saving.";
 
     private final Index targetIndex;
 
@@ -43,13 +49,13 @@ public class ExportCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MSG_INVALID_PERSON_DISPLAYED_IDX);
         }
 
         Person personToExport = lastShownList.get(targetIndex.getZeroBased());
         try {
             Exporter.getNewInstance(personToExport, model).export();
-            return new CommandResult(String.format(MESSAGE_EXPORT_PERSON_SUCCESS, personToExport));
+            return new CommandResult(String.format(MESSAGE_EXPORT_PERSON_SUCCESS, personToExport.getName()));
         } catch (IOException ioException) {
             return new CommandResult(String.format(MESSAGE_EXPORT_PERSON_FAILURE));
         }

@@ -99,7 +99,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return hasPerson(person.getPersonId());
+        return addressBook.hasPerson(person);
     }
 
     @Override

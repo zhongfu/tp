@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -17,7 +17,7 @@ public class JobFindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, " \r\t\n", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, " \r\t\n", String.format(MSG_INVALID_CMD_FORMAT,
                 JobFindCommand.MESSAGE_USAGE));
     }
 

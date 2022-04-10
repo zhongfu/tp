@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.job.JobMarkCommand;
@@ -24,7 +24,7 @@ public class JobMarkCommandParser implements Parser<JobMarkCommand> {
             return new JobMarkCommand(index, Employment.getInstance());
         } catch (ParseException pe) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobMarkCommand.MESSAGE_USAGE), pe);
+                String.format(MSG_INVALID_CMD_FORMAT, JobMarkCommand.MESSAGE_USAGE), pe);
         }
     }
 }

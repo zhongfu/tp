@@ -57,6 +57,13 @@ public class JsonUserPrefsStorageTest {
     }
 
     @Test
+    public void readUserPrefs_windowTooSmall_minWindowSizeUsed() throws DataConversionException {
+        UserPrefs expected = getTypicalUserPrefsWithMinSizeWindow();
+        UserPrefs actual = readUserPrefs("UndersizedWindowUserPref.json").get();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
         UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
         assertEquals(new UserPrefs(), actual);
@@ -72,7 +79,14 @@ public class JsonUserPrefsStorageTest {
 
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
+        userPrefs.setGuiSettings(new GuiSettings(1400, 800, 300, 100));
+        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+        return userPrefs;
+    }
+
+    private UserPrefs getTypicalUserPrefsWithMinSizeWindow() {
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setGuiSettings(new GuiSettings(GuiSettings.MIN_WIDTH, GuiSettings.MIN_HEIGHT, 300, 100));
         userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
         return userPrefs;
     }
@@ -103,7 +117,7 @@ public class JsonUserPrefsStorageTest {
     public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
 
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
+        original.setGuiSettings(new GuiSettings(1400, 800, 0, 2));
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);

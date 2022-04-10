@@ -96,6 +96,17 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasPerson_idNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasPerson(ALICE.getPersonId()));
+    }
+
+    @Test
+    public void hasPerson_idInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasPerson(ALICE.getPersonId()));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }

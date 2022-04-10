@@ -37,8 +37,10 @@ import peoplesoft.model.money.exceptions.NegativeMoneyValueException;
 @JsonSerialize(using = Rate.RateSerializer.class)
 @JsonDeserialize(using = Rate.RateDeserializer.class)
 public class Rate {
-    public static final String MESSAGE_CONSTRAINTS = "Value for rate should be a non-negative decimal number.";
-    public static final String MESSAGE_TOO_LARGE = "Value for rate is too large.";
+    public static final String MESSAGE_CONSTRAINTS = "The rate should not be negative or "
+            + "have more than 2 decimal places.";
+    public static final String MESSAGE_TOO_LARGE = "The value for the rate is too large. "
+            + "Are you sure you need to pay this employee more than $1000000 per hour?";
 
     public final Money amount;
     public final Duration duration;

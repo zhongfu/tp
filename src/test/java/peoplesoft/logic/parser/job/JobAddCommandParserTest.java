@@ -1,6 +1,8 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_DURATION_CONSTRAINTS;
+import static peoplesoft.commons.core.Messages.MSG_EMPTY_STRING;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_DURATION;
 import static peoplesoft.logic.parser.CliSyntax.PREFIX_NAME;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -8,12 +10,11 @@ import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
 import org.junit.jupiter.api.Test;
 
 import peoplesoft.logic.commands.job.JobAddCommand;
-import peoplesoft.logic.parser.ParserUtil;
 
 public class JobAddCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobAddCommand.MESSAGE_USAGE);
+            String.format(MSG_INVALID_CMD_FORMAT, JobAddCommand.MESSAGE_USAGE);
 
     private static final String VALID_NAME = " " + PREFIX_NAME + "name";
     private static final String VALID_DURATION = " " + PREFIX_DURATION + "3";
@@ -38,13 +39,13 @@ public class JobAddCommandParserTest {
     }
 
     @Test
-    public void parse_wrongFormatArgs_throwsParseException() {
+    public void parse_emptyNameArgs_throwsParseException() {
         // Empty name
         assertParseFailure(parser, INVALID_NAME + VALID_DURATION,
-                ParserUtil.STRING_MESSAGE_CONSTRAINTS);
+                MSG_EMPTY_STRING);
 
         // Incorrect duration parse
         assertParseFailure(parser, VALID_NAME + INVALID_DURATION,
-                ParserUtil.DURATION_MESSAGE_CONSTRAINTS);
+                MSG_DURATION_CONSTRAINTS);
     }
 }

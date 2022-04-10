@@ -106,6 +106,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
+     * Returns true if a person with the given data fields exists in the address book.
+     */
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return persons.contains(person);
+    }
+
+    /**
      * Returns true if a person with the given id exists in the address book.
      */
     public boolean hasPerson(ID personId) {
@@ -312,7 +320,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                         0);
 
                 // just in case we get a jobId that already exists
-                while (upl.contains(new ID(jobId))) {
+                while (ujl.contains(new ID(jobId))) {
                     jobId++;
                 }
 

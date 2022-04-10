@@ -175,26 +175,26 @@ The serialization and deserialization of model objects (e.g. `AddressBook`, `Uni
 
 These serializers and deserializers are automatically used by Jackson during serialization and deserialization.
 
-The serializer and deserializer for each class determine how the objects are to be serialized and deserialized, including but not limited to:  
+The serializer and deserializer for each class determine how the objects are to be serialized and deserialized, including but not limited to:
 * which fields are to be stored,
 * how each field should be (de)serialized, e.g. by directly converting it to/from a JSON type, or by delegating it to Jackson (which will use the serializer/deserializer for the field type), and
 * how the fields and current object are to be represented as (or parsed from) JSON values, e.g. objects, strings, numbers.
 
-This architecture has some advantages:  
+This architecture has some advantages:
 * The serdes implementations are kept together with the related classes; developers adding new model classes will not have to modify files in other packages.
    * The previous implementation (with `JsonAdaptedPerson`, etc) requires that developers update the `JsonAdapted` classes belonging in the `Storage` component; this may not be immediately evident to developers.
 * Developers adding new model classes can incorporate existing types (that already have corresponding serializers/deserializers) without needing to duplicate the serdes code, unlike with the previous implementation.
 * Developers will also not need to (practically) duplicate classes, e.g. `Job` -> `JsonAdaptedJob` (with the `@JsonCreator` annotation), just so that Jackson has something to serialize from/deserialize to.
 
-However, it also has some drawbacks:  
+However, it also has some drawbacks:
 * It can be rather verbose, since each serializer/deserializer class contains a portion of boilerplate code
 * Developers writing serializers/deserializers will need to have basic knowledge of JSON, e.g. the types that are available, the structure of JSON objects and arrays, etc
 * Some knowledge of Jackson components (e.g. `JsonParser`, `JsonGenerator`, `ObjectNode`) is also required, as developers will need to use them to write values to/read values from the internal Jackson representation of a JSON value/object.
 
 ### \[Proposed\] Addition of pay multipliers to Job
-The proposed addition of pay multipliers to `Job` objects is facilitated by `Employment` which implements the operation `Employment#calculatePay()`. `Employment#calculatePay()` calls `Job#calculatePay()` based on optional `Tag` parameters. 
+The proposed addition of pay multipliers to `Job` objects is facilitated by `Employment` which implements the operation `Employment#calculatePay()`. `Employment#calculatePay()` calls `Job#calculatePay()` based on optional `Tag` parameters.
 
-`Tag` contains a Map of `multiplierHistory` which stores pay multiplier values and their time of addition. This is then passed to `Job#calculatePay()` which returns the appropriately scaled pay amount. 
+`Tag` contains a Map of `multiplierHistory` which stores pay multiplier values and their time of addition. This is then passed to `Job#calculatePay()` which returns the appropriately scaled pay amount.
 
 #### Design considerations:
 
@@ -295,36 +295,36 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### The `Find` command
 
-The `Find` command is an enhancement of the `Find` feature provided in AB3. 
-It is structured using an object of `PersonContainsKeywordPredicate`, adapted from `NameContainsKeywordPredicate`. It 
+The `Find` command is an enhancement of the `Find` feature provided in AB3.
+It is structured using an object of `PersonContainsKeywordPredicate`, adapted from `NameContainsKeywordPredicate`. It
 has the following attributes:
 * `static final String COMMAND_WORD` initialised to `'find'`
 * `static final String MESSAGE_USAGE` initialised to the relevant message.
 * `PersonContainsKeywordPredicate predicate` used to find `Person` objects that match with the given keyword.
 
-Applying this filter to the entire list means that only `Persons` that match **ALL** the keywords would be retained in 
+Applying this filter to the entire list means that only `Persons` that match **ALL** the keywords would be retained in
 the filtered list.
 #### The `PersonContainsKeywordPredicate` class
 
-The **match** itself is defined as follows (within the `PersonContainsKeywordPredicate` class which implements the 
+The **match** itself is defined as follows (within the `PersonContainsKeywordPredicate` class which implements the
 `Predicate` interface):
-If a `Person` contains **ALL** the keywords passed in the query, either in their `name` field or as equivalent to an 
+If a `Person` contains **ALL** the keywords passed in the query, either in their `name` field or as equivalent to an
 element in their `tags` set of `Tag` objects, then, passed as a parameter to `test()`,
-it is a valid match. 
+it is a valid match.
 
-The implementation is achieved through using stream manipulations to iterate through each person object, 
-and for any such object, iterating through each keyword passed in the query. The keyword is then checked if it is 
+The implementation is achieved through using stream manipulations to iterate through each person object,
+and for any such object, iterating through each keyword passed in the query. The keyword is then checked if it is
 contained within the name or among the tags.
 
-One motivation behind using streams rather than iteration was that streams can be better optimized, given the need or 
-bandwith arising later. 
+One motivation behind using streams rather than iteration was that streams can be better optimized, given the need or
+bandwith arising later.
 
 ### The `JobList` interface and `UniqueJobList` class
 
-The `JobList` is an interface for the list of jobs, that implements the `Iterable` interface and supports minimal list 
-operations. 
+The `JobList` is an interface for the list of jobs, that implements the `Iterable` interface and supports minimal list
+operations.
 
-The `UniqueJobList` class implements the `JobList` interface to that enforces uniqueness between its elements and does 
+The `UniqueJobList` class implements the `JobList` interface to that enforces uniqueness between its elements and does
 not allow nulls.
 Furthermore, it has the following attributes, to interact with `java.fx` effectively.
 * `ObservableList<Job> internalList`
@@ -337,7 +337,7 @@ The `Job` class is an abstraction for a job stored in PeopleSoft. A `Job` object
 following attributes:
 * `String jobId` - Jobs are referenced by this attribute.
 * `String desc` - A user-readable description of this job.
-* `Rate rate` - The hourly pay of a job. A `Rate` object contains a `Money` object which saves money values as 
+* `Rate rate` - The hourly pay of a job. A `Rate` object contains a `Money` object which saves money values as
 a `java.math.BigDecimal` with 6 decimal places.
 * `Duration duration` - The duration that a job has been worked. Is used together with `rate` to calculate the
 total job earnings. Uses `java.time.Duration`.
@@ -372,7 +372,7 @@ testing of the serialization/deserialization of the class.
 
 * **Alternative 1 (current choice):** Saves the mapping of `Job` objects to `Person` objects in `Employment`.
     * Pros: Guarantee of commutative association.
-    * Cons: Harder to implement. 
+    * Cons: Harder to implement.
 
 * **Alternative 2 (rejected):** Saves a map of the ids of related `Person` objects in `Job` objects, and a map of the ids of related `Job` objects in `Person` objects.
     * Pros: Easier to implement.

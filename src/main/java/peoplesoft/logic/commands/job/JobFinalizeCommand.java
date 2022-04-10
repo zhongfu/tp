@@ -30,15 +30,14 @@ public class JobFinalizeCommand extends Command {
     public static final String COMMAND_FORMAT = COMMAND_WORD + " JOB_INDEX " + PREFIX_CONFIRMATION;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finalizes payments for the job identified by the index number used in the displayed job list.\n"
+            + ": Pay out a completed job. Finalizes payments for the job in the job list displayed.\n"
             + "Note: This command is irreversible!\n"
-            + "Parameters: JOB_INDEX " + PREFIX_CONFIRMATION + "\n"
+            + "Format: "
+            + COMMAND_WORD + " "
+            + "INDEX " + PREFIX_CONFIRMATION + "\n"
             + "Example: " + COMMAND_WORD + " 1" + PREFIX_CONFIRMATION;
 
     public static final String MESSAGE_SUCCESS = "Finalized payments for Job %s.";
-    public static final String MESSAGE_JOB_NOT_PAID_FAILURE =
-            "Payments cannot be finalized if the job is not yet marked as paid.";
-    // TODO: change message if needed
 
     private final Index toFinalize;
     private Employment instance;
@@ -61,13 +60,13 @@ public class JobFinalizeCommand extends Command {
         List<Job> lastShownList = model.getFilteredJobList();
 
         if (toFinalize.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MSG_INVALID_JOB_DISPLAYED_IDX);
         }
 
         Job job = lastShownList.get(toFinalize.getZeroBased());
 
         if (job.isFinal()) {
-            throw new CommandException(Messages.MESSAGE_MODIFY_FINAL_JOB);
+            throw new CommandException(Messages.MSG_MODIFY_FINAL_JOB);
         }
 
         try {
@@ -75,9 +74,9 @@ public class JobFinalizeCommand extends Command {
             model.setJob(job, finalJob);
             PaymentHandler.finalizePayments(finalJob, model, instance);
         } catch (JobNotPaidException e) {
-            throw new CommandException(MESSAGE_JOB_NOT_PAID_FAILURE, e);
+            throw new CommandException(Messages.MSG_JOB_NOT_PAID_FAILURE, e);
         } catch (PaymentRequiresPersonException e) {
-            throw new CommandException(Messages.MESSAGE_ASSIGN_PERSON_TO_JOB, e);
+            throw new CommandException(Messages.MSG_ASSIGN_PERSON_TO_JOB, e);
         } finally {
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         }

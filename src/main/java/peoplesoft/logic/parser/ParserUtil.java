@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import peoplesoft.commons.core.Messages;
 import peoplesoft.commons.core.index.Index;
 import peoplesoft.commons.util.StringUtil;
 import peoplesoft.logic.parser.exceptions.ParseException;
@@ -25,9 +26,6 @@ import peoplesoft.model.util.ID;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-    public static final String STRING_MESSAGE_CONSTRAINTS = "Empty string not allowed.";
-    public static final String DURATION_MESSAGE_CONSTRAINTS = "Expects a positive number for duration (in hours).";
-    public static final String DURATION_MESSAGE_TOO_LARGE = "Value for duration is too large.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -154,7 +152,7 @@ public class ParserUtil {
         requireNonNull(str);
         String res = str.trim();
         if (res.isBlank()) {
-            throw new ParseException(STRING_MESSAGE_CONSTRAINTS);
+            throw new ParseException(Messages.MSG_EMPTY_STRING);
         }
         return res;
     }
@@ -201,14 +199,14 @@ public class ParserUtil {
         try {
             dur = Double.parseDouble(trim);
         } catch (NumberFormatException e) {
-            throw new ParseException(DURATION_MESSAGE_CONSTRAINTS, e);
+            throw new ParseException(Messages.MSG_DURATION_CONSTRAINTS, e);
         }
         Duration res = Duration.ofMinutes(Math.round(dur * 60));
         if (!isDurationNonNegative(res)) {
-            throw new ParseException(DURATION_MESSAGE_CONSTRAINTS);
+            throw new ParseException(Messages.MSG_DURATION_CONSTRAINTS);
         }
         if (isDurationTooLarge(res)) {
-            throw new ParseException(DURATION_MESSAGE_TOO_LARGE);
+            throw new ParseException(Messages.MSG_DURATION_TOO_LARGE);
         }
         return res;
     }
