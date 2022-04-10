@@ -39,7 +39,8 @@ import peoplesoft.model.money.exceptions.NegativeMoneyValueException;
 public class Rate {
     public static final String MESSAGE_CONSTRAINTS = "The rate should not be negative. "
             + "It can include 2 decimal places.";
-    public static final String MESSAGE_TOO_LARGE = "PeopleSoft cannot store such a high rate.";
+    public static final String MESSAGE_TOO_LARGE = "The value for the rate is too large. "
+            + "Are you sure you need to pay this employee more than $1000000 per hour?";
 
     public final Money amount;
     public final Duration duration;

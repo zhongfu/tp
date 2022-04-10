@@ -26,11 +26,11 @@ public class JobFinalizeCommand extends Command {
     public static final String COMMAND_WORD = "pay";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Pay out a completed job. Finalizes payments for the job in the job list displayed. "
+            + ": Pay out a completed job. Finalizes payments for the job in the job list displayed.\n"
             + "Note: This command is irreversible!\n"
             + "Format: "
             + COMMAND_WORD + " "
-            + "JOB_INDEX " + PREFIX_CONFIRMATION + "\n"
+            + "INDEX " + PREFIX_CONFIRMATION + "\n"
             + "Example: " + COMMAND_WORD + " 1" + PREFIX_CONFIRMATION;
 
     public static final String MESSAGE_SUCCESS = "Finalized payments for Job %s.";

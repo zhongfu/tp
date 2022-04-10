@@ -22,9 +22,7 @@ public class PersonDeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Format: "
-            + COMMAND_WORD + " "
-            + "PERSON_INDEX (must be a positive integer)\n"
+            + "Format: " + COMMAND_WORD + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "%s was removed.";

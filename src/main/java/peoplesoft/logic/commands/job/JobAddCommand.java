@@ -19,11 +19,15 @@ public class JobAddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database.\n"
             + "Format: "
             + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
-            + PREFIX_DURATION + "DURATION ";
+            + PREFIX_DURATION + "DURATION\n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_NAME + "Fix washing machine "
+            + PREFIX_DURATION + "2.5\n";
 
     public static final String MESSAGE_SUCCESS = "New job added: %s";
 

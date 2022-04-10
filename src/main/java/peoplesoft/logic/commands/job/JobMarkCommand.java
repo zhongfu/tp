@@ -25,6 +25,7 @@ public class JobMarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the chosen job as completed.\n"
+            + "Format: " + COMMAND_WORD + " INDEX"
             + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_SUCCESS = "Marked job \"%s\" as %s.";

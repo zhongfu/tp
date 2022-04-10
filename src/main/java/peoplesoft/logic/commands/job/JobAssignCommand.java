@@ -26,11 +26,11 @@ public class JobAssignCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a job to one or more person(s). "
-            + "Format: "
-            + COMMAND_WORD + " "
-            + "JOB_INDEX "
-            + PREFIX_INDEX + "PERSON_INDEX [PERSON_INDEX]... (as many persons as needed)";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a job to one or more person(s).\n"
+            + "Format: " + COMMAND_WORD + " JOB_INDEX "
+            + PREFIX_INDEX + "PERSON_INDEX [PERSON_INDEX]... (as many persons as needed)\n"
+            + "Example: " + COMMAND_WORD + " 2 "
+            + PREFIX_INDEX + "3 " + PREFIX_INDEX + "4";
 
     public static final String MESSAGE_SUCCESS = "Assigned job \"%s\" to %s.";
 

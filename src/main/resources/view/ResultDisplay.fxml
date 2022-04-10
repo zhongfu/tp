@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fx:id="placeHolder" hbarPolicy="NEVER" minWidth="990.0" prefHeight="73.0" prefWidth="990.0" style="-fx-background-color: transparent;" styleClass="result-display" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:id="placeHolder" hbarPolicy="NEVER" minWidth="990.0" prefHeight="73.0" prefWidth="990.0" style="-fx-background-color: transparent;" styleClass="result-display" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <VBox alignment="CENTER_LEFT">
       <children>
          <Label fx:id="resultDisplay" lineSpacing="1.0" maxHeight="-Infinity" minHeight="53.0" minWidth="-Infinity" prefWidth="950.0" styleClass="result-display-label" text="The command's response will be displayed here" wrapText="true" />
