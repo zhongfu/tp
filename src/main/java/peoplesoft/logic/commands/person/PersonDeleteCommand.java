@@ -46,7 +46,7 @@ public class PersonDeleteCommand extends Command {
         model.deletePerson(p);
         // Deletes employment associations
         Employment.getInstance().deletePerson(p);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, p));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, p.getName()));
     }
 
     @Override
