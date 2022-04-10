@@ -93,7 +93,7 @@ public class MainWindow extends UiPart<Stage> {
         sideBar = new SideBar(this);
         sideBarPlaceholder.getChildren().add(sideBar.getRoot());
 
-        helpPage = new HelpPage(resultDisplay);
+        helpPage = new HelpPage(resultDisplay, logic.getCommandHelpMessageList());
         overviewPage = new OverviewPage(logic.getFilteredPersonList(), logic.getFilteredJobList());
         loadOverviewPage();
     }

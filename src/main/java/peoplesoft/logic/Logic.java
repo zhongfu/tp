@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import peoplesoft.commons.core.GuiSettings;
+import peoplesoft.logic.commands.CommandHelpMessage;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.logic.parser.exceptions.ParseException;
@@ -36,6 +37,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Job> getFilteredJobList();
+
+    /** Returns an unmodifiable view of the list of command help messages */
+    ObservableList<CommandHelpMessage> getCommandHelpMessageList();
 
     /**
      * Returns the user prefs' address book file path.
