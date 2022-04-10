@@ -25,13 +25,17 @@ Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 
-Class ResultDisplay
 Class SideBar
+Class PageSwitcher
+Class ResultDisplay
 Class CommandBox
 Class HelpPage
 Class OverviewPage
 Class "{abstract}\nPage" as Page
 
+PageSwitcher -[hidden]right- MainWindow
+PageSwitcher -[hidden]down- SideBar
+(MainWindow, SideBar) .. PageSwitcher
 Class PersonListPanel
 Class PersonCard
 Class JobListPanel
@@ -49,6 +53,7 @@ package Logic <<Rectangle>> {
     rectangle b <<i>> {
     }
 }
+
 
 arrowFromNowhere ..> Ui
 

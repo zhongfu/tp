@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private OverviewPage overviewPage;
     private HelpPage helpPage;
+    private PageSwitcher pageSwitcher;
 
     @FXML
     private BorderPane bp;
@@ -104,11 +105,13 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        sideBar = new SideBar(this);
+        sideBar = new SideBar();
         sideBarPlaceholder.getChildren().add(sideBar.getRoot());
 
         helpPage = new HelpPage(resultDisplay);
         overviewPage = new OverviewPage(logic.getFilteredPersonList(), logic.getFilteredJobList());
+        pageSwitcher = new PageSwitcher(this, sideBar);
+        sideBar.setPageSwitcher(pageSwitcher);
         loadOverviewPage();
     }
 
@@ -164,6 +167,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Executes the command and returns the result.
+     * Sends the result to PageSwitcher to switch the highlighted bar.
      *
      * @see peoplesoft.logic.Logic#execute(String)
      */
@@ -174,11 +178,11 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                loadHelpPage();
+                pageSwitcher.switchOnCommand(PageSwitcher.PageValues.HELP);
             } else if (commandResult.isExit()) {
-                handleExit();
-            } else {
-                loadOverviewPage();
+                pageSwitcher.switchOnCommand(PageSwitcher.PageValues.EXIT);
+            } else { // Future Developments: if there are more pages, add them here.
+                pageSwitcher.switchOnCommand(PageSwitcher.PageValues.OVERVIEW);
             }
 
             return commandResult;

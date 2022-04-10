@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
-import peoplesoft.ui.MainWindow;
+import peoplesoft.ui.PageSwitcher;
 import peoplesoft.ui.UiPart;
 
 public class SideBar extends UiPart<Region> implements Initializable {
@@ -28,16 +28,24 @@ public class SideBar extends UiPart<Region> implements Initializable {
     @FXML
     private Button bExit;
 
-    private MainWindow mainWindow;
+    private PageSwitcher pageSwitcher;
 
     /**
      * Creates a sidebar panel.
-     *
-     * @param mw the main window used to change the page.
      */
-    public SideBar(MainWindow mw) {
+    public SideBar() {
         super(FXML);
-        mainWindow = mw;
+    }
+
+    /**
+     * Binds the page switcher to execute the page change in MainWindow.
+     * Exists because MainWindow cannot simultaneously create
+     * this SideBar and a PageSwitcher.
+     *
+     * @param ps the PageSwitcher object.
+     */
+    public void setPageSwitcher(PageSwitcher ps) {
+        pageSwitcher = ps;
     }
 
     /**
@@ -51,21 +59,43 @@ public class SideBar extends UiPart<Region> implements Initializable {
         activePage = bOverview;
     }
 
+    // --- mouse input detection ---
+
     @FXML
     private void switchToOverview(MouseEvent event) {
-        mainWindow.loadOverviewPage();
-        switchButtonColor(bOverview);
+        pageSwitcher.switchOnCommand(PageSwitcher.PageValues.OVERVIEW);
     }
 
     @FXML
     private void switchToHelp(MouseEvent event) {
-        mainWindow.loadHelpPage();
-        switchButtonColor(bHelp);
+        pageSwitcher.switchOnCommand(PageSwitcher.PageValues.HELP);
     }
 
     @FXML
     private void exitApp(MouseEvent event) {
-        mainWindow.handleExit();
+        pageSwitcher.switchOnCommand(PageSwitcher.PageValues.EXIT);
+    }
+
+    // --- update view ---
+
+    /**
+     * Makes the overview button light up and deactivates the current button.
+     */
+    public void activateOverviewButton() {
+        switchButtonColor(bOverview);
+    }
+
+    /**
+     * Makes the help button light up and deactivates the current button.
+     */
+    public void activateHelpButton() {
+        switchButtonColor(bHelp);
+    }
+
+    /**
+     * Makes the exit button light up and deactivates the current button.
+     */
+    public void activateExitButton() {
         switchButtonColor(bExit);
     }
 
