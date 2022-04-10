@@ -48,7 +48,7 @@ public class JobMarkCommandTest {
     public void execute_incorrectArgs_throwsCommandException() {
         // No job at index 3
         JobMarkCommand cmd = new JobMarkCommand(Index.fromOneBased(3), new Employment());
-        assertCommandFailure(cmd, expectedModel, Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+        assertCommandFailure(cmd, expectedModel, Messages.MSG_INVALID_JOB_DISPLAYED_IDX);
     }
 
     @Test
@@ -65,14 +65,14 @@ public class JobMarkCommandTest {
         expectedModel.addJob(PAID);
         expectedModel.setPerson(ALICE, aliceToo);
         JobMarkCommand cmd = new JobMarkCommand(Index.fromOneBased(1), emp);
-        assertCommandSuccess(cmd, model, String.format(JobMarkCommand.MESSAGE_SUCCESS, PAID.getDesc(), "paid"),
+        assertCommandSuccess(cmd, model, String.format(JobMarkCommand.MESSAGE_SUCCESS, PAID.getDesc(), "Paid"),
                 expectedModel);
 
         // Mark as not paid
         expectedModel.setJob(PAID, UNPAID);
         expectedModel.setPerson(aliceToo, ALICE);
         cmd = new JobMarkCommand(Index.fromOneBased(1), emp);
-        assertCommandSuccess(cmd, model, String.format(JobMarkCommand.MESSAGE_SUCCESS, UNPAID.getDesc(), "not paid"),
+        assertCommandSuccess(cmd, model, String.format(JobMarkCommand.MESSAGE_SUCCESS, UNPAID.getDesc(), "Not Paid"),
                 expectedModel);
     }
 }

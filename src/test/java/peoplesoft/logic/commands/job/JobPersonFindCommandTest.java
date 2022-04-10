@@ -29,7 +29,7 @@ public class JobPersonFindCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         model.addJob(JOB);
         expectedModel.addJob(JOB);
-        String expectedMessage = String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(Messages.MSG_JOBS_LISTED_OVERVIEW, 0);
         JobContainsKeywordsPredicate predicate = preparePredicate(" ");
         JobFindCommand command = new JobFindCommand(predicate);
         expectedModel.updateFilteredJobList(predicate);
@@ -41,7 +41,7 @@ public class JobPersonFindCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         model.addJob(JOB);
         expectedModel.addJob(JOB);
-        String expectedMessage = String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(Messages.MSG_JOBS_LISTED_OVERVIEW, 1);
         JobContainsKeywordsPredicate predicate = preparePredicate("right");
         JobFindCommand command = new JobFindCommand(predicate);
         expectedModel.updateFilteredJobList(predicate);

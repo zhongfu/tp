@@ -12,10 +12,13 @@ public class JobFindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose description contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " electric aircon appliances";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose description contains ALL of "
+            + "the specified keywords (case-insensitive) and displays them in the list.\n"
+            + "Format: "
+            + COMMAND_WORD + " "
+            + "KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " \"electric aircon appliances\" "
+            + "finds all jobs which have \"electric\", \"aircon\" and \"appliances\" in them.";
 
     private final JobContainsKeywordsPredicate predicate;
 
@@ -28,7 +31,7 @@ public class JobFindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredJobList(predicate);
         return new CommandResult(
-            String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredJobList().size()));
+            String.format(Messages.MSG_JOBS_LISTED_OVERVIEW, model.getFilteredJobList().size()));
     }
 
     @Override

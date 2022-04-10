@@ -21,8 +21,9 @@ public class PersonAddCommand extends Command {
 
     public static final String COMMAND_WORD = "personadd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the database. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the database.\n"
+            + "Format: "
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -38,7 +39,7 @@ public class PersonAddCommand extends Command {
             + PREFIX_TAG + "Intern "
             + PREFIX_TAG + "Painting";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "%s was added.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the database";
 
     private final Person toAdd;
@@ -60,7 +61,7 @@ public class PersonAddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName()));
     }
 
     @Override

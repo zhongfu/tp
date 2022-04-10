@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.person;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 
 import java.util.Arrays;
 
@@ -26,7 +26,7 @@ public class PersonFindCommandParser implements Parser<PersonFindCommand> {
             trimmedArgs = ParserUtil.parseString(args);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonFindCommand.MESSAGE_USAGE), pe);
+                    String.format(MSG_INVALID_CMD_FORMAT, PersonFindCommand.MESSAGE_USAGE), pe);
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

@@ -1,6 +1,6 @@
 package peoplesoft.logic.parser.job;
 
-import static peoplesoft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static peoplesoft.commons.core.Messages.MSG_INVALID_CMD_FORMAT;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static peoplesoft.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -12,7 +12,7 @@ import peoplesoft.logic.commands.job.JobDeleteCommand;
 public class JobDeleteCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, JobDeleteCommand.MESSAGE_USAGE);
+            String.format(MSG_INVALID_CMD_FORMAT, JobDeleteCommand.MESSAGE_USAGE);
 
     private static final String WHITESPACE = " \t\r\n";
 

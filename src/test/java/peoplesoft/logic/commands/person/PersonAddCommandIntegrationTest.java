@@ -34,7 +34,7 @@ public class PersonAddCommandIntegrationTest {
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new PersonAddCommand(validPerson), model,
-                String.format(PersonAddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+                String.format(PersonAddCommand.MESSAGE_SUCCESS, validPerson.getName()), expectedModel);
     }
 
     @Test
