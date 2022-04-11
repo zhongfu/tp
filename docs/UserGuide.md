@@ -13,9 +13,9 @@ You can also generate a `CSV` payslip for your employees to refer to.
 
 The program simulates a real life workflow:
   * Employees start working. 
-  * HR Manager `adds` the job to PeopleSoft and `assigns` those working on it to the job 
+  * HR Manager `adds` the job to PeopleSoft and `assigns` those working on it to the job.
   * Once the job has been completed in real life, HR Manager `marks` the job as completed. 
-  * Once it is time to pay the employees, `pay` the job and `export` the .CSV payslips to pass to the employees
+  * Once it is time to pay the employees, `pay` the job and `export` the .CSV payslips to pass to the employees.
 
 ## How to use this guide
 
@@ -130,10 +130,19 @@ Example: `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive,
 `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25.
 No tags are added since it's an optional attribute.
 
-❗ PeopleSoft does not accept names which use `/`. Use `-` in place of `/` if the employee's name has it. Example: `Ravi s/o Veegan` -> `Ravi s-o Veegan`
+<div markdown="block" class="alert alert-info">
 
+**:information_source: Note:**<br>
+
+* Names containing `/` are not accepted. Use `-` instead of `/` if an employee's name has it. For example:
+Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`.
+
+* The maximum value for the hourly rate of an employee is $1,000,000.
+
+</div>
 
 ### How to edit an employee’s information? `personedit`
+
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
 Rate updates will only take effect with jobs that are pending completion; payout amounts for already-completed jobs will not change.
@@ -145,7 +154,17 @@ Example: `personedit 2 p/62353535` edits the second person's phone number to 623
 `personedit 3 t/Hardware t/Network` edits the third person's tags to be `Hardware` and `Network` instead of the tags originally associated.
 
 <div markdown="block" class="alert alert-info">
-❗Editing tags removes all existing tags, only retaining the tags passed with the edit command.
+
+**:information_source: Note:**<br>
+
+* Names containing `/` are not accepted. Use `-` instead of `/` if an employee's name has it. For example:
+  Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`.
+
+* The maximum value for the hourly rate of an employee is $1,000,000.
+
+* When editing tags, new tags will not be added to the existing tags. Rather, all existing tags will be
+replaced by new tags. Additionally, all tags can be cleared by typing `t/` without specifying any tags.
+  
 </div>
 
 ### How to delete an employee's information? `persondelete`
@@ -156,7 +175,9 @@ Format: `persondelete PERSON_INDEX`
 Example: `persondelete 3` deletes the third person in the list
 
 ### How to search for a person by name or tag? `personfind`
+
 Finds all people by a certain name and/or tag. 
+
 If multiple tags are entered, only entries that match **all** tags are returned.
 
 Format: `personfind [NAME] [TAG]...​`
@@ -213,6 +234,18 @@ Format: `add n/NAME d/DURATION`
 
 Example: `add 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* The maximum value for the duration of a job is 1,000,000 hours.
+
+* Multiple jobs of the same name can be added. These jobs can be differentiated by their internal ID and the
+order at which they were added, although practically it can easily result in confusion. Instead, it is
+recommended that a user differentiates jobs through naming to avoid any difficulties.
+  
+</div>
+
 ## How to search for a job by name? `find`
 
 Finds all jobs by a certain name.
@@ -246,22 +279,29 @@ Example: `delete 2` deletes the second job
 
 ### How to assign a job to an employee? `assign`
 
-Assigns a job to an employee that is working on it. A [marked](#mark-a-job-as-done-or-not-done--mark) job cannot be assigned to
-any person.
+Assigns a job to an employee that is working on it.
 
 Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
 
 Example: `assign 2 i/3` assigns the second job to the third employee
 
-❗️Caution: You cannot `assign` a job you have applied `mark` on before.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+A job that has been [marked](#mark-a-job-as-done-or-not-done--mark) as completed cannot be assigned. If a job
+is completed, it makes little sense to assign more employees to it. In the event more employees need to be
+assigned to a job, un-mark the job first before assigning them.
 
 ![before](images/screenshots/assign/before.png)
 ![after](images/screenshots/assign/after.png)
 
+</div>
+
 ### How to mark a job as done or not done? `mark`
 
-Toggles the state of a job. The first time it is applied to a job, it indicates that a job has been completed and is pending payment. 
-To reclassify a job as unfinished, apply `mark` to the job again. 
+Toggles the state of a job. The first time it is applied to a job, it indicates that a job has been completed and is pending payment.
+To reclassify a job as unfinished, apply `mark` to the job again.
 
 A job needs to be [assigned](#assign-a-job-to-an-employee--assign) to at least one person before it can be marked.
 
@@ -338,5 +378,3 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 e.g. The second person in the list has an `INDEX` of 2.
 
 **Command-line Interface (CLI)**:	An interface which involves the users typing text and executing it as commands.
-
-
