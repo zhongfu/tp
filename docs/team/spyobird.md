@@ -67,7 +67,7 @@ Here are some ways I have contributed to this project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=Spyobird&tabRepo=AY2122S2-CS2103T-T11-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 * **Project management**: Managed Continuous Integration (CI) of team repository.
 * **Team tasks**:
-  * Reviewed [23 pull requests](https://github.com/AY2122S2-CS2103T-T11-4/tp/pulls?page=2&q=type%3Apr+reviewed-by%3Aspyobird) for the team repository.
+  * Reviewed [23 pull requests](https://github.com/AY2122S2-CS2103T-T11-4/tp/pulls?q=type%3Apr+reviewed-by%3Aspyobird) for the team repository.
 * **Documentation**:
   * User Guide: Contributed to the Quick Start tutorial and minor changes. [\#234](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/234)
   * Developer Guide: Contributed to the `Logic` and `Model` components. [\#240](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/240)
