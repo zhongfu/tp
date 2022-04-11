@@ -31,7 +31,7 @@ public class PaymentTest {
     private static final Job RUNNING = new Job(new ID(3175), "Running", Duration.ofHours(8));
 
     @Test
-    public void createPendingPayments_throwsPaymentRequiresPersonException() {
+    public void createPendingPayments_noPersonAssigned_throwsPaymentRequiresPersonException() {
         Employment employment = new Employment();
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertThrows(PaymentRequiresPersonException.class, () ->
