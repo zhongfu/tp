@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -158,13 +159,18 @@ public class Employment {
      */
     public List<Person> getPersons(Job job, Model model) {
         requireAllNonNull(job, model);
-        model.updateFilteredPersonList(person -> map.get(job.getJobId()) != null
-                && map.get(job.getJobId()).contains(person.getPersonId()));
-        return model.getFilteredPersonList();
+
+        if (!map.containsKey(job.getJobId())) {
+            return List.of();
+        } else {
+            return map.get(job.getJobId()).stream()
+                    .map(model::getPerson)
+                    .collect(Collectors.toList());
+        }
     }
 
     /**
-     * Returns a list of {@code Jobs} that a {@code Person} has.
+     * Returns a list of {@code Persons} assigned to a {@code Job}.
      *
      * @return Map of jobs.
      */
