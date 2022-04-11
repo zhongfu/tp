@@ -17,7 +17,6 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.logic.commands.CommandHelpMessage;
-import peoplesoft.logic.commands.HelpCommand;
 import peoplesoft.ui.controls.PeoplesoftTablePane;
 import peoplesoft.ui.regions.ResultDisplay;
 
@@ -31,7 +30,6 @@ public class HelpPage extends Page {
     private static ResultDisplay display;
     private static final Logger logger = LogsCenter.getLogger(HelpPage.class);
     private static final String FXML = "HelpPage.fxml";
-    private static ObservableList<CommandHelpMessage> commandHelpMessages = HelpCommand.COMMANDS;
 
     @FXML
     private Button openInBrowserButton;
@@ -84,7 +82,7 @@ public class HelpPage extends Page {
         examples.setCellFactory(cellFactory);
         examples.setCellValueFactory(new PropertyValueFactory<>("examples"));
 
-        helpTablePane.getTable().setItems(commandHelpMessages);
+        helpTablePane.getTable().setItems(commandHelpMessageList);
     }
 
     /**
