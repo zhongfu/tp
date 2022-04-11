@@ -4,57 +4,91 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
+' @@author arrow from nowhere adapted from Anthony-Gaudino
+' https://forum.plantuml.net/6378/inwards-outwards-arrow-to-from-a-class-from-to-nowhere
+skinparam rectangle {
+    BorderColor<<b>> transparent
+    FontColor<<b>> transparent
+    StereotypeFontColor<<b>> transparent
+    BorderColor<<i>> transparent
+    FontColor<<i>> transparent
+    StereotypeFontColor<<i>> transparent
+}
+
+rectangle arrowFromNowhere <<b>> {
+}
+' @@author
+
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
+
+Class SideBar
+Class PageSwitcher
 Class ResultDisplay
+Class CommandBox
+Class HelpPage
+Class OverviewPage
+Class "{abstract}\nPage" as Page
+
+PageSwitcher -[hidden]right- MainWindow
+PageSwitcher -[hidden]down- SideBar
+(MainWindow, SideBar) .. PageSwitcher
 Class PersonListPanel
 Class PersonCard
-Class StatusBarFooter
-Class CommandBox
+Class JobListPanel
+Class JobCard
 }
 
 package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+    ' invisible boxes inside to make the high-level components look bigger
+    rectangle a <<i>> {
+    }
 }
 
 package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+    ' invisible boxes inside to make the high-level components look bigger
+    rectangle b <<i>> {
+    }
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
 
-UiManager .left.|> Ui
+arrowFromNowhere ..> Ui
+
+UiManager -left-|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
+
+MainWindow *-down-> "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" SideBar
+MainWindow *-down-> "1" HelpPage
+MainWindow *-down-> "1" OverviewPage
 
-PersonListPanel -down-> "*" PersonCard
-
-MainWindow -left-|> UiPart
+MainWindow --left--|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+SideBar --|> UiPart
 
-PersonCard ..> Model
+OverviewPage --|> Page
+HelpPage --|> Page
+
+Page --|> UiPart
+
+OverviewPage *-down-> "1" PersonListPanel
+OverviewPage *-down-> "1" JobListPanel
+
+PersonListPanel *-down-> "*" PersonCard
+JobListPanel *-down-> "*" JobCard
+
+PersonCard .right.> Model
+JobCard .right.> Model
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+SideBar -[hidden]right- CommandBox
+CommandBox -[hidden]right- ResultDisplay
 
-MainWindow -[hidden]-|> UiPart
 @enduml

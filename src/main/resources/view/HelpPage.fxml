@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import peoplesoft.ui.controls.PeoplesoftTablePane?>
+<?import javafx.scene.text.*?>
 
 <VBox fx:id="help" spacing="30.0" style="-fx-background-color: transparent;" stylesheets="@../styles/HelpPage.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -19,8 +21,22 @@
         <StackPane id="helpMessageContainer" styleClass="bottom-help-panel">
             <AnchorPane fx:id="helpMessageContainer">
                 <children>
-                    <Label fx:id="helpMessage" prefHeight="25.0" text="More details in the User Guide" AnchorPane.leftAnchor="0.0" />
-                    <Button fx:id="openInBrowserButton" mnemonicParsing="false" onAction="#openInBrowser" prefHeight="25.0" text="Open in Browser" AnchorPane.rightAnchor="0.0" />
+                    <Label fx:id="helpMessage" prefHeight="37.0" text="More details in the User Guide" AnchorPane.leftAnchor="0.0" />
+                    <Button fx:id="openInBrowserButton" graphicTextGap="8.0" prefHeight="37.0" mnemonicParsing="false" onAction="#openInBrowser" text="Open in Browser" AnchorPane.rightAnchor="0.0" >
+                        <graphic>
+                            <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                <viewport>
+                                    <Rectangle2D />
+                                </viewport>
+                                <image>
+                                    <Image url="@../images/open_browser.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font name="Inter Regular" size="13.0" />
+                        </font>
+                    </Button>
                 </children>
             </AnchorPane>
             <padding>

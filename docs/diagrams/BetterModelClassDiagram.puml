@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
+skinparam arrowColor MODEL_COLOR_T4
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
@@ -15,7 +15,10 @@ UniquePersonList -right-> Person
 Person -up-> "*" Tag
 
 Person *--> Name
+Person *--> ID
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Rate
+Person *--> "List<Payment>"
 @enduml

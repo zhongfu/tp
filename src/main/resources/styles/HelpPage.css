@@ -1,50 +1,33 @@
 .root {
     /* Final Colors */
-    bg: #1B1C31;
-    pane: #222338;
-    pane-light: #33344B;
-    accent: #6076FF;
-
     text-norm: white;
     text-faded: #858AAB;
 
-    tag-accent-bg: #282B4C;
-    tag-green: #19A589;
-    tag-green-bg: #19A589;
-    tag-yellow: #FF9860;
-    tag-yellow-bg: #382F3C;
-    tag-red: #E06767;
-    tag-red-bg: #352A3D;
+    bg: #1B1A2B;
+    pane: #201f31;
+    pane-light: #2e2d42;
+    accent: #6368ff;
 
-    /* Font Colors */
-    text-default: black;
-    text-inverse: white;
-    text-error: #FF5736;
-    -fx-focus-color: #000000;
-}
-
-#copyButton, #helpMessage {
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
-}
-
-#copyButton {
-    -fx-font-size: 13pt;
-    -fx-background-color: #ffff00;
-}
-
-#copyButton:hover {
-    -fx-background-color: gray;
-}
-
-#copyButton:armed {
-    -fx-background-color: #ffff00;
-}
-
-#helpMessageContainer {
-    -fx-background-color: derive(bg, 20%);
+    tag: #262645;
+    tag-green: #249b7e;
+    tag-green-bg: #202a38;
 }
 
 .bottom-help-panel {
+    -fx-background-color: pane;
     -fx-background-radius: 11px;
+}
+
+.bottom-help-panel .label {
+    -fx-text-fill: text-norm;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 12;
+}
+
+.button {
+    -fx-background-color: pane-light;
+    -fx-background-radius: 8;
+    -fx-text-fill: text-norm;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 12;
 }
