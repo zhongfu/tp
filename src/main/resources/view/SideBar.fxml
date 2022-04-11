@@ -17,7 +17,6 @@
             </ImageView>
          </children>
       </StackPane>
-      <Button fx:id="bOverview" graphicTextGap="16.0" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: #6076FF; -fx-background-radius: 10;" textFill="WHITE">
       <Button fx:id="bOverview" graphicTextGap="16.0" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: #6368ff; -fx-background-radius: 10;" textFill="WHITE">
          <graphic>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="150.0" spacing="16.0">
