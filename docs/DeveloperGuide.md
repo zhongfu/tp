@@ -23,6 +23,7 @@ PeopleSoft is a desktop app for **calculating the salary for shift-based contrac
 ## Acknowledgements
 
 * Project adapted from [addressbook-level3](https://se-education.org/addressbook-level3/DeveloperGuide.html#product-scope)
+* Layout of user stories adapted from [TAB](https://ay2122s1-cs2103t-f13-3.github.io/tp/DeveloperGuide.html#user-stories)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -299,8 +300,6 @@ The proposed addition of pay multipliers to `Job` objects is facilitated by `Emp
 * **Alternative 2:** Saves pay amount as a fixed value and updates it when Tag is edited.
     * Pros: Will use less memory as only one value is being stored.
     * Cons: Loss of useful pay breakdown information.
-``
-
 
 
 ### \[Proposed\] Undo/redo feature
@@ -384,8 +383,24 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
+A simple archival feature can be easily implemented, as all of the app data can be (and is currently) stored in a single file.
 
-_{Explain here how the data archiving feature will be implemented}_
+As such, it should be trivial to add an `archive` command, which saves a copy of the database to a different filename. Auto-archival should also be possible, e.g. by saving a copy of the database on every X changes, or if the last archive was made more than Y hours ago.
+
+The archived data files may not be as user-friendly though -- restoring data archives will require users to copy an archived copy of the database to the expected location, then restarting the application.
+
+We might hence want to implement a rudimentary interface with which users can browse through older archives -- this interface might show basic information about each archive, such as:
+- date of archive
+- number of employees/jobs
+- size of archive
+
+...as well as provide an easy way to load the archive into the app temporarily, which can be implemented as follows:
+1. save the current database somewhere
+2. make a copy of the archive
+3. set the storage filename to point to the archive copy
+4. reload the application, if required
+
+If the user desires to return to the original database, then we can simply load the database saved in Step 1 and reload the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -421,28 +436,41 @@ HR Managers of companies offering contractor services
 
 
 ### User stories
+For convenience, our user stories have been categorized with three broad labels: 
+1. [E] - Employee-related functions
+2. [J] - Job-related functions
+3. [N] - Neither of the above 
+
+Note: multiple labels can be applied to a single user story.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                                                   | So that I can…​                                                               |
-|----------|----------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* *`    | new user       | see usage instructions                                                         | refer to instructions when I forget how to use the App                        |
-| `* *`    | potential user | see the app populated with sample data                                         | easily see how the app will look like when it is in use                       |
-| `* * *`  | HR Manager     | add a new employee                                                             |                                                                               |
-| `* * *`  | HR Manager     | add tags to employees                                                          | identify their roles                                                          |
-| `* * *`  | HR Manager     | edit an employee's information                                                 | rectify mistakes or update their personal information if need be              |
-| `* * *`  | HR Manager     | delete an employee                                                             |                                                                               |
-| `* * *`  | HR Manager     | delete all employees                                                           | mass-remove entries that I no longer need                                     |
-| `* * *`  | HR Manager     | list all employees                                                             |                                                                               |
-| `* * *`  | HR Manager     | find a person by name or tag                                                   | locate details of persons without having to go through the entire list        |
-| `* * *`  | HR Manager     | view the salary owed to a given employee                                       | pay them                                                                      |
-| `* * *`  | HR Manager     | pay for a given type of job                                                    |                                                                               |
-| `* * *`  | HR Manager     | load and save data in human-readable data files                                | I can backup the data externally or access it in a different application      |
-| `* * *`  | HR Manager     | exit the application                                                           |                                                                               |
-| `* * *`  | HR Manager     | create, update, read, delete jobs                                              | manage the jobs that my employees are working on                              |
-| `* * *`  | HR Manager     | see which jobs each employee is working on                                     | pay them accordingly                                                          |
-| `* *`    | HR Manager     | log into separate modes for HR-related functions and for job-related functions | easily access relevant data for the type of work I am doing at any given time |
-| `* *`    | HR Manager     | edit pay multiplier factors (e.g. overtime, experience, emergency on-calls)    | apply changes in payment policies across the organization                     |
+| Label | Priority | As a …​        | I want to …​                                                                   | So that I can…​                                                               |
+|-------|----------|----------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| N     | `* *`    | new user       | see usage instructions                                                         | refer to instructions when I forget how to use the App                        |
+| N     | `* *`    | potential user | see the app populated with sample data                                         | easily see how the app will look like when it is in use                       |
+| N     | `* *`    | HR Manager     | log into separate modes for HR-related functions and for job-related functions | easily access relevant data for the type of work I am doing at any given time |
+| N     | `* * *`  | HR Manager     | load and save data in human-readable data files                                | I can backup the data externally or access it in a different application      |                                                                           |
+| N     | `* * *`  | HR Manager     | exit the application                                                           |
+| E     | `* * *`  | HR Manager     | add a new employee                                                             |                                                                               |
+| E     | `* * *`  | HR Manager     | add tags to employees                                                          | identify their roles                                                          |
+| E     | `* * *`  | HR Manager     | edit an employee's information                                                 | rectify mistakes or update their personal information if need be              |
+| E     | `* * *`  | HR Manager     | delete an employee                                                             |                                                                               |
+| E     | `* * *`  | HR Manager     | delete all employees                                                           | mass-remove entries that I no longer need                                     |
+| E     | `* * *`  | HR Manager     | list all employees                                                             |                                                                               |
+| E     | `* * *`  | HR Manager     | find an employee by name or tag                                                | locate details of employees without having to go through the entire list      |
+| J     | `* * *`  | HR Manager     | add a new job                                                                  |                                                                               |
+| J     | `* * *`  | HR Manager     | mark a job as having been paid for                                             |                                                                               |
+| J     | `* * *`  | HR Manager     | mark a job as having been completed                                            |                                                                               |
+| J     | `* * *`  | HR Manager     | update a job                                                                   |                                                                               |
+| J     | `* * *`  | HR Manager     | delete a job                                                                   |                                                                               |
+| J     | `* * *`  | HR Manager     | delete all jobs                                                                | mass-remove entries that I no longer need                                     |
+| J     | `* * *`  | HR Manager     | find a job by description                                                      | locate details of jobs without having to go through the entire list           |
+| EJ    | `* * *`  | HR Manager     | assign an employee to a job                                                    |                                                                               |
+| EJ    | `* * *`  | HR Manager     | view the salary owed to a given employee                                       | pay them                                                                      |
+| EJ    | `* * *`  | HR Manager     | pay for a given type of job                                                    |                                                                               |
+| EJ    | `* * *`  | HR Manager     | see which jobs each employee is working on                                     | pay them accordingly                                                          |
+| EJ    | `* *`    | HR Manager     | edit pay multiplier factors (e.g. overtime, experience, emergency on-calls)    | apply changes in payment policies across the organization                     |
 
 
 ### Use cases
