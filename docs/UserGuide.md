@@ -17,10 +17,6 @@ The program simulates a real life workflow:
   * Once the job has been completed in real life, HR Manager `marks` the job as completed. 
   * Once it is time to pay the employees, `pay` the job and `export` the .CSV payslips to pass to the employees.
 
-
-### How to use this guide
-
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: How to use this guide:**<br>
@@ -53,18 +49,15 @@ The program simulates a real life workflow:
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: If this does not work, open an instance of the command line (command prompt for Windows, the terminal on Mac and Linux), navigate to directory where the file is located, and run `java -jar peoplesoft.jar`.
+**:information_source: Note:** If this does not work, open an instance of the command line (command prompt for Windows, the terminal on Mac and Linux), navigate to directory where the file is located, and run `java -jar peoplesoft.jar`.
 
 </div>
 
-
-
-![Ui](images/Ui.png)<br>
+![Ui](images/Ui_label.png)<br>
 _The PeopleSoft interface_
 
 
-
-The application should be filled with sample data. Additionally, the application should have created a `/data/` folder and some additional files in the same folder as `peoplesoft.jar`. Use the `clear` command to delete the sample data.
+The application should be filled with sample data. Additionally, the application should have created a `data` folder and some additional files in the same folder as `peoplesoft.jar`. Use the `clear` command to delete the sample data.
 
 ### Exploring the sample data
 
@@ -74,7 +67,7 @@ To start off, notice that the sample data contains some employees under the tabl
 
 #### Create a job
 
-To create a job, you can use the command `add`. You will have to specify a name and a duration using the prefixes `n/` and `d/` respectively. In this case, a aircon repair job that lasts two hours will be created.
+When employees start working on a job, you can add it to PeopleSoft. To create a job, you can use the command `add`. You will have to specify a name and a duration using the prefixes `n/` and `d/` respectively. In this case, a aircon repair job that lasts two hours will be created.
 
 1. Type `add n/Repair aircon d/2` in the command window.
 
@@ -82,7 +75,7 @@ This is the command to add a new job with the name 'Repair aircon' and a duratio
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: The order of the prefixes `n/` and `d/` does not matter.
+**:information_source: Note:** The order of the prefixes `n/` and `d/` does not matter.
 
 </div>
 
@@ -96,7 +89,7 @@ Like in the real-world, jobs need to be assigned to employees. This can be done 
 
 1. Type `assign 1 i/1` in the command window.
 
-The first number in the command refers to the index of the job in the table of jobs. In this case, it is referencing the first job in the table of jobs, which is the aircon repair job created earlier. The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it is referencing the first employee in the table of employees, which is 'Nicole Tan'.
+The first number in the command refers to the index of the job in the table of jobs. In this case, it references the first job in the table of jobs, which is the aircon repair job created earlier. The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the table of employees, which is 'Nicole Tan'.
 
 2. Hit **enter** to run the command.
 
@@ -122,7 +115,7 @@ A message should appear that mentions that the job 'Repair aircon' is assigned t
 
 #### Complete a job and pay employees
 
-A key feature of PeopleSoft is tracking the state of job completion and payments. Two commands, `mark` and `pay` are suited for these roles respectively. Both `mark` and `pay` are index-based commands.
+A key feature of PeopleSoft is tracking the state of job completion and whether its payment has been processed. Two commands, `mark` and `pay` are suited for these roles respectively. Both `mark` and `pay` are index-based commands.
 
 1. Type `mark 1` in the command window.
 
@@ -143,11 +136,11 @@ The prefix `y/` is a safeguard against accidental misuse of this command. This c
    
 5. Hit **enter** to run the command.
 
-The job has its payments finalized. This is reflected in the checkmark under the *Paid* column.
+The job has its payments finalized, i.e. it has been sent to the bank for processing. This is reflected in the checkmark under the *Paid* column.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Run the `export` command to create a CSV payslip for an employee.
+**:information_source: Note:** Run the `export` command to create a CSV payslip for an employee.
 
 </div>
 
@@ -260,7 +253,9 @@ replaced by new tags. Additionally, all tags can be cleared by typing `t/` witho
 </div>
 
 #### How to delete an employee's information? `persondelete`
-Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.
+Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.<br>
+
+❗️Caution: This is irreversible.
 
 Format: `persondelete PERSON_INDEX`
 
@@ -272,7 +267,7 @@ Finds all people by a certain name and/or tag.
 
 If multiple tags are entered, only entries that match **all** tags are returned.
 
-Format: `personfind [NAME] [TAG]...​`
+Format: `personfind KEYWORD [MORE_KEYWORDS]...​`
 
 Examples:
 
@@ -363,7 +358,7 @@ Example: `list` lists all the jobs you have created
 
 #### How to delete a job? `delete`
 
-Deletes the job that was referred to by the index.
+Deletes the job that was referred to by the index.<br>
 
 ❗️Caution: This is irreversible.
 
@@ -404,9 +399,9 @@ To update the payout amounts to reflect the new hourly rates, un-mark and mark t
 
 Format: `mark JOB_INDEX`
 
-Example: `mark 2` marks the second job, assuming it is not already marked as complete
+Example 1: `mark 2` marks the second job, assuming it is not already marked as complete
 
-Example: `mark 2` un-marks the second job after the previous example is performed
+Example 2: `mark 2` un-marks the second job after the previous example is performed
 
 
 ![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
@@ -414,7 +409,7 @@ Example: `mark 2` un-marks the second job after the previous example is performe
 #### How to finalize payments for a job? `pay`
 
 Finalizes the payments of a job. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
-finalized.
+finalized.<br>
 
 ❗️Caution: This is irreversible. The finalized job cannot be modified in any way except by `clear`.
 
@@ -442,8 +437,6 @@ Exits the program immediately.
 
 Format: `exit`
 
-
-
 #### How to find all the commands if you need help? `help`
 Opens the help page which shows the command list like the one above.
 
@@ -451,7 +444,7 @@ Format: `help`
 
 ![help](images/screenshots/help/help.png)
 
-Prompted when the user makes a typo (i.e. tries to use an invalid command) :
+Prompted when the user makes a typo (i.e. tries to use an invalid command):
 Format: `Looks like you used an invalid command. Use the command help to access a list of all available commands.`
 
 --------------------------------------------------------------------------------------------------------------------
@@ -460,11 +453,11 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 **Q**: How do I save the data?
 
-**A**: PeopleSoft automatically saves the data to the folder you placed it in automatically after any command that changes the data. There is no need to save manually.
+**A**: PeopleSoft automatically saves the data to the folder you placed it in automatically after any command. There is no need to save manually.
 
 **Q**: What happens if I want to edit the data externally?
 
-**A**: PeopleSoft data is saved as a JSON file under `/data/peoplesoft.json`.
+**A**: PeopleSoft data is saved as a JSON file under `/data/peoplesoft.json`.<br>
 
 ❗️Caution: Do not edit the data directly unless you are sure that its format will remain valid. If your changes to the data file makes its format invalid, PeopleSoft will discard all data and start with an empty data file at the next run.
 
@@ -484,7 +477,11 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 ## Glossary
 
-**Index**: The item's number in a list.
-e.g. The second person in the list has an `INDEX` of 2.
+**CSV**: Comma-seperated values. A common file format for storing data.
+
+**Index**: The item's number that is displayed in its respective list.
+e.g. The second person in the displayed list has an `INDEX` of 2.
+
+**Keyword**: Either a word that is part of a name or tag. Used by search commands to filter the respective lists.
 
 **Command-line Interface (CLI)**:	An interface which involves the users typing text and executing it as commands.

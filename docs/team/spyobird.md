@@ -65,14 +65,8 @@ Here are some ways I have contributed to this project.
     those mentioned above. The tests give some assurance of correctness in the main functionality and error
     handling, and helps to manage regressions caused by new changes.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=Spyobird&tabRepo=AY2122S2-CS2103T-T11-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
-* **Project management**:
+* **Project management**: Managed Continuous Integration (CI) of team repository.
 * **Documentation**:
-    * User Guide:
-    * Developer Guide:
-* **Community**:
-* **Tools**:   
-
-## OPTIONAL Contributions to the Developer Guide (Extracts):
-Reproduce the parts in the Developer Guide that you wrote. Alternatively, you can show the various diagrams you contributed.
-## OPTIONAL Contributions to the User Guide (Extracts):
-Reproduce the parts in the User Guide that you wrote.
+    * User Guide: Contributed to the Quick Start tutorial and minor changes.
+    * Developer Guide: Contributed to the `Logic` and `Model` components.
+* **Community**: Reported [issues](https://github.com/Spyobird/ped/issues) for other team projects during practical exam dry-run.
