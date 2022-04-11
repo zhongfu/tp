@@ -113,6 +113,9 @@ public class JobAssignCommand extends Command {
             }
         }
 
+        // show the new assignement
+        model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, job.getDesc(), successPersons));
     }
 

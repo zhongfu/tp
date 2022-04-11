@@ -73,7 +73,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> {
                     Label lbl = new Label(tag.tagName);
                     lbl.setWrapText(true);
-                    lbl.setTextAlignment(TextAlignment.LEFT);
+                    lbl.setTextAlignment(TextAlignment.CENTER);
                     lbl.maxWidthProperty().bind(tagPaneWidthProperty);
                     visibleTags.add(lbl);
                 });

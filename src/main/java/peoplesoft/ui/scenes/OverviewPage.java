@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import peoplesoft.commons.core.LogsCenter;
+import peoplesoft.model.Model;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
 import peoplesoft.ui.regions.JobListPanel;
@@ -37,7 +38,8 @@ public class OverviewPage extends Page {
     /**
      * Creates a {@code OverPage} with the given {@code ObservableList<Person>}
     */
-    public OverviewPage(ObservableList<Person> filteredPersonList, ObservableList<Job> filteredJobList) {
+    public OverviewPage(ObservableList<Person> filteredPersonList,
+            ObservableList<Job> filteredJobList, Model model) {
         super(FXML);
         logger.fine("Opening PeopleSoft's Overview page.");
         List<ReadOnlyDoubleProperty> personColWidths = personListHeader.getChildren().stream()
@@ -49,7 +51,7 @@ public class OverviewPage extends Page {
         List<ReadOnlyDoubleProperty> jobColWidths = jobListHeader.getChildren().stream()
                 .map(node -> ((Region) node).widthProperty())
                 .collect(Collectors.toList());
-        jobListPanel = new JobListPanel(filteredJobList, jobColWidths);
+        jobListPanel = new JobListPanel(filteredJobList, filteredPersonList, model, jobColWidths);
 
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());

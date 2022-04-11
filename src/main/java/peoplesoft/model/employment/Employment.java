@@ -145,9 +145,6 @@ public class Employment {
     public List<Job> getJobs(Person person, Model model) {
         requireAllNonNull(person, model);
 
-        // TODO: Updates UI, remove if not needed
-        model.updateFilteredJobList(job -> map.get(job.getJobId()) != null
-                && map.get(job.getJobId()).contains(person.getPersonId()));
         return model.getFilteredJobList();
     }
 

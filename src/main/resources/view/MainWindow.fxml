@@ -33,9 +33,13 @@
                         <top>
                             <VBox fx:id="topBox" prefHeight="150.0" styleClass="main-pane">
                                 <children>
-                                    <StackPane fx:id="commandBoxPlaceholder" focusTraversable="true" prefHeight="50.0" style="-fx-background-color: transparent;" VBox.vgrow="NEVER" />
-                                    <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0" prefHeight="2.0" style="-fx-background-color: #33344B;" />
-                                    <StackPane fx:id="resultDisplayPlaceholder" prefHeight="73.0" style="-fx-background-color: transparent;" />
+                                    <VBox fx:id="topBox" prefHeight="150.0" prefWidth="990.0" styleClass="main-pane">
+                                        <children>
+                                            <StackPane fx:id="commandBoxPlaceholder" focusTraversable="true" prefHeight="50.0" prefWidth="990.0" style="-fx-background-color: transparent;" VBox.vgrow="NEVER" />
+                                            <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0" prefHeight="2.0" style="-fx-background-color: #2e2d42;" />
+                                            <StackPane fx:id="resultDisplayPlaceholder" prefHeight="73.0" prefWidth="990.0" style="-fx-background-color: transparent;" />
+                                        </children>
+                                    </VBox>
                                 </children>
                                 <BorderPane.margin>
                                     <Insets left="30.0" right="30.0" top="30.0" />

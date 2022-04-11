@@ -10,7 +10,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import peoplesoft.commons.core.LogsCenter;
+import peoplesoft.model.Model;
+import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Job;
+import peoplesoft.model.person.Person;
 import peoplesoft.ui.UiPart;
 
 /**
@@ -19,6 +22,8 @@ import peoplesoft.ui.UiPart;
 public class JobListPanel extends UiPart<Region> {
     private static final String FXML = "JobListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(JobListPanel.class);
+    private final Model model;
+    private final ObservableList<Person> personList;
 
     private List<ReadOnlyDoubleProperty> colWidths;
 
@@ -28,11 +33,14 @@ public class JobListPanel extends UiPart<Region> {
     /**
      * Creates a {@code JobListPanel} with the given {@code ObservableList}.
      */
-    public JobListPanel(ObservableList<Job> jobList, List<ReadOnlyDoubleProperty> colWidths) {
+    public JobListPanel(ObservableList<Job> jobList, ObservableList<Person> personList,
+            Model model, List<ReadOnlyDoubleProperty> colWidths) {
         super(FXML);
         this.colWidths = colWidths;
         jobListView.setItems(jobList);
         jobListView.setCellFactory(listView -> new JobListViewCell());
+        this.personList = personList;
+        this.model = model;
     }
 
     /**
@@ -47,10 +55,14 @@ public class JobListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                // add a new divider before also!
+                // Future Development: For better UX, add a new divider before each new card.
                 // <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0"
-                // prefHeight="2.0" style="-fx-background-color: #33344B;" />
-                setGraphic(new JobCard(job, getIndex() + 1, colWidths).getRoot());
+                // prefHeight="2.0" style="-fx-background-color: #2e2d42;" />
+
+                // find the people assigned to this job
+                List<Person> peopleAssigned = Employment.getInstance().getPersons(job, model);
+
+                setGraphic(new JobCard(job, getIndex() + 1, peopleAssigned, colWidths).getRoot());
             }
         }
     }
