@@ -11,6 +11,12 @@ Then, you can assign the employees to the jobs that they are working on.
 After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates.
 You can also generate a `CSV` payslip for your employees to refer to.
 
+The program simulates a real life workflow:
+  * Employees start working. 
+  * HR Manager `adds` the job to PeopleSoft and `assigns` those working on it to the job 
+  * Once the job has been completed in real life, HR Manager `marks` the job as completed. 
+  * Once it is time to pay the employees, `pay` the job and `export` the .CSV payslips to pass to the employees
+
 ## How to use this guide
 
 <div markdown="block" class="alert alert-info">
@@ -123,6 +129,9 @@ Example: `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive,
 
 `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25.
 No tags are added since it's an optional attribute.
+
+❗ PeopleSoft does not accept names which use `/`. Use `-` in place of `/` if the employee's name has it. Example: `Ravi s/o Veegan` -> `Ravi s-o Veegan`
+
 
 ### How to edit an employee’s information? `personedit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
@@ -243,6 +252,11 @@ any person.
 Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
 
 Example: `assign 2 i/3` assigns the second job to the third employee
+
+❗️Caution: You cannot `assign` a job you have applied `mark` on before.
+
+![before](images/screenshots/assign/before.png)
+![after](images/screenshots/assign/after.png)
 
 ### How to mark a job as done or not done? `mark`
 

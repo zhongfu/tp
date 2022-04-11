@@ -27,7 +27,7 @@ PeopleSoft is a Payroll management app for companies handling contractor-based s
       that match **all** tags are returned.
     * The motivation behind this logic is that users want to increasingly narrow down the number 
       of persons they see in the outlay.
-    * Feature was later extended to a parallel on jobs as well. 
+    * Feature was later extended to similar behaviour on jobs as well. 
 
 * **Documentation**:
   * User Guide:
