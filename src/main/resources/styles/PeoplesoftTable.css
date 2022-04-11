@@ -1,0 +1,68 @@
+@import "DarkTheme.css";
+
+.table-view {
+    -fx-base: base;
+    -fx-control-inner-background: base;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-selection-bar-non-focused: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #33344B;
+}
+
+/* .table-view .column-header-background .filler {
+    -fx-background-color: #33344B;
+} */
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 50;
+    -fx-border-width: 0 0 0 0;
+    -fx-background-color: #33344B;
+    -fx-border-color:
+        #33344B
+        #33344B
+        #33344B
+        #33344B;
+    -fx-border-insets: 10 10 10 10;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 13px;
+    -fx-font-family: "Inter";
+    -fx-text-fill: text-norm;
+    -fx-font-weight: normal;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: text-norm;
+    -fx-border-insets: 10 10 10 10;
+}
+
+.table-view .table-cell .cell-text {
+    -fx-text-fill: text-norm;
+}
+
+.table-view .table-cell .text {
+    -fx-fill: text-norm;
+}
+
+.table-view .placeholder .label {
+    -fx-opacity: 0;
+    -fx-font-size: 0px;
+}

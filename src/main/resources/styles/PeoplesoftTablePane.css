@@ -1,0 +1,17 @@
+@import "DarkTheme.css";
+
+.header-label {
+    -fx-font-size: 20px;
+    -fx-font-family: "Inter";
+    -fx-font-weight: bold;
+}
+
+.pane {
+    -fx-background-color: pane;
+    -fx-background-radius: 11px;
+}
+
+/* .table-view, .table-view .filler {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+} */

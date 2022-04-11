@@ -20,6 +20,10 @@ public class JobDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " 3";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " JOB_INDEX";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the job identified by the index.\n"
             + "Format: " + COMMAND_WORD + " INDEX\n"

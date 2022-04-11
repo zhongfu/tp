@@ -14,8 +14,11 @@ public class PersonListCommand extends Command {
 
     public static final String COMMAND_WORD = "personlist";
 
-    public static final String MESSAGE_SUCCESS = "All people are now listed under Employees.";
+    public static final String COMMAND_EXAMPLES = "N.A.";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD;
+
+    public static final String MESSAGE_SUCCESS = "All people are now listed under Employees.";
 
     @Override
     public CommandResult execute(Model model) {
