@@ -89,7 +89,7 @@ public class HelpPage extends Page {
 
     /**
      * Opens the User Guide in the Browser.
-     * Solution referenced from https://stackoverflow.com/a/54869038/16777554
+     * @@author adapted from https://stackoverflow.com/a/54869038/16777554 by Dave
      */
     @FXML
     private void openInBrowser() {
