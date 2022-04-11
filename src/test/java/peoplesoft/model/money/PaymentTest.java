@@ -1,7 +1,6 @@
 package peoplesoft.model.money;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static peoplesoft.testutil.Assert.assertThrows;
 import static peoplesoft.testutil.TypicalPersons.ALICE;
 import static peoplesoft.testutil.TypicalPersons.BENSON;
@@ -23,7 +22,6 @@ import peoplesoft.model.job.Job;
 import peoplesoft.model.money.exceptions.PaymentRequiresPersonException;
 import peoplesoft.model.person.Person;
 import peoplesoft.model.util.ID;
-import peoplesoft.testutil.JobBuilder;
 import peoplesoft.testutil.PersonBuilder;
 
 
