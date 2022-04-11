@@ -17,23 +17,21 @@ The program simulates a real life workflow:
   * Once the job has been completed in real life, HR Manager `marks` the job as completed. 
   * Once it is time to pay the employees, `pay` the job and `export` the .CSV payslips to pass to the employees.
 
-## How to use this guide
+
+### How to use this guide
+
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: How to use this guide:**<br>
 
-* Words in `monospace` are commands to be typed into PeopleSoft.<br>
+* Words in `monospace font` are commands to be typed into PeopleSoft.<br>
 
 * Words in `UPPERCASE` are to be replaced with an appropriate value.<br>
   e.g. `n/NAME` means that `NAME` should be substituted with a name, e.g. `n/John Doe`.
 
 * Words in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Words in parentheses are required, and denote that one of the given choices (delimited by the pipe symbol `|`) are to be selected.<br>
-  e.g. `personfind (*|NAME)` means that `personfind *` and `personfind John` are valid commands.
-
 </div>
 
 * Table of Contents
@@ -41,9 +39,9 @@ The program simulates a real life workflow:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick start
+## Quick start
 
-## Running PeopleSoft for the first time
+### Running PeopleSoft for the first time
 
 1. Ensure you have Java `11` or above installed in your Computer. Follow [**this guide**](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) to do so.
 
@@ -53,28 +51,28 @@ The program simulates a real life workflow:
 
 4. **Double-click** the file to start the app. A window should appear in a few seconds as pictured below.
 
-<br><br>
-
-![Ui](images/Ui.png)<br>
-_The PeopleSoft interface_
-
-<br><br>
-
 <div markdown="block" class="alert alert-info">
 
 :information_source: If this does not work, open an instance of the command line (command prompt for Windows, the terminal on Mac and Linux), navigate to directory where the file is located, and run `java -jar peoplesoft.jar`.
 
 </div>
 
-The application should be filled with sample data. Additionally, the application should have created a `data` folder and some additional files in the same folder as `peoplesoft.jar`. Use the `clear` command to delete the sample data.
 
-## Exploring the sample data
+
+![Ui](images/Ui.png)<br>
+_The PeopleSoft interface_
+
+
+
+The application should be filled with sample data. Additionally, the application should have created a `/data/` folder and some additional files in the same folder as `peoplesoft.jar`. Use the `clear` command to delete the sample data.
+
+### Exploring the sample data
 
 The sample data is meant to help users get started using PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.<br>
 
 To start off, notice that the sample data contains some employees under the table of employees. Here you can see the details of the employees, including their name, base pay and tags. Notice also that the sample data does not contain any jobs.
 
-### Create a job
+#### Create a job
 
 To create a job, you can use the command `add`. You will have to specify a name and a duration using the prefixes `n/` and `d/` respectively. In this case, a aircon repair job that lasts two hours will be created.
 
@@ -92,7 +90,7 @@ This is the command to add a new job with the name 'Repair aircon' and a duratio
 
 A new job should be created in the table of jobs. It should have the name 'Repair aircon' with a duration of '2h'.
 
-### Assign person to a job
+#### Assign person to a job
 
 Like in the real-world, jobs need to be assigned to employees. This can be done in PeopleSoft with the command `assign`. `assign` is a command that is **index-based**, this means that it uses the ordering of the items displayed in the table. You will have to specify at least two indexes, one for the job, and at least one for the employees.
 
@@ -122,7 +120,7 @@ This assigns the second person in the table to the first job, which is 'Arjun Kh
 
 A message should appear that mentions that the job 'Repair aircon' is assigned to 'Arjun Khatau'.
 
-### Complete a job and pay employees
+#### Complete a job and pay employees
 
 A key feature of PeopleSoft is tracking the state of job completion and payments. Two commands, `mark` and `pay` are suited for these roles respectively. Both `mark` and `pay` are index-based commands.
 
@@ -157,7 +155,7 @@ This concludes the short tutorial on the basic functionalities of PeopleSoft. Yo
 
 
 --------------------------------------------------------------------------------------------------------------------
-# Command summary
+## Command summary
 
 A handy reference for more experienced users who just need to know the format of a command.
 
@@ -205,13 +203,13 @@ A handy reference for more experienced users who just need to know the format of
 
 </div>
 
-# Features
+## Features
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Employee-related commands
+### Employee-related commands
 
-### How to add an employee? `personadd`
+#### How to add an employee? `personadd`
 
 Adds a new employee to the system with the given attributes.
 
@@ -235,7 +233,7 @@ Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`.
 
 </div>
 
-### How to edit an employee’s information? `personedit`
+#### How to edit an employee’s information? `personedit`
 
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
@@ -261,14 +259,14 @@ replaced by new tags. Additionally, all tags can be cleared by typing `t/` witho
   
 </div>
 
-### How to delete an employee's information? `persondelete`
+#### How to delete an employee's information? `persondelete`
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.
 
 Format: `persondelete PERSON_INDEX`
 
 Example: `persondelete 3` deletes the third person in the list
 
-### How to search for a person by name or tag? `personfind`
+#### How to search for a person by name or tag? `personfind`
 
 Finds all people by a certain name and/or tag. 
 
@@ -284,17 +282,19 @@ Examples:
 
 `personfind Nicole Hardware Display` finds all employees named ‘Nicole’, tagged with BOTH 'Hardware' AND 'Display'
 
+
 ![before](images/screenshots/personfind/before.png)
 ![after](images/screenshots/personfind/after.png)
 
-### How to list all persons? `personlist`
+#### How to list all persons? `personlist`
+
 Lists all the employees in the company.
 
 Format: `personlist`
 
 Example: `personlist` shows all the employees in the company
 
-### How to export a person's information? `export`
+#### How to export a person's information? `export`
 
 Export a `.csv` file with the person's name as file name, containing the jobs the contractor worked on, and the hours
 they worked for, and how much pay they should expect to receive this month.
@@ -316,9 +316,9 @@ This command updates the job list to show all jobs assigned to that person.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Job-related commands
+### Job-related commands
 
-### How to add a job? `add`
+#### How to add a job? `add`
 
 Adds a new job to the system with the given attributes. `RATE` refers to how much the employee is paid per hour.
 `DURATION` refers to how long the job took. The payment is calculated accordingly.
@@ -339,7 +339,7 @@ recommended that a user differentiates jobs through naming to avoid any difficul
   
 </div>
 
-## How to search for a job by name? `find`
+#### How to search for a job by name? `find`
 
 Finds all jobs by a certain name.
 
@@ -352,7 +352,8 @@ Examples:
 ![before](images/screenshots/find/before.png)
 ![after](images/screenshots/find/after.png)
 
-### How to list all jobs? `list`
+#### How to list all jobs? `list`
+
 
 Lists all the jobs you have created, including jobs that have been paid for and those that have not been paid for yet.
 
@@ -360,7 +361,7 @@ Format: `list`
 
 Example: `list` lists all the jobs you have created
 
-### How to delete a job? `delete`
+#### How to delete a job? `delete`
 
 Deletes the job that was referred to by the index.
 
@@ -370,7 +371,7 @@ Format: `delete JOB_INDEX`
 
 Example: `delete 2` deletes the second job
 
-### How to assign a job to an employee? `assign`
+#### How to assign a job to an employee? `assign`
 
 Assigns a job to an employee that is working on it.
 
@@ -391,7 +392,7 @@ assigned to a job, un-mark the job first before assigning them.
 
 </div>
 
-### How to mark a job as done or not done? `mark`
+#### How to mark a job as done or not done? `mark`
 
 Toggles the state of a job. The first time it is applied to a job, it indicates that a job has been completed and is pending payment.
 To reclassify a job as unfinished, apply `mark` to the job again.
@@ -407,10 +408,10 @@ Example: `mark 2` marks the second job, assuming it is not already marked as com
 
 Example: `mark 2` un-marks the second job after the previous example is performed
 
+
 ![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
 
-
-### How to finalize payments for a job? `pay`
+#### How to finalize payments for a job? `pay`
 
 Finalizes the payments of a job. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
 finalized.
@@ -425,9 +426,9 @@ Example: `pay 2 y/` finalizes the payments of the second job
 ![after](images/screenshots/pay/after.png)
 --------------------------------------------------------------------------------------------------------------------
 
-## Miscellaneous commands
+### Miscellaneous commands
 
-### How to clear all entries? `clear`
+#### How to clear all entries? `clear`
 
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
@@ -436,13 +437,15 @@ Format: `clear`
 
 Example: `clear` removes all the employees and jobs from the app
 
-### How to exit the program? `exit`
+#### How to exit the program? `exit`
 Exits the program immediately.
 
 Format: `exit`
 
-### How to find all the commands if you need help? `help`
-Opens the help page which shows a scrollable command list like the one above.
+
+
+#### How to find all the commands if you need help? `help`
+Opens the help page which shows the command list like the one above.
 
 Format: `help`
 
@@ -453,7 +456,7 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 --------------------------------------------------------------------------------------------------------------------
 
-# FAQ
+## FAQ
 
 **Q**: How do I save the data?
 
@@ -479,7 +482,7 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Glossary
+## Glossary
 
 **Index**: The item's number in a list.
 e.g. The second person in the list has an `INDEX` of 2.
