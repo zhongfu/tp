@@ -121,6 +121,9 @@ Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG
 
 Example: `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
 
+`personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25.
+No tags are added since it's an optional attribute.
+
 ### How to edit an employee’s information ? `personedit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
@@ -129,6 +132,8 @@ Rate updates will only take effect with jobs that are pending completion; payout
 Format: `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
 Example: `personedit 2 p/62353535` edits the second person's phone number to 62353535
+
+`personedit 3 t/Hardware t/Network` edits the third person's tags to be `Hardware` and `Network` instead of the tags originally associated.
 
 ### How to delete an employee's information ? `persondelete`
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.
@@ -232,7 +237,9 @@ Example: `assign 2 i/3` assigns the second job to the third employee
 
 ### How to mark a job as done or not done ? `mark`
 
-Indicates that a job has been completed and is pending payment. To un-mark a job, `mark` the job again.
+Toggles the state of a job. The first time it is applied to a job, it indicates that a job has been completed and is pending payment. 
+To reclassify a job as unfinished, apply `mark` to the job again. 
+
 A job needs to be [assigned](#assign-a-job-to-an-employee--assign) to at least one person before it can be marked.
 
 Note: the hourly rate(s) paid out to each employee will be fixed after a job is marked as done; further changes to any employee's rate will not cause the payout amounts to change.
