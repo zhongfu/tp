@@ -135,6 +135,10 @@ Example: `personedit 2 p/62353535` edits the second person's phone number to 623
 
 `personedit 3 t/Hardware t/Network` edits the third person's tags to be `Hardware` and `Network` instead of the tags originally associated.
 
+<div markdown="block" class="alert alert-info">
+❗Editing tags removes all existing tags, only retaining the tags passed with the edit command.
+</div>
+
 ### How to delete an employee's information? `persondelete`
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.
 
@@ -155,6 +159,9 @@ Examples:
 `personfind Nicole` finds all the employees named ‘Nicole’
 
 `personfind Nicole Hardware Display` finds all employees named ‘Nicole’, tagged with BOTH 'Hardware' AND 'Display'
+
+![before](images/screenshots/personfind/before.png)
+![after](images/screenshots/personfind/after.png)
 
 ### How to list all persons? `personlist`
 Lists all the employees in the company.
@@ -180,7 +187,6 @@ Example: `export 3` exports the third person in the list
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
 
-[coming in v1.3] Require confirmation with a `yes clear` for clearing all data with `clear`.
 Format: `clear`
 
 Example: `clear` removes all the employees and jobs from the app
@@ -198,7 +204,7 @@ Format: `add n/NAME d/DURATION`
 
 Example: `add 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
 
-## How to earch for a job by name? `find`
+## How to search for a job by name? `find`
 
 Finds all jobs by a certain name.
 
@@ -207,6 +213,9 @@ Format: `find NAME`
 Examples:
 
 `find Painting` finds all the jobs with 'Painting' in its name
+
+![before](images/screenshots/find/before.png)
+![after](images/screenshots/find/after.png)
 
 ### How to list all jobs? `list`
 
@@ -251,6 +260,9 @@ Example: `mark 2` marks the second job, assuming it is not already marked as com
 
 Example: `mark 2` un-marks the second job after the previous example is performed
 
+![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
+
+
 ### How to finalize payments for a job? `pay`
 
 Finalizes the payments of a job. This command is irreversible, and the finalized job cannot be
@@ -261,6 +273,8 @@ Format: `pay JOB_INDEX y/`
 
 Example: `pay 2 y/` finalizes the payments of the second job
 
+![before](images/screenshots/pay/before.png)
+![after](images/screenshots/pay/after.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Miscellaneous commands
@@ -271,9 +285,11 @@ Exits the program immediately.
 Format: `exit`
 
 ### How to find all the commands if you need help? `help`
-Opens the help page which shows the command list like the one above.
+Opens the help page which shows a scrollable command list like the one above.
 
 Format: `help`
+
+![help](images/screenshots/help/help.png)
 
 Prompted when the user makes a typo (i.e. tries to use an invalid command) :
 Format: `Looks like you used an invalid command. Use the command help to access a list of all available commands.`
