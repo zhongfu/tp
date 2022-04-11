@@ -289,12 +289,13 @@ testing of the serialization/deserialization of the class.
     * Cons: Mutual associations are not guaranteed. The possible extension of a one-to-many relationship between `Person` and `Tag` would be harder to implement.
 
 ### \[Proposed\] Addition of pay multipliers to Job
-The proposed addition of pay multipliers to `Job` objects is facilitated by `Employment` which implements the operation `Employment#calculatePay()`. `Employment#calculatePay()` calls `Job#calculatePay()` based on optional `Tag` parameters.
+![MultiplierTag0](images/MultiplierTagInheritanceDiagram.png)
 
-`Tag` contains a Map of `multiplierHistory` which stores pay multiplier values and their time of addition. This is then passed to `Job#calculatePay()` which returns the appropriately scaled pay amount.
+The proposed mechanism for adding pay multipliers to `Job` is facilitated by `MultiplierTag`. `MultiplierTag` extends `Tag` with a multiplier addition timeline history, stored internally as a `MultiplierHistory` Map between pay multiplier values and their time of addition. 
+
+The inclusion of `MultiplierTag` in calculating pay `Job` objects is facilitated by `PaymentHandler#createPendingPayments` which calls on the modified operation `Job#calculatePay(Set<Tags>)`. `Job#calculatePay(Set<Tags>)` returns the appropriately scaled pay amount after accounting for every tag the passed `Person` parameter has. `Job#calculatePay()` is called by calls `Job#calculatePay()` based on optional `Tag` parameters.
 
 #### Design considerations:
-
 * **Alternative 1 (current choice):** Saves a Map of previous multipliers and time of addition in Tag.
     * Pros: Easy to implement. Pay breakdown can be useful in the implementation of other features.
     * Cons: May have performance issues in terms of memory usage.
