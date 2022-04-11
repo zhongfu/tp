@@ -103,7 +103,7 @@ The `UI` component,
 
 ### Logic component
 
-The **API** of this component is specified in the [`Logic.java`](https://github.com/AY2122S2-CS2103T-T11-4/tp/blob/master/src/main/java/peoplesoft/logic/Logic.java)
+The **API** of this component is specified in the [`Logic.java`](https://github.com/AY2122S2-CS2103T-T11-4/tp/blob/master/src/main/java/peoplesoft/logic/Logic.java) interface.
 
 Here's a (partial) class diagram of the `Logic` component:
 
