@@ -17,7 +17,7 @@ import peoplesoft.model.UserPrefs;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.util.ID;
 
-public class JobPersonDeleteCommandTest {
+public class JobDeleteCommandTest {
 
     private static final String TEST_ID = "test";
     private static final Job JOB = new Job(new ID(TEST_ID), "The Right Job", Duration.ofHours(2));

@@ -58,9 +58,9 @@ public class Job {
     }
 
     /**
-     * Constructor used internally.
+     * Constructor to set all fields.
      */
-    private Job(ID jobId, String desc, Duration duration, boolean hasPaid, boolean isFinal) {
+    public Job(ID jobId, String desc, Duration duration, boolean hasPaid, boolean isFinal) {
         requireAllNonNull(jobId, desc, duration, hasPaid, isFinal);
         this.jobId = jobId;
         this.desc = desc;
