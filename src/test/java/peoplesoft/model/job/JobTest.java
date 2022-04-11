@@ -11,12 +11,37 @@ import org.junit.jupiter.api.Test;
 import peoplesoft.model.money.Money;
 import peoplesoft.model.money.Rate;
 import peoplesoft.model.util.ID;
+import peoplesoft.testutil.JobBuilder;
 
 class JobTest {
 
     private static final Job EATING = new Job(new ID(1043), "Eating", Duration.ofDays(1));
     private static final Job RUNNING = new Job(new ID(3175), "Running", Duration.ofHours(8));
     private static final Rate RATE_ONE = new Rate(new Money(1), Duration.ofHours(1));
+
+    @Test
+    public void isSameJob() {
+        // null -> returns false
+        assertFalse(EATING.isSameJob(null));
+
+        // same object -> returns true
+        assertTrue(EATING.isSameJob(EATING));
+
+        // same id, all other attributes different -> returns true
+        Job editedJob = new JobBuilder(EATING)
+                .withDesc(RUNNING.getDesc())
+                .withDuration(RUNNING.getDuration())
+                .withHasPaid(RUNNING.hasPaid())
+                .withIsFinal(RUNNING.isFinal())
+                .build();
+        assertTrue(EATING.isSameJob(editedJob));
+
+        // different id, all other attributes same -> returns false
+        editedJob = new JobBuilder(EATING)
+                .withId(new ID(10000))
+                .build();
+        assertFalse(EATING.isSameJob(editedJob));
+    }
 
     @Test
     public void calculatePay() {
@@ -39,7 +64,7 @@ class JobTest {
     }
 
     @Test
-    public void testEquals() {
+    public void equals() {
         // same object -> returns true
         assertTrue(EATING.equals(EATING));
 
