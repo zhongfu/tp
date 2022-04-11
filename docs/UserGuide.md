@@ -143,7 +143,7 @@ Format: `persondelete PERSON_INDEX`
 Example: `persondelete 3` deletes the third person in the list
 
 ### How to search for a person by name or tag? `personfind`
-Finds all people by a certain name and/or tag. If you wish to search by tags alone, use the wildcard operator `*` instead of typing a name.
+Finds all people by a certain name and/or tag. 
 If multiple tags are entered, only entries that match **all** tags are returned.
 
 Format: `personfind [NAME] [TAG]...​`
