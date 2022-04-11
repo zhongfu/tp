@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static peoplesoft.testutil.Assert.assertThrows;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import peoplesoft.commons.core.index.Index;
 import peoplesoft.logic.commands.CommandResult;
 import peoplesoft.logic.commands.EmploymentStub;
 import peoplesoft.logic.commands.ModelStub;
+import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.model.AddressBook;
 import peoplesoft.model.ReadOnlyAddressBook;
 import peoplesoft.model.employment.Employment;
@@ -27,6 +29,9 @@ import peoplesoft.testutil.JobBuilder;
 import peoplesoft.testutil.PersonBuilder;
 
 public class JobAssignCommandTest {
+
+    private static final Job EATING = new Job(new ID(1043), "Eating", Duration.ofHours(1));
+
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new JobAssignCommand(null, Set.of(),
@@ -62,6 +67,60 @@ public class JobAssignCommandTest {
         assertEquals(String.format(JobAssignCommand.MESSAGE_SUCCESS, validJob.getDesc(), validPerson.getName()),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validJob), modelStub.jobsAdded);
+    }
+
+    @Test
+    public void execute_invalidJobIndex_throwsCommandException() {
+        Job validJob = new JobBuilder().build();
+        Person validPerson = new PersonBuilder().build();
+
+        ModelStubWithJobAndPerson modelStub = new ModelStubWithJobAndPerson();
+        EmploymentStub employmentStub = new EmploymentStub();
+        modelStub.addJob(validJob);
+        modelStub.addPerson(validPerson);
+
+        Index invalidJobIndex = Index.fromZeroBased(10);
+        Set<Index> personIndexes = new HashSet<>();
+        personIndexes.add(Index.fromZeroBased(0));
+
+        assertThrows(CommandException.class, ()
+                -> new JobAssignCommand(invalidJobIndex, personIndexes, employmentStub).execute(modelStub));
+    }
+
+    @Test
+    public void execute_finalJob_throwsCommandException() {
+        Job validJob = new JobBuilder().withIsFinal(true).build();
+        Person validPerson = new PersonBuilder().build();
+
+        ModelStubWithJobAndPerson modelStub = new ModelStubWithJobAndPerson();
+        EmploymentStub employmentStub = new EmploymentStub();
+        modelStub.addJob(validJob);
+        modelStub.addPerson(validPerson);
+
+        Index jobIndex = Index.fromZeroBased(0);
+        Set<Index> personIndexes = new HashSet<>();
+        personIndexes.add(Index.fromZeroBased(0));
+
+        assertThrows(CommandException.class, ()
+                -> new JobAssignCommand(jobIndex, personIndexes, employmentStub).execute(modelStub));
+    }
+
+    @Test
+    public void execute_paidJob_throwsCommandException() {
+        Job validJob = new JobBuilder().withHasPaid(true).build();
+        Person validPerson = new PersonBuilder().build();
+
+        ModelStubWithJobAndPerson modelStub = new ModelStubWithJobAndPerson();
+        EmploymentStub employmentStub = new EmploymentStub();
+        modelStub.addJob(validJob);
+        modelStub.addPerson(validPerson);
+
+        Index jobIndex = Index.fromZeroBased(0);
+        Set<Index> personIndexes = new HashSet<>();
+        personIndexes.add(Index.fromZeroBased(0));
+
+        assertThrows(CommandException.class, ()
+                -> new JobAssignCommand(jobIndex, personIndexes, employmentStub).execute(modelStub));
     }
 
     /**
