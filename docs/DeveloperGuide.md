@@ -201,6 +201,7 @@ However, it also has some drawbacks:
 * It can be rather verbose, since each serializer/deserializer class contains a portion of boilerplate code
 * Developers writing serializers/deserializers will need to have basic knowledge of JSON, e.g. the types that are available, the structure of JSON objects and arrays, etc
 * Some knowledge of Jackson components (e.g. `JsonParser`, `JsonGenerator`, `ObjectNode`) is also required, as developers will need to use them to write values to/read values from the internal Jackson representation of a JSON value/object.
+
 ### The `Find` command
 
 The `Find` command is an enhancement of the `Find` feature provided in AB3.
@@ -212,6 +213,7 @@ has the following attributes:
 
 Applying this filter to the entire list means that only `Persons` that match **ALL** the keywords would be retained in
 the filtered list.
+
 #### The `PersonContainsKeywordPredicate` class
 
 The **match** itself is defined as follows (within the `PersonContainsKeywordPredicate` class which implements the
@@ -246,11 +248,11 @@ following attributes:
 * `String jobId` - Jobs are referenced by this attribute.
 * `String desc` - A user-readable description of this job.
 * `Rate rate` - The hourly pay of a job. A `Rate` object contains a `Money` object which saves money values as
-  a `java.math.BigDecimal` with 6 decimal places.
+a `java.math.BigDecimal` with 6 decimal places.
 * `Duration duration` - The duration that a job has been worked. Is used together with `rate` to calculate the
-  total job earnings. Uses `java.time.Duration`.
+total job earnings. Uses `java.time.Duration`.
 * `boolean hasPaid` - A boolean to denote if this job has been paid for. Used to calculate the salary of a
-  `Person`.
+`Person`.
 
 The use of immutability ensures that there are no unintended side effects of modifying a `Job`.
 Whenever a `Job` needs to be modified (for example setting the value of `hasPaid`), a new immutable copy
@@ -286,7 +288,7 @@ testing of the serialization/deserialization of the class.
     * Pros: Easier to implement.
     * Cons: Mutual associations are not guaranteed. The possible extension of a one-to-many relationship between `Person` and `Tag` would be harder to implement.
 
-### \[Proposed\] Addition of pay multipliers
+### \[Proposed\] Addition of pay multipliers to Job
 The proposed addition of pay multipliers to `Job` objects is facilitated by `Employment` which implements the operation `Employment#calculatePay()`. `Employment#calculatePay()` calls `Job#calculatePay()` based on optional `Tag` parameters.
 
 `Tag` contains a Map of `multiplierHistory` which stores pay multiplier values and their time of addition. This is then passed to `Job#calculatePay()` which returns the appropriately scaled pay amount.
@@ -300,7 +302,6 @@ The proposed addition of pay multipliers to `Job` objects is facilitated by `Emp
 * **Alternative 2:** Saves pay amount as a fixed value and updates it when Tag is edited.
     * Pros: Will use less memory as only one value is being stored.
     * Cons: Loss of useful pay breakdown information.
-
 
 ### \[Proposed\] Undo/redo feature
 
@@ -383,22 +384,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
-A simple archival feature can be easily implemented, as all of the app data can be (and is currently) stored in a single file.
+A simple archival feature can be easily implemented, as all of the app data can be (and is currently) stored in a single file. 
 
 As such, it should be trivial to add an `archive` command, which saves a copy of the database to a different filename. Auto-archival should also be possible, e.g. by saving a copy of the database on every X changes, or if the last archive was made more than Y hours ago.
 
 The archived data files may not be as user-friendly though -- restoring data archives will require users to copy an archived copy of the database to the expected location, then restarting the application.
 
 We might hence want to implement a rudimentary interface with which users can browse through older archives -- this interface might show basic information about each archive, such as:
+
 - date of archive
 - number of employees/jobs
 - size of archive
 
 ...as well as provide an easy way to load the archive into the app temporarily, which can be implemented as follows:
+
 1. save the current database somewhere
 2. make a copy of the archive
 3. set the storage filename to point to the archive copy
 4. reload the application, if required
+
 
 If the user desires to return to the original database, then we can simply load the database saved in Step 1 and reload the application.
 
