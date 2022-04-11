@@ -8,14 +8,14 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### Zhong Fu
+### Li Zhong Fu
 
 <img src="images/zhongfu.png" width="200px">
 
 [[github](https://github.com/zhongfu)]
 [[portfolio](team/zhongfu.md)]
 
-### Ian Hong
+### Hong Yi En, Ian
 
 <img src="images/ian-from-dover.png" width="200px">
 
