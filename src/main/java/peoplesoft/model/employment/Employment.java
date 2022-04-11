@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static peoplesoft.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -146,7 +147,15 @@ public class Employment {
     public List<Job> getJobs(Person person, Model model) {
         requireAllNonNull(person, model);
 
-        return model.getFilteredJobList();
+        List<Job> jobs = new ArrayList<>();
+
+        for (Map.Entry<ID, Set<ID>> entry : map.entrySet()) {
+            if (entry.getValue().contains(person.getPersonId())) {
+                jobs.add(model.getJob(entry.getKey()));
+            }
+        }
+
+        return jobs;
     }
 
     /**
