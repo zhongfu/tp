@@ -11,6 +11,12 @@ Then, you can assign the employees to the jobs that they are working on.
 After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates.
 You can also generate a `CSV` payslip for your employees to refer to.
 
+The program simulates a real life workflow:
+  * Employees start working. 
+  * HR Manager `adds` the job to PeopleSoft and `assigns` those working on it to the job 
+  * Once the job has been completed in real life, HR Manager `marks` the job as completed. 
+  * Once it is time to pay the employees, `pay` the job and `export` the .CSV payslips to pass to the employees
+
 ## How to use this guide
 
 <div markdown="block" class="alert alert-info">
@@ -124,6 +130,9 @@ Example: `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive,
 `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25.
 No tags are added since it's an optional attribute.
 
+❗ PeopleSoft does not accept names which use `/`. Use `-` in place of `/` if the employee's name has it. Example: `Ravi s/o Veegan` -> `Ravi s-o Veegan`
+
+
 ### How to edit an employee’s information? `personedit`
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
@@ -135,6 +144,10 @@ Example: `personedit 2 p/62353535` edits the second person's phone number to 623
 
 `personedit 3 t/Hardware t/Network` edits the third person's tags to be `Hardware` and `Network` instead of the tags originally associated.
 
+<div markdown="block" class="alert alert-info">
+❗Editing tags removes all existing tags, only retaining the tags passed with the edit command.
+</div>
+
 ### How to delete an employee's information? `persondelete`
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.
 
@@ -143,7 +156,7 @@ Format: `persondelete PERSON_INDEX`
 Example: `persondelete 3` deletes the third person in the list
 
 ### How to search for a person by name or tag? `personfind`
-Finds all people by a certain name and/or tag. If you wish to search by tags alone, use the wildcard operator `*` instead of typing a name.
+Finds all people by a certain name and/or tag. 
 If multiple tags are entered, only entries that match **all** tags are returned.
 
 Format: `personfind [NAME] [TAG]...​`
@@ -155,6 +168,9 @@ Examples:
 `personfind Nicole` finds all the employees named ‘Nicole’
 
 `personfind Nicole Hardware Display` finds all employees named ‘Nicole’, tagged with BOTH 'Hardware' AND 'Display'
+
+![before](images/screenshots/personfind/before.png)
+![after](images/screenshots/personfind/after.png)
 
 ### How to list all persons? `personlist`
 Lists all the employees in the company.
@@ -180,7 +196,6 @@ Example: `export 3` exports the third person in the list
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
 
-[coming in v1.3] Require confirmation with a `yes clear` for clearing all data with `clear`.
 Format: `clear`
 
 Example: `clear` removes all the employees and jobs from the app
@@ -198,7 +213,7 @@ Format: `add n/NAME d/DURATION`
 
 Example: `add 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
 
-## How to earch for a job by name? `find`
+## How to search for a job by name? `find`
 
 Finds all jobs by a certain name.
 
@@ -207,6 +222,9 @@ Format: `find NAME`
 Examples:
 
 `find Painting` finds all the jobs with 'Painting' in its name
+
+![before](images/screenshots/find/before.png)
+![after](images/screenshots/find/after.png)
 
 ### How to list all jobs? `list`
 
@@ -235,6 +253,11 @@ Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
 
 Example: `assign 2 i/3` assigns the second job to the third employee
 
+❗️Caution: You cannot `assign` a job you have applied `mark` on before.
+
+![before](images/screenshots/assign/before.png)
+![after](images/screenshots/assign/after.png)
+
 ### How to mark a job as done or not done? `mark`
 
 Toggles the state of a job. The first time it is applied to a job, it indicates that a job has been completed and is pending payment. 
@@ -251,6 +274,9 @@ Example: `mark 2` marks the second job, assuming it is not already marked as com
 
 Example: `mark 2` un-marks the second job after the previous example is performed
 
+![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
+
+
 ### How to finalize payments for a job? `pay`
 
 Finalizes the payments of a job. This command is irreversible, and the finalized job cannot be
@@ -261,6 +287,8 @@ Format: `pay JOB_INDEX y/`
 
 Example: `pay 2 y/` finalizes the payments of the second job
 
+![before](images/screenshots/pay/before.png)
+![after](images/screenshots/pay/after.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Miscellaneous commands
@@ -271,9 +299,11 @@ Exits the program immediately.
 Format: `exit`
 
 ### How to find all the commands if you need help? `help`
-Opens the help page which shows the command list like the one above.
+Opens the help page which shows a scrollable command list like the one above.
 
 Format: `help`
+
+![help](images/screenshots/help/help.png)
 
 Prompted when the user makes a typo (i.e. tries to use an invalid command) :
 Format: `Looks like you used an invalid command. Use the command help to access a list of all available commands.`
