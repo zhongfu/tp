@@ -553,40 +553,55 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding an employee
 
-### Deleting a person
+Adding an employee while employees are being shown
 
-1. Deleting a person while all persons are being shown
+Prerequisites: List all employees using the `list` command. Multiple employees in the list.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+- Test case: `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior`<br>Expected: An employee with the corresponding details will be added to the end of the employee list. Details of the added employee will be shown in the status message.
+- Test case: `personadd p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior`<br>Expected: No employee is added. The expected format of the `personadd` command will be shown in the status message.
+- Test case: `personadd n/Nicole p/9 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior`<br>
+  Expected: No employee is added. The expected format of `Phone` will be shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+Other incorrect `personadd` commands to try: `personadd`, `personadd n/Nicole`, `...` <br>
+Expected: Similar to previous.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Deleting an employee
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Deleting an employee while all employees are being shown
 
-1. _{ more test cases …​ }_
+    1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
 
-### Saving data
+    1. Test case: `delete 1`<br>
+       Expected: First employee is deleted from the list. Details of the deleted employee shown in the status message.
 
-1. Dealing with missing/corrupted data files
+    1. Test case: `delete 0`<br>
+       Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting an employee after a find command is executed
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the observable list. Details of the deleted contact shown in the status message. Entering the `list` command shows that the employee that was originally in the first index is not deleted (unless the position of the employee was the same after the `find` command).
+
+    3. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
