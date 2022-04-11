@@ -34,6 +34,9 @@ public class JobMarkCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Marked job \"%s\" as %s.";
 
+    public static final String MARK_PART = "completed";
+    public static final String UNMARK_PART = "not completed";
+
     private final Index toMark;
     private boolean state;
     private Employment instance;
@@ -86,7 +89,7 @@ public class JobMarkCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, jobToMark.getDesc(),
-                state ? "Not Paid" : "Paid"));
+                state ? UNMARK_PART : MARK_PART));
     }
 
     @Override

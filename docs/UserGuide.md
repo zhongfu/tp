@@ -9,7 +9,7 @@ PeopleSoft is a desktop app for **calculating the salary for shift-based contrac
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
 After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates.
-You can also generate a `CSV` payslip for your employees to refer to.
+You can also generate a payslip in CSV format for your employees to refer to.
 
 The program simulates a real life workflow:
   * Employees start working. 
@@ -23,7 +23,7 @@ The program simulates a real life workflow:
 
 **:information_source: How to use this guide:**<br>
 
-* Words in `this format` are commands to be typed into PeopleSoft.<br>
+* Words in `monospace` are commands to be typed into PeopleSoft.<br>
 
 * Words in `UPPERCASE` are to be replaced with an appropriate value.<br>
   e.g. `n/NAME` means that `NAME` should be substituted with a name, e.g. `n/John Doe`.
@@ -41,15 +41,17 @@ The program simulates a real life workflow:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. Follow [this guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) to do so.
+## Running PeopleSoft for the first time
 
-2. Download the latest version of the application from [here](https://github.com/AY2122S2-CS2103T-T11-4/tp/releases). Select the `peoplesoft.jar` file.
+1. Ensure you have Java `11` or above installed in your Computer. Follow [**this guide**](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) to do so.
 
-3. Move it to the folder that you want the data to be saved in.
+2. **Download** the latest version of `peoplesoft.jar` from [**here**](https://github.com/AY2122S2-CS2103T-T11-4/tp/releases).
 
-4. Double-click the file to start the app. The GUI should appear as pictured in a few seconds. If this does not work on your system, open an instance of the command line (command prompt for Windows, the terminal on Mac and Linux), navigate to directory where the file is located, and type `java -jar peoplesoft.jar`. Note how the app contains some sample data.
+3. Place the `peoplesoft.jar` file anywhere on your computer. Ideally, create a new folder for this step.
+
+4. **Double-click** the file to start the app. A window should appear in a few seconds as pictured below.
 
 <br><br>
 
@@ -58,12 +60,104 @@ _The PeopleSoft interface_
 
 <br><br>
 
-7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>You can try out any command from the [Command Summary](#command-summary) below.
+<div markdown="block" class="alert alert-info">
 
-8. Refer to the [Features](#features) below for details of each command.
+:information_source: If this does not work, open an instance of the command line (command prompt for Windows, the terminal on Mac and Linux), navigate to directory where the file is located, and run `java -jar peoplesoft.jar`.
+
+</div>
+
+The application should be filled with sample data. Additionally, the application should have created a `data` folder and some additional files in the same folder as `peoplesoft.jar`. Use the `clear` command to delete the sample data.
+
+## Exploring the sample data
+
+The sample data is meant to help users get started using PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.<br>
+
+To start off, notice that the sample data contains some employees under the table of employees. Here you can see the details of the employees, including their name, base pay and tags. Notice also that the sample data does not contain any jobs.
+
+### Create a job
+
+To create a job, you can use the command `add`. You will have to specify a name and a duration using the prefixes `n/` and `d/` respectively. In this case, a aircon repair job that lasts two hours will be created.
+
+1. Type `add n/Repair aircon d/2` in the command window.
+
+This is the command to add a new job with the name 'Repair aircon' and a duration of two hours.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: The order of the prefixes `n/` and `d/` does not matter.
+
+</div>
+
+2. Hit **enter** to run the command.
+
+A new job should be created in the table of jobs. It should have the name 'Repair aircon' with a duration of '2h'.
+
+### Assign person to a job
+
+Like in the real-world, jobs need to be assigned to employees. This can be done in PeopleSoft with the command `assign`. `assign` is a command that is **index-based**, this means that it uses the ordering of the items displayed in the table. You will have to specify at least two indexes, one for the job, and at least one for the employees.
+
+1. Type `assign 1 i/1` in the command window.
+
+The first number in the command refers to the index of the job in the table of jobs. In this case, it is referencing the first job in the table of jobs, which is the aircon repair job created earlier. The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it is referencing the first employee in the table of employees, which is 'Nicole Tan'.
+
+2. Hit **enter** to run the command.
+
+A message should appear that mentions that the job 'Repair aircon' is assigned to 'Nicole Tan'.<br>
+
+Index-based commands depend on the ordering of the items displayed in its respective table. The respective search and list commands can vary this order to the user's liking.'
+
+3. Type `personfind aircon` in the command window.
+
+This command searches through the table of employees to find any keywords that match with 'Aircon'. Keywords can be part of names or tags and are not case-sensitive.
+
+4. Hit **enter** to run the command.
+
+There should be two persons listed. One of whom is 'Nicole Tan', and the other is 'Arjun Khatau'. Notice how the table of employees have been updated to where each person has the 'Aircon' tag.
+
+5. Type `assign 1 i/2` in the command window.
+
+This assigns the second person in the table to the first job, which is 'Arjun Khatau' Notice how the index being used is that of the new filtered table where 'Arjun Khatau' is the second employee that is listed.
+
+6. Hit **enter** to run the command.
+
+A message should appear that mentions that the job 'Repair aircon' is assigned to 'Arjun Khatau'.
+
+### Complete a job and pay employees
+
+A key feature of PeopleSoft is tracking the state of job completion and payments. Two commands, `mark` and `pay` are suited for these roles respectively. Both `mark` and `pay` are index-based commands.
+
+1. Type `mark 1` in the command window.
+
+This command marks the first job as completed.
+
+2. Hit **enter** to run the command.
+
+The job 'Repair aircon' should be marked as completed. This can also be seen through the checkmark under the *Done* column.
+
+3. Type `personlist` in the command window. Hit **enter** to run the command. This reverts the employee table to display **all** employees.
+
+Marking a job as completed creates pending payments for the job. The pending payments are reflected in the *Unpaid* column in the employees list. Notice how 'Nicole Tan' and 'Arjun Khatau' have non-zero values under the *Unpaid* column.
+This value reflects the amount of money that is pending payment to the employees. It is calculated from the employee's base rate and the job's duration.
+
+4. Type `pay 1 y/` in the command window. 
+
+The prefix `y/` is a safeguard against accidental misuse of this command. This command finalizes payments for the given job and it is **irreversible**. After the job is finalized, it cannot be modified by any commands, so do make sure that you are intending to run this command before running it.
+   
+5. Hit **enter** to run the command.
+
+The job has its payments finalized. This is reflected in the checkmark under the *Paid* column.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Run the `export` command to create a CSV payslip for an employee.
+
+</div>
+
+This concludes the short tutorial on the basic functionalities of PeopleSoft. You can refer to the [features](#features) section for more information about specific features. To clear the sample data, run the command `clear`.
+
 
 --------------------------------------------------------------------------------------------------------------------
-## Command summary
+# Command summary
 
 A handy reference for more experienced users who just need to know the format of a command.
 
@@ -86,8 +180,6 @@ A handy reference for more experienced users who just need to know the format of
 | `exit`      | `exit`                                                                                      | NA                                                                                                         |
 | `help`      | `help`                                                                                      | NA                                                                                                         |
 --------------------------------------------------------------------------------------------------------------------
-
-## Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -112,6 +204,8 @@ A handy reference for more experienced users who just need to know the format of
   e.g. `[t/TAG]...​` can be used as `t/friend`, `t/friend t/family`
 
 </div>
+
+# Features
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -212,14 +306,13 @@ Format: `export PERSON_INDEX`
 
 Example: `export 3` exports the third person in the list
 
-### How to clear all entries? `clear`
+<div markdown="block" class="alert alert-info">
 
-Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
-❗️Caution: You cannot recover the data afterwards.
+**:information_source: Note:**<br>
 
-Format: `clear`
+This command updates the job list to show all jobs assigned to that person.
 
-Example: `clear` removes all the employees and jobs from the app
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -319,9 +412,10 @@ Example: `mark 2` un-marks the second job after the previous example is performe
 
 ### How to finalize payments for a job? `pay`
 
-Finalizes the payments of a job. This command is irreversible, and the finalized job cannot be
-modified in any way except by `clear`. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
+Finalizes the payments of a job. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
 finalized.
+
+❗️Caution: This is irreversible. The finalized job cannot be modified in any way except by `clear`.
 
 Format: `pay JOB_INDEX y/`
 
@@ -332,6 +426,15 @@ Example: `pay 2 y/` finalizes the payments of the second job
 --------------------------------------------------------------------------------------------------------------------
 
 ## Miscellaneous commands
+
+### How to clear all entries? `clear`
+
+Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
+❗️Caution: You cannot recover the data afterwards.
+
+Format: `clear`
+
+Example: `clear` removes all the employees and jobs from the app
 
 ### How to exit the program? `exit`
 Exits the program immediately.
@@ -350,7 +453,7 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I save the data?
 
@@ -362,6 +465,10 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 ❗️Caution: Do not edit the data directly unless you are sure that its format will remain valid. If your changes to the data file makes its format invalid, PeopleSoft will discard all data and start with an empty data file at the next run.
 
+**Q**: Can I get back the initial sample data?
+
+**A**: Deleting the file `/data/peoplesoft.json` will reload the sample data on the next start-up of PeopleSoft.
+
 **Q**: How do I transfer my data to another Computer?
 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with your existing PeopleSoft data file.
@@ -372,7 +479,7 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+# Glossary
 
 **Index**: The item's number in a list.
 e.g. The second person in the list has an `INDEX` of 2.
