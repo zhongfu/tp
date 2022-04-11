@@ -135,7 +135,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `JobAddCommandParser`, `JobDeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-The **API** of this component is specified in the [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-4/tp/blob/master/src/main/java/peoplesoft/model/Model.java)
+The **API** of this component is specified in the [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-4/tp/blob/master/src/main/java/peoplesoft/model/Model.java) interface.
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
