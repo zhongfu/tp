@@ -8,6 +8,8 @@
     /* Source: https://stackoverflow.com/questions/13566210/declaring-variable-in-javafx-css-file */
     /* Docs https://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html */
 
+    base: white;
+
     list-cell-even: #cdcdcd;
     list-cell-odd: #dedede;
     list-cell-selected: derive(list-cell-even, -10%);
