@@ -3,15 +3,19 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import peoplesoft.ui.controls.PeoplesoftTablePane?>
 
-<VBox fx:id="help" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="1050.0" spacing="30.0" style="-fx-background-color: transparent;" stylesheets="@../styles/HelpPage.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="help" spacing="30.0" style="-fx-background-color: transparent;" stylesheets="@../styles/HelpPage.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <TableView fx:id="table" prefHeight="2160.0" prefWidth="1050.0">
-            <columns>
-                <TableColumn fx:id="command" prefWidth="75.0" text="Command" />
-                <TableColumn fx:id="format" prefWidth="75.0" text="Format" />
-                <TableColumn fx:id="examples" prefWidth="75.0" text="Examples" />
-            </columns>
+        <PeoplesoftTablePane fx:id="helpTablePane" label="Commands" prefWidth="500" VBox.vgrow="ALWAYS">
+            <table>
+                <columns>
+                    <TableColumn fx:id="command" prefWidth="60" text="Command" reorderable="false" />
+                    <TableColumn fx:id="format" prefWidth="220" text="Format" reorderable="false" />
+                    <TableColumn fx:id="examples" prefWidth="220" text="Examples" reorderable="false" />
+                </columns>
+            </table>
+        </PeoplesoftTablePane>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
