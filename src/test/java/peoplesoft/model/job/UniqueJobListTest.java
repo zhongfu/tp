@@ -142,8 +142,8 @@ public class UniqueJobListTest {
     @Test
     public void setJobs_list_replacesOwnListWithProvidedList() {
         uniqueJobList.add(EATING);
-        List<Job> JobList = Collections.singletonList(RUNNING);
-        uniqueJobList.setJobs(JobList);
+        List<Job> jobList = Collections.singletonList(RUNNING);
+        uniqueJobList.setJobs(jobList);
         UniqueJobList expectedUniqueJobList = new UniqueJobList();
         expectedUniqueJobList.add(RUNNING);
         assertEquals(expectedUniqueJobList, uniqueJobList);
