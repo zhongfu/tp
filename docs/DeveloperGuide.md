@@ -290,7 +290,6 @@ The proposed addition of pay multipliers to `Job` objects is facilitated by `Emp
 * **Alternative 2:** Saves pay amount as a fixed value and updates it when Tag is edited.
     * Pros: Will use less memory as only one value is being stored.
     * Cons: Loss of useful pay breakdown information.
-``
 
 ### \[Proposed\] Undo/redo feature
 
@@ -374,7 +373,26 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+A simple archival feature can be easily implemented, as all of the app data can be (and is currently) stored in a single file. 
+
+As such, it should be trivial to add an `archive` command, which saves a copy of the database to a different filename. Auto-archival should also be possible, e.g. by saving a copy of the database on every X changes, or if the last archive was made more than Y hours ago.
+
+The archived data files may not be as user-friendly though -- restoring data archives will require users to copy an archived copy of the database to the expected location, then restarting the application.
+
+We might hence want to implement a rudimentary interface with which users can browse through older archives -- this interface might show basic information about each archive, such as:
+
+- date of archive
+- number of employees/jobs
+- size of archive
+
+...as well as provide an easy way to load the archive into the app temporarily, which can be implemented as follows:
+
+1. save the current database somewhere
+2. make a copy of the archive
+3. set the storage filename to point to the archive copy
+4. reload the application, if required
+
+If the user desires to return to the original database, then we can simply load the database saved in Step 1 and reload the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
