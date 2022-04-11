@@ -93,7 +93,7 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
-        throw new AssertionError("This method should not be called.");
+        // let this method be called because job assign needs to update the personlist.
     }
 
     @Override
@@ -132,6 +132,6 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredJobList(Predicate<Job> predicate) {
-        throw new AssertionError("This method should not be called.");
+        // let this method be called because job add needs to update the joblist.
     }
 }

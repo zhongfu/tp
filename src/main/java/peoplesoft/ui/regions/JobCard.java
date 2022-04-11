@@ -4,10 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.beans.property.ReadOnlyDoubleProperty;
-import java.util.HashMap;
-import java.util.Objects;
-
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -59,10 +55,11 @@ public class JobCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public JobCard(Job job, int displayedIndex, HashMap<Integer, Person> assignedIndexes,
+    public JobCard(Job job, int displayedIndex, List<Person> assignedPeople,
             List<ReadOnlyDoubleProperty> colWidths) {
         super(FXML);
 
+        // dynamically size the card
         List<? extends Region> cols = List.of(idx, desc, duration, doneIconCol,
                 paidForIconCol, assigned);
         if (cols.size() != colWidths.size()) {
@@ -73,7 +70,7 @@ public class JobCard extends UiPart<Region> {
             cols.get(i).maxWidthProperty().bind(colWidths.get(i));
         }
 
-        // calculate time
+        // calculate duration to display
         int hH = job.getDuration().toHoursPart();
         int mins = job.getDuration().toMinutesPart();
         String mM = mins == 0 ? "" : (mins + "m");
@@ -90,8 +87,8 @@ public class JobCard extends UiPart<Region> {
         ReadOnlyDoubleProperty asgnPaneWidthProperty = assigned.widthProperty();
         ObservableList<Node> visibleAssignemnts = assigned.getChildren();
 
-        assignedIndexes.forEach((idx, person) -> {
-            Label lbl = new Label(idx + " – " + person.getName());
+        assignedPeople.forEach(person -> {
+            Label lbl = new Label(person.getName() + "");
             lbl.setWrapText(true);
             lbl.setTextAlignment(TextAlignment.CENTER);
             lbl.maxWidthProperty().bind(asgnPaneWidthProperty);

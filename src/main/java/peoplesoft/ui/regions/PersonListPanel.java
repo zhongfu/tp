@@ -47,9 +47,10 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                // add a new divider before also!
+                // Future Development: For better UX, add a new divider before each new card.
                 // <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0"
                 // prefHeight="2.0" style="-fx-background-color: #2e2d42;" />
+
                 setGraphic(new PersonCard(person, getIndex() + 1, colWidths).getRoot());
             }
         }

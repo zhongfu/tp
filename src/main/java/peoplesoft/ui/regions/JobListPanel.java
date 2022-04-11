@@ -1,7 +1,5 @@
 package peoplesoft.ui.regions;
 
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -57,29 +55,15 @@ public class JobListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                // find the people assigned to this job
-                HashMap<Integer, Person> assignedIndexes = new HashMap<>();
-                List<Person> peopleAssigned = Employment.getInstance().getPersons(job, model);
-
-                peopleAssigned.stream()
-                        .sorted(Comparator.comparingInt(this::getOneBased))
-                        .forEach(person -> assignedIndexes.put(getOneBased(person), person));
-
-                // add a new divider before also!
+                // Future Development: For better UX, add a new divider before each new card.
                 // <StackPane fx:id="divider" layoutX="10.0" layoutY="21.0"
                 // prefHeight="2.0" style="-fx-background-color: #2e2d42;" />
-                setGraphic(new JobCard(job, getIndex() + 1, assignedIndexes, colWidths).getRoot());
-            }
-        }
 
-        /**
-         * Returns the index of the person in the displayed employees list.
-         *
-         * @param p the person being displayed
-         * @return the transient index of that person in the current list
-         */
-        private int getOneBased(Person p) {
-            return personList.indexOf(p) + 1;
+                // find the people assigned to this job
+                List<Person> peopleAssigned = Employment.getInstance().getPersons(job, model);
+
+                setGraphic(new JobCard(job, getIndex() + 1, peopleAssigned, colWidths).getRoot());
+            }
         }
     }
 
