@@ -8,7 +8,9 @@ import javafx.collections.ObservableList;
 import peoplesoft.commons.core.GuiSettings;
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.logic.commands.Command;
+import peoplesoft.logic.commands.CommandHelpMessage;
 import peoplesoft.logic.commands.CommandResult;
+import peoplesoft.logic.commands.HelpCommand;
 import peoplesoft.logic.commands.exceptions.CommandException;
 import peoplesoft.logic.parser.AddressBookParser;
 import peoplesoft.logic.parser.exceptions.ParseException;
@@ -68,6 +70,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Job> getFilteredJobList() {
         return model.getFilteredJobList();
+    }
+
+    @Override
+    public ObservableList<CommandHelpMessage> getCommandHelpMessageList() {
+        return HelpCommand.COMMANDS;
     }
 
     @Override

@@ -19,6 +19,14 @@ public class JobAddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " "
+            + PREFIX_NAME + "Fix HDB Lock "
+            + PREFIX_DURATION + "1";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_DURATION + "DURATION ";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the database.\n"
             + "Format: "
             + COMMAND_WORD + " "

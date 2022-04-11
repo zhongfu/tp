@@ -6,11 +6,19 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
 import peoplesoft.commons.core.LogsCenter;
+import peoplesoft.logic.commands.CommandHelpMessage;
+import peoplesoft.logic.commands.HelpCommand;
+import peoplesoft.ui.controls.PeoplesoftTablePane;
 import peoplesoft.ui.regions.ResultDisplay;
 
 public class HelpPage extends Page {
@@ -23,6 +31,7 @@ public class HelpPage extends Page {
     private static ResultDisplay display;
     private static final Logger logger = LogsCenter.getLogger(HelpPage.class);
     private static final String FXML = "HelpPage.fxml";
+    private static ObservableList<CommandHelpMessage> commandHelpMessages = HelpCommand.COMMANDS;
 
     @FXML
     private Button openInBrowserButton;
@@ -35,16 +44,47 @@ public class HelpPage extends Page {
      * https://medium.com/@keeptoo/adding-data-to-javafx-tableview-stepwise-df582acbae4f
      */
     @FXML
-    private TableView<String> table;
+    private PeoplesoftTablePane<CommandHelpMessage> helpTablePane;
+
+    @FXML
+    private TableColumn<CommandHelpMessage, String> command;
+
+    @FXML
+    private TableColumn<CommandHelpMessage, String> format;
+
+    @FXML
+    private TableColumn<CommandHelpMessage, String> examples;
+
+    private Callback<
+            TableColumn<CommandHelpMessage, String>,
+            TableCell<CommandHelpMessage, String>> cellFactory = col -> {
+                TableCell<CommandHelpMessage, String> cell = new TableCell<>();
+                Text text = new Text();
+                cell.setGraphic(text);
+
+                text.getStyleClass().add("text");
+                text.wrappingWidthProperty().bind(cell.widthProperty().subtract(20));
+                text.textProperty().bind(cell.itemProperty());
+                return cell;
+            };
 
     /**
      * Creates a new {@code HelpPage}
      */
-    public HelpPage(ResultDisplay rd) {
+    public HelpPage(ResultDisplay rd, ObservableList<CommandHelpMessage> commandHelpMessageList) {
         super(FXML);
         logger.fine("Opening PeopleSoft's Help page.");
         helpMessage.setText(HELP_MESSAGE);
         display = rd;
+
+        command.setCellFactory(cellFactory);
+        command.setCellValueFactory(new PropertyValueFactory<>("command"));
+        format.setCellFactory(cellFactory);
+        format.setCellValueFactory(new PropertyValueFactory<>("format"));
+        examples.setCellFactory(cellFactory);
+        examples.setCellValueFactory(new PropertyValueFactory<>("examples"));
+
+        helpTablePane.getTable().setItems(commandHelpMessages);
     }
 
     /**

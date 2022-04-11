@@ -60,23 +60,23 @@ You can also generate a PDF payslip for your employees to refer to.
 
 A handy reference for more experienced users who just need to know the format of a command.
 
-| Command     | Format                                                                                      | Examples                                                                                                   |
-|-------------|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `personadd` | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                      | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
+| Command     | Format                                                                                         | Examples                                                                                                   |
+|-------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `personadd` | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                         | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
 | `personedit` | `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                           |
-| `persondelete` | `persondelete PERSON_INDEX`                                                                 | `persondelete 3`                                                                                           |
-| `personfind` | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                    | `find Nicole Hardware`, `personfind Aircon`                                                                |
-| `personlist` | `personlist`                                                                                | NA                                                                                                         |
-| `clear`     | `clear`                                                                                     | NA                                                                                                         |
-| `add`       | `add n/NAME d/DURATION`                                                                     | `add n/Fix HDB Lock d/1`                                                                                   |
-| `find`      | `find NAME`                                                                                 | `find Painting`                                                                                            |
-| `list`      | `list`                                                                                      | NA                                                                                                         |
-| `delete`    | `delete JOB_INDEX`                                                                          | `delete 3`                                                                                                 |
-| `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                      | `assign 2 i/1`                                                                                             |
-| `mark`      | `mark JOB_INDEX`                                                                            | `mark 2`                                                                                                   |
-| `pay`       | `pay JOB_INDEX y/`                                                                          | `pay 2 y/`                                                                                                 |
-| `exit`      | `exit`                                                                                      | NA                                                                                                         |
-| `help`      | `help`                                                                                      | NA                                                                                                         |
+| `persondelete` | `persondelete PERSON_INDEX`                                                                    | `persondelete 3`                                                                                           |
+| `personfind` | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                       | `find Nicole Hardware`, `personfind Aircon`                                                                |
+| `personlist` | `personlist`                                                                                   | NA                                                                                                         |
+| `clear`     | `clear`                                                                                        | NA                                                                                                         |
+| `add`       | `add n/NAME d/DURATION`                                                                        | `add n/Fix HDB Lock d/1`                                                                                   |
+| `find`      | `find KEYWORD`                                                                                 | `find Painting`                                                                                            |
+| `list`      | `list`                                                                                         | NA                                                                                                         |
+| `delete`    | `delete JOB_INDEX`                                                                             | `delete 3`                                                                                                 |
+| `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                         | `assign 2 i/1`                                                                                             |
+| `mark`      | `mark JOB_INDEX`                                                                               | `mark 2`                                                                                                   |
+| `pay`       | `pay JOB_INDEX y/`                                                                             | `pay 2 y/`                                                                                                 |
+| `exit`      | `exit`                                                                                         | NA                                                                                                         |
+| `help`      | `help`                                                                                         | NA                                                                                                         |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features

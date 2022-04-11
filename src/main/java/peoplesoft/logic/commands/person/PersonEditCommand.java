@@ -40,6 +40,18 @@ public class PersonEditCommand extends Command {
 
     public static final String COMMAND_WORD = "personedit";
 
+    public static final String COMMAND_EXAMPLES = COMMAND_WORD + " 2 "
+            + PREFIX_NAME + "Nicole Lee "
+            + PREFIX_TAG + "OS";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " PERSON_INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_RATE + "RATE] "
+            + "[" + PREFIX_TAG + "TAG]...";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values and tags will be overwritten by the input values.\n"
