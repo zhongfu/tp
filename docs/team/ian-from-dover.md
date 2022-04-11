@@ -14,9 +14,7 @@ PeopleSoft is a Payroll management app for companies handling contractor-based s
 * **New Feature**: Added the ability to open the User Guide directly in the web browser. (Pull Request [\#77](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/77))
   * **What it does**: Allows the user to open the User Guide directly in the web browser.
   * **Justification**: This feature improves the product because it significantly reduces the number of steps a user needs to do to search for help. It also follows Jakob Nielsen's Revised Usability Heuristic H2-10: Help and documentation.
-  * **Highlights**: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+  * Credits: [Dave from StackOverflow](https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java/54869038#54869038) for opening the browser across OSes
 
 * **New Feature**: Added the sidebar and allowed the user to navigate between pages either using it, or using commands. (Pull Request [\#222](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/222))
   * **What it does**: Gives the user multiple ways to change between pages (through both GUI and CLI)
@@ -29,7 +27,7 @@ PeopleSoft is a Payroll management app for companies handling contractor-based s
   * Reviewed [39 PRs](https://github.com/AY2122S2-CS2103T-T11-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aian-from-dover+) and offered non-trivial comments. (Eg. PR [\#52](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/52), [\#109](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/109))
   * Ensured that issues and internal milestones were on schedule
   * Drafted meeting agendas and facilitated meeting discussion
-  * Regularly updated tP deliverables document and served as point of contact for tutor.
+  * Regularly updated tP deliverables document and served as point of contact for tutor
   * Made the release `v1.3.0` on GitHub
 
 * **Enhancements to existing features**:
@@ -43,17 +41,18 @@ PeopleSoft is a Payroll management app for companies handling contractor-based s
 
 * **Documentation**:
   * User Guide:
-    * Added `How to use this guide` section
-    * Added documentation for the features `job` `joblist`, `jobdelete` and `assign` [\#86](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/86/files)
-    * Added `Glossary` section (PR [\#86](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/86/files) also)
-    * Updated command summary with new commands
-    * Did cosmetic tweaks to existing documentation of features `mark`: [\#118](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/118/)
+    * Added the `How to use this guide` section
+    * Added documentation for the features `job` `joblist`, `jobdelete` and `assign` (PR [\#86](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/86/files))
+    * Added the `Glossary` section (PR [\#86](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/86/files) also)
+    * Updated the command summary with the new job commands
+    * Did cosmetic tweaks to existing documentation for the `mark` feature: [\#118](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/118/)
     * Extensively researched 20 previous UGs to consolidate best practices for the team. [\#203](https://github.com/AY2122S2-CS2103T-T11-4/tp/issues/203)
-  * Developer Guide: (PR [\#221](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/221))
+  * Developer Guide: 
+    * All changes are in PR [\#221](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/221)
     * Added introduction, target user profile and value proposition to the front
     * Added implementation details of the GUI under the [UI component section](https://ay2122s2-cs2103t-t11-4.github.io/tp/DeveloperGuide.html).
     * Tweaked User Stories
-  * Readme:
+  * README:
     * Added animated preview and crafted the write-up for skimming. (PR [\#36](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/36) and [\#222](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/222))
 
 * **Community**:
@@ -61,7 +60,7 @@ PeopleSoft is a Payroll management app for companies handling contractor-based s
   * Reported [10 bugs and suggestions for other teams](https://github.com/ian-from-dover/ped/issues) in the class during Practical Exam Dry run (PE-D)
 
 * **Tools**:
-  * Implemented a UI Kit found in Figma by emulating its design using JavaFX.
-  * Touched up all icons and images in Adobe Photoshop.
-  * Brainstormed multiple user interfaces by drawing wireframe sketches before chancing upon the UI Kit.
+  * Implemented a UI Kit found in Figma by emulating its design using JavaFX
+  * Touched up all icons and images in Adobe Photoshop
+  * Brainstormed multiple user interfaces by drawing wireframe sketches before chancing upon the UI Kit
   * ![Sketches](../images/ian_sketches.jpg)
