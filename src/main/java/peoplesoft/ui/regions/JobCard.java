@@ -90,7 +90,7 @@ public class JobCard extends UiPart<Region> {
         assignedPeople.forEach(person -> {
             Label lbl = new Label(person.getName() + "");
             lbl.setWrapText(true);
-            lbl.setTextAlignment(TextAlignment.CENTER);
+            lbl.setTextAlignment(TextAlignment.LEFT);
             lbl.maxWidthProperty().bind(asgnPaneWidthProperty);
             visibleAssignemnts.add(lbl);
         });
