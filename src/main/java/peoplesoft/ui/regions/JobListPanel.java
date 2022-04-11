@@ -15,6 +15,8 @@ import peoplesoft.model.employment.Employment;
 import peoplesoft.model.job.Job;
 import peoplesoft.model.person.Person;
 import peoplesoft.ui.UiPart;
+import peoplesoft.ui.util.NoFocusModel;
+import peoplesoft.ui.util.NoSelectionModel;
 
 /**
  * Panel containing the list of persons.
@@ -37,6 +39,8 @@ public class JobListPanel extends UiPart<Region> {
             Model model, List<ReadOnlyDoubleProperty> colWidths) {
         super(FXML);
         this.colWidths = colWidths;
+        jobListView.setSelectionModel(new NoSelectionModel<>());
+        jobListView.setFocusModel(new NoFocusModel<>());
         jobListView.setItems(jobList);
         jobListView.setCellFactory(listView -> new JobListViewCell());
         this.personList = personList;
