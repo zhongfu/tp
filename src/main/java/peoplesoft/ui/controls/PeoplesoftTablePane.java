@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewFocusModel;
 import javafx.scene.layout.VBox;
+import peoplesoft.ui.util.TableNoSelectionModel;
 
 public class PeoplesoftTablePane<S> extends VBox {
     @FXML
@@ -28,6 +30,9 @@ public class PeoplesoftTablePane<S> extends VBox {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        table.setSelectionModel(new TableNoSelectionModel<>(table));
+        table.setFocusModel(new TableViewFocusModel<>(table));
     }
 
     public final void setItems(ObservableList<S> items) {

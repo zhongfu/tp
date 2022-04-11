@@ -12,6 +12,8 @@ import javafx.scene.layout.Region;
 import peoplesoft.commons.core.LogsCenter;
 import peoplesoft.model.person.Person;
 import peoplesoft.ui.UiPart;
+import peoplesoft.ui.util.NoFocusModel;
+import peoplesoft.ui.util.NoSelectionModel;
 
 /**
  * Panel containing the list of persons.
@@ -31,6 +33,8 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList, List<ReadOnlyDoubleProperty> colWidths) {
         super(FXML);
         this.colWidths = colWidths;
+        personListView.setSelectionModel(new NoSelectionModel<>());
+        personListView.setFocusModel(new NoFocusModel<>());
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
