@@ -103,7 +103,9 @@ The `UI` component,
 
 ### Logic component
 
-The **API** of this component is specified in the [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java) interface.
+The **API** of this component is specified in the [`Logic.java`](https://github.com/AY2122S2-CS2103T-T11-4/tp/blob/master/src/main/java/peoplesoft/logic/Logic.java) interface.
+
+Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
@@ -111,15 +113,15 @@ The **API** of this component is specified in the [`Logic.java`](https://github.
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `JobAddCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 *Figure 6. Sequence diagram of the interactions within the `Logic` component for the `execute("delete 1")` API call*
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> The lifeline for `JobDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -129,15 +131,15 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 *Figure 7. Class diagram of the Parser component, a subcomponent of the Logic component*
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `JobAddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `JobAddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `JobAddCommandParser`, `JobDeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-The **API** of this component is specified in the [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java) interface.
+The **API** of this component is specified in the [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-4/tp/blob/master/src/main/java/peoplesoft/model/Model.java) interface.
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-*Figure 8. Class diagram of the Model component*
+*Figure 8. Class diagram of the `Model` component*
 
 The `Model` component,
 
@@ -146,20 +148,18 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the currently 'selected' `Job` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Job>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* contains an `Employment` class which represents the associations between `Person` and `Job` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+A more detailed model of `Person` and `Job` is given below. Notice the association class `Employment` between `Person` and `Job`.
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+![Details of Person and Job](images/BetterModelClassDiagram.png)
 
-*Figure 9. Class diagram of a more OOP-based alternative Model*
-
-</div>
-
+*Figure 9. Class diagram of `Person` and `Job`*
 
 ### Storage component
 
-The **API** of this component is specified in the [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java) interface.
+The **API** of this component is specified in the [`Storage.java`](https://github.com/AY2122S2-CS2103T-T11-4/tp/blob/master/src/main/java/peoplesoft/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -240,19 +240,17 @@ Furthermore, it has the following attributes, to interact with `java.fx` effecti
 * `ObservableList<Job> internalList`
 * `ObservableList<Job> internalUnmodifiableList`
 
-
 ### The `Job` class
 
 The `Job` class is an abstraction for a job stored in PeopleSoft. A `Job` object is immutable and contains the
 following attributes:
 * `String jobId` - Jobs are referenced by this attribute.
 * `String desc` - A user-readable description of this job.
-* `Rate rate` - The hourly pay of a job. A `Rate` object contains a `Money` object which saves money values as
-a `java.math.BigDecimal` with 6 decimal places.
 * `Duration duration` - The duration that a job has been worked. Is used together with `rate` to calculate the
-total job earnings. Uses `java.time.Duration`.
-* `boolean hasPaid` - A boolean to denote if this job has been paid for. Used to calculate the salary of a
-`Person`.
+  total job earnings. Uses `java.time.Duration`.
+* `boolean hasPaid` - A boolean to denote if this job is completed. Used to calculate the salary of a
+  `Person`.
+* `boolean isFinal` - A boolean to denote if this job has finalized payments.
 
 The use of immutability ensures that there are no unintended side effects of modifying a `Job`.
 Whenever a `Job` needs to be modified (for example setting the value of `hasPaid`), a new immutable copy
@@ -267,14 +265,11 @@ association class `Employment` is used. The class handles the following responsi
 * Removing all necessary associations on the deletion/edit of a `Job` or `Person`.
 * Filtering the `Job` objects that are mapped to a `Person`.
 
-In the current implementation, there is a one-to-many mapping of `Job` objects to `Person` objects. An
+In the current implementation, there is a many-to-many mapping of `Job` objects to `Person` objects. An
 association can be created using `Employment#associate(job, person)`. The jobs are internally referenced by
-`jobId`, while the persons are referenced by `Name`.
-
-Future implementations may work on allowing for a many-to-many relationship between `Job` objects and `Person`
-objects (to represent how some jobs may have multiple persons involved). Currently, the class `Employment` is
-written as a singleton. This may be changed to be a field of `AddressBook` due to potential obstacles with the
-testing of the serialization/deserialization of the class.
+`jobId`, while the persons are referenced by `personId`. Currently, the class `Employment` is written as a
+singleton. This may be changed to be a field of `AddressBook` due to potential obstacles with the testing of
+the serialization/deserialization of the class.
 
 #### Design considerations:
 
@@ -403,7 +398,6 @@ We might hence want to implement a rudimentary interface with which users can br
 2. make a copy of the archive
 3. set the storage filename to point to the archive copy
 4. reload the application, if required
-
 
 If the user desires to return to the original database, then we can simply load the database saved in Step 1 and reload the application.
 
