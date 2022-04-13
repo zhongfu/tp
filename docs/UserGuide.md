@@ -30,9 +30,9 @@ The program simulates a real life workflow:
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 </div>
 
-* Table of Contents
-  {:toc}
-
+--------------------------------------------------------------------------------------------------------------------
+* Table of Contents 
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -152,24 +152,25 @@ This concludes the short tutorial on the basic functionalities of PeopleSoft. Yo
 
 A handy reference for more experienced users who just need to know the format of a command.
 
-| Command     | Format                                                                                      | Examples                                                                                                   |
-|-------------|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `personadd` | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                      | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
-| `personedit` | `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                           |
-| `persondelete` | `persondelete PERSON_INDEX`                                                                 | `persondelete 3`                                                                                           |
-| `personfind` | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                    | `personfind Nicole Hardware`, `personfind Aircon`                                                                |
-| `personlist` | `personlist`                                                                                | NA                                                                                                         |
-| `export`    | `export PERSON_INDEX`                                                                       | `export 2`                                                                                                 |
-| `clear`     | `clear`                                                                                     | NA                                                                                                         |
-| `add`       | `add n/NAME d/DURATION`                                                                     | `add n/Fix HDB Lock d/1`                                                                                   |
-| `find`      | `find NAME`                                                                                 | `find Painting`                                                                                            |
-| `list`      | `list`                                                                                      | NA                                                                                                         |
-| `delete`    | `delete JOB_INDEX`                                                                          | `delete 3`                                                                                                 |
-| `assign`    | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                      | `assign 2 i/1`                                                                                             |
-| `mark`      | `mark JOB_INDEX`                                                                            | `mark 2`                                                                                                   |
-| `pay`       | `pay JOB_INDEX y/`                                                                          | `pay 2 y/`                                                                                                 |
-| `exit`      | `exit`                                                                                      | NA                                                                                                         |
-| `help`      | `help`                                                                                      | NA                                                                                                         |
+| Command        | Format                                                                                            | Examples                                                                                                      |
+|:---------------|:--------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
+| `personadd`    | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                         | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
+| `personedit`   | `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                              |
+| `persondelete` | `persondelete PERSON_INDEX`                                                                       | `persondelete 3`                                                                                              |
+| `personfind`   | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                       | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
+| `personlist`   | `personlist`                                                                                      | NA                                                                                                            |
+| `export`       | `export PERSON_INDEX`                                                                             | `export 2`                                                                                                    |
+| `clear`        | `clear`                                                                                           | NA                                                                                                            |
+| `add`          | `add n/NAME d/DURATION`                                                                           | `add n/Fix HDB Lock d/1`                                                                                      |
+| `find`         | `find NAME`                                                                                       | `find Painting`                                                                                               |
+| `list`         | `list`                                                                                            | NA                                                                                                            |
+| `delete`       | `delete JOB_INDEX`                                                                                | `delete 3`                                                                                                    |
+| `assign`       | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                         | `assign 2 i/1`                                                                                                |
+| `mark`         | `mark JOB_INDEX`                                                                                  | `mark 2`                                                                                                      |
+| `pay`          | `pay JOB_INDEX y/`                                                                                | `pay 2 y/`                                                                                                    |
+  | `exit`         | `exit`                                                                                          | NA                                                                                                            |
+| `help`         | `help`                                                                                            | NA                                                                                                            |
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div markdown="block" class="alert alert-info">
