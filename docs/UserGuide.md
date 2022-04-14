@@ -340,12 +340,14 @@ This command updates the job list to show all jobs assigned to that person.
 
 #### `add`: Add a job
 
-Adds a new job to the system with the given attributes. `RATE` refers to how much the employee is paid per hour.
-`DURATION` refers to how long the job took. The payment is calculated accordingly.
+Adds a new job with the given attributes. `DURATION` refers to the duration required for job, in hours.
 
 Format: `add n/NAME d/DURATION`
 
-Example: `add 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees worked for 1 hour to fix a HDB lock
+Examples:
+
+* `add n/Fix HDB Lock d/1` creates a job named "Fix HDB Lock" with a duration of 1 hour.
+* `add n/Repair aircon d/4` creates a job named "Repair aircon" with a duration of 4 hours.
 
 <div markdown="block" class="alert alert-info">
 
@@ -353,36 +355,39 @@ Example: `add 2 n/Fix HDB Lock d/1` creates a job with id 2, where the employees
 
 * The maximum value for the duration of a job is 1,000,000 hours.
 
-* Multiple jobs of the same name can be added. These jobs can be differentiated by their internal ID and the
-order at which they were added, although practically it can easily result in confusion. Instead, it is
-recommended that a user differentiates jobs through naming to avoid any difficulties.
+* Multiple jobs of the same name can be added. These jobs can then be differentiated by their internal ID, the order in which they were added, and the employees that were assigned to it, although practically it can easily result in confusion. It is thus recommended that a user differentiates jobs through naming to avoid any confusion.
   
 </div>
 
-#### `find`: Search for a job by name
+#### `find`: Find jobs by name
 
-Finds all jobs by a certain name.
+Finds all jobs that have the given keyword(s) in their names or tags, and lists them in the employee table.
 
-Format: `find NAME`
+If multiple keywords are entered, only entries that match **all** keywords are returned.
+
+Keywords are case-insensitive.
+
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 Examples:
 
-`find Painting` finds all the jobs with 'Painting' in its name
+* `find Painting` finds all jobs with 'Painting' in their names.
+* `find paint istana` finds all jobs with 'paint' **and** 'istana' in their names.
 
 ![before](images/screenshots/find/before.png)
 ![after](images/screenshots/find/after.png)
 
 #### `list`: List all jobs
 
-Lists all the jobs you have created, including jobs that have been paid for and those that have not been paid for yet.
+Lists all the jobs added to the application, including jobs that have been paid for and those that have not been paid for yet.
 
 Format: `list`
 
-Example: `list` lists all the jobs you have created
+Example: `list` shows all jobs.
 
 #### `delete`: Delete a job
 
-Deletes the job that was referred to by the index.<br>
+Deletes the job with the given index.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -394,21 +399,24 @@ This is irreversible.
 
 Format: `delete JOB_INDEX`
 
-Example: `delete 2` deletes the second job
+Example: `delete 2` deletes the second job.
 
 #### `assign`: Assign a job to an employee
 
-Assigns a job to an employee that is working on it.
+Assigns a job to an employee to indicate that they are to be paid for the job.
 
 Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
 
-Example: `assign 2 i/3` assigns the second job to the third employee
+Examples:
+
+* `assign 2 i/3` assigns the second job to the third employee.
+* `assign 1 i/5 i/7` assigns the first job to the fifth and seventh employees.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
 
-A job that has been [marked](#mark-a-job-as-done-or-not-done--mark) as completed cannot be assigned. If a job
+A job that has been [marked](#mark-mark-or-unmark-a-job-as-done) as completed cannot be assigned. If a job
 is completed, it makes little sense to assign more employees to it. In the event more employees need to be
 assigned to a job, un-mark the job first before assigning them.
 
@@ -419,33 +427,40 @@ assigned to a job, un-mark the job first before assigning them.
 
 #### `mark`: Mark or unmark a job as done
 
-Toggles the state of a job. The first time it is applied to a job, it indicates that a job has been completed and is pending payment.
-To reclassify a job as unfinished, apply `mark` to the job again.
+Marks a job as done if it was not already marked as done, or marks a job as undone otherwise.
 
-A job needs to be [assigned](#assign-a-job-to-an-employee--assign) to at least one person before it can be marked.
+Marking a job as done indicates that a job has been completed and is pending payment. Unmarking a job causes the pending payment amounts to be subtracted from assigned employees.
 
-Note: the hourly rate(s) paid out to each employee will be fixed after a job is marked as done; further changes to any employee's rate will not cause the payout amounts to change.
+Jobs are initially **not** marked as done when first created, and have to have at least one person [assigned](#assign-assign-a-job-to-an-employee) to it before it can be marked.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+The hourly rate(s) paid out to each employee for a job is fixed once the job is marked as done; further changes to any employee's rate will not cause the payout amounts to change.
+
 To update the payout amounts to reflect the new hourly rates, un-mark and mark the job again.
+
+</div>
 
 Format: `mark JOB_INDEX`
 
-Example 1: `mark 2` marks the second job, assuming it is not already marked as complete
+Examples:
 
-Example 2: `mark 2` un-marks the second job after the previous example is performed
-
+* `mark 2` marks the second job, assuming it is not already marked as done.
+* `mark 2` un-marks the second job if it has already been marked as done.
 
 ![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
 
 #### `pay`: Finalize payments for a job
 
-Finalizes the payments of a job. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
-finalized.<br>
+Finalizes the payments of a job. A job needs to be [marked](#mark-mark-or-unmark-a-job-as-done) as done before it can be finalized.
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-This is irreversible. The finalized job cannot be modified in any way except by `clear`.
+This is irreversible. The finalized job cannot be modified in any way, and can only be removed with [`clear`](#clear-clear-all-app-data).
 
 </div>
 
@@ -455,6 +470,7 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 ![before](images/screenshots/pay/before.png)
 ![after](images/screenshots/pay/after.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Miscellaneous commands
