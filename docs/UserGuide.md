@@ -58,96 +58,109 @@ The program simulates a real life workflow:
 ![Ui](images/Ui_label.png)<br>
 _The PeopleSoft interface_
 
+When the application is started for the first time, it will be populated with sample data. You may delete this data with the `clear` command.
 
-The application should be filled with sample data. Additionally, the application should have created a `data` folder and some additional files in the same folder as `peoplesoft.jar`. Use the `clear` command to delete the sample data.
+A `data` folder and some configuration files (with a `.json` extension) will also be created in the folder that you run `peoplesoft.jar` from; this is where the application data will be stored.
 
 ### Exploring the sample data
 
-The sample data is meant to help users get started using PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.<br>
+The sample data is meant to help users get started with PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.
 
-To start off, notice that the sample data contains some employees under the table of employees. Here you can see the details of the employees, including their name, base pay and tags. Notice also that the sample data does not contain any jobs.
+To start off, notice that the sample data contains some employees under the table of employees. Here, you can see the details of the employees, including their name, base pay and tags.
+
+Since the sample data does not include any jobs, we will need to create new ones.
 
 #### Create a job
 
-When employees start working on a job, you can add it to PeopleSoft. To create a job, you can use the command `add`. You will have to specify a name and a duration using the prefixes `n/` and `d/` respectively. In this case, a aircon repair job that lasts two hours will be created.
+When your company receives a new job, you can add it to PeopleSoft. To create a job, you can use the `add` command. You will have to specify a name and a duration using the `n/` and `d/` prefixes respectively. For this tutorial, we will create a 2-hour-long aircon repair job.
 
 1. Type `add n/Repair aircon d/2` in the command window.
 
-This is the command to add a new job with the name 'Repair aircon' and a duration of two hours.
+    This command will add a new job with the name 'Repair aircon' and a duration of two hours.
 
-<div markdown="block" class="alert alert-info">
+    <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** The order of the prefixes `n/` and `d/` does not matter.
+    **:information_source: Note:** The order of the prefixes `n/` and `d/` does not matter.
 
-</div>
+    </div>
 
 2. Hit **enter** to run the command.
 
-A new job should be created in the table of jobs. It should have the name 'Repair aircon' with a duration of '2h'.
+    A new job should be created in the table of jobs. It should have the name 'Repair aircon' with a duration of '2h'.
 
 #### Assign person to a job
 
-Like in the real-world, jobs need to be assigned to employees. This can be done in PeopleSoft with the command `assign`. `assign` is a command that is **index-based**, this means that it uses the ordering of the items displayed in the table. You will have to specify at least two indexes, one for the job, and at least one for the employees.
+PeopleSoft allows you to indicate which employees are in-charge of a certain job with the `assign` command. The `assign` command requires 1 job *index*, and at laest 1 employee *index* (each prefixed by `i/`). These indexes can be found under the `#` column in both tables.
 
 1. Type `assign 1 i/1` in the command window.
 
-The first number in the command refers to the index of the job in the table of jobs. In this case, it references the first job in the table of jobs, which is the aircon repair job created earlier. The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the table of employees, which is 'Nicole Tan'.
+    The first number in the command (`1`) refers to the *index* of the job. In this case, it refers to the first job in the table of jobs, which is the aircon repair job created earlier.
+    
+    The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the table of employees, which is 'Nicole Tan'. Additional employees can also be assigned to this job by adding additional `i/` attributes.
 
 2. Hit **enter** to run the command.
 
-A message should appear that mentions that the job 'Repair aircon' is assigned to 'Nicole Tan'.<br>
+    A message should appear, indicating that the job 'Repair aircon' is assigned to 'Nicole Tan'.
+    
+<br>
 
-Index-based commands depend on the ordering of the items displayed in its respective table. The respective search and list commands can vary this order to the user's liking.'
+Index-based commands depend on the ordering of the items displayed in their respective tables. The search and list commands for employees and jobs can cause this order to vary.
 
-3. Type `personfind aircon` in the command window.
+1. Type `personfind aircon` in the command window.
 
-This command searches through the table of employees to find any keywords that match with 'Aircon'. Keywords can be part of names or tags and are not case-sensitive.
+    This command searches for 'aircon' in the names or tags of employees. Search terms are not case-sensitive.
+
+2. Hit **enter** to run the command.
+
+    There should be two persons listed: 'Nicole Tan', and 'Arjun Khatau'. Notice that the table of employees now only shows employees with the 'Aircon' tag.
+
+3. Type `assign 1 i/2` in the command window.
+
+    This assigns the second person in the table (Arjun Khatau) to the first job. Notice that the employee index (2) now refers to the second employee in the current list (Arjun Khatau), instead of in the original list (Kavya Singh).
 
 4. Hit **enter** to run the command.
 
-There should be two persons listed. One of whom is 'Nicole Tan', and the other is 'Arjun Khatau'. Notice how the table of employees have been updated to where each person has the 'Aircon' tag.
-
-5. Type `assign 1 i/2` in the command window.
-
-This assigns the second person in the table to the first job, which is 'Arjun Khatau' Notice how the index being used is that of the new filtered table where 'Arjun Khatau' is the second employee that is listed.
-
-6. Hit **enter** to run the command.
-
-A message should appear that mentions that the job 'Repair aircon' is assigned to 'Arjun Khatau'.
+    A message should appear, indicating that the job 'Repair aircon' is assigned to 'Arjun Khatau'.
 
 #### Complete a job and pay employees
 
-A key feature of PeopleSoft is tracking the state of job completion and whether its payment has been processed. Two commands, `mark` and `pay` are suited for these roles respectively. Both `mark` and `pay` are index-based commands.
+A key feature of PeopleSoft is tracking the state of job completion and whether its payment has been processed; this can be done with the `mark` and `pay` commands, respectively.
 
 1. Type `mark 1` in the command window.
 
-This command marks the first job as completed.
+    This command marks the first job as completed.
 
 2. Hit **enter** to run the command.
 
-The job 'Repair aircon' should be marked as completed. This can also be seen through the checkmark under the *Done* column.
+    The job 'Repair aircon' should be marked as completed, and a checkmark should appear under the *Done* column.
 
-3. Type `personlist` in the command window. Hit **enter** to run the command. This reverts the employee table to display **all** employees.
+Marking a job as completed creates pending payments for the job. The amounts pending payment are reflected in the *Unpaid* column in the employees list.
 
-Marking a job as completed creates pending payments for the job. The pending payments are reflected in the *Unpaid* column in the employees list. Notice how 'Nicole Tan' and 'Arjun Khatau' have non-zero values under the *Unpaid* column.
+Now that the 'Repair aircon' job has been marked as completed, 'Nicole Tan' and 'Arjun Khatau' should have non-zero values under the *Unpaid* column.
+
 This value reflects the amount of money that is pending payment to the employees. It is calculated from the employee's base rate and the job's duration.
 
-4. Type `pay 1 y/` in the command window. 
+1. Type `pay 1 y/` in the command window. 
 
-The prefix `y/` is a safeguard against accidental misuse of this command. This command finalizes payments for the given job and it is **irreversible**. After the job is finalized, it cannot be modified by any commands, so do make sure that you are intending to run this command before running it.
+    The prefix `y/` is a safeguard against accidental misuse of this command. This command finalizes payments for the given job, and is **irreversible**. After the job is finalized, it cannot be further modified, so do make sure that you intend to run this command before running it.
    
-5. Hit **enter** to run the command.
+2. Hit **enter** to run the command.
 
-The job has its payments finalized, i.e. it has been sent to the bank for processing. This is reflected in the checkmark under the *Paid* column.
+    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark under the *Paid* column.
 
-<div markdown="block" class="alert alert-info">
+#### Export employee payslips
 
-**:information_source: Note:** Run the `export` command to create a CSV payslip for an employee.
+PeopleSoft also allows users to export a payslip for each user as a comma-separated values (CSV) spreadsheet.
 
-</div>
+1. Type `export 1` in the command window.
 
-This concludes the short tutorial on the basic functionalities of PeopleSoft. You can refer to the [features](#features) section for more information about specific features. To clear the sample data, run the command `clear`.
+    This command exports the payslip for the first user (Nicole Tan) to a CSV spreadsheet.
 
+2. Hit **enter** to run the command.
+
+    The payslip is now saved in the PeopleSoft `data` folder under a name beginning with the employee's name.
+
+This concludes the tutorial on the basic usage of PeopleSoft. You can refer to the [features](#features) section for more information about specific features. To clear the sample data, run the `clear` command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
