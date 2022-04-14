@@ -9,13 +9,14 @@ PeopleSoft is a desktop app for **calculating the salary for shift-based contrac
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
 After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates.
-You can also generate a payslip in CSV format for your employees to refer to.
+You can also generate a payslip in comma-separated values (CSV) format for you and your employees to refer to.
 
 The program simulates a real life workflow:
+  * Company receives a new job.
+  * The HR manager `add`s the job to PeopleSoft, and `assign`s employees to work on it.
   * Employees start working. 
-  * HR Manager `adds` the job to PeopleSoft and `assigns` those working on it to the job.
-  * Once the job has been completed in real life, HR Manager `marks` the job as completed. 
-  * Once it is time to pay the employees, `pay` the job and `export` the .CSV payslips to pass to the employees.
+  * When the employees complete the job, the HR manager `mark`s the job as completed.
+  * Once it is time to pay the employees, `pay` out the job and `export` the payslips for the employees.
 
 <div markdown="block" class="alert alert-info">
 
