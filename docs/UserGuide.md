@@ -517,6 +517,8 @@ Example: `help` opens up the help page.
 
 **A**: PeopleSoft automatically saves application data to the folder that it was started from after every command. There is no need to save manually.
 
+<br>
+
 **Q**: How can I edit the application data manually?
 
 **A**: PeopleSoft data is saved as a JSON file under `data/peoplesoft.json` in the folder that it was started from. It is possible (although not recommended) to modify application data by editing that file.
@@ -529,13 +531,19 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 </div>
 
+<br>
+
 **Q**: Can I get back the initial sample data?
 
 **A**: Deleting the `data/peoplesoft.json` file and restarting PeopleSoft will cause the sample data to be reloaded.
 
+<br>
+
 **Q**: How do I transfer my data to another computer?
 
 **A**: Install the app on the other computer and overwrite the `data/peoplesoft.json` file it creates with your existing `data/peoplesoft.json` file.
+
+<br>
 
 **Q**: How do I report a bug? How do I suggest a feature?
 
