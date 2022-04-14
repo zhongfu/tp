@@ -24,11 +24,9 @@ The program simulates a real life workflow:
 
 * Words in `monospace font` are commands to be typed into PeopleSoft.<br>
 
-* Words in `UPPERCASE` are to be replaced with an appropriate value.<br>
-  e.g. `n/NAME` means that `NAME` should be substituted with a name, e.g. `n/John Doe`.
+* Boxes like these (with a blue background and the :information_source: icon) contain relevant tips for using PeopleSoft.
 
-* Words in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Boxes with a yellow background and the :warning: icon contain important warnings.
 
 </div>
 
@@ -186,8 +184,6 @@ A handy reference for more experienced users who just need to know the format of
 | [`exit`](#exit-exit-the-program)                            | `exit`                                                                                        | NA                                                                                                            |
 | [`help`](#help-show-help-page)                              | `help`                                                                                        | NA                                                                                                            |
 
---------------------------------------------------------------------------------------------------------------------
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -211,6 +207,8 @@ A handy reference for more experienced users who just need to know the format of
   e.g. `[t/TAG]...​` can be used as `t/friend`, `t/friend t/family`
 
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -271,7 +269,13 @@ replaced by new tags. Additionally, all tags can be cleared by typing `t/` witho
 #### `persondelete`: Delete an employee
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.<br>
 
-❗️Caution: This is irreversible.
+<div markdown="block" class="alert alert-warning">
+
+**:Warning: Caution:**<br>
+
+This is irreversible.
+
+</div>
 
 Format: `persondelete PERSON_INDEX`
 
@@ -375,7 +379,13 @@ Example: `list` lists all the jobs you have created
 
 Deletes the job that was referred to by the index.<br>
 
-❗️Caution: This is irreversible.
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Caution:**<br>
+
+This is irreversible.
+
+</div>
 
 Format: `delete JOB_INDEX`
 
@@ -426,7 +436,13 @@ Example 2: `mark 2` un-marks the second job after the previous example is perfor
 Finalizes the payments of a job. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
 finalized.<br>
 
-❗️Caution: This is irreversible. The finalized job cannot be modified in any way except by `clear`.
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Caution:**<br>
+
+This is irreversible. The finalized job cannot be modified in any way except by `clear`.
+
+</div>
 
 Format: `pay JOB_INDEX y/`
 
@@ -441,7 +457,14 @@ Example: `pay 2 y/` finalizes the payments of the second job
 #### `clear`: Clear all app data
 
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
-❗️Caution: You cannot recover the data afterwards.
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Caution:**<br>
+
+This is irreversible, and the data cannot be recovered afterwards.
+
+</div>
 
 Format: `clear`
 
@@ -474,7 +497,13 @@ Format: `Looks like you used an invalid command. Use the command help to access 
 
 **A**: PeopleSoft data is saved as a JSON file under `/data/peoplesoft.json`.<br>
 
-❗️Caution: Do not edit the data directly unless you are sure that its format will remain valid. If your changes to the data file makes its format invalid, PeopleSoft will discard all data and start with an empty data file at the next run.
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Caution:**<br>
+
+Do not edit the data directly unless you are sure that its format will remain valid. If your changes to the data file makes its format invalid, PeopleSoft will discard all data and start with an empty data file at the next run.
+
+</div>
 
 **Q**: Can I get back the initial sample data?
 
