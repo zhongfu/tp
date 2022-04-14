@@ -545,11 +545,14 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 ## Glossary
 
-**CSV**: Comma-seperated values. A common file format for storing data.
+**CLI**: Command-line interface. A primarily text-based interface, which is typically operated with text commands.
+
+**CSV**: Comma-seperated values. A common file format for storing tabular data, similar to a spreadsheet.
 
 **Index**: The item's number that is displayed in its respective list.
+
 e.g. The second person in the displayed list has an `INDEX` of 2.
 
-**Keyword**: Either a word that is part of a name or tag. Used by search commands to filter the respective lists.
+**JSON**: JavaScript Object Notation. A structured file format used to store arbitrary text data. This is the file format used by PeopleSoft to store data and settings.
 
-**Command-line Interface (CLI)**:	An interface which involves the users typing text and executing it as commands.
+**Keyword**: A word to search for in a set of data, e.g. in the list of employees or jobs.
