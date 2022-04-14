@@ -189,30 +189,28 @@ A handy reference for more experienced users who just need to know the format of
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the attributes to be filled in by you.<br>
-  e.g. in `personadd n/NAME`, the `NAME` attribute could be `personadd n/John Doe`.
+  e.g. in `personadd n/NAME`, `NAME` can be replaced with an actual name like in `personadd n/John Doe`.
 
 * Attributes can be in any order.<br>
   e.g. if the command asks for `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also fine.
 
-* If an attribute is expected only once, but you type it multiple times, only the last occurrence of the attribute will be taken.<br>
+* If an attribute is expected only once but is typed multiple times, only the last occurrence of the attribute will be taken.<br>
   e.g. if you specify `n/Jake n/Jason`, only `n/Jason` will be taken.
 
-* For commands that do not need attributes, (like `help`, `list`, `exit` and `clear`) anything typed after the command word will be ignored.<br>
-  e.g. typing `help 123`, it will be interpreted as `help`.
+* For commands that do not need attributes (like `help`, `list`, `exit` and `clear`), anything typed after the command word will be ignored.<br>
+  e.g. `help 123` will be interpreted as `help`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be typed as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be specified as `n/John Doe t/friend` or `n/John Doe`.
 
-* Items with `...​` after them can be used multiple times or not at all.<br>
-  e.g. `[t/TAG]...​` can be used as `t/friend`, `t/friend t/family`
+* Items with ellipses (`...​`) after them indicate that the items can be repeated any number of times.<br>
+  e.g. `[t/TAG]...​` can be interpreted as `[t/TAG]`, `[t/TAG] [t/TAG]`, and so on.
 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
---------------------------------------------------------------------------------------------------------------------
 
 ### Employee-related commands
 
@@ -224,17 +222,18 @@ Rate refers to the hourly pay of the employee.
 
 Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG]...`
 
-Example: `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
+Examples:
 
-`personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25.
-No tags are added since it's an optional attribute.
+* `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
+* `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25. No tags are added since it's an optional attribute.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
 
-* Names containing `/` are not accepted. Use `-` instead of `/` if an employee's name has it. For example:
-Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`.
+* Attributes containing `/` are not accepted. Replace `/` with another character (e.g. `-`) if any attribute contains `/`.
+
+  For example: Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`, and `3-5 Jalan Trus` instead of `3/5 Jalan Trus`.
 
 * The maximum value for the hourly rate of an employee is $1,000,000.
 
@@ -244,34 +243,38 @@ Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`.
 
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
-Rate updates will only take effect with jobs that are pending completion; payout amounts for already-completed jobs will not change.
+Rate updates will only take effect with jobs that are pending completion; payout amounts for already-completed (i.e. marked with `mark`) jobs will not change.
 
 Format: `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
-Example: `personedit 2 p/62353535` edits the second person's phone number to 62353535
+Examples:
 
-`personedit 3 t/Hardware t/Network` edits the third person's tags to be `Hardware` and `Network` instead of the tags originally associated.
+* `personedit 2 p/62353535` changes the second person's phone number to 62353535.
+* `personedit 3 t/Hardware t/Network` changes the third person's tags to `Hardware` and `Network` instead of their original tags.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
 
-* Names containing `/` are not accepted. Use `-` instead of `/` if an employee's name has it. For example:
-  Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`.
+* Attributes containing `/` are not accepted. Replace `/` with another character (e.g. `-`) if any attribute contains `/`.
+
+  For example: Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`, and `3-5 Jalan Trus` instead of `3/5 Jalan Trus`.
 
 * The maximum value for the hourly rate of an employee is $1,000,000.
 
-* When editing tags, new tags will not be added to the existing tags. Rather, all existing tags will be
-replaced by new tags. Additionally, all tags can be cleared by typing `t/` without specifying any tags.
+* When editing tags, new tags will not be added to the existing tags. Instead, all existing tags will be replaced by new tags.
+
+* To clear all tags, add `t/` to the command without specifying any other tags.
   
 </div>
 
 #### `persondelete`: Delete an employee
-Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.<br>
+
+Deletes the employee referred to by the index. This also removes the deleted employee from all associated jobs.<br>
 
 <div markdown="block" class="alert alert-warning">
 
-**:Warning: Caution:**<br>
+**:warning: Caution:**<br>
 
 This is irreversible.
 
@@ -279,23 +282,23 @@ This is irreversible.
 
 Format: `persondelete PERSON_INDEX`
 
-Example: `persondelete 3` deletes the third person in the list
+Example: `persondelete 3` deletes the third person in the list.
 
-#### `personfind`: Find an employee by name or tag
+#### `personfind`: Find employees by name or tag
 
-Finds all people by a certain name and/or tag.
+Finds all employees that have the given keyword(s) in their names or tags, and lists them in the employee table.
 
-If multiple tags are entered, only entries that match **all** tags are returned.
+If multiple keywords are entered, only entries that match **all** keywords are returned.
+
+Keywords are case-insensitive.
 
 Format: `personfind KEYWORD [MORE_KEYWORDS]...​`
 
 Examples:
 
-`personfind Nicole Hardware` finds all the employees named ‘Nicole’, with the ‘Hardware’ tag
-
-`personfind Nicole` finds all the employees named ‘Nicole’
-
-`personfind Nicole Hardware Display` finds all employees named ‘Nicole’, tagged with BOTH 'Hardware' AND 'Display'
+* `personfind Nicole Hardware` finds all employees with ‘Nicole’ **and** ‘Hardware’ in their name and/or tags.
+* `personfind Nicole` finds all employees with ‘Nicole’ in their name and/or tags.
+* `personfind Nicole Hardware Display` finds all employees with ‘Nicole’, 'Hardware', **and** 'Display' in their name and/or tags.
 
 
 ![before](images/screenshots/personfind/before.png)
@@ -303,23 +306,25 @@ Examples:
 
 #### `personlist`: List all employees
 
-Lists all the employees in the company.
+Lists all employees added to the application.
 
 Format: `personlist`
 
-Example: `personlist` shows all the employees in the company
+Example: `personlist` shows all employees.
 
 #### `export`: Export jobs done by an employee
 
-Export a `.csv` file with the person's name as file name, containing the jobs the contractor worked on, and the hours
-they worked for, and how much pay they should expect to receive this month.
-
-This helps contractors check if their hours and pay is accurately reflected. This increases the transparency of the SME
-they are working for.
+Exports a `.csv` file containing the jobs that the employee was assigned to, including:
+* job IDs,
+* job descriptions,
+* job statuses (incomplete, pending payment, paid),
+* effective rate(s) for the employee,
+* job durations, and
+* the amount paid, or to be paid to the employee.
 
 Format: `export PERSON_INDEX`
 
-Example: `export 3` exports the third person in the list
+Example: `export 3` exports the third person in the list.
 
 <div markdown="block" class="alert alert-info">
 
