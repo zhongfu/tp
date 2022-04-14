@@ -203,7 +203,7 @@ A handy reference for more experienced users who just need to know the format of
 
 ### Employee-related commands
 
-#### How to add an employee? `personadd`
+#### `personadd`: Add an employee
 
 Adds a new employee to the system with the given attributes.
 
@@ -227,7 +227,7 @@ Use `Ravi s-o Veegan` instead of `Ravi s/o Veegan`.
 
 </div>
 
-#### How to edit an employee’s information? `personedit`
+#### `personedit`: Edit an employee's information
 
 Edit the information of an existing employee. Use this in the event that an employee's details change.
 
@@ -253,7 +253,7 @@ replaced by new tags. Additionally, all tags can be cleared by typing `t/` witho
   
 </div>
 
-#### How to delete an employee's information? `persondelete`
+#### `persondelete`: Delete an employee
 Deletes the employee referred to by the index. This is irreversible. Removes the deleted employee from all associated jobs as well.<br>
 
 ❗️Caution: This is irreversible.
@@ -262,9 +262,9 @@ Format: `persondelete PERSON_INDEX`
 
 Example: `persondelete 3` deletes the third person in the list
 
-#### How to search for a person by name or tag? `personfind`
+#### `personfind`: Find an employee by name or tag
 
-Finds all people by a certain name and/or tag. 
+Finds all people by a certain name and/or tag.
 
 If multiple tags are entered, only entries that match **all** tags are returned.
 
@@ -282,7 +282,7 @@ Examples:
 ![before](images/screenshots/personfind/before.png)
 ![after](images/screenshots/personfind/after.png)
 
-#### How to list all persons? `personlist`
+#### `personlist`: List all employees
 
 Lists all the employees in the company.
 
@@ -290,7 +290,7 @@ Format: `personlist`
 
 Example: `personlist` shows all the employees in the company
 
-#### How to export a person's information? `export`
+#### `export`: Export jobs done by an employee
 
 Export a `.csv` file with the person's name as file name, containing the jobs the contractor worked on, and the hours
 they worked for, and how much pay they should expect to receive this month.
@@ -314,7 +314,7 @@ This command updates the job list to show all jobs assigned to that person.
 
 ### Job-related commands
 
-#### How to add a job? `add`
+#### `add`: Add a job
 
 Adds a new job to the system with the given attributes. `RATE` refers to how much the employee is paid per hour.
 `DURATION` refers to how long the job took. The payment is calculated accordingly.
@@ -335,7 +335,7 @@ recommended that a user differentiates jobs through naming to avoid any difficul
   
 </div>
 
-#### How to search for a job by name? `find`
+#### `find`: Search for a job by name
 
 Finds all jobs by a certain name.
 
@@ -348,8 +348,7 @@ Examples:
 ![before](images/screenshots/find/before.png)
 ![after](images/screenshots/find/after.png)
 
-#### How to list all jobs? `list`
-
+#### `list`: List all jobs
 
 Lists all the jobs you have created, including jobs that have been paid for and those that have not been paid for yet.
 
@@ -357,7 +356,7 @@ Format: `list`
 
 Example: `list` lists all the jobs you have created
 
-#### How to delete a job? `delete`
+#### `delete`: Delete a job
 
 Deletes the job that was referred to by the index.<br>
 
@@ -367,7 +366,7 @@ Format: `delete JOB_INDEX`
 
 Example: `delete 2` deletes the second job
 
-#### How to assign a job to an employee? `assign`
+#### `assign`: Assign a job to an employee
 
 Assigns a job to an employee that is working on it.
 
@@ -388,7 +387,7 @@ assigned to a job, un-mark the job first before assigning them.
 
 </div>
 
-#### How to mark a job as done or not done? `mark`
+#### `mark`: Mark or unmark a job as done
 
 Toggles the state of a job. The first time it is applied to a job, it indicates that a job has been completed and is pending payment.
 To reclassify a job as unfinished, apply `mark` to the job again.
@@ -407,7 +406,7 @@ Example 2: `mark 2` un-marks the second job after the previous example is perfor
 
 ![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
 
-#### How to finalize payments for a job? `pay`
+#### `pay`: Finalize payments for a job
 
 Finalizes the payments of a job. A job needs to be [marked](#mark-a-job-as-done-or-not-done--mark) before it can be
 finalized.<br>
@@ -424,7 +423,7 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 ### Miscellaneous commands
 
-#### How to clear all entries? `clear`
+#### `clear`: Clear all app data
 
 Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
 ❗️Caution: You cannot recover the data afterwards.
@@ -433,12 +432,12 @@ Format: `clear`
 
 Example: `clear` removes all the employees and jobs from the app
 
-#### How to exit the program? `exit`
+#### `exit`: Exit the program
 Exits the program immediately.
 
 Format: `exit`
 
-#### How to find all the commands if you need help? `help`
+#### `help`: Show help page
 Opens the help page which shows the command list like the one above.
 
 Format: `help`
