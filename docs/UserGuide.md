@@ -29,6 +29,7 @@ The program simulates a real life workflow:
 
 * Words in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -40,17 +41,17 @@ The program simulates a real life workflow:
 
 ### Running PeopleSoft for the first time
 
-1. Ensure you have Java `11` or above installed in your Computer. Follow [**this guide**](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) to do so.
+1. Ensure you have Java 11 or above installed on your computer. Follow [**this guide**](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) to do so.
 
 2. **Download** the latest version of `peoplesoft.jar` from [**here**](https://github.com/AY2122S2-CS2103T-T11-4/tp/releases).
 
-3. Place the `peoplesoft.jar` file anywhere on your computer. Ideally, create a new folder for this step.
+3. Place the `peoplesoft.jar` file anywhere on your computer (preferably within a new folder, as the configuration and data files will be stored in the same location).
 
-4. **Double-click** the file to start the app. A window should appear in a few seconds as pictured below.
+4. **Double-click** the file to start the app. A window (similar to the one below) should appear shortly.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** If this does not work, open an instance of the command line (command prompt for Windows, the terminal on Mac and Linux), navigate to directory where the file is located, and run `java -jar peoplesoft.jar`.
+**:information_source: Note:** If double-clicking the file does not start the application, then open the command line interpreter for your system (e.g. Command Prompt or Windows Terminal for Windows, or Terminal on macOS and Linux), navigate to directory where the file is located (e,g, with `cd path/to/folder`), and run `java -jar peoplesoft.jar`.
 
 </div>
 
