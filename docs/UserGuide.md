@@ -477,34 +477,37 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 #### `clear`: Clear all app data
 
-Removes all the employees’ information in the company from the app. Useful for clearing out sample data.<br>
+Removes **all** data stored in the application. Useful for removing the sample data created when the application is started for the first time.
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-This is irreversible, and the data cannot be recovered afterwards.
+This is irreversible; deleted data cannot be recovered afterwards without a backup.
 
 </div>
 
 Format: `clear`
 
-Example: `clear` removes all the employees and jobs from the app
+Example: `clear` removes all employees and jobs from the application.
 
 #### `exit`: Exit the program
+
 Exits the program immediately.
 
 Format: `exit`
 
+Example: `exit` exits the program immediately.
+
 #### `help`: Show help page
-Opens the help page which shows the command list like the one above.
+
+Opens the help page, which includes a list of commands, command formats, and example usages.
 
 Format: `help`
 
-![help](images/screenshots/help/help.png)
+Example: `help` opens up the help page.
 
-Prompted when the user makes a typo (i.e. tries to use an invalid command):
-Format: `Looks like you used an invalid command. Use the command help to access a list of all available commands.`
+![help](images/screenshots/help/help.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
