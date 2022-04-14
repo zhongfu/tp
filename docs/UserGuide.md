@@ -513,33 +513,33 @@ Example: `help` opens up the help page.
 
 ## FAQ
 
-**Q**: How do I save the data?
+**Q**: How do I save my data?
 
-**A**: PeopleSoft automatically saves the data to the folder you placed it in automatically after any command. There is no need to save manually.
+**A**: PeopleSoft automatically saves application data to the folder that it was started from after every command. There is no need to save manually.
 
-**Q**: What happens if I want to edit the data externally?
+**Q**: How can I edit the application data manually?
 
-**A**: PeopleSoft data is saved as a JSON file under `/data/peoplesoft.json`.<br>
+**A**: PeopleSoft data is saved as a JSON file under `data/peoplesoft.json` in the folder that it was started from. It is possible (although not recommended) to modify application data by editing that file.
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-Do not edit the data directly unless you are sure that its format will remain valid. If your changes to the data file makes its format invalid, PeopleSoft will discard all data and start with an empty data file at the next run.
+Do not edit the data directly unless you know what you are doing. If your changes cause the data file to become invalid, PeopleSoft will discard all data and start with an empty data file the next time it is started.
 
 </div>
 
 **Q**: Can I get back the initial sample data?
 
-**A**: Deleting the file `/data/peoplesoft.json` will reload the sample data on the next start-up of PeopleSoft.
+**A**: Deleting the `data/peoplesoft.json` file and restarting PeopleSoft will cause the sample data to be reloaded.
 
-**Q**: How do I transfer my data to another Computer?
+**Q**: How do I transfer my data to another computer?
 
-**A**: Install the app in the other computer and overwrite the empty data file it creates with your existing PeopleSoft data file.
+**A**: Install the app on the other computer and overwrite the `data/peoplesoft.json` file it creates with your existing `data/peoplesoft.json` file.
 
 **Q**: How do I report a bug? How do I suggest a feature?
 
-**A**: You may create an issue under the `Issues` tab on our [GitHub Page](https://github.com/AY2122S2-CS2103T-T11-4/tp/tree/v1.3.tag). You may suggest a feature in the same way.
+**A**: You may report a bug or suggest a new feature on the [PeopleSoft issue tracker](https://github.com/AY2122S2-CS2103T-T11-4/tp/issues).
 
 --------------------------------------------------------------------------------------------------------------------
 
