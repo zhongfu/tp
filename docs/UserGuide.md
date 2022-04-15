@@ -64,7 +64,7 @@ A `data` folder and some configuration files (with a `.json` extension) will als
 [//]: # (Comment: trying this out, will remove if it doesnt work on webpage after I merge)
 [Return to the Table of Contents](#toc)
 
-### Exploring the sample data
+### Processing your first payment using the sample data
 
 The sample data is meant to help users get started with PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.
 
@@ -82,7 +82,7 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
 
     <div markdown="block" class="alert alert-info">
 
-    **:information_source: Note:** The order of the prefixes `n/` and `d/` does not matter.
+    **:information_source: Note:** The attributes prefixed by `n/` and `d/` can be in any order.
 
     </div>
 
@@ -104,9 +104,13 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
     A message should appear, indicating that the job 'Repair aircon' is assigned to 'Nicole Tan'.
 
-<br>
+    <div markdown="block" class="alert alert-info">
 
-Index-based commands depend on the ordering of the items displayed in their respective tables. The search and list commands for employees and jobs can cause this order to vary.
+    **:information_source: Note:** Index-based commands depend on the ordering of the items displayed in their respective tables. The search and list commands for employees and jobs can cause this order to vary.
+
+    </div>
+
+<br>
 
 1. Type `personfind aircon` in the command window.
 
@@ -134,7 +138,7 @@ A key feature of PeopleSoft is tracking the state of job completion and whether 
 
 2. Hit **enter** to run the command.
 
-    The job 'Repair aircon' should be marked as completed, and a checkmark should appear under the *Done* column.
+    The job 'Repair aircon' should be marked as completed, and a checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) should appear under the *Done* column.
 
 Marking a job as completed creates pending payments for the job. The amounts pending payment are reflected in the *Unpaid* column in the employees list.
 
@@ -148,7 +152,7 @@ This value reflects the amount of money that is pending payment to the employees
 
 2. Hit **enter** to run the command.
 
-    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark under the *Paid* column.
+    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) under the *Paid* column.
 
 #### Export employee payslips
 
@@ -272,7 +276,7 @@ Examples:
 
 * The maximum value for the hourly rate of an employee is $1,000,000.
 
-* When editing tags, new tags will not be added to the existing tags. Instead, all existing tags will be replaced by new tags.
+* When editing tags, new tags will **not** be added to the existing tags. Instead, all existing tags will be replaced by new tags.
 
 * To clear all tags, add `t/` to the command without specifying any other tags.
 
@@ -332,7 +336,7 @@ Example: `personlist` shows all employees.
 
 #### `export`: Export jobs done by an employee
 
-Exports a `.csv` file containing the jobs that the employee was assigned to, including:
+Exports a `.csv` file to the `data` folder, containing the jobs that the employee was assigned to, including:
 * job IDs,
 * job descriptions,
 * job statuses (incomplete, pending payment, paid),
@@ -459,7 +463,7 @@ assigned to a job, un-mark the job first before assigning them.
 
 Marks a job as done if it was not already marked as done, or marks a job as undone otherwise.
 
-Marking a job as done indicates that a job has been completed and is pending payment. Unmarking a job causes the pending payment amounts to be subtracted from assigned employees.
+Marking a job as done indicates that a job has been completed and is pending payment. Un-marking a job causes the pending payment amounts to be subtracted from assigned employees.
 
 Jobs are initially **not** marked as done when first created, and have to have at least one person [assigned](#assign-assign-a-job-to-an-employee) to it before it can be marked.
 
