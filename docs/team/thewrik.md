@@ -21,13 +21,13 @@ PeopleSoft is a Payroll management app for companies handling contractor-based s
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=thewrik)
 
 * **Enhancements to existing features**:
-  * Find Functionality 
+  * Find Functionality
     * **Originally** no wildcard support
-    * After development, finds all people by a certain name and/or tag. If multiple keywords are queried, only entries 
+    * After development, finds all people by a certain name and/or tag. If multiple keywords are queried, only entries
       that match **all** tags are returned.
-    * The motivation behind this logic is that users want to increasingly narrow down the number 
+    * The motivation behind this logic is that users want to increasingly narrow down the number
       of persons they see in the outlay.
-    * Feature was later extended to similar behaviour on jobs as well. 
+    * Feature was later extended to similar behaviour on jobs as well.
 
 * **Documentation**:
   * User Guide:

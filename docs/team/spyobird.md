@@ -12,7 +12,7 @@ PeopleSoft is a payroll management app for companies handling contractor-based s
 Here are some ways I have contributed to this project.
 
 * **New Feature**: Added basic create and delete functionality for jobs. [\#81](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/81)
-  * Details: Added `add` and `delete` commands which allows the user to create and delete new jobs 
+  * Details: Added `add` and `delete` commands which allows the user to create and delete new jobs
     respectively.
   * Justification: These are basic features which are necessary for a payroll management application.
 * **New Feature**: Added basic search functionality for jobs. [\#109](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/109)
@@ -51,7 +51,7 @@ Here are some ways I have contributed to this project.
     model this same association that people can have with taking on jobs. This is the framework for which
     certain functionality such as `assign` are built upon.
 * **Enhancement**: Added implementation for the generation of job IDs. [\#81](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/81)
-  * Details: Job IDs play the role of uniquely identifying jobs internally. This allows for the assignment of 
+  * Details: Job IDs play the role of uniquely identifying jobs internally. This allows for the assignment of
     unique job IDs in the creation of new jobs.
 * **Enhancement**: Added logic for the creation and management of payment objects. [\#128](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/128)
   * Details: As `Payment` objects are used internally to calculate the actual payment of a person, some logic

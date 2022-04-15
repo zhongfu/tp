@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 * **New Feature**: Display of an overview of commands on the HelpWindow page
     * What it does: Allow for the display of messages from all command classes on a singular UI component.
     * Justification: In previous iterations, the HelpWindow contained a button that linked to the user guide on Github. While this technically fits the wording of the `help` command provided in the user guide, displaying the commands directly would be more user-friendly.
-      * Highlights: A previous implementation was considered following the implementation for `Person` with similar `CommandHelpMessageCard` and `CommandHelpMessageListPanel` classes. TableView was selectively chosen over this implementation given its relative ease of use. 
+      * Highlights: A previous implementation was considered following the implementation for `Person` with similar `CommandHelpMessageCard` and `CommandHelpMessageListPanel` classes. TableView was selectively chosen over this implementation given its relative ease of use.
     * Credits: [Amos Chepchieng from Medium](https://medium.com/@keeptoo/adding-data-to-javafx-tableview-stepwise-df582acbae4f) for populating TableView with data programmatically
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ovidharshini&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
