@@ -91,7 +91,7 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
 
     </div>
 
-2. Hit **enter** to run the command.
+2. Hit **Enter** to run the command.
 
     ![Added repair Aircon](images/screenshots/tut_add.png)
 
@@ -112,7 +112,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
     The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the list of employees, which is "Nicole Tan". Additional employees can also be assigned to this job by adding additional `i/` attributes.
 
-2. Hit **enter** to run the command.
+2. Hit **Enter** to run the command.
 
     A message should appear, indicating that the job "Repair aircon" is assigned to "Nicole Tan".
 
@@ -139,7 +139,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
     This command searches for "aircon" in the names or tags of employees. Search terms are not case-sensitive.
 
-2. Hit **enter** to run the command.
+2. Hit **Enter** to run the command.
 
     There should be two persons listed: "Nicole Tan", and "Arjun Khatau". Notice that the list of employees now only shows employees with the "Aircon" tag.
 
@@ -156,7 +156,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
     This assigns the second person in the list (Arjun Khatau) to the first job. Notice that the employee index (2) now refers to the second employee in the current list (Arjun Khatau), instead of in the original list (Kavya Singh).
 
-4. Hit **enter** to run the command.
+4. Hit **Enter** to run the command.
 
     A message should appear, indicating that the job "Repair aircon" is assigned to "Arjun Khatau".
 
@@ -168,7 +168,7 @@ A key feature of PeopleSoft is tracking the state of job completion and whether 
 
     This command marks the first job as completed.
 
-2. Hit **enter** to run the command.
+2. Hit **Enter** to run the command.
 
     The job "Repair aircon" should be marked as completed, and a checkmark ![tick](images/apple-tick-emoji.png) should appear under the *Done* column.
 
@@ -182,7 +182,7 @@ This value reflects the amount of money that is pending payment to the employees
 
     The prefix `y/` is a safeguard against accidental misuse of this command. This command finalizes payments for the given job, and is **irreversible**. After the job is finalized, it cannot be further modified, so do make sure that you intend to run this command before running it.
 
-2. Hit **enter** to run the command.
+2. Hit **Enter** to run the command.
 
     The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark ![tick](images/apple-tick-emoji.png) under the *Paid* column.
 
@@ -203,7 +203,7 @@ PeopleSoft also allows users to export a payslip for each employee as a comma-se
 
     This command exports the payslip for the first employee (Nicole Tan) to a CSV spreadsheet.
 
-2. Hit **enter** to run the command.
+2. Hit **Enter** to run the command.
 
     The payslip beginning with the emplyee's name is now saved in the PeopleSoft `data` folder.
 
