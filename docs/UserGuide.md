@@ -98,7 +98,7 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
     <figcaption 
         style="text-align: center; 
                font-style: italic;"> 
-        A job with the name "Repair aircon" and a duration of "2h" is created in the job list
+        A job with the name "Repair aircon" and a duration of two hours is created in the job list
     </figcaption>
 <br>
 
@@ -229,12 +229,12 @@ A handy reference for more experienced users who just need to know the format of
 | [`personadd`](#personadd-add-an-employee)                   | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                         | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
 | [`personedit`](#personedit-edit-an-employees-information)   | `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                              |
 | [`persondelete`](#persondelete-delete-an-employee)          | `persondelete PERSON_INDEX`                                                                   | `persondelete 3`                                                                                              |
-| [`personfind`](#personfind-find-employees-by-name-or-tag)   | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                       | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
+| [`personfind`](#personfind-find-employees-by-name-or-tag)   | `personfind KEYWORD [KEYWORD]...​`                                                             | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
 | [`personlist`](#personlist-list-all-employees)              | `personlist`                                                                                  | NA                                                                                                            |
 | [`export`](#export-export-jobs-done-by-an-employee)         | `export PERSON_INDEX`                                                                         | `export 2`                                                                                                    |
 | [`clear`](#clear-clear-all-peoplesoft-data)                | `clear`                                                                                       | NA                                                                                                            |
 | [`add`](#add-add-a-job)                                     | `add n/NAME d/DURATION`                                                                       | `add n/Fix HDB Lock d/1`                                                                                      |
-| [`find`](#find-find-jobs-by-name)                           | `find NAME`                                                                                   | `find Painting`                                                                                               |
+| [`find`](#find-find-jobs-by-name)                           | `find KEYWORD [KEYWORD]...`                                                                   | `find Painting Senior`, `find Painting`                                                                       |
 | [`list`](#list-list-all-jobs)                               | `list`                                                                                        | NA                                                                                                            |
 | [`delete`](#delete-delete-a-job)                            | `delete JOB_INDEX`                                                                            | `delete 3`                                                                                                    |
 | [`assign`](#assign-assign-a-job-to-an-employee)             | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                         | `assign 2 i/1`                                                                                                |
@@ -375,7 +375,7 @@ If multiple keywords are entered, only entries that match **all** keywords are r
 
 Keywords are case-insensitive.
 
-Format: `personfind KEYWORD [MORE_KEYWORDS]...​`
+Format: `personfind KEYWORD [KEYWORDS]...​`
 
 Examples:
 
@@ -457,13 +457,13 @@ Examples:
 
 #### `find`: Find jobs by name
 
-Finds all jobs that have the given keyword(s) in their names or tags, and lists them in the employee list.
+Finds all jobs that have the given keyword(s) in their names, and lists them in the employee list.
 
 If multiple keywords are entered, only entries that match **all** keywords are returned.
 
 Keywords are case-insensitive.
 
-Format: `find KEYWORD [MORE_KEYWORDS]...`
+Format: `find KEYWORD [KEYWORD]...`
 
 Examples:
 
@@ -523,9 +523,7 @@ Examples:
 
 **:information_source: Note:**<br>
 
-A job that has been [marked](#mark-mark-or-unmark-a-job-as-done) as completed cannot be assigned. If a job
-is completed, it makes little sense to assign more employees to it. In the event more employees need to be
-assigned to a job, un-mark the job first before assigning them.
+A job that has been [marked](#mark-mark-or-unmark-a-job-as-done) as completed cannot be assigned. If a job is completed, it makes little sense to assign more employees to it. In the event more employees need to be assigned to a job, unmark the job first before assigning them.
 
 </div>
 
@@ -543,7 +541,7 @@ assigned to a job, un-mark the job first before assigning them.
 
 Marks a job as done if it was not already marked as done, or marks a job as undone otherwise.
 
-Marking a job as done indicates that a job has been completed and is pending payment. Un-marking a job causes the pending payment amounts to be subtracted from assigned employees.
+Marking a job as done indicates that a job has been completed and is pending payment. Unmarking a job causes the pending payment amounts to be subtracted from assigned employees.
 
 Jobs are initially **not** marked as done when first created, and have to have at least one person [assigned](#assign-assign-a-job-to-an-employee) to it before it can be marked.
 
@@ -553,7 +551,7 @@ Jobs are initially **not** marked as done when first created, and have to have a
 
 The hourly rate(s) paid out to each employee for a job is fixed once the job is marked as done; further changes to any employee's rate will not cause the payout amounts to change.
 
-To update the payout amounts to reflect the new hourly rates, un-mark and mark the job again.
+To update the payout amounts to reflect the new hourly rates, unmark and mark the job again.
 
 </div>
 
@@ -562,14 +560,14 @@ Format: `mark JOB_INDEX`
 Examples:
 
 * `mark 1` marks the first job, assuming it is not already marked as done.
-* `mark 1` un-marks the first job if it has already been marked as done.
+* `mark 1` unmarks the first job if it has already been marked as done.
 
 ![Command](images/screenshots/mark/mark.png)
 
 <figcaption 
     style="text-align: center; 
            font-style: italic;">
-    You can use the mark command to both mark and un-mark a job
+    You can use the mark command to both mark and unmark a job
 </figcaption>
 
 [Return to the Table of Contents](#toc)
