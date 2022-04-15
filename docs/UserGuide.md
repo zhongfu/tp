@@ -54,8 +54,13 @@ The program simulates a real life workflow:
 
 </div>
 
-![Ui](images/Ui_label.png)<br>
-_The PeopleSoft interface_
+![Ui](images/screenshots/Ui_label.png)<br>
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    The PeopleSoft interface
+</figcaption>
 
 When the application is started for the first time, it will be populated with sample data. You may delete this data with the `clear` command.
 
@@ -88,7 +93,14 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
 
 2. Hit **enter** to run the command.
 
-    A new job should be created in the table of jobs. It should have the name 'Repair aircon' with a duration of '2h'.
+    ![Added repair Aircon](images/screenshots/tut_add.png)
+
+    <figcaption 
+        style="text-align: center; 
+               font-style: italic;"> 
+        A job with the name 'Repair aircon' and a duration of '2h' is created in the job list
+    </figcaption>
+<br>
 
 #### Assign person to a job
 
@@ -104,13 +116,24 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
     A message should appear, indicating that the job 'Repair aircon' is assigned to 'Nicole Tan'.
 
+    ![Assigned to nicole](images/screenshots/tut_asgn.png)
+
+    <figcaption 
+        style="text-align: center; 
+               font-style: italic;"> 
+        Nicole is assigned to repair the aircon
+    </figcaption>
+<br>
+
     <div markdown="block" class="alert alert-info">
 
-    **:information_source: Note:** Index-based commands depend on the ordering of the items displayed in their respective tables. The search and list commands for employees and jobs can cause this order to vary.
+    **:information_source: Note:** Index-based commands depend on the ordering of the items displayed in their respective lists. The search and list commands for employees and jobs can cause this order to vary.
 
     </div>
 
 <br>
+
+#### Find employees who are qualified
 
 1. Type `personfind aircon` in the command window.
 
@@ -119,6 +142,15 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 2. Hit **enter** to run the command.
 
     There should be two persons listed: 'Nicole Tan', and 'Arjun Khatau'. Notice that the table of employees now only shows employees with the 'Aircon' tag.
+
+   ![Find people who can fix aircon](images/screenshots/tut_find.png)
+
+    <figcaption 
+        style="text-align: center; 
+               font-style: italic;"> 
+        Nicole and Arjun are qualified to fix the aircon
+    </figcaption>
+<br>
 
 3. Type `assign 1 i/2` in the command window.
 
@@ -154,17 +186,34 @@ This value reflects the amount of money that is pending payment to the employees
 
     The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) under the *Paid* column.
 
+   ![Mark and pay](images/screenshots/tut_markpay.png)
+
+    <figcaption 
+        style="text-align: center; 
+               font-style: italic;"> 
+        The job list after the job is marked and payment is finalised
+    </figcaption>
+<br>
+
 #### Export employee payslips
 
-PeopleSoft also allows users to export a payslip for each user as a comma-separated values (CSV) spreadsheet.
+PeopleSoft also allows users to export a payslip for each employee as a comma-separated values (CSV) spreadsheet.
 
 1. Type `export 1` in the command window.
 
-    This command exports the payslip for the first user (Nicole Tan) to a CSV spreadsheet.
+    This command exports the payslip for the first employee (Nicole Tan) to a CSV spreadsheet.
 
 2. Hit **enter** to run the command.
 
-    The payslip is now saved in the PeopleSoft `data` folder under a name beginning with the employee's name.
+    The payslip beginning with the emplyee's name is now saved in the PeopleSoft `data` folder.
+
+![Location of the data folder](images/screenshots/data_folder.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;"> 
+    Exported employee data can be found under the data folder
+</figcaption>
 
 This concludes the tutorial on the basic usage of PeopleSoft. You can refer to the [features](#features) section for more information about specific features. To clear the sample data, run the `clear` command.
 
@@ -193,6 +242,14 @@ A handy reference for more experienced users who just need to know the format of
 | [`pay`](#pay-finalize-payments-for-a-job)                   | `pay JOB_INDEX y/`                                                                            | `pay 2 y/`                                                                                                    |
 | [`exit`](#exit-exit-the-program)                            | `exit`                                                                                        | NA                                                                                                            |
 | [`help`](#help-show-help-page)                              | `help`                                                                                        | NA                                                                                                            |
+
+![Command format](images/screenshots/command_format.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;"> 
+    Parts of a command in PeopleSoft
+</figcaption>
 
 <div markdown="block" class="alert alert-info">
 
@@ -237,7 +294,15 @@ Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG
 Examples:
 
 * `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
-* `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25. No tags are added since it's an optional attribute.
+* `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25. No tags will be added since it is an optional attribute.
+
+![Adding Jennifer](images/screenshots/personadd/personadd.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    After adding Jennifer Tan to PeopleSoft
+</figcaption>
 
 <div markdown="block" class="alert alert-info">
 
@@ -319,8 +384,13 @@ Examples:
 * `personfind Nicole Hardware Display` finds all employees with ‘Nicole’, 'Hardware', **and** 'Display' in their name and/or tags.
 
 
-![before](images/screenshots/personfind/before.png)
-![after](images/screenshots/personfind/after.png)
+![before](images/screenshots/personfind/personf_before.png)
+
+<figcaption style="text-align: center; font-style: italic;">Before the command is executed: all employees are shown.</figcaption>
+
+![after](images/screenshots/personfind/personf_after.png)
+
+<figcaption style="text-align: center; font-style: italic;">After the command is executed: Employees with the Aircon tag are shown.</figcaption>
 
 [Return to the Table of Contents](#toc)
 
@@ -397,11 +467,16 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 Examples:
 
-* `find Painting` finds all jobs with 'Painting' in their names.
+* `find paint` finds all jobs with 'Painting' in their names.
 * `find paint istana` finds all jobs with 'paint' **and** 'istana' in their names.
 
-![before](images/screenshots/find/before.png)
-![after](images/screenshots/find/after.png)
+![before](images/screenshots/find/find.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    Entries that match all keywords are found
+</figcaption>
 
 [Return to the Table of Contents](#toc)
 
@@ -454,8 +529,13 @@ assigned to a job, un-mark the job first before assigning them.
 
 </div>
 
-![before](images/screenshots/assign/before.png)
-![after](images/screenshots/assign/after.png)
+![after](images/screenshots/assign/assign.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    Assigning the 4th job in the job list to the Kavya who is the first person in the employees list
+</figcaption>
 
 [Return to the Table of Contents](#toc)
 
@@ -481,10 +561,16 @@ Format: `mark JOB_INDEX`
 
 Examples:
 
-* `mark 2` marks the second job, assuming it is not already marked as done.
-* `mark 2` un-marks the second job if it has already been marked as done.
+* `mark 1` marks the first job, assuming it is not already marked as done.
+* `mark 1` un-marks the first job if it has already been marked as done.
 
-![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
+![Command](images/screenshots/mark/mark.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    You can use the mark command to both mark and un-mark a job
+</figcaption>
 
 [Return to the Table of Contents](#toc)
 
@@ -505,7 +591,20 @@ Format: `pay JOB_INDEX y/`
 Example: `pay 2 y/` finalizes the payments of the second job
 
 ![before](images/screenshots/pay/before.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    Before paying for the second job
+</figcaption>
+
 ![after](images/screenshots/pay/after.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    After paying for the second job
+</figcaption>
 
 [Return to the Table of Contents](#toc)
 
@@ -550,6 +649,12 @@ Format: `help`
 Example: `help` opens up the help page.
 
 ![help](images/screenshots/help/help.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    The help page
+</figcaption>
 
 [Return to the Table of Contents](#toc)
 
