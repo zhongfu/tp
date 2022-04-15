@@ -73,7 +73,7 @@ A `data` folder and some configuration files (with a `.json` extension) will als
 
 The sample data is meant to help users get started with PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.
 
-To start off, notice that the sample data contains some employees under the table of employees. Here, you can see the details of the employees, including their name, base pay and tags.
+To start off, notice that the sample data contains some employees under the list of employees. Here, you can see the details of the employees, including their name, base pay and tags.
 
 Since the sample data does not include any jobs, we will need to create new ones.
 
@@ -104,13 +104,13 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
 
 #### Assign person to a job
 
-PeopleSoft allows you to indicate which employees are in-charge of a certain job with the `assign` command. The `assign` command requires 1 job *index*, and at least 1 employee *index* (each prefixed by `i/`). These indexes can be found under the `#` column in both tables.
+PeopleSoft allows you to indicate which employees are in-charge of a certain job with the `assign` command. The `assign` command requires 1 job *index*, and at least 1 employee *index* (each prefixed by `i/`). These indexes can be found under the `#` column in both lists.
 
 1. Type `assign 1 i/1` in the command window.
 
-    The first number in the command (`1`) refers to the *index* of the job. In this case, it refers to the first job in the table of jobs, which is the aircon repair job created earlier.
+    The first number in the command (`1`) refers to the *index* of the job. In this case, it refers to the first job in the list of jobs, which is the aircon repair job created earlier.
 
-    The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the table of employees, which is 'Nicole Tan'. Additional employees can also be assigned to this job by adding additional `i/` attributes.
+    The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the list of employees, which is 'Nicole Tan'. Additional employees can also be assigned to this job by adding additional `i/` attributes.
 
 2. Hit **enter** to run the command.
 
@@ -141,7 +141,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
 2. Hit **enter** to run the command.
 
-    There should be two persons listed: 'Nicole Tan', and 'Arjun Khatau'. Notice that the table of employees now only shows employees with the 'Aircon' tag.
+    There should be two persons listed: 'Nicole Tan', and 'Arjun Khatau'. Notice that the list of employees now only shows employees with the 'Aircon' tag.
 
    ![Find people who can fix aircon](images/screenshots/tut_find.png)
 
@@ -154,7 +154,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
 3. Type `assign 1 i/2` in the command window.
 
-    This assigns the second person in the table (Arjun Khatau) to the first job. Notice that the employee index (2) now refers to the second employee in the current list (Arjun Khatau), instead of in the original list (Kavya Singh).
+    This assigns the second person in the list (Arjun Khatau) to the first job. Notice that the employee index (2) now refers to the second employee in the current list (Arjun Khatau), instead of in the original list (Kavya Singh).
 
 4. Hit **enter** to run the command.
 
@@ -457,7 +457,7 @@ Examples:
 
 #### `find`: Find jobs by name
 
-Finds all jobs that have the given keyword(s) in their names or tags, and lists them in the employee table.
+Finds all jobs that have the given keyword(s) in their names or tags, and lists them in the employee list.
 
 If multiple keywords are entered, only entries that match **all** keywords are returned.
 
