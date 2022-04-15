@@ -11,7 +11,7 @@ Then, you can assign the employees to the jobs that they are working on.
 After the job is completed, you can mark the job as paid, and PeopleSoft will calculate how much each employee is to be paid based on their hourly rates.
 You can also generate a payslip in comma-separated values (CSV) format for you and your employees to refer to.
 
-The program simulates a real life workflow:
+PeopleSoft simulates a real life workflow:
   * The company receives a new job.
   * The HR manager `add`s the job to PeopleSoft, and `assign`s employees to work on it.
   * The employees start working. 
@@ -232,7 +232,7 @@ A handy reference for more experienced users who just need to know the format of
 | [`personfind`](#personfind-find-employees-by-name-or-tag)   | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                       | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
 | [`personlist`](#personlist-list-all-employees)              | `personlist`                                                                                  | NA                                                                                                            |
 | [`export`](#export-export-jobs-done-by-an-employee)         | `export PERSON_INDEX`                                                                         | `export 2`                                                                                                    |
-| [`clear`](#clear-clear-all-application-data)                | `clear`                                                                                       | NA                                                                                                            |
+| [`clear`](#clear-clear-all-peoplesoft-data)                | `clear`                                                                                       | NA                                                                                                            |
 | [`add`](#add-add-a-job)                                     | `add n/NAME d/DURATION`                                                                       | `add n/Fix HDB Lock d/1`                                                                                      |
 | [`find`](#find-find-jobs-by-name)                           | `find NAME`                                                                                   | `find Painting`                                                                                               |
 | [`list`](#list-list-all-jobs)                               | `list`                                                                                        | NA                                                                                                            |
@@ -240,7 +240,7 @@ A handy reference for more experienced users who just need to know the format of
 | [`assign`](#assign-assign-a-job-to-an-employee)             | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                         | `assign 2 i/1`                                                                                                |
 | [`mark`](#mark-mark-or-unmark-a-job-as-done)                | `mark JOB_INDEX`                                                                              | `mark 2`                                                                                                      |
 | [`pay`](#pay-finalize-payments-for-a-job)                   | `pay JOB_INDEX y/`                                                                            | `pay 2 y/`                                                                                                    |
-| [`exit`](#exit-exit-the-program)                            | `exit`                                                                                        | NA                                                                                                            |
+| [`exit`](#exit-exit-peoplesoft)                            | `exit`                                                                                        | NA                                                                                                            |
 | [`help`](#help-show-help-page)                              | `help`                                                                                        | NA                                                                                                            |
 
 ![Command format](images/screenshots/command_format.png)
@@ -582,7 +582,7 @@ Finalizes the payments of a job. A job needs to be [marked](#mark-mark-or-unmark
 
 **:warning: Caution:**<br>
 
-This is irreversible. The finalized job cannot be modified in any way, and can only be removed with [`clear`](#clear-clear-all-application-data).
+This is irreversible. The finalized job cannot be modified in any way, and can only be removed with [`clear`](#clear-clear-all-peoplesoft-data).
 
 </div>
 
@@ -612,7 +612,7 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 ### Miscellaneous commands
 
-#### `clear`: Clear all application data
+#### `clear`: Clear all PeopleSoft data
 
 Removes **all** data stored in PeopleSoft. Useful for removing the sample data created when PeopleSoft is started for the first time.
 
@@ -630,13 +630,13 @@ Example: `clear` removes all employees and jobs from PeopleSoft.
 
 [Return to the Table of Contents](#toc)
 
-#### `exit`: Exit the program
+#### `exit`: Exit PeopleSoft
 
-Exits the program immediately.
+Exits PeopleSoft immediately.
 
 Format: `exit`
 
-Example: `exit` exits the program immediately.
+Example: `exit` exits PeopleSoft immediately.
 
 [Return to the Table of Contents](#toc)
 
@@ -670,7 +670,7 @@ Example: `help` opens up the help page.
 
 **Q**: What are the `addressbook.log.0`, `config.json`, `preferences.json` files beside my `peoplesoft.jar`? 
 
-**A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of the application is stored in those files. Do not remove or edit those files.
+**A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of PeopleSoft is stored in those files. Do not remove or edit those files.
 
 <br>
 
