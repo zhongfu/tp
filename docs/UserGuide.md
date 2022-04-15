@@ -46,11 +46,11 @@ The program simulates a real life workflow:
 
 3. Place the `peoplesoft.jar` file anywhere on your computer (preferably within a new folder, as the configuration and data files will be stored in the same location).
 
-4. **Double-click** the file to start the application. A window (similar to the one below) should appear shortly.
+4. **Double-click** the file to start PeopleSoft. A window (similar to the one below) should appear shortly.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** If double-clicking the file does not start the application, then open the command line interpreter for your system (e.g. Command Prompt or Windows Terminal for Windows, or Terminal on macOS and Linux), navigate to directory where the file is located (e,g, with `cd path/to/folder`), and run `java -jar peoplesoft.jar`.
+**:information_source: Note:** If double-clicking the file does not start PeopleSoft, then open the command line interpreter for your system (e.g. Command Prompt or Windows Terminal for Windows, or Terminal on macOS and Linux), navigate to directory where the file is located (e,g, with `cd path/to/folder`), and run `java -jar peoplesoft.jar`.
 
 </div>
 
@@ -62,16 +62,16 @@ The program simulates a real life workflow:
     The PeopleSoft interface
 </figcaption>
 
-When the application is started for the first time, it will be populated with sample data. You may delete this data with the `clear` command.
+When PeopleSoft is started for the first time, it will be populated with sample data. You may delete this data with the `clear` command.
 
-A `data` folder and some configuration files (with a `.json` extension) will also be created in the folder that you run `peoplesoft.jar` from; this is where the application data will be stored.
+A `data` folder and some configuration files (with a `.json` extension) will also be created in the folder that you run `peoplesoft.jar` from; this is where PeopleSoft data will be stored.
 
 [//]: # (Comment: trying this out, will remove if it doesnt work on webpage after I merge)
 [Return to the Table of Contents](#toc)
 
 ### Processing your first payment using the sample data
 
-The sample data is meant to help users get started with PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.
+The sample data is meant to help users get started with PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in PeopleSoft. You can refer to the [features](#features) section for more information about specific features.
 
 To start off, notice that the sample data contains some employees under the list of employees. Here, you can see the details of the employees, including their name, base pay and tags.
 
@@ -396,7 +396,7 @@ Examples:
 
 #### `personlist`: List all employees
 
-Lists all employees added to the application.
+Lists all employees added to PeopleSoft.
 
 Format: `personlist`
 
@@ -482,7 +482,7 @@ Examples:
 
 #### `list`: List all jobs
 
-Lists all the jobs added to the application, including jobs that have been paid for and those that have not been paid for yet.
+Lists all the jobs added to PeopleSoft, including jobs that have been paid for and those that have not been paid for yet.
 
 Format: `list`
 
@@ -614,7 +614,7 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 #### `clear`: Clear all application data
 
-Removes **all** data stored in the application. Useful for removing the sample data created when the application is started for the first time.
+Removes **all** data stored in PeopleSoft. Useful for removing the sample data created when PeopleSoft is started for the first time.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -626,7 +626,7 @@ This is irreversible; deleted data cannot be recovered afterwards without a back
 
 Format: `clear`
 
-Example: `clear` removes all employees and jobs from the application.
+Example: `clear` removes all employees and jobs from PeopleSoft.
 
 [Return to the Table of Contents](#toc)
 
@@ -680,7 +680,7 @@ Example: `help` opens up the help page.
 
 <br>
 
-**Q**: How can I edit the application data manually?
+**Q**: How can I edit PeopleSoft data manually?
 
 **A**: PeopleSoft data is saved as a JSON file under `data/peoplesoft.json` in the folder that it was started from. It is possible (although not recommended) to modify application data by editing that file.
 
@@ -702,7 +702,7 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Install the application on the other computer and overwrite the `data/peoplesoft.json` file it creates with your existing `data/peoplesoft.json` file.
+**A**: Install PeopleSoft on the other computer and overwrite the `data/peoplesoft.json` file it creates with your existing `data/peoplesoft.json` file.
 
 <br>
 
