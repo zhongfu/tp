@@ -24,8 +24,6 @@ PeopleSoft simulates a real life workflow:
 
 * Words in `monospace font` are commands to be typed into PeopleSoft.<br>
 
-* Boxes like these 
-
 * Boxes like these (with a blue background and the :information_source: icon) contain relevant tips for using PeopleSoft.
 
 * Boxes with a yellow background and the :warning: icon contain important warnings.
