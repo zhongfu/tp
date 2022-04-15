@@ -170,7 +170,7 @@ A key feature of PeopleSoft is tracking the state of job completion and whether 
 
 2. Hit **enter** to run the command.
 
-    The job "Repair aircon" should be marked as completed, and a checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) should appear under the *Done* column.
+    The job "Repair aircon" should be marked as completed, and a checkmark ![tick](images/apple-tick-emoji.png) should appear under the *Done* column.
 
 Marking a job as completed creates pending payments for the job. The amounts pending payment are reflected in the *Unpaid* column in the employees list.
 
@@ -184,7 +184,7 @@ This value reflects the amount of money that is pending payment to the employees
 
 2. Hit **enter** to run the command.
 
-    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) under the *Paid* column.
+    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark ![tick](images/apple-tick-emoji.png) under the *Paid* column.
 
    ![Mark and pay](images/screenshots/tut_markpay.png)
 
