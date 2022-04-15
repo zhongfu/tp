@@ -4,7 +4,7 @@ title: User Guide
 ---
 Welcome to PeopleSoft!
 
-PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
+PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional graphical user interface apps.
 
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
@@ -31,6 +31,7 @@ The program simulates a real life workflow:
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<span id="toc"/>
 * Table of Contents 
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
@@ -53,14 +54,22 @@ The program simulates a real life workflow:
 
 </div>
 
-![Ui](images/Ui_label.png)<br>
-_The PeopleSoft interface_
+![Ui](images/screenshots/Ui_label.png)<br>
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    The PeopleSoft interface
+</figcaption>
 
 When the application is started for the first time, it will be populated with sample data. You may delete this data with the `clear` command.
 
 A `data` folder and some configuration files (with a `.json` extension) will also be created in the folder that you run `peoplesoft.jar` from; this is where the application data will be stored.
 
-### Exploring the sample data
+[//]: # (Comment: trying this out, will remove if it doesnt work on webpage after I merge)
+[Return to the Table of Contents](#toc)
+
+### Processing your first payment using the sample data
 
 The sample data is meant to help users get started with PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.
 
@@ -78,13 +87,20 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
 
     <div markdown="block" class="alert alert-info">
 
-    **:information_source: Note:** The order of the prefixes `n/` and `d/` does not matter.
+    **:information_source: Note:** The attributes prefixed by `n/` and `d/` can be in any order.
 
     </div>
 
 2. Hit **enter** to run the command.
 
-    A new job should be created in the table of jobs. It should have the name 'Repair aircon' with a duration of '2h'.
+    ![Added repair Aircon](images/screenshots/tut_add.png)
+
+    <figcaption 
+        style="text-align: center; 
+               font-style: italic;"> 
+        A job with the name 'Repair aircon' and a duration of '2h' is created in the job list
+    </figcaption>
+<br>
 
 #### Assign person to a job
 
@@ -100,9 +116,24 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
     A message should appear, indicating that the job 'Repair aircon' is assigned to 'Nicole Tan'.
 
+    ![Assigned to nicole](images/screenshots/tut_asgn.png)
+
+    <figcaption 
+        style="text-align: center; 
+               font-style: italic;"> 
+        Nicole is assigned to repair the aircon
+    </figcaption>
 <br>
 
-Index-based commands depend on the ordering of the items displayed in their respective tables. The search and list commands for employees and jobs can cause this order to vary.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** Index-based commands depend on the ordering of the items displayed in their respective lists. The search and list commands for employees and jobs can cause this order to vary.
+
+</div>
+
+<br>
+
+#### Find employees who are qualified
 
 1. Type `personfind aircon` in the command window.
 
@@ -111,6 +142,15 @@ Index-based commands depend on the ordering of the items displayed in their resp
 2. Hit **enter** to run the command.
 
     There should be two persons listed: 'Nicole Tan', and 'Arjun Khatau'. Notice that the table of employees now only shows employees with the 'Aircon' tag.
+
+   ![Find people who can fix aircon](images/screenshots/tut_find.png)
+
+    <figcaption 
+        style="text-align: center; 
+               font-style: italic;"> 
+        Nicole and Arjun are qualified to fix the aircon
+    </figcaption>
+<br>
 
 3. Type `assign 1 i/2` in the command window.
 
@@ -130,7 +170,7 @@ A key feature of PeopleSoft is tracking the state of job completion and whether 
 
 2. Hit **enter** to run the command.
 
-    The job 'Repair aircon' should be marked as completed, and a checkmark should appear under the *Done* column.
+    The job 'Repair aircon' should be marked as completed, and a checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) should appear under the *Done* column.
 
 Marking a job as completed creates pending payments for the job. The amounts pending payment are reflected in the *Unpaid* column in the employees list.
 
@@ -144,21 +184,40 @@ This value reflects the amount of money that is pending payment to the employees
 
 2. Hit **enter** to run the command.
 
-    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark under the *Paid* column.
+    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) under the *Paid* column.
+
+   ![Mark and pay](images/screenshots/tut_markpay.png)
+
+    <figcaption 
+        style="text-align: center; 
+               font-style: italic;"> 
+        The job list after the job is marked and payment is finalised
+    </figcaption>
+<br>
 
 #### Export employee payslips
 
-PeopleSoft also allows users to export a payslip for each user as a comma-separated values (CSV) spreadsheet.
+PeopleSoft also allows users to export a payslip for each employee as a comma-separated values (CSV) spreadsheet.
 
 1. Type `export 1` in the command window.
 
-    This command exports the payslip for the first user (Nicole Tan) to a CSV spreadsheet.
+    This command exports the payslip for the first employee (Nicole Tan) to a CSV spreadsheet.
 
 2. Hit **enter** to run the command.
 
-    The payslip is now saved in the PeopleSoft `data` folder under a name beginning with the employee's name.
+    The payslip beginning with the emplyee's name is now saved in the PeopleSoft `data` folder.
+
+![Location of the data folder](images/screenshots/data_folder.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;"> 
+    Exported employee data can be found under the data folder
+</figcaption>
 
 This concludes the tutorial on the basic usage of PeopleSoft. You can refer to the [features](#features) section for more information about specific features. To clear the sample data, run the `clear` command.
+
+[Return to the Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
@@ -184,6 +243,14 @@ A handy reference for more experienced users who just need to know the format of
 | [`exit`](#exit-exit-the-program)                            | `exit`                                                                                        | NA                                                                                                            |
 | [`help`](#help-show-help-page)                              | `help`                                                                                        | NA                                                                                                            |
 
+![Command format](images/screenshots/command_format.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;"> 
+    Parts of a command in PeopleSoft
+</figcaption>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -208,6 +275,8 @@ A handy reference for more experienced users who just need to know the format of
 
 </div>
 
+[Return to the Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -225,7 +294,15 @@ Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG
 Examples:
 
 * `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
-* `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25. No tags are added since it's an optional attribute.
+* `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25. No tags will be added since it is an optional attribute.
+
+![Adding Jennifer](images/screenshots/personadd/personadd.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    After adding Jennifer Tan to PeopleSoft
+</figcaption>
 
 <div markdown="block" class="alert alert-info">
 
@@ -238,6 +315,8 @@ Examples:
 * The maximum value for the hourly rate of an employee is $1,000,000.
 
 </div>
+
+[Return to the Table of Contents](#toc)
 
 #### `personedit`: Edit an employee's information
 
@@ -262,11 +341,13 @@ Examples:
 
 * The maximum value for the hourly rate of an employee is $1,000,000.
 
-* When editing tags, new tags will not be added to the existing tags. Instead, all existing tags will be replaced by new tags.
+* When editing tags, new tags will **not** be added to the existing tags. Instead, all existing tags will be replaced by new tags.
 
 * To clear all tags, add `t/` to the command without specifying any other tags.
 
 </div>
+
+[Return to the Table of Contents](#toc)
 
 #### `persondelete`: Delete an employee
 
@@ -283,6 +364,8 @@ This is irreversible.
 Format: `persondelete PERSON_INDEX`
 
 Example: `persondelete 3` deletes the third person in the list.
+
+[Return to the Table of Contents](#toc)
 
 #### `personfind`: Find employees by name or tag
 
@@ -301,8 +384,15 @@ Examples:
 * `personfind Nicole Hardware Display` finds all employees with ‘Nicole’, 'Hardware', **and** 'Display' in their name and/or tags.
 
 
-![before](images/screenshots/personfind/before.png)
-![after](images/screenshots/personfind/after.png)
+![before](images/screenshots/personfind/personf_before.png)
+
+<figcaption style="text-align: center; font-style: italic;">Before the command is executed: all employees are shown.</figcaption>
+
+![after](images/screenshots/personfind/personf_after.png)
+
+<figcaption style="text-align: center; font-style: italic;">After the command is executed: Employees with the Aircon tag are shown.</figcaption>
+
+[Return to the Table of Contents](#toc)
 
 #### `personlist`: List all employees
 
@@ -312,9 +402,11 @@ Format: `personlist`
 
 Example: `personlist` shows all employees.
 
+[Return to the Table of Contents](#toc)
+
 #### `export`: Export jobs done by an employee
 
-Exports a `.csv` file containing the jobs that the employee was assigned to, including:
+Exports a `.csv` file to the `data` folder, containing the jobs that the employee was assigned to, including:
 * job IDs,
 * job descriptions,
 * job statuses (incomplete, pending payment, paid),
@@ -333,6 +425,8 @@ Example: `export 3` exports the third person in the list.
 This command updates the job list to show all jobs assigned to that person.
 
 </div>
+
+[Return to the Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -359,6 +453,8 @@ Examples:
 
 </div>
 
+[Return to the Table of Contents](#toc)
+
 #### `find`: Find jobs by name
 
 Finds all jobs that have the given keyword(s) in their names or tags, and lists them in the employee table.
@@ -371,11 +467,18 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 Examples:
 
-* `find Painting` finds all jobs with 'Painting' in their names.
+* `find paint` finds all jobs with 'Painting' in their names.
 * `find paint istana` finds all jobs with 'paint' **and** 'istana' in their names.
 
-![before](images/screenshots/find/before.png)
-![after](images/screenshots/find/after.png)
+![before](images/screenshots/find/find.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    Entries that match all keywords are found
+</figcaption>
+
+[Return to the Table of Contents](#toc)
 
 #### `list`: List all jobs
 
@@ -384,6 +487,8 @@ Lists all the jobs added to the application, including jobs that have been paid 
 Format: `list`
 
 Example: `list` shows all jobs.
+
+[Return to the Table of Contents](#toc)
 
 #### `delete`: Delete a job
 
@@ -400,6 +505,8 @@ This is irreversible.
 Format: `delete JOB_INDEX`
 
 Example: `delete 2` deletes the second job.
+
+[Return to the Table of Contents](#toc)
 
 #### `assign`: Assign a job to an employee
 
@@ -422,14 +529,21 @@ assigned to a job, un-mark the job first before assigning them.
 
 </div>
 
-![before](images/screenshots/assign/before.png)
-![after](images/screenshots/assign/after.png)
+![after](images/screenshots/assign/assign.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    Assigning the 4th job in the job list to the Kavya who is the first person in the employees list
+</figcaption>
+
+[Return to the Table of Contents](#toc)
 
 #### `mark`: Mark or unmark a job as done
 
 Marks a job as done if it was not already marked as done, or marks a job as undone otherwise.
 
-Marking a job as done indicates that a job has been completed and is pending payment. Unmarking a job causes the pending payment amounts to be subtracted from assigned employees.
+Marking a job as done indicates that a job has been completed and is pending payment. Un-marking a job causes the pending payment amounts to be subtracted from assigned employees.
 
 Jobs are initially **not** marked as done when first created, and have to have at least one person [assigned](#assign-assign-a-job-to-an-employee) to it before it can be marked.
 
@@ -447,10 +561,18 @@ Format: `mark JOB_INDEX`
 
 Examples:
 
-* `mark 2` marks the second job, assuming it is not already marked as done.
-* `mark 2` un-marks the second job if it has already been marked as done.
+* `mark 1` marks the first job, assuming it is not already marked as done.
+* `mark 1` un-marks the first job if it has already been marked as done.
 
-![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
+![Command](images/screenshots/mark/mark.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    You can use the mark command to both mark and un-mark a job
+</figcaption>
+
+[Return to the Table of Contents](#toc)
 
 #### `pay`: Finalize payments for a job
 
@@ -469,7 +591,22 @@ Format: `pay JOB_INDEX y/`
 Example: `pay 2 y/` finalizes the payments of the second job
 
 ![before](images/screenshots/pay/before.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    Before paying for the second job
+</figcaption>
+
 ![after](images/screenshots/pay/after.png)
+
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    After paying for the second job
+</figcaption>
+
+[Return to the Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -491,6 +628,8 @@ Format: `clear`
 
 Example: `clear` removes all employees and jobs from the application.
 
+[Return to the Table of Contents](#toc)
+
 #### `exit`: Exit the program
 
 Exits the program immediately.
@@ -498,6 +637,8 @@ Exits the program immediately.
 Format: `exit`
 
 Example: `exit` exits the program immediately.
+
+[Return to the Table of Contents](#toc)
 
 #### `help`: Show help page
 
@@ -509,9 +650,29 @@ Example: `help` opens up the help page.
 
 ![help](images/screenshots/help/help.png)
 
+<figcaption 
+    style="text-align: center; 
+           font-style: italic;">
+    The help page
+</figcaption>
+
+[Return to the Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+
+**Q**: I'm using Mac and I can't double-click on the `peoplesoft.jar` file to open it. What should I do? 
+
+**A**: Follow the steps stated [here](https://github.com/nus-cs2103-AY2122S1/forum/issues/353) to open your `jar` file.
+
+<br>
+
+**Q**: What are the `addressbook.log.0`, `config.json`, `preferences.json` files beside my `peoplesoft.jar`? 
+
+**A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of the app is stored in those files. Do not remove or edit those files.
+
+<br>
 
 **Q**: How do I save my data?
 
@@ -549,6 +710,8 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **A**: You may report a bug or suggest a new feature on the [PeopleSoft issue tracker](https://github.com/AY2122S2-CS2103T-T11-4/tp/issues).
 
+[Return to the Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
@@ -561,6 +724,10 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 e.g. The second person in the displayed list has an `INDEX` of 2.
 
+**JAR**: Java Archive. A file format used to collate Java class files and their resources for distribution. Java apps are commonly distributed as `.jar` files.
+
 **JSON**: JavaScript Object Notation. A structured file format used to store arbitrary text data. This is the file format used by PeopleSoft to store data and settings.
 
 **Keyword**: A word to search for in a set of data, e.g. in the list of employees or jobs.
+
+[Return to the Table of Contents](#toc)
