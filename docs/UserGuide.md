@@ -420,10 +420,10 @@ A job that has been [marked](#mark-mark-or-unmark-a-job-as-done) as completed ca
 is completed, it makes little sense to assign more employees to it. In the event more employees need to be
 assigned to a job, un-mark the job first before assigning them.
 
+</div>
+
 ![before](images/screenshots/assign/before.png)
 ![after](images/screenshots/assign/after.png)
-
-</div>
 
 #### `mark`: Mark or unmark a job as done
 
