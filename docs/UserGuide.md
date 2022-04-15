@@ -277,7 +277,8 @@ A handy reference for more experienced users who just need to know the format of
 
 ### Parameter constraints
 
-A handy reference for the constraints on input parameters for commands. 
+A handy reference for the constraints on input parameters for commands.
+
 <table>
   <tbody>
     <tr>
@@ -356,7 +357,7 @@ A handy reference for the constraints on input parameters for commands.
       <td><code>i/</code></td>
       <td>
         <p>Contains only digits <code>0-9</code>.</p>
-        <p>Should be a valid index of a employee in the employee list.</p>
+        <p>Should be a valid index of an employee in the employee list.</p>
         <p>Should not be empty.</p>
       </td>
     </tr>
@@ -374,7 +375,7 @@ A handy reference for the constraints on input parameters for commands.
       <td>N.A.</td>
       <td>
         <p>Contains only digits <code>0-9</code>.</p>
-        <p>Should be a valid index of a employee in the employee list.</p>
+        <p>Should be a valid index of an employee in the employee list.</p>
         <p>Should not be empty.</p>
       </td>
     </tr>
