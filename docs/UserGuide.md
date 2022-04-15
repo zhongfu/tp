@@ -12,9 +12,9 @@ After the job is completed, you can mark the job as paid, and PeopleSoft will ca
 You can also generate a payslip in comma-separated values (CSV) format for you and your employees to refer to.
 
 The program simulates a real life workflow:
-  * Company receives a new job.
+  * The company receives a new job.
   * The HR manager `add`s the job to PeopleSoft, and `assign`s employees to work on it.
-  * Employees start working. 
+  * The employees start working. 
   * When the employees complete the job, the HR manager `mark`s the job as completed.
   * Once it is time to pay the employees, `pay` out the job and `export` the payslips for the employees.
 
@@ -88,7 +88,7 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
 
 #### Assign person to a job
 
-PeopleSoft allows you to indicate which employees are in-charge of a certain job with the `assign` command. The `assign` command requires 1 job *index*, and at laest 1 employee *index* (each prefixed by `i/`). These indexes can be found under the `#` column in both tables.
+PeopleSoft allows you to indicate which employees are in-charge of a certain job with the `assign` command. The `assign` command requires 1 job *index*, and at least 1 employee *index* (each prefixed by `i/`). These indexes can be found under the `#` column in both tables.
 
 1. Type `assign 1 i/1` in the command window.
 
@@ -286,7 +286,7 @@ Example: `persondelete 3` deletes the third person in the list.
 
 #### `personfind`: Find employees by name or tag
 
-Finds all employees that have the given keyword(s) in their names or tags, and lists them in the employee table.
+Finds all employees that have the given keyword(s) in their names or tags, and lists them in the employee list.
 
 If multiple keywords are entered, only entries that match **all** keywords are returned.
 
