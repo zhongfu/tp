@@ -718,7 +718,9 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **CSV**: Comma-separated values. A common file format for storing tabular data, similar to a spreadsheet.
 
-**Index**: The position of an item in its respective list.
+**GUI**: Graphical user interface. A primarily visual interface, which is typically operated by a pointing device. 
+
+**Index**: The item's number that is displayed in its respective list.
 
 e.g. The second person in the list has an `INDEX` of 2.
 
