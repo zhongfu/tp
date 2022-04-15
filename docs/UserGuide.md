@@ -125,11 +125,11 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
     </figcaption>
 <br>
 
-    <div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
-    **:information_source: Note:** Index-based commands depend on the ordering of the items displayed in their respective lists. The search and list commands for employees and jobs can cause this order to vary.
+**:information_source: Note:** Index-based commands depend on the ordering of the items displayed in their respective lists. The search and list commands for employees and jobs can cause this order to vary.
 
-    </div>
+</div>
 
 <br>
 
