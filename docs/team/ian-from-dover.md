@@ -53,7 +53,7 @@ PeopleSoft is a Payroll management app for companies handling contractor-based s
     * Updated the command summary with the new job commands
     * Did cosmetic tweaks to existing documentation for the `mark` feature: (PR [\#118](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/118/))
     * Extensively researched 20 previous UGs to consolidate best practices for the team. (PR [\#203](https://github.com/AY2122S2-CS2103T-T11-4/tp/issues/203))
-  * Developer Guide: 
+  * Developer Guide:
     * All changes are in PR [\#221](https://github.com/AY2122S2-CS2103T-T11-4/tp/pull/221):
     * Added introduction, target user profile and value proposition to the front
     * Added implementation details of the GUI under the [UI component section](https://ay2122s2-cs2103t-t11-4.github.io/tp/DeveloperGuide.html).
