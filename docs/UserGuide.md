@@ -4,7 +4,7 @@ title: User Guide
 ---
 Welcome to PeopleSoft!
 
-PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional graphical user interface apps.
+PeopleSoft is a desktop application for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional graphical user interface applications.
 
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
@@ -46,7 +46,7 @@ The program simulates a real life workflow:
 
 3. Place the `peoplesoft.jar` file anywhere on your computer (preferably within a new folder, as the configuration and data files will be stored in the same location).
 
-4. **Double-click** the file to start the app. A window (similar to the one below) should appear shortly.
+4. **Double-click** the file to start the application. A window (similar to the one below) should appear shortly.
 
 <div markdown="block" class="alert alert-info">
 
@@ -232,7 +232,7 @@ A handy reference for more experienced users who just need to know the format of
 | [`personfind`](#personfind-find-employees-by-name-or-tag) | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                       | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
 | [`personlist`](#personlist-list-all-employees)              | `personlist`                                                                                  | NA                                                                                                            |
 | [`export`](#export-export-jobs-done-by-an-employee)         | `export PERSON_INDEX`                                                                         | `export 2`                                                                                                    |
-| [`clear`](#clear-clear-all-app-data)                        | `clear`                                                                                       | NA                                                                                                            |
+| [`clear`](#clear-clear-all-application-data)                | `clear`                                                                                       | NA                                                                                                            |
 | [`add`](#add-add-a-job)                                     | `add n/NAME d/DURATION`                                                                       | `add n/Fix HDB Lock d/1`                                                                                      |
 | [`find`](#find-find-jobs-by-name)                    | `find NAME`                                                                                   | `find Painting`                                                                                               |
 | [`list`](#list-list-all-jobs)                               | `list`                                                                                        | NA                                                                                                            |
@@ -582,7 +582,7 @@ Finalizes the payments of a job. A job needs to be [marked](#mark-mark-or-unmark
 
 **:warning: Caution:**<br>
 
-This is irreversible. The finalized job cannot be modified in any way, and can only be removed with [`clear`](#clear-clear-all-app-data).
+This is irreversible. The finalized job cannot be modified in any way, and can only be removed with [`clear`](#clear-clear-all-application-data).
 
 </div>
 
@@ -612,7 +612,7 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 ### Miscellaneous commands
 
-#### `clear`: Clear all app data
+#### `clear`: Clear all application data
 
 Removes **all** data stored in the application. Useful for removing the sample data created when the application is started for the first time.
 
@@ -670,7 +670,7 @@ Example: `help` opens up the help page.
 
 **Q**: What are the `addressbook.log.0`, `config.json`, `preferences.json` files beside my `peoplesoft.jar`? 
 
-**A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of the app is stored in those files. Do not remove or edit those files.
+**A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of the application is stored in those files. Do not remove or edit those files.
 
 <br>
 
@@ -702,7 +702,7 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Install the app on the other computer and overwrite the `data/peoplesoft.json` file it creates with your existing `data/peoplesoft.json` file.
+**A**: Install the application on the other computer and overwrite the `data/peoplesoft.json` file it creates with your existing `data/peoplesoft.json` file.
 
 <br>
 
@@ -724,7 +724,7 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 e.g. The second person in the displayed list has an `INDEX` of 2.
 
-**JAR**: Java Archive. A file format used to collate Java class files and their resources for distribution. Java apps are commonly distributed as `.jar` files.
+**JAR**: Java Archive. A file format used to collate Java class files and their resources for distribution. Java applications are commonly distributed as `.jar` files.
 
 **JSON**: JavaScript Object Notation. A structured file format used to store arbitrary text data. This is the file format used by PeopleSoft to store data and settings.
 
