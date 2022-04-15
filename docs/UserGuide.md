@@ -4,7 +4,7 @@ title: User Guide
 ---
 Welcome to PeopleSoft!
 
-PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional GUI apps.
+PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional graphical user interface apps.
 
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
@@ -31,6 +31,7 @@ The program simulates a real life workflow:
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<span id="toc"/>
 * Table of Contents 
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
@@ -59,6 +60,9 @@ _The PeopleSoft interface_
 When the application is started for the first time, it will be populated with sample data. You may delete this data with the `clear` command.
 
 A `data` folder and some configuration files (with a `.json` extension) will also be created in the folder that you run `peoplesoft.jar` from; this is where the application data will be stored.
+
+[//]: # (Comment: trying this out, will remove if it doesnt work on webpage after I merge)
+[Return to the Table of Contents](#toc)
 
 ### Exploring the sample data
 
@@ -160,6 +164,8 @@ PeopleSoft also allows users to export a payslip for each user as a comma-separa
 
 This concludes the tutorial on the basic usage of PeopleSoft. You can refer to the [features](#features) section for more information about specific features. To clear the sample data, run the `clear` command.
 
+[Return to the Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
@@ -208,6 +214,8 @@ A handy reference for more experienced users who just need to know the format of
 
 </div>
 
+[Return to the Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -239,6 +247,8 @@ Examples:
 
 </div>
 
+[Return to the Table of Contents](#toc)
+
 #### `personedit`: Edit an employee's information
 
 Edit the information of an existing employee. Use this in the event that an employee's details change.
@@ -268,6 +278,8 @@ Examples:
 
 </div>
 
+[Return to the Table of Contents](#toc)
+
 #### `persondelete`: Delete an employee
 
 Deletes the employee referred to by the index. This also removes the deleted employee from all associated jobs.<br>
@@ -283,6 +295,8 @@ This is irreversible.
 Format: `persondelete PERSON_INDEX`
 
 Example: `persondelete 3` deletes the third person in the list.
+
+[Return to the Table of Contents](#toc)
 
 #### `personfind`: Find employees by name or tag
 
@@ -304,6 +318,8 @@ Examples:
 ![before](images/screenshots/personfind/before.png)
 ![after](images/screenshots/personfind/after.png)
 
+[Return to the Table of Contents](#toc)
+
 #### `personlist`: List all employees
 
 Lists all employees added to the application.
@@ -311,6 +327,8 @@ Lists all employees added to the application.
 Format: `personlist`
 
 Example: `personlist` shows all employees.
+
+[Return to the Table of Contents](#toc)
 
 #### `export`: Export jobs done by an employee
 
@@ -333,6 +351,8 @@ Example: `export 3` exports the third person in the list.
 This command updates the job list to show all jobs assigned to that person.
 
 </div>
+
+[Return to the Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -359,6 +379,8 @@ Examples:
 
 </div>
 
+[Return to the Table of Contents](#toc)
+
 #### `find`: Find jobs by name
 
 Finds all jobs that have the given keyword(s) in their names or tags, and lists them in the employee table.
@@ -377,6 +399,8 @@ Examples:
 ![before](images/screenshots/find/before.png)
 ![after](images/screenshots/find/after.png)
 
+[Return to the Table of Contents](#toc)
+
 #### `list`: List all jobs
 
 Lists all the jobs added to the application, including jobs that have been paid for and those that have not been paid for yet.
@@ -384,6 +408,8 @@ Lists all the jobs added to the application, including jobs that have been paid 
 Format: `list`
 
 Example: `list` shows all jobs.
+
+[Return to the Table of Contents](#toc)
 
 #### `delete`: Delete a job
 
@@ -400,6 +426,8 @@ This is irreversible.
 Format: `delete JOB_INDEX`
 
 Example: `delete 2` deletes the second job.
+
+[Return to the Table of Contents](#toc)
 
 #### `assign`: Assign a job to an employee
 
@@ -424,6 +452,8 @@ assigned to a job, un-mark the job first before assigning them.
 
 ![before](images/screenshots/assign/before.png)
 ![after](images/screenshots/assign/after.png)
+
+[Return to the Table of Contents](#toc)
 
 #### `mark`: Mark or unmark a job as done
 
@@ -452,6 +482,8 @@ Examples:
 
 ![Command](images/screenshots/mark/before.png) ![Result](images/screenshots/mark/after.png)
 
+[Return to the Table of Contents](#toc)
+
 #### `pay`: Finalize payments for a job
 
 Finalizes the payments of a job. A job needs to be [marked](#mark-mark-or-unmark-a-job-as-done) as done before it can be finalized.
@@ -470,6 +502,8 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 ![before](images/screenshots/pay/before.png)
 ![after](images/screenshots/pay/after.png)
+
+[Return to the Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -491,6 +525,8 @@ Format: `clear`
 
 Example: `clear` removes all employees and jobs from the application.
 
+[Return to the Table of Contents](#toc)
+
 #### `exit`: Exit the program
 
 Exits the program immediately.
@@ -498,6 +534,8 @@ Exits the program immediately.
 Format: `exit`
 
 Example: `exit` exits the program immediately.
+
+[Return to the Table of Contents](#toc)
 
 #### `help`: Show help page
 
@@ -509,9 +547,23 @@ Example: `help` opens up the help page.
 
 ![help](images/screenshots/help/help.png)
 
+[Return to the Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+
+**Q**: I'm using Mac and I can't double-click on the `peoplesoft.jar` file to open it. What should I do? 
+
+**A**: Follow the steps stated [here](https://github.com/nus-cs2103-AY2122S1/forum/issues/353) to open your `jar` file.
+
+<br>
+
+**Q**: What are the `addressbook.log.0`, `config.json`, `preferences.json` files beside my `peoplesoft.jar`? 
+
+**A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of the app is stored in those files. Do not remove or edit those files.
+
+<br>
 
 **Q**: How do I save my data?
 
@@ -549,6 +601,8 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **A**: You may report a bug or suggest a new feature on the [PeopleSoft issue tracker](https://github.com/AY2122S2-CS2103T-T11-4/tp/issues).
 
+[Return to the Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
@@ -561,6 +615,10 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 e.g. The second person in the displayed list has an `INDEX` of 2.
 
+**JAR**: Java Archive. A file format used to collate Java class files and their resources for distribution. Java apps are commonly distributed as `.jar` files.
+
 **JSON**: JavaScript Object Notation. A structured file format used to store arbitrary text data. This is the file format used by PeopleSoft to store data and settings.
 
 **Keyword**: A word to search for in a set of data, e.g. in the list of employees or jobs.
+
+[Return to the Table of Contents](#toc)
