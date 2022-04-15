@@ -24,6 +24,8 @@ PeopleSoft simulates a real life workflow:
 
 * Words in `monospace font` are commands to be typed into PeopleSoft.<br>
 
+* Boxes like these 
+
 * Boxes like these (with a blue background and the :information_source: icon) contain relevant tips for using PeopleSoft.
 
 * Boxes with a yellow background and the :warning: icon contain important warnings.
@@ -274,6 +276,116 @@ A handy reference for more experienced users who just need to know the format of
   e.g. `[t/TAG]...​` can be interpreted as `[t/TAG]`, `[t/TAG] [t/TAG]`, and so on.
 
 </div>
+
+### Parameter constraints
+
+A handy reference for the constraints on input parameters for commands. 
+<table>
+  <tbody>
+    <tr>
+      <th>Parameter</th>
+      <th>Prefix</th>
+      <th>Constraints</th>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td><code>n/</code></td>
+      <td>
+        <p>Contains only alphanumeric characters and spaces.</p>
+        <p>Should not be empty.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Phone number</td>
+      <td><code>p/</code></td>
+      <td>
+        <p>Contains only numbers.</p> 
+        <p>Should be at least three digits long.</p>
+      </td>
+    </tr>
+    <tr>
+    <tr>
+     <tr>
+      <td>Email</td>
+      <td><code>e/</code></td>
+      <td>
+        <p>Should be of the format `name@domain.com` where:</p>
+        <ol>
+          <li><code>name</code> contains only alphanumeric characters and the following special characters: <code>+_.-</code></li>
+          <li><code>name</code> should start and end with alphanumeric characters</li>
+          <li><code>domain</code> contains only alphanumeric characters and the following special characters: <code>.-</code></li>
+          <li><code>domain</code> should be at least two characters long</li>
+          <li><code>domain</code> should start and end with alphanumeric characters</li>
+          <li><code>domain</code> should not contain any two consecutive special characters</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+     <tr>
+      <td>Address</td>
+      <td><code>a/</code></td>
+      <td>
+        <p>Should not be empty.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Rate</td>
+      <td><code>p/</code></td>
+      <td>
+        <p>Should be a number consisting of only digits `0-9` and an optional decimal point.</p>
+        <p>Should not be negative.</p>
+        <p>Should not have more than two decimal places.</p>
+        <p>Should not be larger than `1000000` (one million).</p>
+      </td>
+    </tr>
+     <tr>
+      <td>Tag</td>
+      <td><code>t/</code></td>
+      <td>
+        <p>Contains only alphanumeric characters.</p>
+        <p>Should not be empty.</p>
+      </td>
+    </tr>
+     <tr>
+      <td>Duration</td>
+      <td><code>d/</code></td>
+      <td>
+        <p>Should be a number consisting of only digits `0-9` and an optional decimal point.</p>
+        <p>Should be positive.</p>
+        <p>Should not be larger than `23.99`. Consider splitting the job into multiple smaller jobs if a larger value is desired.</p>
+        <p>Should not be empty.</p>
+      </td>
+    </tr>
+     <tr>
+      <td>Assign person</td>
+      <td><code>i/</code></td>
+      <td>
+        <p>Contains only digits <code>0-9</code>.</p>
+        <p>Should be a valid index of a person in the employee list.</p>
+        <p>Should not be empty.</p>
+      </td>
+    </tr>
+    </tr>
+     <tr>
+      <td>JOB_INDEX</td>
+      <td>N.A.</td>
+      <td>
+        <p>Contains only digits <code>0-9</code>.</p>
+        <p>Should be a valid index of a job in the job list.</p>
+        <p>Should not be empty.</p>
+      </td>
+    </tr>
+     <tr>
+      <td>PERSON_INDEX</td>
+      <td>N.A.</td>
+      <td>
+        <p>Contains only digits <code>0-9</code>.</p>
+        <p>Should be a valid index of a person in the person list.</p>
+        <p>Should not be empty.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [Return to the Table of Contents](#toc)
 
