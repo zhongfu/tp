@@ -255,13 +255,13 @@ A handy reference for more experienced users who just need to know the format of
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the attributes to be filled in by you.<br>
+* Words in `UPPERCASE` are the attributes to be replaced with values provided by you.<br>
   e.g. in `personadd n/NAME`, `NAME` can be replaced with an actual name like in `personadd n/John Doe`.
 
 * Attributes can be in any order.<br>
   e.g. if the command asks for `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also fine.
 
-* If an attribute is expected only once but is typed multiple times, only the last occurrence of the attribute will be taken.<br>
+* If an attribute is expected only once but is used multiple times, only the last occurrence of the attribute will be taken.<br>
   e.g. if you specify `n/Jake n/Jason`, only `n/Jason` will be taken.
 
 * For commands that do not need attributes (like `help`, `list`, `exit` and `clear`), anything typed after the command word will be ignored.<br>
@@ -294,7 +294,7 @@ Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...`
 Examples:
 
 * `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` will create a new employee with name "Nicole Tan", phone number "99338558", email "nicole@stffhub.org", address "1 Tech Drive, S138572", an hourly rate of $37.50, and with tags "Hardware" and "Senior".
-* `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25. No tags will be added since it is an optional attribute.
+* `personadd n/Jennifer Tan p/88473219 e/jennifer@stffhub.org a/13 Tech Drive, S182562 r/25` will create a new employee with name "Jennifer Tan", phone number "88473219", email "jennifer@stffhub.org", address "13 Tech Drive, S182562", an hourly rate of $25. No tags will be added since no tag attributes were provided.
 
 ![Adding Jennifer](images/screenshots/personadd/personadd.png)
 
@@ -449,7 +449,7 @@ Examples:
 
 * The maximum value for the duration of a job is 1,000,000 hours.
 
-* Multiple jobs of the same name can be added. These jobs can then be differentiated by their internal ID, the order in which they were added, and the employees that were assigned to it, although practically it can easily result in confusion. It is thus recommended that a user differentiates jobs through naming to avoid any confusion.
+* Multiple jobs of the same name can be added. These jobs can then be differentiated by their internal ID, the order in which they were added, and/or the employees that were assigned to it, although it can easily result in confusion. It is thus recommended that a user differentiates jobs through naming to avoid any confusion.
 
 </div>
 
@@ -482,7 +482,7 @@ Examples:
 
 #### `list`: List all jobs
 
-Lists all the jobs added to PeopleSoft, including jobs that have been paid for and those that have not been paid for yet.
+Lists all jobs added to PeopleSoft.
 
 Format: `list`
 
@@ -662,11 +662,11 @@ Example: `help` opens up the help page.
 
 **Q**: I'm using macOS and I can't double-click on the `peoplesoft.jar` file to open it. What should I do? 
 
-**A**: Follow the steps stated [here](https://github.com/nus-cs2103-AY2122S1/forum/issues/353) to open your `jar` file.
+**A**: Follow the steps [here](https://github.com/nus-cs2103-AY2122S1/forum/issues/353) to open your `jar` file.
 
 <br>
 
-**Q**: What are the `addressbook.log.0`, `config.json`, `preferences.json` files beside my `peoplesoft.jar`? 
+**Q**: What are the `addressbook.log.0`, `config.json`, `preferences.json` files in the same folder as `peoplesoft.jar`? 
 
 **A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of PeopleSoft is stored in those files. Do not remove or edit those files.
 
@@ -718,9 +718,9 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **CSV**: Comma-separated values. A common file format for storing tabular data, similar to a spreadsheet.
 
-**Index**: The item's number that is displayed in its respective list.
+**Index**: The position of an item in its respective list.
 
-e.g. The second person in the displayed list has an `INDEX` of 2.
+e.g. The second person in the list has an `INDEX` of 2.
 
 **JAR**: Java ARchive. A file format used to collate Java class files and their resources for distribution. Java applications are commonly distributed as `.jar` files.
 
