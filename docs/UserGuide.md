@@ -83,7 +83,7 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
 
 1. Type `add n/Repair aircon d/2` in the command window.
 
-    This command will add a new job with the name 'Repair aircon' and a duration of two hours.
+    This command will add a new job with the name "Repair aircon" and a duration of two hours.
 
     <div markdown="block" class="alert alert-info">
 
@@ -98,7 +98,7 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
     <figcaption 
         style="text-align: center; 
                font-style: italic;"> 
-        A job with the name 'Repair aircon' and a duration of '2h' is created in the job list
+        A job with the name "Repair aircon" and a duration of "2h" is created in the job list
     </figcaption>
 <br>
 
@@ -110,11 +110,11 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
     The first number in the command (`1`) refers to the *index* of the job. In this case, it refers to the first job in the list of jobs, which is the aircon repair job created earlier.
 
-    The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the list of employees, which is 'Nicole Tan'. Additional employees can also be assigned to this job by adding additional `i/` attributes.
+    The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the list of employees, which is "Nicole Tan". Additional employees can also be assigned to this job by adding additional `i/` attributes.
 
 2. Hit **enter** to run the command.
 
-    A message should appear, indicating that the job 'Repair aircon' is assigned to 'Nicole Tan'.
+    A message should appear, indicating that the job "Repair aircon" is assigned to "Nicole Tan".
 
     ![Assigned to nicole](images/screenshots/tut_asgn.png)
 
@@ -137,11 +137,11 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
 1. Type `personfind aircon` in the command window.
 
-    This command searches for 'aircon' in the names or tags of employees. Search terms are not case-sensitive.
+    This command searches for "aircon" in the names or tags of employees. Search terms are not case-sensitive.
 
 2. Hit **enter** to run the command.
 
-    There should be two persons listed: 'Nicole Tan', and 'Arjun Khatau'. Notice that the list of employees now only shows employees with the 'Aircon' tag.
+    There should be two persons listed: "Nicole Tan", and "Arjun Khatau". Notice that the list of employees now only shows employees with the "Aircon" tag.
 
    ![Find people who can fix aircon](images/screenshots/tut_find.png)
 
@@ -158,7 +158,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
 4. Hit **enter** to run the command.
 
-    A message should appear, indicating that the job 'Repair aircon' is assigned to 'Arjun Khatau'.
+    A message should appear, indicating that the job "Repair aircon" is assigned to "Arjun Khatau".
 
 #### Complete a job and pay employees
 
@@ -170,11 +170,11 @@ A key feature of PeopleSoft is tracking the state of job completion and whether 
 
 2. Hit **enter** to run the command.
 
-    The job 'Repair aircon' should be marked as completed, and a checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) should appear under the *Done* column.
+    The job "Repair aircon" should be marked as completed, and a checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) should appear under the *Done* column.
 
 Marking a job as completed creates pending payments for the job. The amounts pending payment are reflected in the *Unpaid* column in the employees list.
 
-Now that the 'Repair aircon' job has been marked as completed, 'Nicole Tan' and 'Arjun Khatau' should have non-zero values under the *Unpaid* column.
+Now that the "Repair aircon" job has been marked as completed, "Nicole Tan" and "Arjun Khatau" should have non-zero values under the *Unpaid* column.
 
 This value reflects the amount of money that is pending payment to the employees. It is calculated from the employee's base rate and the job's duration.
 
@@ -329,7 +329,7 @@ Format: `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
 Examples:
 
 * `personedit 2 p/62353535` changes the second person's phone number to 62353535.
-* `personedit 3 t/Hardware t/Network` changes the third person's tags to `Hardware` and `Network` instead of their original tags.
+* `personedit 3 t/Hardware t/Network` changes the third person's tags to "Hardware" and "Network" instead of their original tags.
 
 <div markdown="block" class="alert alert-info">
 
@@ -379,9 +379,9 @@ Format: `personfind KEYWORD [MORE_KEYWORDS]...​`
 
 Examples:
 
-* `personfind Nicole Hardware` finds all employees with ‘Nicole’ **and** ‘Hardware’ in their name and/or tags.
-* `personfind Nicole` finds all employees with ‘Nicole’ in their name and/or tags.
-* `personfind Nicole Hardware Display` finds all employees with ‘Nicole’, 'Hardware', **and** 'Display' in their name and/or tags.
+* `personfind Nicole Hardware` finds all employees with "Nicole" **and** "Hardware" in their name and/or tags.
+* `personfind Nicole` finds all employees with "Nicole" in their name and/or tags.
+* `personfind Nicole Hardware Display` finds all employees with "Nicole", "Hardware", **and** "Display" in their name and/or tags.
 
 
 ![before](images/screenshots/personfind/personf_before.png)
@@ -467,8 +467,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 Examples:
 
-* `find paint` finds all jobs with 'Painting' in their names.
-* `find paint istana` finds all jobs with 'paint' **and** 'istana' in their names.
+* `find paint` finds all jobs with "paint" in their names.
+* `find paint istana` finds all jobs with "paint" **and** "istana" in their names.
 
 ![before](images/screenshots/find/find.png)
 
