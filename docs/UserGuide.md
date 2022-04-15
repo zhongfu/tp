@@ -4,7 +4,7 @@ title: User Guide
 ---
 Welcome to PeopleSoft!
 
-PeopleSoft is a desktop application for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional graphical user interface applications.
+PeopleSoft is a desktop application for **calculating the salary for shift-based contractors**, optimized for use via a **command-line interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional graphical user interface (GUI) applications.
 
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
@@ -50,7 +50,7 @@ PeopleSoft simulates a real life workflow:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** If double-clicking the file does not start PeopleSoft, then open the command line interpreter for your system (e.g. Command Prompt or Windows Terminal for Windows, or Terminal on macOS and Linux), navigate to directory where the file is located (e,g, with `cd path/to/folder`), and run `java -jar peoplesoft.jar`.
+**:information_source: Note:** If double-clicking the file does not start PeopleSoft, then open the command line interpreter for your system (e.g. Command Prompt or Windows Terminal on Windows, or Terminal on macOS and Linux), navigate to directory where the file is located (e.g. with `cd path/to/folder`), and run `java -jar peoplesoft.jar`.
 
 </div>
 
@@ -79,7 +79,7 @@ Since the sample data does not include any jobs, we will need to create new ones
 
 #### Create a job
 
-When your company receives a new job, you can add it to PeopleSoft. To create a job, you can use the `add` command. You will have to specify a name and a duration using the `n/` and `d/` prefixes respectively. For this tutorial, we will create a 2-hour-long aircon repair job.
+When your company receives a new job, you can add it to PeopleSoft. To create a job, you can use the `add` command. You will have to specify a name and duration using the `n/` and `d/` prefixes respectively. For this tutorial, we will create a 2-hour-long aircon repair job.
 
 1. Type `add n/Repair aircon d/2` in the command window.
 
@@ -205,7 +205,7 @@ PeopleSoft also allows users to export a payslip for each employee as a comma-se
 
 2. Hit **Enter** to run the command.
 
-    The payslip beginning with the emplyee's name is now saved in the PeopleSoft `data` folder.
+    The payslip beginning with the employee's name is now saved in the PeopleSoft `data` folder.
 
 ![Location of the data folder](images/screenshots/data_folder.png)
 
@@ -434,7 +434,7 @@ This command updates the job list to show all jobs assigned to that person.
 
 #### `add`: Add a job
 
-Adds a new job with the given attributes. `DURATION` refers to the duration required for job, in hours.
+Adds a new job with the given attributes. `DURATION` refers to the duration required for the job, in hours.
 
 Format: `add n/NAME d/DURATION`
 
@@ -662,7 +662,7 @@ Example: `help` opens up the help page.
 
 ## FAQ
 
-**Q**: I'm using Mac and I can't double-click on the `peoplesoft.jar` file to open it. What should I do? 
+**Q**: I'm using macOS and I can't double-click on the `peoplesoft.jar` file to open it. What should I do? 
 
 **A**: Follow the steps stated [here](https://github.com/nus-cs2103-AY2122S1/forum/issues/353) to open your `jar` file.
 
@@ -718,13 +718,13 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **CLI**: Command-line interface. A primarily text-based interface, which is typically operated with text commands.
 
-**CSV**: Comma-seperated values. A common file format for storing tabular data, similar to a spreadsheet.
+**CSV**: Comma-separated values. A common file format for storing tabular data, similar to a spreadsheet.
 
 **Index**: The item's number that is displayed in its respective list.
 
 e.g. The second person in the displayed list has an `INDEX` of 2.
 
-**JAR**: Java Archive. A file format used to collate Java class files and their resources for distribution. Java applications are commonly distributed as `.jar` files.
+**JAR**: Java ARchive. A file format used to collate Java class files and their resources for distribution. Java applications are commonly distributed as `.jar` files.
 
 **JSON**: JavaScript Object Notation. A structured file format used to store arbitrary text data. This is the file format used by PeopleSoft to store data and settings.
 
