@@ -121,7 +121,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
     <figcaption 
         style="text-align: center; 
                font-style: italic;"> 
-        Nicole is assigned to repair the aircon
+        Nicole Tan is assigned to the "Repair aircon" job
     </figcaption>
 <br>
 
@@ -143,12 +143,12 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
     There should be two persons listed: "Nicole Tan", and "Arjun Khatau". Notice that the list of employees now only shows employees with the "Aircon" tag.
 
-   ![Find people who can fix aircon](images/screenshots/tut_find.png)
+   ![Find people with the "Aircon" tag](images/screenshots/tut_find.png)
 
     <figcaption 
         style="text-align: center; 
                font-style: italic;"> 
-        Nicole and Arjun are qualified to fix the aircon
+        Nicole and Arjun are have the "Aircon" tag
     </figcaption>
 <br>
 
@@ -191,7 +191,7 @@ This value reflects the amount of money that is pending payment to the employees
     <figcaption 
         style="text-align: center; 
                font-style: italic;"> 
-        The job list after the job is marked and payment is finalised
+        The job list after the job is marked as done and payments are finalised
     </figcaption>
 <br>
 
@@ -390,7 +390,7 @@ Examples:
 
 ![after](images/screenshots/personfind/personf_after.png)
 
-<figcaption style="text-align: center; font-style: italic;">After the command is executed: Employees with the Aircon tag are shown.</figcaption>
+<figcaption style="text-align: center; font-style: italic;">After the command is executed: Employees with the "Aircon" tag are shown.</figcaption>
 
 [Return to the Table of Contents](#toc)
 
@@ -534,7 +534,7 @@ assigned to a job, un-mark the job first before assigning them.
 <figcaption 
     style="text-align: center; 
            font-style: italic;">
-    Assigning the 4th job in the job list to the Kavya who is the first person in the employees list
+    Assigning the 4th job in the job list to Kavya, the first person in the employees list
 </figcaption>
 
 [Return to the Table of Contents](#toc)
