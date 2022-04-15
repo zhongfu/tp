@@ -102,7 +102,7 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
     </figcaption>
 <br>
 
-#### Assign person to a job
+#### Assign employee to a job
 
 PeopleSoft allows you to indicate which employees are in-charge of a certain job with the `assign` command. The `assign` command requires 1 job *index*, and at least 1 employee *index* (each prefixed by `i/`). These indexes can be found under the `#` column in both lists.
 
@@ -141,7 +141,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
 2. Hit **Enter** to run the command.
 
-    There should be two persons listed: "Nicole Tan", and "Arjun Khatau". Notice that the list of employees now only shows employees with the "Aircon" tag.
+    There should be two employees listed: "Nicole Tan", and "Arjun Khatau". Notice that the list of employees now only shows employees with the "Aircon" tag.
 
    ![Find people with the "Aircon" tag](images/screenshots/tut_find.png)
 
@@ -154,7 +154,7 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
 3. Type `assign 1 i/2` in the command window.
 
-    This assigns the second person in the list (Arjun Khatau) to the first job. Notice that the employee index (2) now refers to the second employee in the current list (Arjun Khatau), instead of in the original list (Kavya Singh).
+    This assigns the second employee in the list (Arjun Khatau) to the first job. Notice that the employee index (2) now refers to the second employee in the current list (Arjun Khatau), instead of in the original list (Kavya Singh).
 
 4. Hit **Enter** to run the command.
 
@@ -224,24 +224,24 @@ This concludes the tutorial on the basic usage of PeopleSoft. You can refer to t
 
 A handy reference for more experienced users who just need to know the format of a command.
 
-| Command                                                     | Format                                                                                        | Examples                                                                                                      |
-|:------------------------------------------------------------|:----------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
-| [`personadd`](#personadd-add-an-employee)                   | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                         | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
-| [`personedit`](#personedit-edit-an-employees-information)   | `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                              |
-| [`persondelete`](#persondelete-delete-an-employee)          | `persondelete PERSON_INDEX`                                                                   | `persondelete 3`                                                                                              |
-| [`personfind`](#personfind-find-employees-by-name-or-tag)   | `personfind KEYWORD [KEYWORD]...​`                                                             | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
-| [`personlist`](#personlist-list-all-employees)              | `personlist`                                                                                  | NA                                                                                                            |
-| [`export`](#export-export-jobs-done-by-an-employee)         | `export PERSON_INDEX`                                                                         | `export 2`                                                                                                    |
-| [`clear`](#clear-clear-all-peoplesoft-data)                | `clear`                                                                                       | NA                                                                                                            |
-| [`add`](#add-add-a-job)                                     | `add n/NAME d/DURATION`                                                                       | `add n/Fix HDB Lock d/1`                                                                                      |
-| [`find`](#find-find-jobs-by-name)                           | `find KEYWORD [KEYWORD]...`                                                                   | `find Painting Senior`, `find Painting`                                                                       |
-| [`list`](#list-list-all-jobs)                               | `list`                                                                                        | NA                                                                                                            |
-| [`delete`](#delete-delete-a-job)                            | `delete JOB_INDEX`                                                                            | `delete 3`                                                                                                    |
-| [`assign`](#assign-assign-a-job-to-an-employee)             | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                         | `assign 2 i/1`                                                                                                |
-| [`mark`](#mark-mark-or-unmark-a-job-as-done)                | `mark JOB_INDEX`                                                                              | `mark 2`                                                                                                      |
-| [`pay`](#pay-finalize-payments-for-a-job)                   | `pay JOB_INDEX y/`                                                                            | `pay 2 y/`                                                                                                    |
-| [`exit`](#exit-exit-peoplesoft)                            | `exit`                                                                                        | NA                                                                                                            |
-| [`help`](#help-show-help-page)                              | `help`                                                                                        | NA                                                                                                            |
+| Command                                                     | Format                                                                                          | Examples                                                                                                      |
+|:------------------------------------------------------------|:------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
+| [`personadd`](#personadd-add-an-employee)                   | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                           | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
+| [`personedit`](#personedit-edit-an-employees-information)   | `personedit EMPLOYEE_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                              |
+| [`persondelete`](#persondelete-delete-an-employee)          | `persondelete EMPLOYEE_INDEX`                                                                   | `persondelete 3`                                                                                              |
+| [`personfind`](#personfind-find-employees-by-name-or-tag)   | `personfind KEYWORD [KEYWORD]...​`                                                               | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
+| [`personlist`](#personlist-list-all-employees)              | `personlist`                                                                                    | NA                                                                                                            |
+| [`export`](#export-export-jobs-done-by-an-employee)         | `export EMPLOYEE_INDEX`                                                                         | `export 2`                                                                                                    |
+| [`clear`](#clear-clear-all-peoplesoft-data)                 | `clear`                                                                                         | NA                                                                                                            |
+| [`add`](#add-add-a-job)                                     | `add n/NAME d/DURATION`                                                                         | `add n/Fix HDB Lock d/1`                                                                                      |
+| [`find`](#find-find-jobs-by-name)                           | `find KEYWORD [KEYWORD]...`                                                                     | `find Painting Senior`, `find Painting`                                                                       |
+| [`list`](#list-list-all-jobs)                               | `list`                                                                                          | NA                                                                                                            |
+| [`delete`](#delete-delete-a-job)                            | `delete JOB_INDEX`                                                                              | `delete 3`                                                                                                    |
+| [`assign`](#assign-assign-a-job-to-an-employee)             | `assign JOB_INDEX i/EMPLOYEE_INDEX [i/EMPLOYEE_INDEX]...​`                                       | `assign 2 i/1`                                                                                                |
+| [`mark`](#mark-mark-or-unmark-a-job-as-done)                | `mark JOB_INDEX`                                                                                | `mark 2`                                                                                                      |
+| [`pay`](#pay-finalize-payments-for-a-job)                   | `pay JOB_INDEX y/`                                                                              | `pay 2 y/`                                                                                                    |
+| [`exit`](#exit-exit-peoplesoft)                             | `exit`                                                                                          | NA                                                                                                            |
+| [`help`](#help-show-help-page)                              | `help`                                                                                          | NA                                                                                                            |
 
 ![Command format](images/screenshots/command_format.png)
 
@@ -355,11 +355,11 @@ A handy reference for the constraints on input parameters for commands.
       </td>
     </tr>
      <tr>
-      <td>Assign person</td>
+      <td>Assign employee</td>
       <td><code>i/</code></td>
       <td>
         <p>Contains only digits <code>0-9</code>.</p>
-        <p>Should be a valid index of a person in the employee list.</p>
+        <p>Should be a valid index of a employee in the employee list.</p>
         <p>Should not be empty.</p>
       </td>
     </tr>
@@ -374,11 +374,11 @@ A handy reference for the constraints on input parameters for commands.
       </td>
     </tr>
      <tr>
-      <td>PERSON_INDEX</td>
+      <td>EMPLOYEE_INDEX</td>
       <td>N.A.</td>
       <td>
         <p>Contains only digits <code>0-9</code>.</p>
-        <p>Should be a valid index of a person in the person list.</p>
+        <p>Should be a valid index of a employee in the employee list.</p>
         <p>Should not be empty.</p>
       </td>
     </tr>
@@ -434,12 +434,12 @@ Edit the information of an existing employee. Use this in the event that an empl
 
 Rate updates will only take effect with jobs that are pending completion; payout amounts for already-completed (i.e. marked with `mark`) jobs will not change.
 
-Format: `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
+Format: `personedit EMPLOYEE_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​`
 
 Examples:
 
-* `personedit 2 p/62353535` changes the second person's phone number to 62353535.
-* `personedit 3 t/Hardware t/Network` changes the third person's tags to "Hardware" and "Network" instead of their original tags.
+* `personedit 2 p/62353535` changes the second employee's phone number to 62353535.
+* `personedit 3 t/Hardware t/Network` changes the third employee's tags to "Hardware" and "Network" instead of their original tags.
 
 <div markdown="block" class="alert alert-info">
 
@@ -471,9 +471,9 @@ This is irreversible.
 
 </div>
 
-Format: `persondelete PERSON_INDEX`
+Format: `persondelete EMPLOYEE_INDEX`
 
-Example: `persondelete 3` deletes the third person in the list.
+Example: `persondelete 3` deletes the third employee in the list.
 
 [Return to the Table of Contents](#toc)
 
@@ -524,15 +524,15 @@ Exports a `.csv` file to the `data` folder, containing the jobs that the employe
 * job durations, and
 * the amount paid, or to be paid to the employee.
 
-Format: `export PERSON_INDEX`
+Format: `export EMPLOYEE_INDEX`
 
-Example: `export 3` exports the third person in the list.
+Example: `export 3` exports the third employee in the list.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
 
-This command updates the job list to show all jobs assigned to that person.
+This command updates the job list to show all jobs assigned to that employee.
 
 </div>
 
@@ -622,7 +622,7 @@ Example: `delete 2` deletes the second job.
 
 Assigns a job to an employee to indicate that they are to be paid for the job.
 
-Format: `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...`
+Format: `assign JOB_INDEX i/EMPLOYEE_INDEX [i/EMPLOYEE_INDEX]...`
 
 Examples:
 
@@ -642,7 +642,7 @@ A job that has been [marked](#mark-mark-or-unmark-a-job-as-done) as completed ca
 <figcaption 
     style="text-align: center; 
            font-style: italic;">
-    Assigning the 4th job in the job list to Kavya, the first person in the employees list
+    Assigning the 4th job in the job list to Kavya, the first employee in the employees list
 </figcaption>
 
 [Return to the Table of Contents](#toc)
@@ -653,7 +653,7 @@ Marks a job as done if it was not already marked as done, or marks a job as undo
 
 Marking a job as done indicates that a job has been completed and is pending payment. Unmarking a job causes the pending payment amounts to be subtracted from assigned employees.
 
-Jobs are initially **not** marked as done when first created, and have to have at least one person [assigned](#assign-assign-a-job-to-an-employee) to it before it can be marked.
+Jobs are initially **not** marked as done when first created, and have to have at least one employee [assigned](#assign-assign-a-job-to-an-employee) to it before it can be marked.
 
 <div markdown="block" class="alert alert-info">
 
@@ -832,7 +832,7 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **Index**: The item's number that is displayed in its respective list.
 
-e.g. The second person in the list has an `INDEX` of 2.
+e.g. The second employee in the list has an `INDEX` of 2.
 
 **JAR**: Java ARchive. A file format used to collate Java class files and their resources for distribution. Java applications are commonly distributed as `.jar` files.
 
