@@ -93,13 +93,13 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 1. Type `assign 1 i/1` in the command window.
 
     The first number in the command (`1`) refers to the *index* of the job. In this case, it refers to the first job in the table of jobs, which is the aircon repair job created earlier.
-    
+
     The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the table of employees, which is 'Nicole Tan'. Additional employees can also be assigned to this job by adding additional `i/` attributes.
 
 2. Hit **enter** to run the command.
 
     A message should appear, indicating that the job 'Repair aircon' is assigned to 'Nicole Tan'.
-    
+
 <br>
 
 Index-based commands depend on the ordering of the items displayed in their respective tables. The search and list commands for employees and jobs can cause this order to vary.
@@ -141,7 +141,7 @@ This value reflects the amount of money that is pending payment to the employees
 1. Type `pay 1 y/` in the command window. 
 
     The prefix `y/` is a safeguard against accidental misuse of this command. This command finalizes payments for the given job, and is **irreversible**. After the job is finalized, it cannot be further modified, so do make sure that you intend to run this command before running it.
-   
+
 2. Hit **enter** to run the command.
 
     The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark under the *Paid* column.
@@ -265,7 +265,7 @@ Examples:
 * When editing tags, new tags will not be added to the existing tags. Instead, all existing tags will be replaced by new tags.
 
 * To clear all tags, add `t/` to the command without specifying any other tags.
-  
+
 </div>
 
 #### `persondelete`: Delete an employee
@@ -356,7 +356,7 @@ Examples:
 * The maximum value for the duration of a job is 1,000,000 hours.
 
 * Multiple jobs of the same name can be added. These jobs can then be differentiated by their internal ID, the order in which they were added, and the employees that were assigned to it, although practically it can easily result in confusion. It is thus recommended that a user differentiates jobs through naming to avoid any confusion.
-  
+
 </div>
 
 #### `find`: Find jobs by name

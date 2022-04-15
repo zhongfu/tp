@@ -13,11 +13,11 @@ PeopleSoft is a Payroll management app for companies handling contractor-based s
 * **New Feature**: Added the export feature for payslips.
   * **What it does**: Gives the user ability to view exact earnings and job assignments.
   * **Justification**: Helps contractors keep track of their earnings transparently.
-  
+
 * **New Feature**: Created the job list interface and a skeletal implementation
   * **What it does**: Core functionality of the product.
   * **Justification**: Helps contractors keep track of their earnings transparently.
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=thewrik)
 
 * **Enhancements to existing features**:
