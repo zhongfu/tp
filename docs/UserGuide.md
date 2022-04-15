@@ -4,7 +4,7 @@ title: User Guide
 ---
 Welcome to PeopleSoft!
 
-PeopleSoft is a desktop app for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional graphical user interface apps.
+PeopleSoft is a desktop application for **calculating the salary for shift-based contractors**, optimized for use via a **Command Line Interface (CLI)**. If you are a **HR manager** and you can type fast, PeopleSoft can get your payroll tasks done **much faster** than traditional graphical user interface applications.
 
 You can input your employees' data and the jobs that you want to keep track of.
 Then, you can assign the employees to the jobs that they are working on.
@@ -46,11 +46,11 @@ The program simulates a real life workflow:
 
 3. Place the `peoplesoft.jar` file anywhere on your computer (preferably within a new folder, as the configuration and data files will be stored in the same location).
 
-4. **Double-click** the file to start the app. A window (similar to the one below) should appear shortly.
+4. **Double-click** the file to start PeopleSoft. A window (similar to the one below) should appear shortly.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** If double-clicking the file does not start the application, then open the command line interpreter for your system (e.g. Command Prompt or Windows Terminal for Windows, or Terminal on macOS and Linux), navigate to directory where the file is located (e,g, with `cd path/to/folder`), and run `java -jar peoplesoft.jar`.
+**:information_source: Note:** If double-clicking the file does not start PeopleSoft, then open the command line interpreter for your system (e.g. Command Prompt or Windows Terminal for Windows, or Terminal on macOS and Linux), navigate to directory where the file is located (e,g, with `cd path/to/folder`), and run `java -jar peoplesoft.jar`.
 
 </div>
 
@@ -62,18 +62,18 @@ The program simulates a real life workflow:
     The PeopleSoft interface
 </figcaption>
 
-When the application is started for the first time, it will be populated with sample data. You may delete this data with the `clear` command.
+When PeopleSoft is started for the first time, it will be populated with sample data. You may delete this data with the `clear` command.
 
-A `data` folder and some configuration files (with a `.json` extension) will also be created in the folder that you run `peoplesoft.jar` from; this is where the application data will be stored.
+A `data` folder and some configuration files (with a `.json` extension) will also be created in the folder that you run `peoplesoft.jar` from; this is where PeopleSoft data will be stored.
 
 [//]: # (Comment: trying this out, will remove if it doesnt work on webpage after I merge)
 [Return to the Table of Contents](#toc)
 
 ### Processing your first payment using the sample data
 
-The sample data is meant to help users get started with PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in the application. You can refer to the [features](#features) section for more information about specific features.
+The sample data is meant to help users get started with PeopleSoft. This is a tutorial of some of the basic features of PeopleSoft using the sample data. As such, it is not a comprehensive overview of every feature in PeopleSoft. You can refer to the [features](#features) section for more information about specific features.
 
-To start off, notice that the sample data contains some employees under the table of employees. Here, you can see the details of the employees, including their name, base pay and tags.
+To start off, notice that the sample data contains some employees under the list of employees. Here, you can see the details of the employees, including their name, base pay and tags.
 
 Since the sample data does not include any jobs, we will need to create new ones.
 
@@ -83,7 +83,7 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
 
 1. Type `add n/Repair aircon d/2` in the command window.
 
-    This command will add a new job with the name 'Repair aircon' and a duration of two hours.
+    This command will add a new job with the name "Repair aircon" and a duration of two hours.
 
     <div markdown="block" class="alert alert-info">
 
@@ -98,23 +98,23 @@ When your company receives a new job, you can add it to PeopleSoft. To create a 
     <figcaption 
         style="text-align: center; 
                font-style: italic;"> 
-        A job with the name 'Repair aircon' and a duration of '2h' is created in the job list
+        A job with the name "Repair aircon" and a duration of "2h" is created in the job list
     </figcaption>
 <br>
 
 #### Assign person to a job
 
-PeopleSoft allows you to indicate which employees are in-charge of a certain job with the `assign` command. The `assign` command requires 1 job *index*, and at least 1 employee *index* (each prefixed by `i/`). These indexes can be found under the `#` column in both tables.
+PeopleSoft allows you to indicate which employees are in-charge of a certain job with the `assign` command. The `assign` command requires 1 job *index*, and at least 1 employee *index* (each prefixed by `i/`). These indexes can be found under the `#` column in both lists.
 
 1. Type `assign 1 i/1` in the command window.
 
-    The first number in the command (`1`) refers to the *index* of the job. In this case, it refers to the first job in the table of jobs, which is the aircon repair job created earlier.
+    The first number in the command (`1`) refers to the *index* of the job. In this case, it refers to the first job in the list of jobs, which is the aircon repair job created earlier.
 
-    The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the table of employees, which is 'Nicole Tan'. Additional employees can also be assigned to this job by adding additional `i/` attributes.
+    The prefix `i/` denotes the index of the employee to be assigned to the job. In this case, it references the first employee in the list of employees, which is "Nicole Tan". Additional employees can also be assigned to this job by adding additional `i/` attributes.
 
 2. Hit **enter** to run the command.
 
-    A message should appear, indicating that the job 'Repair aircon' is assigned to 'Nicole Tan'.
+    A message should appear, indicating that the job "Repair aircon" is assigned to "Nicole Tan".
 
     ![Assigned to nicole](images/screenshots/tut_asgn.png)
 
@@ -137,11 +137,11 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
 1. Type `personfind aircon` in the command window.
 
-    This command searches for 'aircon' in the names or tags of employees. Search terms are not case-sensitive.
+    This command searches for "aircon" in the names or tags of employees. Search terms are not case-sensitive.
 
 2. Hit **enter** to run the command.
 
-    There should be two persons listed: 'Nicole Tan', and 'Arjun Khatau'. Notice that the table of employees now only shows employees with the 'Aircon' tag.
+    There should be two persons listed: "Nicole Tan", and "Arjun Khatau". Notice that the list of employees now only shows employees with the "Aircon" tag.
 
    ![Find people who can fix aircon](images/screenshots/tut_find.png)
 
@@ -154,11 +154,11 @@ PeopleSoft allows you to indicate which employees are in-charge of a certain job
 
 3. Type `assign 1 i/2` in the command window.
 
-    This assigns the second person in the table (Arjun Khatau) to the first job. Notice that the employee index (2) now refers to the second employee in the current list (Arjun Khatau), instead of in the original list (Kavya Singh).
+    This assigns the second person in the list (Arjun Khatau) to the first job. Notice that the employee index (2) now refers to the second employee in the current list (Arjun Khatau), instead of in the original list (Kavya Singh).
 
 4. Hit **enter** to run the command.
 
-    A message should appear, indicating that the job 'Repair aircon' is assigned to 'Arjun Khatau'.
+    A message should appear, indicating that the job "Repair aircon" is assigned to "Arjun Khatau".
 
 #### Complete a job and pay employees
 
@@ -170,11 +170,11 @@ A key feature of PeopleSoft is tracking the state of job completion and whether 
 
 2. Hit **enter** to run the command.
 
-    The job 'Repair aircon' should be marked as completed, and a checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) should appear under the *Done* column.
+    The job "Repair aircon" should be marked as completed, and a checkmark ![tick](images/apple-tick-emoji.png) should appear under the *Done* column.
 
 Marking a job as completed creates pending payments for the job. The amounts pending payment are reflected in the *Unpaid* column in the employees list.
 
-Now that the 'Repair aircon' job has been marked as completed, 'Nicole Tan' and 'Arjun Khatau' should have non-zero values under the *Unpaid* column.
+Now that the "Repair aircon" job has been marked as completed, "Nicole Tan" and "Arjun Khatau" should have non-zero values under the *Unpaid* column.
 
 This value reflects the amount of money that is pending payment to the employees. It is calculated from the employee's base rate and the job's duration.
 
@@ -184,7 +184,7 @@ This value reflects the amount of money that is pending payment to the employees
 
 2. Hit **enter** to run the command.
 
-    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark ![tick](../src/main/resources/images/apple-tick-emoji.png) under the *Paid* column.
+    The payments for the job is now finalized, indicating that the employees have been paid for the job. This is also reflected in the checkmark ![tick](images/apple-tick-emoji.png) under the *Paid* column.
 
    ![Mark and pay](images/screenshots/tut_markpay.png)
 
@@ -229,12 +229,12 @@ A handy reference for more experienced users who just need to know the format of
 | [`personadd`](#personadd-add-an-employee)                   | `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...​`                         | `personadd n/Nicole Tan p/99338558 e/nicole@stffhub.org  a/1 Tech Drive, S138572 r/37.50 t/Hardware t/Senior` |
 | [`personedit`](#personedit-edit-an-employees-information)   | `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [t/TAG]...​` | `personedit 2 n/Nicole Lee t/OS`                                                                              |
 | [`persondelete`](#persondelete-delete-an-employee)          | `persondelete PERSON_INDEX`                                                                   | `persondelete 3`                                                                                              |
-| [`personfind`](#personfind-find-an-employee-by-name-or-tag) | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                       | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
+| [`personfind`](#personfind-find-employees-by-name-or-tag)   | `personfind KEYWORD [MORE_KEYWORDS]...​`                                                       | `personfind Nicole Hardware`, `personfind Aircon`                                                             |
 | [`personlist`](#personlist-list-all-employees)              | `personlist`                                                                                  | NA                                                                                                            |
 | [`export`](#export-export-jobs-done-by-an-employee)         | `export PERSON_INDEX`                                                                         | `export 2`                                                                                                    |
-| [`clear`](#clear-clear-all-app-data)                        | `clear`                                                                                       | NA                                                                                                            |
+| [`clear`](#clear-clear-all-application-data)                | `clear`                                                                                       | NA                                                                                                            |
 | [`add`](#add-add-a-job)                                     | `add n/NAME d/DURATION`                                                                       | `add n/Fix HDB Lock d/1`                                                                                      |
-| [`find`](#find-search-for-a-job-by-name)                    | `find NAME`                                                                                   | `find Painting`                                                                                               |
+| [`find`](#find-find-jobs-by-name)                           | `find NAME`                                                                                   | `find Painting`                                                                                               |
 | [`list`](#list-list-all-jobs)                               | `list`                                                                                        | NA                                                                                                            |
 | [`delete`](#delete-delete-a-job)                            | `delete JOB_INDEX`                                                                            | `delete 3`                                                                                                    |
 | [`assign`](#assign-assign-a-job-to-an-employee)             | `assign JOB_INDEX i/PERSON_INDEX [i/PERSON_INDEX]...​`                                         | `assign 2 i/1`                                                                                                |
@@ -289,7 +289,7 @@ Adds a new employee to the system with the given attributes.
 
 Rate refers to the hourly pay of the employee.
 
-Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG] [t/TAG]...`
+Format: `personadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RATE [t/TAG]...`
 
 Examples:
 
@@ -329,7 +329,7 @@ Format: `personedit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
 Examples:
 
 * `personedit 2 p/62353535` changes the second person's phone number to 62353535.
-* `personedit 3 t/Hardware t/Network` changes the third person's tags to `Hardware` and `Network` instead of their original tags.
+* `personedit 3 t/Hardware t/Network` changes the third person's tags to "Hardware" and "Network" instead of their original tags.
 
 <div markdown="block" class="alert alert-info">
 
@@ -379,9 +379,9 @@ Format: `personfind KEYWORD [MORE_KEYWORDS]...​`
 
 Examples:
 
-* `personfind Nicole Hardware` finds all employees with ‘Nicole’ **and** ‘Hardware’ in their name and/or tags.
-* `personfind Nicole` finds all employees with ‘Nicole’ in their name and/or tags.
-* `personfind Nicole Hardware Display` finds all employees with ‘Nicole’, 'Hardware', **and** 'Display' in their name and/or tags.
+* `personfind Nicole Hardware` finds all employees with "Nicole" **and** "Hardware" in their name and/or tags.
+* `personfind Nicole` finds all employees with "Nicole" in their name and/or tags.
+* `personfind Nicole Hardware Display` finds all employees with "Nicole", "Hardware", **and** "Display" in their name and/or tags.
 
 
 ![before](images/screenshots/personfind/personf_before.png)
@@ -396,7 +396,7 @@ Examples:
 
 #### `personlist`: List all employees
 
-Lists all employees added to the application.
+Lists all employees added to PeopleSoft.
 
 Format: `personlist`
 
@@ -457,7 +457,7 @@ Examples:
 
 #### `find`: Find jobs by name
 
-Finds all jobs that have the given keyword(s) in their names or tags, and lists them in the employee table.
+Finds all jobs that have the given keyword(s) in their names or tags, and lists them in the employee list.
 
 If multiple keywords are entered, only entries that match **all** keywords are returned.
 
@@ -467,8 +467,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 Examples:
 
-* `find paint` finds all jobs with 'Painting' in their names.
-* `find paint istana` finds all jobs with 'paint' **and** 'istana' in their names.
+* `find paint` finds all jobs with "paint" in their names.
+* `find paint istana` finds all jobs with "paint" **and** "istana" in their names.
 
 ![before](images/screenshots/find/find.png)
 
@@ -482,7 +482,7 @@ Examples:
 
 #### `list`: List all jobs
 
-Lists all the jobs added to the application, including jobs that have been paid for and those that have not been paid for yet.
+Lists all the jobs added to PeopleSoft, including jobs that have been paid for and those that have not been paid for yet.
 
 Format: `list`
 
@@ -582,7 +582,7 @@ Finalizes the payments of a job. A job needs to be [marked](#mark-mark-or-unmark
 
 **:warning: Caution:**<br>
 
-This is irreversible. The finalized job cannot be modified in any way, and can only be removed with [`clear`](#clear-clear-all-app-data).
+This is irreversible. The finalized job cannot be modified in any way, and can only be removed with [`clear`](#clear-clear-all-application-data).
 
 </div>
 
@@ -612,9 +612,9 @@ Example: `pay 2 y/` finalizes the payments of the second job
 
 ### Miscellaneous commands
 
-#### `clear`: Clear all app data
+#### `clear`: Clear all application data
 
-Removes **all** data stored in the application. Useful for removing the sample data created when the application is started for the first time.
+Removes **all** data stored in PeopleSoft. Useful for removing the sample data created when PeopleSoft is started for the first time.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -626,7 +626,7 @@ This is irreversible; deleted data cannot be recovered afterwards without a back
 
 Format: `clear`
 
-Example: `clear` removes all employees and jobs from the application.
+Example: `clear` removes all employees and jobs from PeopleSoft.
 
 [Return to the Table of Contents](#toc)
 
@@ -670,7 +670,7 @@ Example: `help` opens up the help page.
 
 **Q**: What are the `addressbook.log.0`, `config.json`, `preferences.json` files beside my `peoplesoft.jar`? 
 
-**A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of the app is stored in those files. Do not remove or edit those files.
+**A**: PeopleSoft uses the settings inside those files to run. For instance, the height and width of the application is stored in those files. Do not remove or edit those files.
 
 <br>
 
@@ -680,7 +680,7 @@ Example: `help` opens up the help page.
 
 <br>
 
-**Q**: How can I edit the application data manually?
+**Q**: How can I edit PeopleSoft data manually?
 
 **A**: PeopleSoft data is saved as a JSON file under `data/peoplesoft.json` in the folder that it was started from. It is possible (although not recommended) to modify application data by editing that file.
 
@@ -702,7 +702,7 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Install the app on the other computer and overwrite the `data/peoplesoft.json` file it creates with your existing `data/peoplesoft.json` file.
+**A**: Install PeopleSoft on the other computer and overwrite the `data/peoplesoft.json` file it creates with your existing `data/peoplesoft.json` file.
 
 <br>
 
@@ -724,7 +724,7 @@ Do not edit the data directly unless you know what you are doing. If your change
 
 e.g. The second person in the displayed list has an `INDEX` of 2.
 
-**JAR**: Java Archive. A file format used to collate Java class files and their resources for distribution. Java apps are commonly distributed as `.jar` files.
+**JAR**: Java Archive. A file format used to collate Java class files and their resources for distribution. Java applications are commonly distributed as `.jar` files.
 
 **JSON**: JavaScript Object Notation. A structured file format used to store arbitrary text data. This is the file format used by PeopleSoft to store data and settings.
 
