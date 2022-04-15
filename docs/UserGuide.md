@@ -302,8 +302,6 @@ A handy reference for the constraints on input parameters for commands.
       </td>
     </tr>
     <tr>
-    <tr>
-     <tr>
       <td>Email</td>
       <td><code>e/</code></td>
       <td>
@@ -319,7 +317,6 @@ A handy reference for the constraints on input parameters for commands.
       </td>
     </tr>
     <tr>
-     <tr>
       <td>Address</td>
       <td><code>a/</code></td>
       <td>
@@ -328,7 +325,7 @@ A handy reference for the constraints on input parameters for commands.
     </tr>
     <tr>
       <td>Rate</td>
-      <td><code>p/</code></td>
+      <td><code>r/</code></td>
       <td>
         <p>Should be a number consisting of only digits `0-9` and an optional decimal point.</p>
         <p>Should not be negative.</p>
@@ -336,7 +333,7 @@ A handy reference for the constraints on input parameters for commands.
         <p>Should not be larger than `1000000` (one million).</p>
       </td>
     </tr>
-     <tr>
+    <tr>
       <td>Tag</td>
       <td><code>t/</code></td>
       <td>
@@ -344,7 +341,7 @@ A handy reference for the constraints on input parameters for commands.
         <p>Should not be empty.</p>
       </td>
     </tr>
-     <tr>
+    <tr>
       <td>Duration</td>
       <td><code>d/</code></td>
       <td>
@@ -354,8 +351,8 @@ A handy reference for the constraints on input parameters for commands.
         <p>Should not be empty.</p>
       </td>
     </tr>
-     <tr>
-      <td>Assign employee</td>
+    <tr>
+      <td>Employee to assign</td>
       <td><code>i/</code></td>
       <td>
         <p>Contains only digits <code>0-9</code>.</p>
@@ -363,8 +360,7 @@ A handy reference for the constraints on input parameters for commands.
         <p>Should not be empty.</p>
       </td>
     </tr>
-    </tr>
-     <tr>
+    <tr>
       <td>JOB_INDEX</td>
       <td>N.A.</td>
       <td>
@@ -373,7 +369,7 @@ A handy reference for the constraints on input parameters for commands.
         <p>Should not be empty.</p>
       </td>
     </tr>
-     <tr>
+    <tr>
       <td>EMPLOYEE_INDEX</td>
       <td>N.A.</td>
       <td>
